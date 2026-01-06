@@ -1,10 +1,8 @@
-package com.Gabriel.API_Banco.Model;
+package com.Gabriel.API_Banco.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Generated;
 
 @Entity
 @Data
@@ -12,6 +10,7 @@ import lombok.Data;
 public class Usuario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_Usuario")
     private int id;
 
