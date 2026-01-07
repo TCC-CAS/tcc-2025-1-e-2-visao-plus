@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="PaginaPrincipal.css">
+    <link rel="stylesheet" href="Estilo1.css">
+</head>
+<body>
+    <header>
+        <div class="profile-menu">
+            <img src="9742847.png" alt="Perfil" class="iconuser">
+            <div class="dropdown">
+                <a href="#">Acessar Perfil</a>
+                <a href="#">Editar Perfil</a>
+            </div>
+        </div>
+        <div class="cart-menu">
+            <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" alt="Carrinho" class="icon">
+            <div class="dropdown">
+                <p>Itens no Carrinho:</p>
+                <ul id="cart-items">
+                    <!-- Itens serão adicionados dinamicamente -->
+                </ul>
+                <p>Total: R$ <span id="cart-total">0.00</span></p>
+                <a href="#">Checar Carrinho</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="products-carousel">
+        <h2>Cotações Recentes</h2>
+        <div class="carousel">
+            <div class="product">
+                <img src="product1.png" alt="Produto 1">
+                <p>Produto 1</p>
+                <button>Adicionar ao Carrinho</button>
+            </div>
+            <div class="product">
+                <img src="product2.png" alt="Produto 2">
+                <p>Produto 2</p>
+                <button>Adicionar ao Carrinho</button>
+            </div>
+            <!-- Adicionar mais produtos -->
+        </div>
+    </section>
+
+    <section class="main-content">
+        <div class="map-container">
+            <!-- Espaço para API do mapa -->
+            <div id="map">Mapa aqui</div>
+        </div>
+        <div class="sidebar">
+            <h3>Lojas Próximas</h3>
+            <ul>
+                <li>Loja 1</li>
+                <li>Loja 2</li>
+                <li>Loja 3</li>
+            </ul>
+        </div>
+    </section>
+
+    <script src="PaginaPrincipal.js"></script>
+</body>
+</html>
