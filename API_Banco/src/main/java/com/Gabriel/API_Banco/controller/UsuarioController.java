@@ -25,7 +25,7 @@ public class UsuarioController {
         return "Usuário " + usuario.getNome() + " salvo com sucesso!";
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String loginUsuario(@RequestBody Usuario usuario){
         Optional<Usuario> usuarioNoBanco = s.consultarPorEmail(usuario.getEmail());
 
