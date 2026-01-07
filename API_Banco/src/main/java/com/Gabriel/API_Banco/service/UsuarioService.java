@@ -3,6 +3,8 @@ import com.Gabriel.API_Banco.model.Usuario;
 import com.Gabriel.API_Banco.repository.Repositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
 
@@ -14,6 +16,10 @@ public class UsuarioService {
 
     public Usuario salvar(Usuario usuario) {
         return r.save(usuario);
+    }
+
+    public Optional<Usuario> consultarPorEmail(String email) {
+        return r.findByEmail(email);
     }
 
 
