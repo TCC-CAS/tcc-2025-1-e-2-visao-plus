@@ -42,32 +42,31 @@ function configurarTela() {
 
     // 👉 CASO 1: ninguém logado
     if (usuario === null) {
-        document.getElementById("menu-visitante").style.display = "block";
+        document.getElementById("menu-visitante").style.display = "flex";
         return;
     }
 
     // 👉 CASO 2: alguém logado
-    document.getElementById("menu-usuario").style.display = "block";
+    document.getElementById("menu-usuario").style.display = "flex";
 
     // Agora decide pelo tipo
     if (usuario.tipoUsuario === "Comum") {
 
-        document.getElementById("menu-carrinho").style.display = "block";
+        document.getElementById("menu-carrinho").style.display = "flex";
         document.getElementById("secao-cotacoes").style.display = "block";
 
     } else if (usuario.tipoUsuario === "Vendedor") {
 
-        document.getElementById("menu-vendedor").style.display = "block";
+        document.getElementById("menu-vendedor").style.display = "flex";
         document.getElementById("secao-cotacoes").style.display = "block";
 
     } else if (usuario.tipoUsuario === "Admin") {
 
-        document.getElementById("menu-admin").style.display = "block";
+        document.getElementById("menu-admin").style.display = "flex";
         document.getElementById("secao-admin").style.display = "block";
-        document.getElementById("menu-vendedor").style.display = "block";
+        document.getElementById("menu-vendedor").style.display = "flex";
         document.getElementById("secao-cotacoes").style.display = "block";
-        document.getElementById("menu-carrinho").style.display = "block";
-        document.getElementById("secao-cotacoes").style.display = "block";
+        document.getElementById("menu-carrinho").style.display = "flex";
     }
 }
 

@@ -1,96 +1,147 @@
-/* Importar estilos base */
-/*@import url('Estilo1.css');
+/* =========================
+   CONFIGURAÇÕES GERAIS
+   ========================= */
+
+/* Fonte padrão do site */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
 
 
-/* Header */
+/* =========================
+   HEADER / BARRA SUPERIOR
+   ========================= */
+
+/* Header principal (barra azul) */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex;                    /* Logo à esquerda e menus à direita */
+    justify-content: space-between;   /* Espaça logo e menus */
+    align-items: center;              /* Centraliza verticalmente */
     background-color: #156783;
     padding: 10px 20px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    position: relative;
-    font-family: Arial, Helvetica, sans-serif;
+    position: relative;               /* Referência para elementos absolutos */
 }
 
-body{
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.logo{
+/* Logo do site */
+.logo {
     color: white;
     font-size: 13px;
     font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
+
+/* =========================
+   MENUS DO HEADER
+   ========================= */
+
+/* Container do menu do usuário (ícones à direita) */
+#menu-usuario {
+    display: flex;          /* <<< ISSO resolve os ícones em linha */
+    align-items: center;    /* Centraliza os ícones verticalmente */
+    gap: 15px;              /* Espaço entre os ícones */
+}
+
+/* Menu visitante (login / cadastro) */
+#menu-visitante a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   ÍCONES
+   ========================= */
+
+/* Ícone padrão */
 .icon {
     width: 30px;
     height: 30px;
     cursor: pointer;
 }
 
-.icon:hover {
-    transform: scale(1.1);
-}
-
+/* Ícone de usuário */
 .iconuser {
     width: 40px;
     height: 40px;
-    cursor: pointer
+    cursor: pointer;
 }
 
+/* Ícone de admin */
 .iconadmin {
     width: 50px;
     height: 50px;
-    cursor: pointer
+    cursor: pointer;
 }
 
+/* Ícone de loja */
 .iconstore {
     width: 30px;
     height: 30px;
-    cursor: pointer
+    cursor: pointer;
 }
 
-.icon:hover, .iconuser:hover {
+/* Efeito hover nos ícones */
+.icon:hover,
+.iconuser:hover,
+.iconadmin:hover,
+.iconstore:hover {
     transform: scale(1.1);
 }
 
+
+/* =========================
+   DROPDOWNS (MENUS FLUTUANTES)
+   ========================= */
+
+/* Cada item que possui dropdown vira referência */
+.profile-menu,
+.cart-menu {
+    position: relative;   /* IMPORTANTE para o dropdown */
+}
+
+/* Caixa do dropdown */
 .dropdown {
-    display: none;
+    display: none;              /* Escondido por padrão */
     position: absolute;
+    top: 100%;                  /* Aparece abaixo do ícone */
+    right: 0;
     background-color: white;
     border: 1px solid #156783;
     border-radius: 5px;
     padding: 10px;
-    top: 50px;
-    z-index: 1;
+    z-index: 10;
+    min-width: 150px;
 }
 
+/* Mostrar dropdown ao passar o mouse */
 .profile-menu:hover .dropdown,
 .cart-menu:hover .dropdown {
     display: block;
 }
 
-.dropdown a, .dropdown p {
+/* Links dentro do dropdown */
+.dropdown a,
+.dropdown p {
     color: #156783;
     text-decoration: none;
     display: block;
-    margin: 5px 0;
+    padding: 5px 0;
 }
 
-.dropdown ul {
-    list-style: none;
-    padding: 0;
+/* Hover nos links do dropdown */
+.dropdown a:hover {
+    background-color: #f0f0f0;
 }
 
-.dropdown li {
-    margin: 5px 0;
-}
 
-/* Products Carousel */
+/* =========================
+   CARROSSEL DE PRODUTOS
+   ========================= */
+
 .products-carousel {
     padding: 20px;
     text-align: center;
@@ -126,12 +177,17 @@ body{
     cursor: pointer;
 }
 
-/* Main Content */
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+   ========================= */
+
 .main-content {
     display: flex;
     height: 75vh;
 }
 
+/* Mapa */
 .map-container {
     flex: 3;
     background-color: white;
@@ -148,6 +204,7 @@ body{
     height: 100%;
 }
 
+/* Sidebar */
 .sidebar {
     flex: 1;
     background-color: #156783;
@@ -169,3 +226,4 @@ body{
     color: white;
     margin: 10px 0;
 }
+
