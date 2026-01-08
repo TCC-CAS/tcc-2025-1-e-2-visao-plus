@@ -23,4 +23,7 @@ public class Usuario {
     @Column(name = "senha")
     private String senha;
 
+    @Column(name = "tipo_usuario")
+    private String tipoUsuario;
+
 }
