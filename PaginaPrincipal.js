@@ -46,6 +46,8 @@ function configurarTela() {
         return;
     }
 
+    console.log("Usuário logado:", usuario);
+
     // 👉 CASO 2: alguém logado
     document.getElementById("menu-usuario").style.display = "flex";
 
@@ -58,6 +60,7 @@ function configurarTela() {
     } else if (usuario.tipoUsuario === "Vendedor") {
 
         document.getElementById("menu-vendedor").style.display = "flex";
+        document.getElementById("menu-carrinho").style.display = "flex";
         document.getElementById("secao-cotacoes").style.display = "block";
 
     } else if (usuario.tipoUsuario === "Admin") {
@@ -69,6 +72,14 @@ function configurarTela() {
         document.getElementById("menu-carrinho").style.display = "flex";
     }
 }
+
+function logout() {
+    // Remove o usuário logado do armazenamento local
+    localStorage.removeItem("usuarioLogado");
+
+    configurarTela();
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
     configurarTela();

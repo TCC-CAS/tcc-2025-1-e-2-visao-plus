@@ -47,10 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 JSON.stringify(usuarioBackend)
             );
 
-            // espera 7 segundos (7000 ms)
+            alert("Login realizado com sucesso! Você será redirecionado em alguns segundos.");
+            // espera 4 segundos (4000 ms)
             setTimeout(() => {
                 window.location.href = "PaginaPrincipal.html";
-            }, 7000);
+            }, 4000);
 
         } catch (error) {
             console.error(error);
