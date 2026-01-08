@@ -27,6 +27,7 @@ function esconderTodosOsBlocos() {
     document.getElementById("secao-usuario").style.display = "none";
     document.getElementById("secao-loja").style.display = "none";
     document.getElementById("secao-cotacoes").style.display = "none";
+    document.getElementById("secao-admin").style.display = "none";
 }
 
 

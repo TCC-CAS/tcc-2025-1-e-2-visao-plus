@@ -197,14 +197,14 @@ header {
 .main-content {
     display: flex;
     justify-content: center; /* Centraliza o bloco na página */
-    margin-top: 50px;
+    margin-top: 1px;
     font-family: Arial, sans-serif;
 }
 
 /* Mapa */
 .perfil-bloco {
     width: 400px;
-    padding: 20px;
+    padding: 10px;
     border: 2px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
@@ -218,7 +218,7 @@ header {
     flex: 1;
     text-align: top;
     padding: 20px;
-    margin: 20px 20px 20px 0;
+    margin: 0px 20px 0px 0;
     border-radius: 10px;
 }
 
@@ -226,8 +226,18 @@ header {
     flex: 1;
     text-align: top;
     padding: 20px;
-    margin: 20px 20px 20px 0;
+    margin: 0px 20px 0px 0;
     border-radius: 10px;
+}
+
+.titulo-secao{
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+    color: #156783;
+    padding-bottom: 5px;
 }
 
 .titulo-perfil {
