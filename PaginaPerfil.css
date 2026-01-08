@@ -196,19 +196,56 @@ header {
 
 .main-content {
     display: flex;
-    height: 75vh;
+    justify-content: center; /* Centraliza o bloco na página */
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
 }
 
 /* Mapa */
-.map-container {
-    flex: 3;
-    background-color: white;
-    border: 1px solid #156783;
-    margin: 20px;
+.perfil-bloco {
+    width: 400px;
+    padding: 20px;
+    border: 2px solid #ccc;
     border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column; /* garante que os elementos fiquem empilhados */
+}
+
+#secao-usuario {
+    flex: 1;
+    text-align: top;
+    padding: 20px;
+    margin: 20px 20px 20px 0;
+    border-radius: 10px;
+}
+
+#secao-loja {
+    flex: 1;
+    text-align: top;
+    padding: 20px;
+    margin: 20px 20px 20px 0;
+    border-radius: 10px;
+}
+
+.titulo-perfil {
+    text-align: center; /* Centraliza o título */
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 24px;
+    color: #333;
+}
+
+.info-usuario p {
+    margin: 15px 0;
+    text-align: left; /* As infos ficam à esquerda */
+    font-size: 16px;
+}
+
+.info-usuario strong {
+    color: #555; /* Deixa o label em destaque */
 }
 
 #map {
