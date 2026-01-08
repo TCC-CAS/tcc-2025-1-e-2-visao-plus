@@ -1,6 +1,3 @@
-
-
-
 // Tenta buscar o usuário salvo no navegador
 function obterUsuarioLogado() {
 
@@ -53,17 +50,17 @@ function configurarTela() {
     document.getElementById("menu-usuario").style.display = "block";
 
     // Agora decide pelo tipo
-    if (usuario.tipo === "CLIENTE") {
+    if (usuario.tipo === "Comum") {
 
         document.getElementById("menu-carrinho").style.display = "block";
         document.getElementById("secao-cotacoes").style.display = "block";
 
-    } else if (usuario.tipo === "VENDEDOR") {
+    } else if (usuario.tipo === "Vendedor") {
 
         document.getElementById("menu-vendedor").style.display = "block";
         document.getElementById("secao-cotacoes").style.display = "block";
 
-    } else if (usuario.tipo === "ADMIN") {
+    } else if (usuario.tipo === "Admin") {
 
         document.getElementById("menu-admin").style.display = "block";
         document.getElementById("secao-admin").style.display = "block";
@@ -74,18 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     configurarTela();
 });
 
-function simularLogin(tipo) {
 
-    const usuarioFake = {
-        nome: "Usuário Teste",
-        email: "teste@email.com",
-        tipo: tipo // CLIENTE | VENDEDOR | ADMIN
-    };
-
-    localStorage.setItem("usuarioLogado", JSON.stringify(usuarioFake));
-
-    configurarTela();
-}
 
 
 
