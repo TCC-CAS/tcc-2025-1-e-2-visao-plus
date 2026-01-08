@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Criar objeto usuário
-        const usuario = {
+        const usuarioLogin = {
             nome: nome,
             email: email,
             senha: senha
@@ -25,21 +25,29 @@ document.addEventListener("DOMContentLoaded", () => {
         // Enviar dados para a API
         try {
             const response = await fetch("http://localhost:8080/usuarios/login", {
-                method: "Post",
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(usuario)
+                body: JSON.stringify(usuarioLogin)
             });
 
+            // Se deu erro:
             if (!response.ok) {
-                throw new Error("Erro ao logar usuário");
+                const mensagemErro = await response.text();
+                alert(mensagemErro);
+                return;
             }
 
-            const mensagem = await response.text();
-            alert(mensagem);
+            // Se chegou aqui, deu certo:
+            const usuarioBackend = await response.json();
 
-            form.reset();
+            localStorage.setItem(
+                "usuarioLogado",
+                JSON.stringify(usuarioBackend)
+            );
+
+            window.location.href = "PaginaPrincipal.html";
 
         } catch (error) {
             console.error(error);
