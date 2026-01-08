@@ -12,7 +12,7 @@
 
         <!-- Sempre visível -->
         <div class="logo">
-            <h1>Meu Site</h1>
+            <h1>VisionPlus+</h1>
         </div>
 
         <!-- VISITANTE (não logado) -->
@@ -25,7 +25,7 @@
         <div id="menu-usuario">
 
             <!-- Perfil (todos os logados) -->
-            <div id="menu-perfil">
+            <div id="menu-perfil" class="profile-menu">
                 <img src="9742847.png" class="iconuser">
                 <div class="dropdown">
                     <a href="#">Perfil</a>
@@ -34,20 +34,26 @@
             </div>
 
             <!-- CLIENTE -->
-            <div id="menu-carrinho">
+            <div id="menu-carrinho" class="cart-menu">
                 <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
             </div>
 
             <!-- VENDEDOR -->
-            <div id="menu-vendedor">
-                <a href="#">Meus Produtos</a>
-                <a href="#">Minhas Vendas</a>
+            <div id="menu-vendedor" class="profile-menu">
+                <img src="store1.png" class="iconstore">
+                <div class="dropdown">
+                    <a href="#">Meus Produtos</a>
+                    <a href="#">Minhas Vendas</a>
+                    <a href="#">Página Loja</a>
+                </div>
             </div>
-
             <!-- ADMIN -->
-            <div id="menu-admin">
-                <a href="#">Painel Admin</a>
-                <a href="#">Usuários</a>
+            <div id="menu-admin" class="profile-menu">
+                <img src="pngadmin.png" class="iconadmin">
+                <div class="dropdown">
+                    <a href="#">Painel Admin</a><br>
+                    <a href="#">Usuários</a>
+                </div>
             </div>
 
         </div>
@@ -55,26 +61,28 @@
     </header>
 
     <!-- COTAÇÕES (cliente e vendedor) -->
-    <section id="secao-cotacoes">
+    <section id="secao-cotacoes" class="products-carousel">
         <h2>Cotações Recentes</h2>
     </section>
 
-    <!-- MAPA (todos) -->
-    <section id="secao-mapa">
-        <div id="map">Mapa aqui</div>
-    </section>
+    <section class="main-content">
+        <!-- MAPA (todos) -->
+        <section id="secao-mapa" class="map-container">
+            <div id="map">Mapa aqui</div>
+        </section>
 
-    <!-- LOJAS -->
-    <section id="secao-lojas">
-        <h3>Lojas Próximas</h3>
+        <!-- LOJAS -->
+        <section id="secao-lojas" class="sidebar">
+            <h3>Lojas Próximas</h3>
+        </section>
     </section>
-
     <!-- ADMIN -->
-    <section id="secao-admin">
-        <h2>Dashboard Administrativo</h2>
+    <section id="secao-admin" class="map-container">
+        <h2 id="map">Dashboard Administrativo</h2>
     </section>
 
     <script src="PaginaPrincipal.js"></script>
+
 </body>
 
 </html>
