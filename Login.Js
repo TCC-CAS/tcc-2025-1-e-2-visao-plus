@@ -47,7 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 JSON.stringify(usuarioBackend)
             );
 
-            window.location.href = "PaginaPrincipal.html";
+            // espera 7 segundos (7000 ms)
+            setTimeout(() => {
+                window.location.href = "PaginaPrincipal.html";
+            }, 7000);
 
         } catch (error) {
             console.error(error);

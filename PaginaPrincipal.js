@@ -50,17 +50,17 @@ function configurarTela() {
     document.getElementById("menu-usuario").style.display = "block";
 
     // Agora decide pelo tipo
-    if (usuario.tipo === "Comum") {
+    if (usuario.tipoUsuario === "Comum") {
 
         document.getElementById("menu-carrinho").style.display = "block";
         document.getElementById("secao-cotacoes").style.display = "block";
 
-    } else if (usuario.tipo === "Vendedor") {
+    } else if (usuario.tipoUsuario === "Vendedor") {
 
         document.getElementById("menu-vendedor").style.display = "block";
         document.getElementById("secao-cotacoes").style.display = "block";
 
-    } else if (usuario.tipo === "Admin") {
+    } else if (usuario.tipoUsuario === "Admin") {
 
         document.getElementById("menu-admin").style.display = "block";
         document.getElementById("secao-admin").style.display = "block";
