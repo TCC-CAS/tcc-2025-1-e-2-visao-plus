@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Página Principal</title>
     <link rel="stylesheet" href="PaginaPrincipal.css">
     <link rel="stylesheet" href="Estilo1.css">
 </head>
+
 <body>
     <header>
-        <div class="profile-menu">
-            <img src="9742847.png" alt="Perfil" class="iconuser">
-            <div class="dropdown">
-                <a href="#">Acessar Perfil</a>
-                <a href="#">Editar Perfil</a>
-            </div>
+
+        <!-- Sempre visível -->
+        <div class="logo">
+            <h1>Meu Site</h1>
         </div>
-        <div class="cart-menu">
-            <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" alt="Carrinho" class="icon">
-            <div class="dropdown">
-                <p>Itens no Carrinho:</p>
-                <ul id="cart-items">
-                    <!-- Itens serão adicionados dinamicamente -->
-                </ul>
-                <p>Total: R$ <span id="cart-total">0.00</span></p>
-                <a href="#">Checar Carrinho</a>
-            </div>
+
+        <!-- VISITANTE (não logado) -->
+        <div id="menu-visitante">
+            <a href="Login.html">Login</a>
+            <a href="Cadastro.html">Cadastrar</a>
         </div>
+
+        <!-- USUÁRIO LOGADO -->
+        <div id="menu-usuario">
+
+            <!-- Perfil (todos os logados) -->
+            <div id="menu-perfil">
+                <img src="9742847.png" class="iconuser">
+                <div class="dropdown">
+                    <a href="#">Perfil</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+
+            <!-- CLIENTE -->
+            <div id="menu-carrinho">
+                <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
+            </div>
+
+            <!-- VENDEDOR -->
+            <div id="menu-vendedor">
+                <a href="#">Meus Produtos</a>
+                <a href="#">Minhas Vendas</a>
+            </div>
+
+            <!-- ADMIN -->
+            <div id="menu-admin">
+                <a href="#">Painel Admin</a>
+                <a href="#">Usuários</a>
+            </div>
+
+        </div>
+
     </header>
+
 
     <section class="products-carousel">
         <h2>Cotações Recentes</h2>
@@ -62,4 +90,5 @@
 
     <script src="PaginaPrincipal.js"></script>
 </body>
+
 </html>
