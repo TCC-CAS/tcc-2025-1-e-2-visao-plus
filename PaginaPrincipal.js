@@ -64,6 +64,10 @@ function configurarTela() {
 
         document.getElementById("menu-admin").style.display = "block";
         document.getElementById("secao-admin").style.display = "block";
+        document.getElementById("menu-vendedor").style.display = "block";
+        document.getElementById("secao-cotacoes").style.display = "block";
+        document.getElementById("menu-carrinho").style.display = "block";
+        document.getElementById("secao-cotacoes").style.display = "block";
     }
 }
 

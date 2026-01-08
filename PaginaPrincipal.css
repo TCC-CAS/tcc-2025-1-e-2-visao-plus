@@ -19,6 +19,13 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.logo{
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .icon {
     width: 30px;
     height: 30px;
@@ -30,6 +37,18 @@ body{
 }
 
 .iconuser {
+    width: 40px;
+    height: 40px;
+    cursor: pointer
+}
+
+.iconadmin {
+    width: 40px;
+    height: 40px;
+    cursor: pointer
+}
+
+.iconstore {
     width: 40px;
     height: 40px;
     cursor: pointer
