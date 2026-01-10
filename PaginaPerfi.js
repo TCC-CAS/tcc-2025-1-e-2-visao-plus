@@ -54,6 +54,7 @@ function configurarTela() {
     // Agora decide pelo tipo
     if (usuario.tipoUsuario === "Comum") {
 
+        document.getElementById("secao-usuario").style.display = "flex";
         document.getElementById("menu-carrinho").style.display = "flex";
         document.getElementById("secao-cotacoes").style.display = "block";
         document.getElementById("secao-pedir_loja").style.display = "block";

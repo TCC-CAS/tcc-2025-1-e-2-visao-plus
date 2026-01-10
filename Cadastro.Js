@@ -52,7 +52,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const usuario = {
             nome: nome,
             email: email,
-            senha: senha
+            senha: senha,
+            tipo_usuario: "Comum"
         };
 
 

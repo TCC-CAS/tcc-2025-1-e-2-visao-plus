@@ -1,0 +1,39 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("#cadastroLojaForm");
+
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const dto = {
+            nome: document.querySelector("#nome").value,
+            email: document.querySelector("#email").value,
+            cep: document.querySelector("#cep").value,
+            cnpj: document.querySelector("#cnpj").value,
+            endereco: document.querySelector("#endereco").value,
+            idUsuario: obterUsuarioLogado.id_usuario
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/lojas/criarLoja", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dto)
+            });
+
+            if (!response.ok) {
+                throw new Error("Erro ao cadastrar loja");
+            }
+
+            const lojaCriada = await response.json();
+            alert("Loja criada com sucesso!");
+
+            form.reset();
+
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao conectar com a API");
+        }
+    });
+});
