@@ -21,7 +21,7 @@ public class Loja {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_dono")
+    @JoinColumn(name = "id_usuario")
     private Usuario dono;
 
     @Column(name = "nome")
@@ -33,8 +33,8 @@ public class Loja {
     @Column(name = "cnpj")
     private String cnpj;
 
-    @Column(name = "CEP")
-    private String CEP;
+    @Column(name = "cep")
+    private String cep;
 
     @Column(name= "endereco")
     private String endereco;

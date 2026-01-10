@@ -28,6 +28,7 @@ public class LojaService {
         loja.setCnpj(dto.getCnpj());
         loja.setEndereco(dto.getEndereco());
         loja.setDono(dono);
+        loja.setCep(dto.getCEP());
 
         return r.save(loja);
     }
@@ -37,6 +38,6 @@ public class LojaService {
     }
 
     public java.util.Optional<Loja> findByEmailLoja(String email) {
-        return r.findByEmailLoja(email);
+        return r.findByEmail(email);
     }
 }

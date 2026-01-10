@@ -1,35 +1,23 @@
 package com.Gabriel.API_Banco.dto;
 
+import java.time.LocalDate;
+
 public class CriarCotacaoDTO {
 
-    private String nome;
-    private Double valor;
-    private Long idLoja;
+    private String produto;
     private Long idUsuario;
-    private String emailUsuario;
-    private String emailLoja;
+    private Double valorBase;
+    private Double valorFinal;
+    private LocalDate dataCriacao;
+    private Long idLoja;
+    private LocalDate dataAprovacao;
     private String status;
-    private
 
-    
-    // getters e setters
-    public String getNome() {
-        return nome;
+    public String getProduto() {
+        return produto;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public Double getValor() {
-        return valor;
-    }
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-    public Long getIdLoja() {
-        return idLoja;
-    }
-    public void setIdLoja(Long idLoja) {
-        this.idLoja = idLoja;
+    public void setProduto(String produto) {
+        this.produto = produto;
     }
     public Long getIdUsuario() {
         return idUsuario;
@@ -37,17 +25,35 @@ public class CriarCotacaoDTO {
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
-    public String getEmailUsuario() {
-        return emailUsuario;
+    public Double getValorBase() {
+        return valorBase;
     }
-    public void setEmailUsuario(String emailUsuario) {
-        this.emailUsuario = emailUsuario;
+    public void setValorBase(Double valorBase) {
+        this.valorBase = valorBase;
     }
-    public String getEmailLoja() {
-        return emailLoja;
+    public Double getValorFinal() {
+        return valorFinal;
     }
-    public void setEmailLoja(String emailLoja) {
-        this.emailLoja = emailLoja;
+    public void setValorFinal(Double valorFinal) {
+        this.valorFinal = valorFinal;
+    }
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+    public Long getIdLoja() {
+        return idLoja;
+    }
+    public void setIdLoja(Long idLoja) {
+        this.idLoja = idLoja;
+    }
+    public LocalDate getDataAprovacao() {
+        return dataAprovacao;
+    }
+    public void setDataAprovacao(LocalDate dataAprovacao) {
+        this.dataAprovacao = dataAprovacao;
     }
     public String getStatus() {
         return status;

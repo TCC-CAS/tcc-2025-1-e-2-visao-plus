@@ -8,14 +8,14 @@ public class CriarLojaDTO {
     private Long idUsuario;
     private String email;
     private String endereco;
-    private String CEP;
+    private String cep;
 
     // getters e setters
     public String getCEP() {
-        return CEP;
+        return cep;
     }
-    public void setCEP(String cEP) {
-        CEP = cEP;
+    public void setCEP(String cep) {
+        this.cep = cep;
     }
     public String getEndereco() {
         return endereco;
