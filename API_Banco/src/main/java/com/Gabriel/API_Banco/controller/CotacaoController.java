@@ -29,5 +29,5 @@ public class CotacaoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(loja);
     }
 
-
+    
 }
