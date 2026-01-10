@@ -14,8 +14,11 @@ public class LojaService {
         this.r = r;
     }
 
-    public Loja salvar(Loja loja) {
+    public Loja criarLoja(Loja loja) {
         return r.save(loja);
     }
 
+    public void deletarLoja(Long id) {
+        r.deleteById(id);
+    }
 }
