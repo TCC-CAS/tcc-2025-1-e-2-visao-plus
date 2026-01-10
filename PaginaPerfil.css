@@ -229,6 +229,31 @@ header {
     border-radius: 10px;
 }
 
+#secao-pedir_loja {
+    flex: 1;
+    text-align: top;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0px 20px 0px 0;
+    border-radius: 10px;
+}
+
+.button{
+    background-color: #156783; /* Azul bebê suave */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.button:hover {
+    background-color: #0e4e5e; /* Azul bebê mais escuro ao passar o mouse */
+}
+
 .titulo-secao{
     display: flex;
     flex-direction: column;
@@ -245,6 +270,12 @@ header {
     margin-bottom: 1px;
     font-size: 24px;
     color: #333;
+}
+
+.info-pedir-loja p {
+    margin: 30px 5px 30px 5px;
+    text-align: center; /* Centraliza o texto */
+    font-size: 16px;
 }
 
 .info-usuario p {

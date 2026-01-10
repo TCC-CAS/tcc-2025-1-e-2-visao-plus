@@ -28,6 +28,7 @@ function esconderTodosOsBlocos() {
     document.getElementById("secao-loja").style.display = "none";
     document.getElementById("secao-cotacoes").style.display = "none";
     document.getElementById("secao-admin").style.display = "none";
+    document.getElementById("secao-pedir_loja").style.display = "none";
 }
 
 
@@ -55,6 +56,7 @@ function configurarTela() {
 
         document.getElementById("menu-carrinho").style.display = "flex";
         document.getElementById("secao-cotacoes").style.display = "block";
+        document.getElementById("secao-pedir_loja").style.display = "block";
 
     } else if (usuario.tipoUsuario === "Vendedor") {
 
