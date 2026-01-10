@@ -62,6 +62,7 @@ function configurarTela() {
         document.getElementById("menu-carrinho").style.display = "flex";
         document.getElementById("secao-cotacoes").style.display = "block";
         document.getElementById("secao-loja").style.display = "block";
+        document.getElementById("secao-usuario").style.display = "flex";
 
     } else if (usuario.tipoUsuario === "Admin") {
 

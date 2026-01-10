@@ -10,12 +10,12 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "usuario")
-public class Usuario {
+@Table(name = "tabela_loja")
+public class Loja {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario")
+    @Column(name = "id_loja")
     private Long id;
 
     @Column(name = "nome")
@@ -24,10 +24,13 @@ public class Usuario {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "senha")
-    private String senha;
+    @Column(name = "cnpj")
+    private String cnpj;
 
-    @Column(name = "tipo_usuario")
-    private String tipoUsuario;
+    @Column(name = "CEP")
+    private String CEP;
+
+    @Column(name= "endereco")
+    private String endereco;
 
 }
