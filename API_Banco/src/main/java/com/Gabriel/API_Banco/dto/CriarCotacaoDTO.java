@@ -1,23 +1,25 @@
 package com.Gabriel.API_Banco.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CriarCotacaoDTO {
 
-    private String produto;
+    private Long idProduto;
     private Long idUsuario;
-    private Double valorBase;
-    private Double valorFinal;
+    private BigDecimal valorBase;
+    private BigDecimal valorFinal;
     private LocalDate dataCriacao;
     private Long idLoja;
     private LocalDate dataAprovacao;
     private String status;
 
-    public String getProduto() {
-        return produto;
+    // getters e setters
+    public Long getIdProduto() {
+        return idProduto;
     }
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public void setIdProduto(Long idProduto) {
+        this.idProduto = idProduto;
     }
     public Long getIdUsuario() {
         return idUsuario;
@@ -25,16 +27,16 @@ public class CriarCotacaoDTO {
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
-    public Double getValorBase() {
+    public BigDecimal getValorBase() {
         return valorBase;
     }
-    public void setValorBase(Double valorBase) {
+    public void setValorBase(BigDecimal valorBase) {
         this.valorBase = valorBase;
     }
-    public Double getValorFinal() {
+    public BigDecimal getValorFinal() {
         return valorFinal;
     }
-    public void setValorFinal(Double valorFinal) {
+    public void setValorFinal(BigDecimal valorFinal) {
         this.valorFinal = valorFinal;
     }
     public LocalDate getDataCriacao() {
@@ -61,5 +63,4 @@ public class CriarCotacaoDTO {
     public void setStatus(String status) {
         this.status = status;
     }
-
 }
