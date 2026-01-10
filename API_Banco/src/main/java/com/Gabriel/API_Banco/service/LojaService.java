@@ -35,4 +35,8 @@ public class LojaService {
     public void deletarLoja(Long id) {
         r.deleteById(id);
     }
+
+    public java.util.Optional<Loja> findByEmailLoja(String email) {
+        return r.findByEmailLoja(email);
+    }
 }

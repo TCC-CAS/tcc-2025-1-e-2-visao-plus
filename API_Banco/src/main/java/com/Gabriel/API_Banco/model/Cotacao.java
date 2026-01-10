@@ -25,10 +25,19 @@ public class Cotacao {
     @ManyToOne
     private Usuario usuario;
 
+
     private BigDecimal valorBase;   // copiado do produto
+
+
     private BigDecimal valorFinal;  // definido pelo vendedor
 
+
     private LocalDate dataCriacao;
+
+
+    private String loja;
+
+
     private LocalDate dataAprovacao;
 
     @Enumerated(EnumType.STRING)
