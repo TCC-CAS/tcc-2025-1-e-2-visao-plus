@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.Gabriel.API_Banco.dto.CriarLojaDTO;
 import com.Gabriel.API_Banco.model.Loja;
 import com.Gabriel.API_Banco.service.LojaService;
-
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -26,9 +26,9 @@ public class LojaController {
     }
 
     @PostMapping("/criarLoja")
-    public ResponseEntity<Loja> criarLoja(@RequestBody Loja loja) {
-        Loja lojaCriada = lojaService.criarLoja(loja);
-        return ResponseEntity.status(HttpStatus.CREATED).body(lojaCriada);
+    public ResponseEntity<Loja> criarLoja(@RequestBody CriarLojaDTO dto) {
+        Loja loja = lojaService.criarLoja(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(loja);
     }
 
     @DeleteMapping("/{id}")
@@ -37,4 +37,3 @@ public class LojaController {
         return ResponseEntity.ok("Loja deletada com sucesso!");
     }
 }
-

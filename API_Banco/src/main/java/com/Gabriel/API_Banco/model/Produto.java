@@ -32,13 +32,10 @@ public class Produto {
     @JoinColumn(name = "id_armacao")
     private Armacao armacao;
 
-    @Column(name = "valor_produto")
+    @Column(name = "valor_Base")
     private BigDecimal valor;
 
     @Column(name = "prazo_entrega_dias")
     private Integer prazoEntregaDias;
-    
-    @Column(name = "local_entrega")
-    private String localEntrega;
 }
 
