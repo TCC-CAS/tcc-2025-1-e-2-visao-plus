@@ -2,6 +2,8 @@ package com.Gabriel.API_Banco.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.Gabriel.API_Banco.model.enums.StatusCotacao;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,12 +29,10 @@ public class Cotacao {
 
     @ManyToOne
     @JoinColumn(name = "id_produto")
-    @Column(name = "produto")
     private Produto produto;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    @Column(name = "usuario")
     private Usuario usuario;
 
     @Column(name = "valor_base")
@@ -56,9 +56,3 @@ public class Cotacao {
     private StatusCotacao status;
 }
 
-enum StatusCotacao {
-    SOLICITADA,
-    EM_ANALISE,
-    APROVADA,
-    REJEITADA
-}
