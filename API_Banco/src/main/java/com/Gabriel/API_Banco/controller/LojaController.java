@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.Gabriel.API_Banco.dto.BuscarLojaDTO;
 
 import com.Gabriel.API_Banco.dto.CriarLojaDTO;
 import com.Gabriel.API_Banco.model.Loja;
@@ -36,4 +37,13 @@ public class LojaController {
         lojaService.deletarLoja(id);
         return ResponseEntity.ok("Loja deletada com sucesso!");
     }
+
+    @PostMapping("/buscarLoja")
+    public ResponseEntity<Loja> buscarLojaPorId(@RequestBody Long idUsuario) {
+
+        return lojaService.findByIdUsuario(idUsuario)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+    
 }

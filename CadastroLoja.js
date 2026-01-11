@@ -4,13 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
+        const obterUsuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
         const dto = {
             nome: document.querySelector("#nome").value,
             email: document.querySelector("#email").value,
             cep: document.querySelector("#cep").value,
             cnpj: document.querySelector("#cnpj").value,
             endereco: document.querySelector("#endereco").value,
-            idUsuario: obterUsuarioLogado.id_usuario
+            idUsuario: obterUsuarioLogado.id
         };
 
         try {

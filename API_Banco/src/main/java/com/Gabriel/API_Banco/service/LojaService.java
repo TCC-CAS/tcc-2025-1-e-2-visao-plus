@@ -40,4 +40,8 @@ public class LojaService {
     public java.util.Optional<Loja> findByEmailLoja(String email) {
         return r.findByEmail(email);
     }
+
+    public java.util.Optional<Loja> findByIdUsuario(Long idUsuario) {
+        return r.findByIdUsuario(idUsuario);
+    }
 }
