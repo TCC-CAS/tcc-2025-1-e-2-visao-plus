@@ -42,6 +42,6 @@ public class LojaService {
     }
 
     public java.util.Optional<Loja> findByIdUsuario(Long idUsuario) {
-        return r.findByIdUsuario(idUsuario);
+        return r.findByDonoId(idUsuario);
     }
 }

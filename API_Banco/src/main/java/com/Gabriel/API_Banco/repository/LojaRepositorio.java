@@ -9,6 +9,6 @@ public interface LojaRepositorio extends JpaRepository<Loja, Long> {
 
     Optional<Loja> findByEmail(String email);
 
-    Optional<Loja> findByIdUsuario(Long idUsuario);
+    Optional<Loja> findByDonoId(Long id);
 
 }

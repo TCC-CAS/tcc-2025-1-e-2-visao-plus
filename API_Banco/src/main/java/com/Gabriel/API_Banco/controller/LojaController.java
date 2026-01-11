@@ -40,7 +40,7 @@ public class LojaController {
 
     @PostMapping("/buscarLoja")
     public ResponseEntity<Loja> buscarLojaPorId(@RequestBody Long idUsuario) {
-
+        
         return lojaService.findByIdUsuario(idUsuario)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
