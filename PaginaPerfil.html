@@ -55,7 +55,12 @@
 
         <!-- seção usuário, sempre mostrar -->
         <section id="secao-usuario" class="perfil-bloco">
-            <h2 class="titulo-perfil">Perfil do Usuário</h2>
+            <div class="perfil-header">
+                <h2 class="titulo-perfil">Perfil do Usuário</h2>
+                <button id="editar-perfil" class="button button-icon" title="Editar informações do usuário">
+                    <img src="pngpencil.png" class="icon-pencil">
+                </button>
+            </div>
             <div class="info-usuario">
                 <p><strong>Nome:</strong> <span id="nomeUsuario"></span></p>
                 <p><strong>Email:</strong> <span id="emailUsuario"></span></p>
@@ -65,14 +70,19 @@
 
         <!-- seção loja, mostrar quando o usuário for vendedor -->
         <section id="secao-loja" class="perfil-bloco">
-            <h2 class="titulo-perfil">Minha loja</h2>
-            <div class="info-usuario">
-                <p><strong>Nome:</strong> <span id="nomeLoja"></span></p>
-                <p><strong>Email:</strong> <span id="emailLoja"></span></p>
-                <p><strong>CNPJ:</strong> <span id="cnpjLoja"></span></p>
-                <p><strong>Endereço:</strong> <span id="enderecoLoja"></span></p>
-                <p><strong>CEP:</strong> <span id="cepLoja"></span></p>
-            </div>
+            <div class="perfil-header">
+                <h2 class="titulo-perfil">Minha Loja</h2>
+                <button id="editar-loja" class="button button-icon" title="Editar informações da loja">
+                    <img src="pngpencil.png" class="icon-pencil">
+                </button>
+                </div>
+                <div class="info-loja">
+                    <p><strong>Nome:</strong> <span id="nomeLoja"></span></p>
+                    <p><strong>Email:</strong> <span id="emailLoja"></span></p>
+                    <p><strong>CNPJ:</strong> <span id="cnpjLoja"></span></p>
+                    <p><strong>Endereço:</strong> <span id="enderecoLoja"></span></p>
+                    <p><strong>CEP:</strong> <span id="cepLoja"></span></p>
+                </div>
         </section>
 
         <!-- seção pedir loja, mostrar quando o usuário for cliente somente-->

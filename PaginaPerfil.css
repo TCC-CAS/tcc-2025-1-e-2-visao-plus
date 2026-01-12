@@ -238,6 +238,26 @@ header {
     margin: 0px 20px 0px 0;
     border-radius: 10px;
 }
+.perfil-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.perfil-header .titulo-perfil {
+    margin: 0;
+}
+
+.button-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 6px;
+    background-color: #156783;
+}
+
 
 .button{
     background-color: #156783; /* Azul bebê suave */
@@ -273,6 +293,18 @@ header {
     color: #333;
 }
 
+.icon-pencil{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    vertical-align: middle; /* Alinha o ícone com o texto */
+    align-items: center;
+}
+
+.icon-pencil:hover {
+    transform: scale(1.2);
+}
+
 .info-pedir-loja p {
     margin: 30px 5px 30px 5px;
     text-align: center; /* Centraliza o texto */
@@ -286,6 +318,16 @@ header {
 }
 
 .info-usuario strong {
+    color: #555; /* Deixa o label em destaque */
+}
+
+.info-loja p {
+    margin: 15px 0;
+    text-align: left; /* As infos ficam à esquerda */
+    font-size: 16px;
+}
+
+.info-loja strong {
     color: #555; /* Deixa o label em destaque */
 }
 
