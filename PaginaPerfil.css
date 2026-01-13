@@ -297,15 +297,6 @@ header {
     padding: 20px;
     border-radius: 8px;
     margin: auto;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.modal-overlay{
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 999;
 }
 
 .fechar-modal {
