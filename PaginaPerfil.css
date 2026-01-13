@@ -255,12 +255,12 @@ header {
     right: 0;
     top: 0;
     padding: 6px;
-    background-color: #156783;
+    background-color: #7399a6;
 }
 
 
 .button{
-    background-color: #156783; /* Azul bebê suave */
+    background-color: #ccc; /* Azul bebê suave */
     color: white;
     border: none;
     padding: 10px;
@@ -272,8 +272,16 @@ header {
 }
 
 .button:hover {
-    background-color: #0e4e5e; /* Azul bebê mais escuro ao passar o mouse */
+    background-color: #9f9d9d; /* Azul bebê mais escuro ao passar o mouse */
 }
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
 
 .titulo-secao{
     display: flex;

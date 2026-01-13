@@ -68,6 +68,20 @@
             </div>
         </section>
 
+        <div id="modal-editar-perfil" class="modal hidden">
+            <div class="modal-content">
+                <span class="fechar-modal" data-fechar="perfil">&times;</span>
+
+                <h2>Editar Perfil</h2>
+
+                <input id="edit-nome-usuario" placeholder="Nome">
+                <input id="edit-email-usuario" placeholder="Email">
+                <input id="edit-senha-usuario" type="password" placeholder="Senha">
+
+                <button id="salvar-perfil">Salvar</button>
+            </div>
+        </div>
+
         <!-- seção loja, mostrar quando o usuário for vendedor -->
         <section id="secao-loja" class="perfil-bloco">
             <div class="perfil-header">
@@ -75,15 +89,32 @@
                 <button id="editar-loja" class="button button-icon" title="Editar informações da loja">
                     <img src="pngpencil.png" class="icon-pencil">
                 </button>
-                </div>
-                <div class="info-loja">
-                    <p><strong>Nome:</strong> <span id="nomeLoja"></span></p>
-                    <p><strong>Email:</strong> <span id="emailLoja"></span></p>
-                    <p><strong>CNPJ:</strong> <span id="cnpjLoja"></span></p>
-                    <p><strong>Endereço:</strong> <span id="enderecoLoja"></span></p>
-                    <p><strong>CEP:</strong> <span id="cepLoja"></span></p>
-                </div>
+            </div>
+            <div class="info-loja">
+                <p><strong>Nome:</strong> <span id="nomeLoja"></span></p>
+                <p><strong>Email:</strong> <span id="emailLoja"></span></p>
+                <p><strong>CNPJ:</strong> <span id="cnpjLoja"></span></p>
+                <p><strong>Endereço:</strong> <span id="enderecoLoja"></span></p>
+                <p><strong>CEP:</strong> <span id="cepLoja"></span></p>
+            </div>
         </section>
+
+        <div id="modal-editar-loja" class="modal hidden">
+            <div class="modal-content">
+                <span class="fechar-modal" data-fechar="loja">&times;</span>
+
+                <h2>Editar Loja</h2>
+
+                <input id="edit-nome-loja" placeholder="Nome da loja">
+                <input id="edit-email-loja" placeholder="Email da loja">
+                <input id="edit-cnpj-loja" placeholder="CNPJ">
+                <input id="edit-cep-loja" placeholder="CEP">
+                <input id="edit-endereco-loja" placeholder="Endereço">
+
+                <button id="salvar-loja">Salvar</button>
+            </div>
+        </div>
+
 
         <!-- seção pedir loja, mostrar quando o usuário for cliente somente-->
         <section id="secao-pedir_loja" class="perfil-bloco">
