@@ -286,6 +286,36 @@ header {
 
 }
 
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    width: 350px;
+    padding: 20px;
+    border-radius: 8px;
+    margin: auto;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.modal-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.fechar-modal {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+    font-size: 22px;
+}
+
 form {
     display: flex;
     flex-direction: column;

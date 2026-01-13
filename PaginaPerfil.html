@@ -71,8 +71,12 @@
         <!-- Modal para editar usuário -->
 
         <div id="modal-editar-perfil" class="modal hidden">
+            <!-- fundo escuro -->
+            <div class="modal-overlay"></div>
+
+            <!-- caixa branca -->
             <div class="modal-content">
-                <span class="fechar-modal" data-fechar="perfil">&times;</span>
+                <span id="fechar-modal-perfil" class="fechar-modal">&times;</span>
 
                 <h2>Editar Perfil</h2>
 
@@ -108,19 +112,19 @@
 
         <div id="modal-editar-loja" class="modal hidden">
             <div class="modal-content">
-            <span class="fechar-modal" data-fechar="loja">&times;</span>
+                <span class="fechar-modal" data-fechar="loja">&times;</span>
 
-            <h2>Editar Loja</h2>
+                <h2>Editar Loja</h2>
 
-            <form id="form-editar-loja">
-                <label>Nome da Loja: <br><input id="edit-nome-loja" required> </label>
-                <label>Email da Loja: <br><input id="edit-email-loja" type="email" required> </label>
-                <label>CNPJ: <br><input id="edit-cnpj-loja" required> </label>
-                <label>CEP: <br><input id="edit-cep-loja" required> </label>
-                <label>Endereço: <br><input id="edit-endereco-loja" required> </label>
+                <form id="form-editar-loja">
+                    <label>Nome da Loja: <br><input id="edit-nome-loja" required> </label>
+                    <label>Email da Loja: <br><input id="edit-email-loja" type="email" required> </label>
+                    <label>CNPJ: <br><input id="edit-cnpj-loja" required> </label>
+                    <label>CEP: <br><input id="edit-cep-loja" required> </label>
+                    <label>Endereço: <br><input id="edit-endereco-loja" required> </label>
 
-                <button type="submit" class="button">Salvar</button>
-            </form>
+                    <button type="submit" class="button">Salvar</button>
+                </form>
             </div>
         </div>
 
@@ -147,4 +151,6 @@
     </section>
 
     <script src="PaginaPerfi.js"></script>
+    <script src="editarLoja.js"></script>
+    <script src="editarPerfil.js"></script>
 </body>
