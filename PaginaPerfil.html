@@ -68,19 +68,24 @@
             </div>
         </section>
 
+        <!-- Modal para editar usuário -->
+
         <div id="modal-editar-perfil" class="modal hidden">
             <div class="modal-content">
                 <span class="fechar-modal" data-fechar="perfil">&times;</span>
 
                 <h2>Editar Perfil</h2>
 
-                <input id="edit-nome-usuario" placeholder="Nome">
-                <input id="edit-email-usuario" placeholder="Email">
-                <input id="edit-senha-usuario" type="password" placeholder="Senha">
+                <form id="form-editar-perfil">
+                    <label>Nome: <input id="edit-nome-usuario" required> </label>
+                    <label>Email: <input id="edit-email-usuario" type="email" required> </label>
+                    <label>Senha: <input id="edit-senha-usuario" type="password"> </label>
 
-                <button id="salvar-perfil">Salvar</button>
+                    <button type="submit" class="button">Salvar</button>
+                </form>
             </div>
         </div>
+
 
         <!-- seção loja, mostrar quando o usuário for vendedor -->
         <section id="secao-loja" class="perfil-bloco">
@@ -99,19 +104,23 @@
             </div>
         </section>
 
+        <!-- Modal para editar loja -->
+
         <div id="modal-editar-loja" class="modal hidden">
             <div class="modal-content">
-                <span class="fechar-modal" data-fechar="loja">&times;</span>
+            <span class="fechar-modal" data-fechar="loja">&times;</span>
 
-                <h2>Editar Loja</h2>
+            <h2>Editar Loja</h2>
 
-                <input id="edit-nome-loja" placeholder="Nome da loja">
-                <input id="edit-email-loja" placeholder="Email da loja">
-                <input id="edit-cnpj-loja" placeholder="CNPJ">
-                <input id="edit-cep-loja" placeholder="CEP">
-                <input id="edit-endereco-loja" placeholder="Endereço">
+            <form id="form-editar-loja">
+                <label>Nome da Loja: <input id="edit-nome-loja" required> </label>
+                <label>Email da Loja: <input id="edit-email-loja" type="email" required> </label>
+                <label>CNPJ: <input id="edit-cnpj-loja" required> </label>
+                <label>CEP: <input id="edit-cep-loja" required> </label>
+                <label>Endereço: <input id="edit-endereco-loja" required> </label>
 
-                <button id="salvar-loja">Salvar</button>
+                <button type="submit" class="button">Salvar</button>
+            </form>
             </div>
         </div>
 
