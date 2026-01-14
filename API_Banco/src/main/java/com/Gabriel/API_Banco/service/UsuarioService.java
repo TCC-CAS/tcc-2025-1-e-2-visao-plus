@@ -1,6 +1,7 @@
 package com.Gabriel.API_Banco.service;
 import java.util.Optional;
 
+import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
 import org.springframework.stereotype.Service;
 
 import com.Gabriel.API_Banco.model.Usuario;
@@ -21,6 +22,17 @@ public class UsuarioService {
 
     public Optional<Usuario> consultarPorEmail(String email) {
         return r.findByEmail(email);
+    }
+
+    public Usuario editarUsuario (EditarUsuarioDTO dto){
+
+        Usuario usuario = r.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
+
+        usuario.setNome(dto.getNome());
+        usuario.setEmail(dto.getEmail());
+
+        return r.save(usuario);
     }
 
 

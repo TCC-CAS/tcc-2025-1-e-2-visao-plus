@@ -11,4 +11,6 @@ public interface LojaRepositorio extends JpaRepository<Loja, Long> {
 
     Optional<Loja> findByDonoId(Long id);
 
+    Optional<Loja> findById(Long id);
+
 }

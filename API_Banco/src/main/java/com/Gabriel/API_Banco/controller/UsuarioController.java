@@ -2,13 +2,10 @@ package com.Gabriel.API_Banco.controller;
 
 import java.util.Optional;
 
+import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.Gabriel.API_Banco.model.Usuario;
 import com.Gabriel.API_Banco.service.UsuarioService;
@@ -57,6 +54,12 @@ public class UsuarioController {
         // Se chegou até aqui, o email e a senha estão corretos!!
         // Retorna o usuário inteiro → vira JSON automaticamente
         return ResponseEntity.ok(usuarioNoBanco.get());
+    }
+
+    @PutMapping("/editarUsuario")
+    public ResponseEntity<Usuario> editarUsuario(@RequestBody EditarUsuarioDTO dto){
+        Usuario usuario = s.editarUsuario(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(usuario);
     }
 
 }

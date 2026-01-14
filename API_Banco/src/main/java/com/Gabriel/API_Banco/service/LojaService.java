@@ -1,4 +1,5 @@
 package com.Gabriel.API_Banco.service;
+import com.Gabriel.API_Banco.dto.EditarLojaDTO;
 import org.springframework.stereotype.Service;
 
 import com.Gabriel.API_Banco.dto.CriarLojaDTO;
@@ -43,5 +44,19 @@ public class LojaService {
 
     public java.util.Optional<Loja> findByIdUsuario(Long idUsuario) {
         return r.findByDonoId(idUsuario);
+    }
+
+    public Loja editarLoja(EditarLojaDTO dto) {
+
+        Loja loja = r.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Loja não encontrada"));
+
+        loja.setNome(dto.getNome());
+        loja.setEmail(dto.getEmail());
+        loja.setCnpj(dto.getCnpj());
+        loja.setCep(dto.getCEP());
+        loja.setEndereco(dto.getEndereco());
+
+        return r.save(loja);
     }
 }

@@ -1,14 +1,9 @@
 package com.Gabriel.API_Banco.controller;
 
+import com.Gabriel.API_Banco.dto.EditarLojaDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.Gabriel.API_Banco.dto.BuscarLojaDTO;
 
 import com.Gabriel.API_Banco.dto.CriarLojaDTO;
@@ -44,6 +39,12 @@ public class LojaController {
         return lojaService.findByIdUsuario(idUsuario)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @PutMapping("/editarLoja")
+    public ResponseEntity<Loja> editarLoja(@RequestBody EditarLojaDTO dto){
+        Loja loja = lojaService.editarLoja(dto);
+        return ResponseEntity.status(HttpStatus.OK).body(loja);
     }
     
 }
