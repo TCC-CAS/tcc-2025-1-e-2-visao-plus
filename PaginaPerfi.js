@@ -1,16 +1,22 @@
-// pega os elementos
 const modalPerfil = document.getElementById("modal-editar-perfil");
 const botaoEditarPerfil = document.getElementById("editar-perfil");
 const botaoFecharPerfil = document.getElementById("fechar-modal-perfil");
 
-// ABRIR MODAL
+// abrir
 botaoEditarPerfil.addEventListener("click", () => {
     modalPerfil.classList.remove("hidden");
 });
 
-// FECHAR PELO X
+// fechar pelo X
 botaoFecharPerfil.addEventListener("click", () => {
     modalPerfil.classList.add("hidden");
+});
+
+// fechar clicando fora da caixa
+modalPerfil.addEventListener("click", (e) => {
+    if (e.target === modalPerfil) {
+        modalPerfil.classList.add("hidden");
+    }
 });
 
 
