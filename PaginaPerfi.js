@@ -2,7 +2,6 @@
 const modalPerfil = document.getElementById("modal-editar-perfil");
 const botaoEditarPerfil = document.getElementById("editar-perfil");
 const botaoFecharPerfil = document.getElementById("fechar-modal-perfil");
-const overlayPerfil = modalPerfil.querySelector(".modal-overlay");
 
 // ABRIR MODAL
 botaoEditarPerfil.addEventListener("click", () => {
@@ -14,10 +13,6 @@ botaoFecharPerfil.addEventListener("click", () => {
     modalPerfil.classList.add("hidden");
 });
 
-// FECHAR CLICANDO FORA
-overlayPerfil.addEventListener("click", () => {
-    modalPerfil.classList.add("hidden");
-});
 
 
 // Tenta buscar o usuário salvo no navegador
