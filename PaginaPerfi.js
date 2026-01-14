@@ -20,6 +20,24 @@ modalPerfil.addEventListener("click", (e) => {
 });
 
 
+const modalLoja = document.getElementById("modal-editar-loja");
+const botaoEditarLoja = document.getElementById("editar-loja");
+const botaoFecharLoja = modalLoja.querySelector(".fechar-modal");
+
+botaoEditarLoja.addEventListener("click", () => {
+    modalLoja.classList.remove("hidden");
+});
+
+botaoFecharLoja.addEventListener("click", () => {
+    modalLoja.classList.add("hidden");
+});
+
+modalLoja.addEventListener("click", (e) => {
+    if (e.target === modalLoja) {
+        modalLoja.classList.add("hidden");
+    }
+});
+
 
 // Tenta buscar o usuário salvo no navegador
 function obterUsuarioLogado() {
