@@ -54,7 +54,7 @@ public class LojaService {
         loja.setNome(dto.getNome());
         loja.setEmail(dto.getEmail());
         loja.setCnpj(dto.getCnpj());
-        loja.setCep(dto.getCEP());
+        loja.setCep(dto.getCep());
         loja.setEndereco(dto.getEndereco());
 
         return r.save(loja);
