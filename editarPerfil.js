@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // ===== ELEMENTOS DO DOM =====
     const modalPerfil = document.getElementById("modal-editar-perfil");
     const botaoEditarPerfil = document.getElementById("editar-perfil");
     const botaoFecharPerfil = document.getElementById("fechar-modal-perfil");
+
+    // ===== EVENTOS =====
 
     // abrir
     botaoEditarPerfil.addEventListener("click", () => {
@@ -23,15 +26,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // SALVAR PERFIL
-    document.getElementById("form-editar-perfil")
-        .addEventListener("submit", salvarPerfil);
+    formEditarPerfil.addEventListener("submit", salvarPerfil);
 });
+
+// ===== FUNÇÕES DE UI =====
 
 // Função para obter o usuário logado do localStorage
 function obterUsuarioLogado() {
     const usuarioJSON = localStorage.getItem("usuarioLogado");
     return usuarioJSON ? JSON.parse(usuarioJSON) : null;
 }
+
+// ===== FUNÇÕES DE DADOS =====
 
 // Preencher o formulário com os dados do usuário
 function preencherFormularioPerfil() {
@@ -40,6 +46,19 @@ function preencherFormularioPerfil() {
     document.getElementById("edit-nome-usuario").value = usuario.nome;
     document.getElementById("edit-email-usuario").value = usuario.email;
 }
+
+function montarDtoUsuario() {
+    const usuario = obterUsuarioLogado();
+
+    return {
+        id: usuario.id,
+        nome: document.getElementById("edit-nome-usuario").value,
+        email: document.getElementById("edit-email-usuario").value,
+        senha: document.getElementById("edit-senha-usuario").value
+    };
+}
+
+// ===== FLUXO PRINCIPAL =====
 
 async function salvarPerfil(e) {
     e.preventDefault();
