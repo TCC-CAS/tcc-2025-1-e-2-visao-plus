@@ -76,23 +76,30 @@ function montarDtoLoja() {
 async function salvarLoja(e) {
     e.preventDefault();
 
-    // 1️⃣ pegar dados do formulário
-    const dadosLoja = montarDtoLoja();
+    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+    const dadosLoja = {
+        id: usuario.loja.id,
+        nome: document.getElementById("edit-nome-loja").value,
+        email: document.getElementById("edit-email-loja").value,
+        cnpj: document.getElementById("edit-cnpj-loja").value,
+        cep: document.getElementById("edit-cep-loja").value,
+        endereco: document.getElementById("edit-endereco-loja").value
+    };
+
     console.log("DTO Loja:", dadosLoja);
 
-    // 2️⃣ enviar para API
     const lojaAtualizada = await editarDadosLoja(dadosLoja);
 
-    if (!lojaAtualizada) {
-        alert("Erro ao salvar loja");
-        return;
+    if (lojaAtualizada) {
+        usuario.loja = lojaAtualizada;
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+
+        alert("Loja atualizada com sucesso!");
+        document.getElementById("modal-editar-loja").classList.add("hidden");
+    } else {
+        alert("Erro ao atualizar loja");
     }
-
-    // 3️⃣ atualizar localStorage
-    atualizarLojaNoLocalStorage(lojaAtualizada);
-
-    // 4️⃣ fechar modal
-    fecharModalLoja();
 }
 
 
