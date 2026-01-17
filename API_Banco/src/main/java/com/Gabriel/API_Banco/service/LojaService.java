@@ -7,6 +7,9 @@ import com.Gabriel.API_Banco.model.Loja;
 import com.Gabriel.API_Banco.model.Usuario;
 import com.Gabriel.API_Banco.repository.LojaRepositorio;
 import com.Gabriel.API_Banco.repository.UsuarioRepositorio;
+import com.Gabriel.API_Banco.dto.ListarLojasDTO;
+
+import java.util.List;
 
 @Service
 public class LojaService {
@@ -59,4 +62,18 @@ public class LojaService {
 
         return r.save(loja);
     }
+
+    public List<ListarLojasDTO> listarTodas() {
+        return r.findAll().stream()
+                .map(loja -> new ListarLojasDTO(
+                        loja.getId(),
+                        loja.getNome(),
+                        loja.getEmail(),
+                        loja.getCnpj(),
+                        loja.getCep(),
+                        loja.getEndereco()
+                ))
+                .toList();
+    }
+
 }
