@@ -1,8 +1,11 @@
 package com.Gabriel.API_Banco.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
+import com.Gabriel.API_Banco.dto.ListarLojasDTO;
+import com.Gabriel.API_Banco.dto.ListarUsuariosDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +63,17 @@ public class UsuarioController {
     public ResponseEntity<Usuario> editarUsuario(@RequestBody EditarUsuarioDTO dto){
         Usuario usuario = s.editarUsuario(dto);
         return ResponseEntity.status(HttpStatus.OK).body(usuario);
+    }
+
+    @GetMapping("/listarUsuarios")
+    public ResponseEntity<List<ListarUsuariosDTO>> listarUsuarios() {
+        return ResponseEntity.ok(s.listarUsuarios());
+    }
+
+    @DeleteMapping("/deletarUsuario/{id}")
+    public ResponseEntity<Void> deletarUsuario(@PathVariable Long id) {
+        s.deletarUsuario(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
