@@ -449,7 +449,7 @@ input {
 }
 
 .barra-vertical button{
-    background-color: #ccc; /* Azul bebê suave */
+    background-color: #938f8f; /* Azul bebê suave */
     color: white;
     border: none;
     padding: 8px;   
@@ -459,6 +459,10 @@ input {
     font-style: normal;
     font-size: 14px;
     margin-right: 5px;
+}
+
+.barra-vertical button:hover {
+    background-color: #9f9d9d; /* Azul bebê mais escuro ao passar o mouse */
 }
 
 .barra-vertical li {
