@@ -208,6 +208,15 @@ header {
     height: 100%;
 }
 
+.lista-lojas {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 10px;
+    border: #156783;
+    border-radius: 5px;
+    padding: 10px;
+}   
+
 /* Sidebar */
 .sidebar {
     flex: 1;
