@@ -2,19 +2,19 @@ document.addEventListener("DOMContentLoaded", carregarUsuarios);
 
 async function carregarUsuarios() {
     try {
-        const response = await fetch("http://localhost:8080/lojas/listarUsuarios");
-        if (!response.ok) throw new Error("Erro ao buscar lojas");
+        const response = await fetch("http://localhost:8080/usuarios/listarUsuarios");
+        if (!response.ok) throw new Error("Erro ao buscar usuario");
 
-        const lojas = await response.json();
+        const usuarios = await response.json();
         renderizarUsuarios(usuarios)
     } catch (error) {
         console.error(error);
-        alert("Erro ao carregar lojas");
+        alert("Erro ao carregar usuarios");
     }
 }
 
 function renderizarUsuarios(usuarios) {
-    const container = document.getElementById("lista-usuarios");
+    const container = document.getElementById("admin-usuarios");
     container.innerHTML = "";
 
     if (usuarios.length === 0) {
