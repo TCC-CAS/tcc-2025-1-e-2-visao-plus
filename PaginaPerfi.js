@@ -56,7 +56,6 @@ async function buscarLojaDoUsuario(usuario) {
 }
 
 
-
 async function configurarTela() {
     esconderTodosOsBlocos();
 
