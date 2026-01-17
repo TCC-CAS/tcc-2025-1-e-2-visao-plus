@@ -28,10 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 throw new Error("Erro ao cadastrar loja");
             }
 
-            const lojaCriada = await response.json();
             alert("Loja criada com sucesso!");
-
             form.reset();
+
+            setTimeout(() => {
+                window.location.href = "./PaginaPerfil.html";
+            }, 100);
+
+
 
         } catch (error) {
             console.error(error);

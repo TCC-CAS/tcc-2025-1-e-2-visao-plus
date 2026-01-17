@@ -33,6 +33,7 @@ public class LojaService {
         loja.setEndereco(dto.getEndereco());
         loja.setDono(dono);
         loja.setCep(dto.getCEP());
+        dono.setTipoUsuario("Vendedor");
 
         return r.save(loja);
     }
