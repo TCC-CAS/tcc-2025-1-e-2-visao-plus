@@ -132,3 +132,6 @@ function atualizarLojaNoLocalStorage(lojaAtualizada) {
     usuario.loja = lojaAtualizada;
     localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
 }
+
+
+// FIM - funcionando editarLoja.js

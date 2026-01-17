@@ -104,3 +104,5 @@ function atualizarLojaNoLocalStorage(usuarioAtualizado) {
     const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
     localStorage.setItem("usuarioLogado", JSON.stringify(usuarioAtualizado));
 }
+
+// FIM - funcionando editarPerfil.js
