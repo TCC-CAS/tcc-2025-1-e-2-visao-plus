@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // SALVAR PERFIL
-    formEditarPerfil.addEventListener("submit", salvarPerfil);
+    document.getElementById("form-editar-perfil").addEventListener("submit", salvarPerfil); 
 });
 
 // ===== FUNÇÕES DE UI =====
@@ -53,8 +53,7 @@ function montarDtoUsuario() {
     return {
         id: usuario.id,
         nome: document.getElementById("edit-nome-usuario").value,
-        email: document.getElementById("edit-email-usuario").value,
-        senha: document.getElementById("edit-senha-usuario").value
+        email: document.getElementById("edit-email-usuario").value
     };
 }
 
@@ -63,28 +62,20 @@ function montarDtoUsuario() {
 async function salvarPerfil(e) {
     e.preventDefault();
 
-    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
-
-    const dadosUsuario = {
-        id: usuario.id,
-        nome: document.getElementById("edit-nome-usuario").value,
-        email: document.getElementById("edit-email-usuario").value,
-        senha: document.getElementById("edit-senha-usuario").value
-    };
+    const dadosUsuario = montarDtoUsuario();
 
     console.log("DTO Perfil:", dadosUsuario);
 
     const usuarioAtualizado = await editarDadosUsuario(dadosUsuario);
 
-    if (usuarioAtualizado) {
-        dadosUsuario = usuarioAtualizado;
-        // Atualiza o localStorage com os novos dados do usuário
-        localStorage.setItem("usuarioLogado", JSON.stringify(usuarioAtualizado));
-        alert("Perfil atualizado com sucesso!");
-        document.getElementById("modal-editar-perfil").classList.add("hidden");
-    } else {
-        alert("Erro ao atualizar perfil. Tente novamente.");
+    if (!usuarioAtualizado) {
+        alert("Erro ao atualizar perfil.");
+        return;
     }
+
+    localStorage.setItem("usuarioLogado", JSON.stringify(usuarioAtualizado));
+    alert("Perfil atualizado com sucesso!");
+    document.getElementById("modal-editar-perfil").classList.add("hidden");
 }
 
 // ===== API =====
