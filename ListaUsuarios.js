@@ -34,8 +34,8 @@ function criarCardUsuario(usuario) {
 
     div.innerHTML = `
         <h2>${usuario.nome}</h2>
-        <p><strong>${usuario.email}</strong></p>
-        <p><strong>${usuario.tipoUsuario}</strong></p>
+        <p><strong>Email: </strong>${usuario.email}</p>
+        <p><strong>Tipo de Usuário: </strong>${usuario.tipoUsuario}</p>
         <button class="btn-detalhes">Deletar</button><button class="btn-detalhes">Editar</button> 
     `;
 
