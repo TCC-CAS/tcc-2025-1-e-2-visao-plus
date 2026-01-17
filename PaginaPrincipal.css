@@ -208,35 +208,71 @@ header {
     height: 100%;
 }
 
+/* =========================
+    LISTA DE LOJAS
+   ========================= */
+
 .lista-lojas {
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 10px;
-    border: #156783;
-    border-radius: 5px;
-    padding: 10px;
-}   
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.card-loja {
+    background: #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 8px;
+}
+
+.card-loja:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #b9b6b6;
+    cursor: pointer;
+}
 
 /* Sidebar */
 .sidebar {
     flex: 1;
     background-color: #156783;
     padding: 20px;
-    margin: 20px 20px 20px 0;
+    margin: 5px 20px 20px 0;
     border-radius: 10px;
 }
 
 .sidebar h3 {
     color: white;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 18px;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar li {
+.sidebar h2 {
     color: white;
-    margin: 10px 0;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
 }
 
+.sidebar p {
+    color: #156783;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-top: 0px;
+}
+
+.sidebar button {
+    background-color: white;
+    color: #156783;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sidebar button:hover {
+    background-color: #f0f0f0;
+}

@@ -33,12 +33,9 @@ function criarCardLoja(loja) {
     div.classList.add("card-loja");
 
     div.innerHTML = `
-        <h3>${loja.nome}</h3>
-        <p><strong>Email:</strong> ${loja.email}</p>
-        <p><strong>CNPJ:</strong> ${loja.cnpj}</p>
-        <p><strong>Endereço:</strong> ${loja.endereco}</p>
-        <p><strong>CEP:</strong> ${loja.cep}</p>
-        <button class="btn-detalhes">Ver detalhes</button>
+        <h2>${loja.nome}</h2>
+        <p><strong>${loja.email}</strong></p>
+        <p><strong>${loja.endereco}</strong></p>
     `;
 
     return div;
