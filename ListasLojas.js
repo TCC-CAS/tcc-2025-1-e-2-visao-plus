@@ -36,6 +36,7 @@ function criarCardLoja(loja) {
         <h2>${loja.nome}</h2>
         <p><strong>${loja.email}</strong></p>
         <p><strong>${loja.endereco}</strong></p>
+        <button class="btn-detalhes">Deletar</button><button class="btn-detalhes">Editar</button> 
     `;
 
     return div;
