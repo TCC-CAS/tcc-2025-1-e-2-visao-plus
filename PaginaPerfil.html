@@ -71,7 +71,7 @@
         <!-- Modal para editar usuário -->
 
         <div id="modal-editar-perfil" class="modal hidden">
-            
+
 
             <!-- caixa branca -->
             <div class="modal-content">
@@ -145,19 +145,19 @@
     </section>
 
     <!-- Administração -->
+    <h3 class="titulo-secao">Administração</h3>
     <section id="secao-admin" class="barra-vertical">
-        <h3>Administração</h3>
 
         <!--Seção de administração dos usuários-->
         <section>
-        <h3>Usuários</h3>
-        <section id="admin-usuarios" class="lista-usuarios"></section><br>
+            <h3>Usuários</h3>
+            <section id="admin-usuarios" class="lista-usuarios"></section><br>
         </section>
 
         <!--Seção de administração das lojas-->
         <section>
-        <h3>Lojas</h3>
-        <section id="lista-lojas" class="lista-lojas"></section>
+            <h3>Lojas</h3>
+            <section id="lista-lojas" class="lista-lojas"></section>
         </section>
     </section>
 
@@ -166,6 +166,41 @@
     <script src="editarPerfil.js"></script>
 </body>
 
+<!-- Modal editar usuário (Admin) -->
+<div id="modal-editar-usuario-admin" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-admin" class="fechar-modal">&times;</span>
+
+        <h2>Editar Usuário</h2>
+
+        <form id="form-editar-usuario-admin">
+            <input type="hidden" id="admin-id-usuario">
+
+            <label>
+                Nome:<br>
+                <input id="admin-nome-usuario" required>
+            </label>
+
+            <label>
+                Email:<br>
+                <input id="admin-email-usuario" type="email" required>
+            </label>
+
+            <label>
+                Tipo de Usuário:<br>
+                <select id="admin-tipo-usuario">
+                    <option value="Cliente">Cliente</option>
+                    <option value="Vendedor">Vendedor</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </label>
+
+            <button type="submit" class="button">Salvar</button>
+        </form>
+    </div>
+</div>
+
 <script src="ListaUsuarios.js"></script>
 <script src="ListasLojas.js"></script>
+
 </html>
