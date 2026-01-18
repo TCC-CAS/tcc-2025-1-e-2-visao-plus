@@ -14,7 +14,7 @@ async function carregarLojas() {
 }
 
 function renderizarLojas(lojas) {
-    const container = document.getElementById("Admin-lojas");
+    const container = document.getElementById("lista-lojas");
     container.innerHTML = "";
 
     if (lojas.length === 0) {
@@ -36,7 +36,7 @@ function criarCardLoja(loja) {
         <h2>${loja.nome}</h2>
         <p><strong>${loja.email}</strong></p>
         <p><strong>${loja.endereco}</strong></p>
-        <button class="btn-detalhes">Deletar</button><button class="btn-detalhes">Editar</button> 
+        <button class="btn-detalhes">Deletar</button><button class="btn-detalhes">Editar</button>    
     `;
 
     return div;

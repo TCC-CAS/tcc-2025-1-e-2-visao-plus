@@ -417,7 +417,12 @@ input {
     padding: 16px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     font-size: 8px;
-    
+    }
+
+.lista-lojas{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
 }
 
 .card-usuario:hover {
