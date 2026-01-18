@@ -53,6 +53,8 @@ public class UsuarioService {
         Usuario usuario = r.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 
+
+
         r.delete(usuario);
     }
 
