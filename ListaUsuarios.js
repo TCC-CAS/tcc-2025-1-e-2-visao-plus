@@ -36,15 +36,15 @@ function criarCardUsuario(usuario) {
         <h2>${usuario.nome}</h2>
         <p><strong>Email: </strong>${usuario.email}</p>
         <p><strong>Tipo de Usuário: </strong>${usuario.tipo_usuario}</p>
-        <button class="btn-detalhes Deletar">Deletar</button>
-        <button class="btn-detalhes Editar">Editar</button> 
+        <button class="btn-detalhes deletar">Deletar</button>
+        <button class="btn-detalhes editar">Editar</button> 
     `;
 
-    div.querySelector(".Editar").addEventListener("click", () => {
+    div.querySelector(".editar").addEventListener("click", () => {
         abrirModalEditarUsuario(usuario);
     });
 
-    div.querySelector(".Deletar").addEventListener("click", () => {
+    div.querySelector(".deletar").addEventListener("click", () => {
         deletarUsuario(usuario.id);
     });
 
