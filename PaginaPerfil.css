@@ -420,6 +420,28 @@ input {
     
 }
 
+.card-usuario:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #b9b6b6;
+    cursor: pointer;
+    
+}
+
+.card-loja{
+    background: #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 8px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.card-loja:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #b9b6b6;
+    cursor: pointer;
+}
+
 .barra-vertical h3 {
     color: white;
     margin-bottom: 15px;
