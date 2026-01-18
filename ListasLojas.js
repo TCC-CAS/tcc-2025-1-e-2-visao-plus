@@ -14,7 +14,7 @@ async function carregarLojas() {
 }
 
 function renderizarLojas(lojas) {
-    const container = document.getElementById("lista-lojas");
+    const container = document.getElementById("Admin-lojas");
     container.innerHTML = "";
 
     if (lojas.length === 0) {
