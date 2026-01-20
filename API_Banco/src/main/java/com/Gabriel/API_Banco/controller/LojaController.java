@@ -30,7 +30,7 @@ public class LojaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(loja);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletarLoja/{id}")
     public ResponseEntity<?> deletarLoja(@PathVariable Long id) {
         lojaService.deletarLoja(id);
         return ResponseEntity.ok("Loja deletada com sucesso!");
