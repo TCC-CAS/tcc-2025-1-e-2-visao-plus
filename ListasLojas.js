@@ -87,3 +87,18 @@ async function salvarLojaAdmin(e) {
     }
 
     const response = await fetch("http://localhost:8080/lojas/editarLoja", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dados)
+    });
+
+    if (response.ok) {
+        alert("Loja atualizada com sucesso!");
+        document
+            .getElementById("modal-editar-loja-admin")
+            .classList.add("hidden");
+        carregarLojas();
+    } else {
+        alert("Erro ao editar loja");
+    }
+}
