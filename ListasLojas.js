@@ -62,10 +62,17 @@ function abrirModalEditarLoja(loja) {
     document
         .getElementById("modal-editar-loja-admin")
         .classList.remove("hidden");
+}
 
-    document.getElementById("fechar-modal-loja-admin").addEventListener("click", () => {
+document.getElementById("fechar-modal-loja-admin").addEventListener("click", () => {
     document
         .getElementById("modal-editar-loja-admin")
         .classList.add("hidden");
 });
-}
+
+document
+    .getElementById("form-editar-loja-admin")
+    .addEventListener("submit", salvarLojaAdmin);
+
+async function salvarLojaAdmin(e) {
+    e.preventDefault();
