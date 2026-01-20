@@ -36,8 +36,17 @@ function criarCardLoja(loja) {
         <h2>${loja.nome}</h2>
         <p><strong>${loja.email}</strong></p>
         <p><strong>${loja.endereco}</strong></p>
-        <button class="btn-detalhes">Deletar</button><button class="btn-detalhes">Editar</button>    
+        <button class="btn-detalhes deletar">Deletar</button>
+        <button class="btn-detalhes editar">Editar</button>    
     `;
+
+    div.querySelector(".editar").addEventListener("click", () => {
+        abrirModalEditarLoja(loja);
+    });
+
+    div.querySelector(".deletar").addEventListener("click", () => {
+        deletarLoja(loja.id);
+    });
 
     return div;
 }
