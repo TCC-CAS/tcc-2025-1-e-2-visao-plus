@@ -60,6 +60,12 @@ function abrirModalEditarLoja(loja) {
     document.getElementById("admin-endereco-loja").value = loja.endereco;
 
     document
-        .getElementById("modal-editar-loja")
+        .getElementById("modal-editar-loja-admin")
         .classList.remove("hidden");
+
+    document.getElementById("fechar-modal-loja-admin").addEventListener("click", () => {
+    document
+        .getElementById("modal-editar-loja-admin")
+        .classList.add("hidden");
+});
 }
