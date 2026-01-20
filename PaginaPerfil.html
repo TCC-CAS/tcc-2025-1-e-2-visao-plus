@@ -200,6 +200,40 @@
     </div>
 </div>
 
+<div id="modal-editar-loja-admin" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-loja-admin" class="fechar-modal">&times;</span>
+
+        <h2>Editar Loja</h2>
+
+        <form id="form-editar-loja-admin">
+            <input type="hidden" id="admin-id-loja">
+
+            <label>
+                Nome da Loja:<br>
+                <input id="admin-nome-loja" required>
+            </label>
+
+            <label>
+                Email da Loja:<br>
+                <input id="admin-email-loja" type="email" required>
+            </label>
+
+            <label>
+                CNPJ:<br>
+                <input id="admin-cnpj-loja" required>
+            </label>
+
+            <label>
+                Endereço:<br>
+                <input id="admin-endereco-loja" required>
+            </label>
+
+            <button type="submit" class="button">Salvar</button>
+        </form>
+    </div>
+</div>
+
 <script src="ListaUsuarios.js"></script>
 <script src="ListasLojas.js"></script>
 

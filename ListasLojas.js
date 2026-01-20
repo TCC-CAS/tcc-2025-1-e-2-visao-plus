@@ -50,3 +50,14 @@ function criarCardLoja(loja) {
 
     return div;
 }
+
+function abrirModalEditarLoja(loja) {
+    document.getElementById("admin-id-loja").value = loja.id;
+    document.getElementById("admin-nome-loja").value = loja.nome;
+    document.getElementById("admin-email-loja").value = loja.email;
+    document.getElementById("admin-endereco-loja").value = loja.endereco;
+
+    document
+        .getElementById("modal-editar-loja")
+        .classList.remove("hidden");
+}
