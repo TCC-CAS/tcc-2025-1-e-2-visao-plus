@@ -102,3 +102,22 @@ async function salvarLojaAdmin(e) {
         alert("Erro ao editar loja");
     }
 }
+
+async function deletarLoja(id) {
+    const confirmacao = confirm("Tem certeza que deseja deletar esta loja?");
+    if (!confirmacao) return;
+
+    const response = await fetch(
+        `http://localhost:8080/lojas/deletarLoja/${id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" }
+        }
+    );
+
+    if (response.ok) {
+        alert("Loja deletada com sucesso!");
+        carregarLojas();
+    } else {
+        alert("Erro ao deletar loja");
+    }
+}
