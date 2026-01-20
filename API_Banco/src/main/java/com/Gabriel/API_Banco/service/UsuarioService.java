@@ -60,13 +60,6 @@ public class UsuarioService {
         Usuario usuario = r.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado!"));
 
-        // Se for vendedor, deletar loja primeiro
-        if (usuario.getTipoUsuario() == TipoUsuario.VENDEDOR) {
-
-            lojaRepository.findByDonoId(id)
-                    .ifPresent(lojaRepository::delete);
-        }
-
         r.delete(usuario);
     }
 
