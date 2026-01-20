@@ -1,11 +1,7 @@
 package com.Gabriel.API_Banco.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -17,6 +13,10 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
     private Long id;
+
+    @OneToOne(mappedBy = "dono", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
+    private Loja loja;
 
     @Column(name = "nome")
     private String nome;
