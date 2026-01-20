@@ -55,6 +55,8 @@ function abrirModalEditarLoja(loja) {
     document.getElementById("admin-id-loja").value = loja.id;
     document.getElementById("admin-nome-loja").value = loja.nome;
     document.getElementById("admin-email-loja").value = loja.email;
+    document.getElementById("admin-cnpj-loja").value = loja.cnpj;
+    document.getElementById("admin-cep-loja").value = loja.cep;
     document.getElementById("admin-endereco-loja").value = loja.endereco;
 
     document
