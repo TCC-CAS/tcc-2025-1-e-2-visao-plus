@@ -85,3 +85,5 @@ async function salvarLojaAdmin(e) {
         cep: document.getElementById("admin-cep-loja").value,
         endereco: document.getElementById("admin-endereco-loja").value,
     }
+
+    const response = await fetch("http://localhost:8080/lojas/editarLoja", {
