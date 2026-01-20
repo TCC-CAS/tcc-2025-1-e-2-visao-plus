@@ -76,3 +76,12 @@ document
 
 async function salvarLojaAdmin(e) {
     e.preventDefault();
+
+    const dados = {
+        id: document.getElementById("admin-id-loja").value,
+        nome: document.getElementById("admin-nome-loja").value,
+        email: document.getElementById("admin-email-loja").value,
+        cnpj: document.getElementById("admin-cnpj-loja").value,
+        cep: document.getElementById("admin-cep-loja").value,
+        endereco: document.getElementById("admin-endereco-loja").value,
+    }
