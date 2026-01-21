@@ -31,7 +31,9 @@ public class Produto {
     @Column(name = "prazo_entrega_dias")
     private Integer prazoEntregaDias;
 
-    ManyToOne
+    @ManyToOne
+    @JoinColumn(name= "id_usuario")
+    private Usuario usuario;
 
 }
 
