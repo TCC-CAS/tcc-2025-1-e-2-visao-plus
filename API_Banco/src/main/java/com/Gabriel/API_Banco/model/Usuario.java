@@ -30,4 +30,8 @@ public class Usuario {
     @Column(name = "tipo_usuario")
     private String tipoUsuario;
 
+    @(mappedBy = "produto", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
+    private Produto produto;
+
 }
