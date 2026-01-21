@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "usuario")
@@ -30,8 +32,8 @@ public class Usuario {
     @Column(name = "tipo_usuario")
     private String tipoUsuario;
 
-    @(mappedBy = "produto", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "usuario")
     @JsonIgnore
-    private Produto produto;
+    private List<Produto> produtos;
 
 }
