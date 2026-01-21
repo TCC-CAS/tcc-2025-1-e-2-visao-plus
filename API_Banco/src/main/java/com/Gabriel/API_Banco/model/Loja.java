@@ -1,7 +1,10 @@
 package com.Gabriel.API_Banco.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -31,5 +34,9 @@ public class Loja {
 
     @Column(name= "endereco")
     private String endereco;
+
+    @OneToMany(mappedBy = "loja", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonIgnore
+    private List<Produto> produtos;
 
 }
