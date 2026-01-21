@@ -31,6 +31,11 @@ public class Produto {
     @Column(name = "prazo_entrega_dias")
     private Integer prazoEntregaDias;
 
+    // Quem pediu
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
+
     @ManyToOne
     @JoinColumn(name = "id_loja")
     private Loja loja;
