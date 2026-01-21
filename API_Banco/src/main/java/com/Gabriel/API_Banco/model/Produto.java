@@ -31,7 +31,7 @@ public class Produto {
     @Column(name = "prazo_entrega_dias")
     private Integer prazoEntregaDias;
 
-    OneToMany
+    ManyToOne
 
 }
 
