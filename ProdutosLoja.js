@@ -33,6 +33,19 @@ async function carregarArmacoes() {
         renderizarArmacoes(armacoes);
     } catch (error) {
         console.error(error);
-        alert("Erro ao carregar armações");
+        alert("Erro ao carregar armações"); 
+    }
+}
+
+async function carregarLentes() {
+    try {
+        const response = await fetch(`${API}/lentes/listarLentes`);
+        if (!response.ok) throw new Error("Erro ao buscar lentes");
+
+        const lentes = await response.json();
+        renderizarLentes(lentes);
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao carregar lentes");
     }
 }
