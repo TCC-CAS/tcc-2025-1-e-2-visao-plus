@@ -49,3 +49,41 @@ async function carregarLentes() {
         alert("Erro ao carregar lentes");
     }
 }
+
+function abrirModal(idModal) {
+    document.getElementById(idModal).classList.remove("hidden");
+}
+
+function fecharModal(idModal) {
+    document.getElementById(idModal).classList.add("hidden");
+}
+
+function renderizarArmacoes(armacoes) {
+    const container = document.getElementById("lista-armacoes");
+    container.innerHTML = "";
+    armacoes.forEach(armacao => {
+        const div = document.createElement("div");
+        div.className = "produto";
+        div.innerHTML = `
+            <h3>${armacao.nome}</h3>
+            <p>Preço: R$ ${armacao.preco}</p>
+            <button onclick="abrirModal('modal-editar-armacao')">Editar</button>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function renderizarLentes(lentes) {
+    const container = document.getElementById("lista-lentes");
+    container.innerHTML = "";
+    lentes.forEach(lente => {
+        const div = document.createElement("div");
+        div.className = "produto";
+        div.innerHTML = `
+            <h3>${lente.nome}</h3>
+            <p>Preço: R$ ${lente.preco}</p>
+            <button onclick="abrirModal('modal-editar-lente')">Editar</button>
+        `;
+        container.appendChild(div);
+    });
+}
