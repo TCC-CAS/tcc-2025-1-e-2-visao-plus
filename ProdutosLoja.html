@@ -57,27 +57,27 @@
         <!--lista de armações-->
         <section class="armacao-section">
 
-                <h3>Minhas Armações</h3>
+            <h3>Minhas Armações</h3>
 
-                <button class="btn-adicionar" id="btn-adicionar-armacao">
-                    + Adicionar Produto
-                </button>
-                <section id="armacao-lista" class="armacao-lista"></section>           
+            <button class="btn-adicionar" id="btn-adicionar-armacao">
+                + Adicionar Produto
+            </button>
+            <section id="armacao-lista" class="armacao-lista"></section>
 
         </section>
 
         <!--lista de lentes-->
         <section class="lente-section">
 
-                <h3>Minhas Lentes</h3>
+            <h3>Minhas Lentes</h3>
 
-                <button class="btn-adicionar" id="btn-adicionar-lente">
-                    + Adicionar Produto
-                </button>
-                <section id="lente-lista" class="lente-lista"></section>
+            <button class="btn-adicionar" id="btn-adicionar-lente">
+                + Adicionar Produto
+            </button>
+            <section id="lente-lista" class="lente-lista"></section>
 
 
-    </section>
+        </section>
 </body>
 
 <!-- Modal para adicionar armação -->
@@ -101,3 +101,23 @@
     </div>
 </div>
 
+<!-- Modal para adicionar lente -->
+<div id="modal-adicionar-lente" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-lente" class="fechar-modal">&times;</span>
+
+        <h2>Adicionar Lente</h2>
+        <form id="form-adicionar-lente">
+            <label for="nomeLente">Nome do Produto:</label>
+            <input type="text" id="nomeLente" name="nomeLente" required>
+
+            <label for="descricaoLente">Descrição:</label>
+            <textarea id="descricaoLente" name="descricaoLente" required></textarea>
+
+            <label for="precoLente">Preço:</label>
+            <input type="number" id="precoLente" name="precoLente" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Lente</button>
+        </form>
+    </div>
+</div>
