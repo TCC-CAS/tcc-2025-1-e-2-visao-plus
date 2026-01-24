@@ -47,40 +47,57 @@
     </header>
 
     <h2 class="titulo-secao">
-        Loja
+        <input type="text">
     </h2>
 
-    <section class="main-content">
-        <p>Conteúdo da Página Loja</p>
+    <!-- Conteúdo Principal -->
+    <section class="main-content" id="Conteudo-Principal">
+        <p class="titulo-secao">Administração de Produtos da Página Loja</p>
 
-        <section class="produtos-section">
-            <div class="produtos-header">
-                <h3>Meus Produtos</h3>
-                <button class="btn-adicionar" id="btnAdicionarProduto">
+        <!--lista de armações-->
+        <section class="armacao-section">
+
+                <h3>Minhas Armações</h3>
+
+                <button class="btn-adicionar" id="btn-adicionar-armacao">
                     + Adicionar Produto
                 </button>
-            </div>
+                <section id="armacao-lista" class="armacao-lista"></section>           
 
-            <div class="produtos-grid">
-                <!-- Card de produto -->
-                <div class="produto-card">
-                    <img src="oculos-exemplo.png" alt="Óculos Exemplo">
-
-                    <div class="produto-info">
-                        <h4>Óculos Ray Vision</h4>
-                        <p>Armação masculina</p>
-                        <span class="preco">R$ 399,90</span>
-                    </div>
-
-                    <div class="produto-acoes">
-                        <button class="btn-editar">Editar</button>
-                        <button class="btn-excluir">Excluir</button>
-                    </div>
-                </div>
-
-                <!-- outros cards virão aqui -->
-            </div>
         </section>
+
+        <!--lista de lentes-->
+        <section class="lente-section">
+
+                <h3>Minhas Lentes</h3>
+
+                <button class="btn-adicionar" id="btn-adicionar-lente">
+                    + Adicionar Produto
+                </button>
+                <section id="lente-lista" class="lente-lista"></section>
 
 
     </section>
+</body>
+
+<!-- Modal para adicionar armação -->
+<div id="modal-adicionar-armação" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-armação" class="fechar-modal">&times;</span>
+
+        <h2>Adicionar Armação</h2>
+        <form id="form-adicionar-armação">
+            <label for="nomeArmacao">Nome do Produto:</label>
+            <input type="text" id="nomeArmacao" name="nomeArmacao" required>
+
+            <label for="descricaoArmacao">Descrição:</label>
+            <textarea id="descricaoArmacao" name="descricaoArmacao" required></textarea>
+
+            <label for="precoArmacao">Preço:</label>
+            <input type="number" id="precoArmacao" name="precoArmacao" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Armacao</button>
+        </form>
+    </div>
+</div>
+
