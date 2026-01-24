@@ -101,6 +101,27 @@
     </div>
 </div>
 
+<!--Modal para editar Armacao-->
+<div id="modal-editar-armação" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-editar-armação" class="fechar-modal">&times;</span>
+
+        <h2>Editar Armação</h2>
+        <form id="form-editar-armação">
+            <label for="nomeArmacaoEdit">Nome do Produto:</label>
+            <input type="text" id="nomeArmacaoEdit" name="nomeArmacaoEdit" required>
+
+            <label for="descricaoArmacaoEdit">Descrição:</label>
+            <textarea id="descricaoArmacaoEdit" name="descricaoArmacaoEdit" required></textarea>
+
+            <label for="precoArmacaoEdit">Preço:</label>
+            <input type="number" id="precoArmacaoEdit" name="precoArmacaoEdit" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Armacao</button>
+        </form>
+    </div>
+</div>
+
 <!-- Modal para adicionar lente -->
 <div id="modal-adicionar-lente" class="modal hidden">
     <div class="modal-content">
