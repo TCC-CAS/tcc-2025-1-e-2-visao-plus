@@ -142,3 +142,24 @@
         </form>
     </div>
 </div>
+
+<!--Modal para editar Lente-->
+<div id="modal-editar-lente" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-editar-lente" class="fechar-modal">&times;</span>
+
+        <h2>Editar Lente</h2>
+        <form id="form-editar-lente">
+            <label for="nomeLenteEdit">Nome do Produto:</label>
+            <input type="text" id="nomeLenteEdit" name="nomeLenteEdit" required>
+
+            <label for="descricaoLenteEdit">Descrição:</label>
+            <textarea id="descricaoLenteEdit" name="descricaoLenteEdit" required></textarea>
+
+            <label for="precoLenteEdit">Preço:</label>
+            <input type="number" id="precoLenteEdit" name="precoLenteEdit" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Lente</button>
+        </form>
+    </div>
+    
