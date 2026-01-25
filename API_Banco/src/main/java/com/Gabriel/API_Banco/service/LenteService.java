@@ -43,9 +43,9 @@ public class LenteService {
         lr.deleteById(id);
     }
 
-    public Lente editarLente(EditarLenteDTO  dto){
+    public Lente editarLente(Long id, EditarLenteDTO  dto){
 
-        Lente lente = lr.findById(dto.getId())
+        Lente lente = lr.findById(id)
                 .orElseThrow(() -> new RuntimeException("Lente não encontrada!"));
 
         lente.setNome(dto.getNome());
@@ -66,6 +66,7 @@ public class LenteService {
     public List<ListarLentesDTO> listarLentes(){
         return lr.findAll().stream()
                 .map(lente -> new ListarLentesDTO(
+                        lente.getId(),
                         lente.getNome(),
                         lente.getTipo(),
                         lente.getMarca(),
@@ -81,6 +82,7 @@ public class LenteService {
         return lr.findByLoja_Id(idLoja)
                 .stream()
                 .map(lente -> new ListarLentesDTO(
+                        lente.getId(),
                         lente.getNome(),
                         lente.getTipo(),
                         lente.getMarca(),
