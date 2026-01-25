@@ -17,6 +17,7 @@ public class ListarLentesDTO {
 
     // construtor para listagem
     public ListarLentesDTO(
+            Long id,
             String nome,
             String tipo,
             String marca,
@@ -25,6 +26,7 @@ public class ListarLentesDTO {
             String descricao,
             Double preco
     ) {
+        this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.marca = marca;

@@ -9,8 +9,7 @@ public class EditarLenteDTO {
     private String material;
     private String descricao;
     private Double preco;
-    private Long idLoja;
-    private Long id;
+
 
     //getters and setters
     public String getNome() {
@@ -51,10 +50,5 @@ public class EditarLenteDTO {
     }
     public Double getPreco(){ return preco;}
     public void setPreco(Double preco) {this.preco = preco;}
-    public Long getIdLoja(){return idLoja;}
 
-    public Long getId(){return id;}
-    public void setId(Long id){
-        this.id = id;
-    }
 }
