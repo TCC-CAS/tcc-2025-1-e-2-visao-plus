@@ -131,3 +131,117 @@ function CardLente(lente) {
     `;
     return div;
 }
+
+//FUNÇÕES DE CONFIGURAÇÃO DE EVENTOS
+
+function configurarEventos() {
+
+    // Abrir modais
+    document.getElementById("btn-adicionar-armacao")
+        .addEventListener("click", () => abrirModal("modal-adicionar-armação"));
+
+    document.getElementById("btn-adicionar-lente")
+        .addEventListener("click", () => abrirModal("modal-adicionar-lente"));
+
+    // Fechar modais
+    document.getElementById("fechar-modal-armação")
+        .addEventListener("click", () => fecharModal("modal-adicionar-armação"));
+
+    document.getElementById("fechar-modal-editar-armação")
+        .addEventListener("click", () => fecharModal("modal-editar-armação"));
+
+    document.getElementById("fechar-modal-lente")
+        .addEventListener("click", () => fecharModal("modal-adicionar-lente"));
+
+    document.getElementById("fechar-modal-editar-lente")
+        .addEventListener("click", () => fecharModal("modal-editar-lente"));
+
+    // Forms
+    document.getElementById("form-adicionar-armação")
+        .addEventListener("submit", adicionarArmacao);
+
+    document.getElementById("form-editar-armação")
+        .addEventListener("submit", salvarEdicaoArmacao);
+
+    document.getElementById("form-adicionar-lente")
+        .addEventListener("submit", adicionarLente);
+
+    document.getElementById("form-editar-lente")
+        .addEventListener("submit", salvarEdicaoLente);
+}
+
+//FUNÇÕES DE ADIÇÃO DE ARMAÇÕES
+
+async function adicionarArmacao(event) {
+    event.preventDefault();
+
+    const armacao = {
+        nome: nomeArmacao.value,
+        tipo: tipoArmacao.value,
+        marca: marcaArmacao.value,
+        modelo: modeloArmacao.value,
+        material: materialArmacao.value,
+        descricao: descricaoArmacao.value,
+        preco: precoArmacao.value
+    };
+
+    try {
+        await fetch(`${API_BASE_URL}/armacoes`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(armacao)
+        });
+
+        fecharModal("modal-adicionar-armação");
+        carregarArmacoes();
+        event.target.reset();
+
+    } catch (error) {
+        console.error("Erro ao adicionar armação", error);
+    }
+}
+
+
+//FUNÇÕES DE EDIÇÃO DE ARMAÇÕES
+
+let armacaoEmEdicaoId = null;
+
+async function abrirModalEditarArmacao(id) {
+    armacaoEmEdicaoId = id;
+
+    const response = await fetch(`${API_BASE_URL}/armacoes/${id}`);
+    const armacao = await response.json();
+
+    nomeArmacaoEdit.value = armacao.nome;
+    tipoArmacaoEdit.value = armacao.tipo;
+    marcaArmacaoEdit.value = armacao.marca;
+    modeloArmacaoEdit.value = armacao.modelo;
+    materialArmacaoEdit.value = armacao.material;
+    descricaoArmacaoEdit.value = armacao.descricao;
+    precoArmacaoEdit.value = armacao.preco;
+
+    abrirModal("modal-editar-armação");
+}
+
+async function salvarEdicaoArmacao(event) {
+    event.preventDefault();
+
+    const armacaoAtualizada = {
+        nome: nomeArmacaoEdit.value,
+        tipo: tipoArmacaoEdit.value,
+        marca: marcaArmacaoEdit.value,
+        modelo: modeloArmacaoEdit.value,
+        material: materialArmacaoEdit.value,
+        descricao: descricaoArmacaoEdit.value,
+        preco: precoArmacaoEdit.value
+    };
+
+    await fetch(`${API_BASE_URL}/armacoes/${armacaoEmEdicaoId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(armacaoAtualizada)
+    });
+
+    fecharModal("modal-editar-armação");
+    carregarArmacoes();
+}
