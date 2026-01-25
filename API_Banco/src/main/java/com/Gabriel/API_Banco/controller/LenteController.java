@@ -43,7 +43,7 @@ public class LenteController {
     }
 
     //EDITAR LENTE
-    @PutMapping("/{id}")
+    @PutMapping("/editarLente/{id}")
     public ResponseEntity<Lente> editarLente(
             @PathVariable Long id,
             @RequestBody EditarLenteDTO dto
@@ -52,7 +52,7 @@ public class LenteController {
     }
 
     //DELETAR LENTE
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletarLente/{id}")
     public ResponseEntity<Void> deletarLente(@PathVariable Long id) {
         lenteService.deletarLente(id);
         return ResponseEntity.noContent().build();
