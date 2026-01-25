@@ -19,8 +19,24 @@ public class LenteService {
     }
 
     public Lente criarLente(CriarLenteDTO dto){
-        Loja loja =
+        Loja idloja = lojar.findById(dto.getIdLoja()).orElseThrow(() -> new RuntimeException("Loja não encontrada"));
+
+        Lente lente = new Lente();
+        lente.setNome(dto.getNome());
+        lente.setTipo(dto.getTipo());
+        lente.setMarca(dto.getMarca());
+        lente.setModelo(dto.getModelo());
+        lente.setMaterial(dto.getMaterial());
+        lente.setDescricao(dto.getDescricao());
+        lente.setPreco(dto.getPreco());
+
 
         return lr.save(lente);
     }
+
+    public void deletarLente(Long id){
+        lr.deleteById(id);
+    }
+
+    public Lente
 }

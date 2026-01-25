@@ -33,14 +33,11 @@ public class Lente {
     @Column(name = "material_lente")
     private String material;
 
+    @Column(name = "descricao")
+    private String descricao;
+
     @Column(name = "preco_lente")
     private Double preco;
-
-    @Column(name = "grau_lente_direita")
-    private Double grauLenteDireita;
-
-    @Column(name = "grau_lente_esquerda")
-    private Double grauLenteEsquerda;
 }
 
 

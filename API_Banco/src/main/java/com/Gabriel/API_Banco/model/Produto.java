@@ -21,6 +21,12 @@ public class Produto {
     @JoinColumn(name = "id_lente")
     private Lente lente;
 
+    @Column(name = "grau_lente_direita")
+    private Double grauLenteDireita;
+
+    @Column(name = "grau_lente_esquerda")
+    private Double grauLenteEsquerda;
+
     @ManyToOne
     @JoinColumn(name = "id_armacao")
     private Armacao armacao;
