@@ -15,7 +15,7 @@ public class Lente {
 
     @ManyToOne
     @JoinColumn(name = "id_loja")
-    private Loja Loja;
+    private Loja loja;
 
     @Column(name = "nome_lente")
     private String nome;
