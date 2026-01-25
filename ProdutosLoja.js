@@ -91,7 +91,7 @@ function CardArmacao(armacao) {
         <p>Tipo: ${armacao.tipo}</p>
         <p>Descrição: ${armacao.descricao}</p>
         <p>Preço: R$ ${armacao.preco}</p>
-        <button onclick="abrirModal('modal-editar-armacao')">Editar</button>
+        <button onclick="abrirModalEditarArmacao(${armacao.id})">Editar</button>
         <button onclick="abrirModal('modal-deletar-armacao')">Deletar</button>
     `;
     return div;
@@ -126,7 +126,7 @@ function CardLente(lente) {
         <p>Material: ${lente.material}</p>
         <p>Descrição: ${lente.descricao}</p>
         <p>Preço: R$ ${lente.preco}</p>
-        <button onclick="abrirModal('modal-editar-lente')">Editar</button>
+        <button onclick="abrirModalEditarArmacao(${lente.id})">Editar</button>
         <button onclick="abrirModal('modal-deletar-lente')">Deletar</button>
     `;
     return div;
@@ -181,12 +181,11 @@ async function adicionarArmacao(event) {
         marca: marcaArmacao.value,
         modelo: modeloArmacao.value,
         material: materialArmacao.value,
-        descricao: descricaoArmacao.value,
         preco: precoArmacao.value
     };
-
+''
     try {
-        await fetch(`${API_BASE_URL}/armacoes`, {
+        await fetch(`${API}/armacoes/criarArmacao`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(armacao)
@@ -209,7 +208,7 @@ let armacaoEmEdicaoId = null;
 async function abrirModalEditarArmacao(id) {
     armacaoEmEdicaoId = id;
 
-    const response = await fetch(`${API_BASE_URL}/armacoes/${id}`);
+    const response = await fetch(`${API}/armacoes/${id}`);
     const armacao = await response.json();
 
     nomeArmacaoEdit.value = armacao.nome;
@@ -236,7 +235,7 @@ async function salvarEdicaoArmacao(event) {
         preco: precoArmacaoEdit.value
     };
 
-    await fetch(`${API_BASE_URL}/armacoes/${armacaoEmEdicaoId}`, {
+    await fetch(`${API}/armacoes/editarArmacao`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(armacaoAtualizada)
@@ -245,3 +244,80 @@ async function salvarEdicaoArmacao(event) {
     fecharModal("modal-editar-armação");
     carregarArmacoes();
 }
+
+
+//FUNÇÕES DE ADIÇÃO DE LENTES
+
+async function adicionarLente(event) {
+    event.preventDefault();
+
+    const lente = {
+        nome: nomeLente.value,
+        tipo: tipoLente.value,
+        marca: marcaLente.value,
+        modelo: modeloLente.value,
+        material: materialLente.value,
+        preco: precoLente.value
+    };
+
+    try {
+        await fetch(`${API}/lentes/criarLente`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(lente)
+        });
+
+        fecharModal("modal-adicionar-lente");
+        carregarLentes();
+        event.target.reset();
+
+    } catch (error) {
+        console.error("Erro ao adicionar lente", error);
+    }
+}
+
+//FUNÇÕES DE EDIÇÃO DE LENTES
+
+let lenteEmEdicaoId = null;
+
+async function abrirModalEditarLente(id) {
+    lenteEmEdicaoId = id;
+
+    const response = await fetch(`${API}/lentes/${id}`);
+    const lente = await response.json();
+
+    nomeLenteEdit.value = lente.nome;
+    tipoLenteEdit.value = lente.tipo;
+    marcaLenteEdit.value = lente.marca;
+    modeloLenteEdit.value = lente.modelo;
+    materialLenteEdit.value = lente.material;
+    descricaoLenteEdit.value = lente.descricao;
+    precoLenteEdit.value = lente.preco;
+
+    abrirModal("modal-editar-lente");
+}
+
+
+async function salvarEdicaoLente(event) {
+    event.preventDefault();
+
+    const lenteAtualizada = {
+        nome: nomeLenteEdit.value,
+        tipo: tipoLenteEdit.value,
+        marca: marcaLenteEdit.value,
+        modelo: modeloLenteEdit.value,
+        material: materialLenteEdit.value,
+        descricao: descricaoLenteEdit.value,
+        preco: precoLenteEdit.value
+    };
+
+    await fetch(`${API}/lentes/editarLente`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lenteAtualizada)
+    });
+
+    fecharModal("modal-editar-lente");
+    carregarLentes();
+}
+
