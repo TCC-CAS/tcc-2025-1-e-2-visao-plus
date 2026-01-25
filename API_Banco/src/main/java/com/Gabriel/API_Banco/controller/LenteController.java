@@ -24,7 +24,7 @@ public class LenteController {
     }
 
     //CRIAR LENTE
-    @PostMapping
+    @PostMapping("/criarLente")
     public ResponseEntity<Lente> criarLente(@RequestBody CriarLenteDTO dto) {
         Lente lenteCriada = lenteService.criarLente(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(lenteCriada);
