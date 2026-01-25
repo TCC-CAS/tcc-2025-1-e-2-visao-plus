@@ -1,11 +1,6 @@
 package com.Gabriel.API_Banco.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -17,6 +12,10 @@ public class Lente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_lente")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_loja")
+    private Loja Loja;
 
     @Column(name = "nome_lente")
     private String nome;

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     initPaginaAdmin();
 });
 
+let lojaIdAtual = null;
 async function setNomeLoja() {
     try {
         const response = await fetch(`${API}/lojas/buscarLoja`);
@@ -12,6 +13,7 @@ async function setNomeLoja() {
         const loja = await response.json();
         const Nomeloja = loja.nome;
 
+        lojaIdAtual = loja.id;
         document.getElementById("nomeLoja").textContent = Nomeloja;
     } catch (error) {
         console.error(error);
@@ -23,7 +25,7 @@ async function setNomeLoja() {
 
 async function carregarArmacoes() {
     try {
-        const response = await fetch(`${API}/armacoes/listarArmacoes`);
+        const response = await fetch(`${API}/armacoes/listarArmacoes/${lojaIdAtual}`);
         if (!response.ok) throw new Error("Erro ao buscar armações");
 
         const armacoes = await response.json();
@@ -36,7 +38,7 @@ async function carregarArmacoes() {
 
 async function carregarLentes() {
     try {
-        const response = await fetch(`${API}/lentes/listarLentes`);
+        const response = await fetch(`${API}/lentes/listarLentes/${lojaIdAtual}`);
         if (!response.ok) throw new Error("Erro ao buscar lentes");
 
         const lentes = await response.json();
@@ -254,7 +256,8 @@ async function adicionarLente(event) {
         modelo: modeloLente.value,
         material: materialLente.value,
         descricao: descricaoLente.value,
-        preco: precoLente.value
+        preco: precoLente.value,
+        idLoja: lojaIdAtual
     };
 
     try {

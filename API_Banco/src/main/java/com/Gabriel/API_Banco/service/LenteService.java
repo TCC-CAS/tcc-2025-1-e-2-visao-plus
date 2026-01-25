@@ -23,7 +23,8 @@ public class LenteService {
     }
 
     public Lente criarLente(CriarLenteDTO dto){
-        Loja idloja = lojar.findById(dto.getIdLoja()).orElseThrow(() -> new RuntimeException("Loja não encontrada"));
+        Loja loja = lojar.findById(dto.getIdLoja())
+                .orElseThrow(() -> new RuntimeException("Loja não encontrada"));
 
         Lente lente = new Lente();
         lente.setNome(dto.getNome());
@@ -33,7 +34,7 @@ public class LenteService {
         lente.setMaterial(dto.getMaterial());
         lente.setDescricao(dto.getDescricao());
         lente.setPreco(dto.getPreco());
-
+        lente.setLoja(loja);
 
         return lr.save(lente);
     }
@@ -75,6 +76,23 @@ public class LenteService {
                 ))
                 .toList();
     }
+
+    public List<ListarLentesDTO> listarLentesPorLoja(Long idLoja) {
+        return lr.findByLoja_Id(idLoja)
+                .stream()
+                .map(lente -> new ListarLentesDTO(
+                        lente.getNome(),
+                        lente.getTipo(),
+                        lente.getMarca(),
+                        lente.getModelo(),
+                        lente.getMaterial(),
+                        lente.getDescricao(),
+                        lente.getPreco()
+                ))
+                .toList();
+    }
+
+
 }
 
 
