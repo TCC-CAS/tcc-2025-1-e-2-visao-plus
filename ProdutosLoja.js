@@ -1,15 +1,8 @@
-const API = "http://localhost:8080/"; // ajusta se precisar
+const API = "http://localhost:8080"; // ajusta se precisar
 
 document.addEventListener("DOMContentLoaded", () => {
     initPaginaAdmin();
 });
-
-function initPaginaAdmin() {
-    setNomeLoja(Nomeloja); // depois você pode buscar isso do backend
-    carregarArmacoes();
-    carregarLentes();
-    configurarEventos();
-}
 
 async function setNomeLoja() {
     try {
@@ -18,6 +11,8 @@ async function setNomeLoja() {
 
         const loja = await response.json();
         const Nomeloja = loja.nome;
+
+        document.getElementById("nomeLoja").textContent = Nomeloja;
     } catch (error) {
         console.error(error);
         alert("Erro ao carregar lojas");
@@ -65,7 +60,7 @@ function fecharModal(idModal) {
 //FUNÇÕES DE RENDERIZAÇÃO DE ARMAÇÕES
 
 function renderizarArmacoes(armacoes) {
-    const container = document.getElementById("lista-armacoes");
+    const container = document.getElementById("armacao-lista");
     container.innerHTML = "";
 
     if (armacoes.length === 0) {
@@ -92,7 +87,7 @@ function CardArmacao(armacao) {
         <p>Descrição: ${armacao.descricao}</p>
         <p>Preço: R$ ${armacao.preco}</p>
         <button onclick="abrirModalEditarArmacao(${armacao.id})">Editar</button>
-        <button onclick="abrirModal('modal-deletar-armacao')">Deletar</button>
+        <button onclick="deletarArmacao(${armacao.id})">Deletar</button>
     `;
     return div;
 }
@@ -100,7 +95,7 @@ function CardArmacao(armacao) {
 //FUNÇÕES DE RENDERIZAÇÃO DE LENTES
 
 function renderizarLentes(lentes) {
-    const container = document.getElementById("lista-lentes");
+    const container = document.getElementById("lente-lista");
     container.innerHTML = "";
     
     if (lentes.length === 0) {
@@ -126,8 +121,8 @@ function CardLente(lente) {
         <p>Material: ${lente.material}</p>
         <p>Descrição: ${lente.descricao}</p>
         <p>Preço: R$ ${lente.preco}</p>
-        <button onclick="abrirModalEditarArmacao(${lente.id})">Editar</button>
-        <button onclick="abrirModal('modal-deletar-lente')">Deletar</button>
+        <button onclick="abrirModalEditarLente(${lente.id})">Editar</button>
+        <button onclick="deletarLente(${lente.id})">Deletar</button>
     `;
     return div;
 }
@@ -181,9 +176,10 @@ async function adicionarArmacao(event) {
         marca: marcaArmacao.value,
         modelo: modeloArmacao.value,
         material: materialArmacao.value,
+        descricao: descricaoArmacao.value,
         preco: precoArmacao.value
     };
-''
+
     try {
         await fetch(`${API}/armacoes/criarArmacao`, {
             method: "POST",
@@ -235,7 +231,7 @@ async function salvarEdicaoArmacao(event) {
         preco: precoArmacaoEdit.value
     };
 
-    await fetch(`${API}/armacoes/editarArmacao`, {
+    await fetch(`${API}/armacoes/editarArmacao/${armacaoEmEdicaoId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(armacaoAtualizada)
@@ -257,6 +253,7 @@ async function adicionarLente(event) {
         marca: marcaLente.value,
         modelo: modeloLente.value,
         material: materialLente.value,
+        descricao: descricaoLente.value,
         preco: precoLente.value
     };
 
@@ -311,7 +308,7 @@ async function salvarEdicaoLente(event) {
         preco: precoLenteEdit.value
     };
 
-    await fetch(`${API}/lentes/editarLente`, {
+    await fetch(`${API}/lentes/editarLente/${lenteEmEdicaoId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(lenteAtualizada)
@@ -321,3 +318,35 @@ async function salvarEdicaoLente(event) {
     carregarLentes();
 }
 
+//FUNÇÕES DE DELEÇÃO DE ARMAÇÕES
+
+async function deletarArmacao(id) {
+    try {
+        await fetch(`${API}/armacoes/deletarArmacao/${id}`, {
+            method: "DELETE"
+        });
+        carregarArmacoes();
+    } catch (error) {
+        console.error("Erro ao deletar armação", error);
+    }
+}
+
+//FUNÇÕES DE DELEÇÃO DE LENTES
+
+async function deletarLente(id) {
+    try {
+        await fetch(`${API}/lentes/deletarLente/${id}`, {
+            method: "DELETE"
+        });
+        carregarLentes();
+    } catch (error) {
+        console.error("Erro ao deletar lente", error);
+    }
+}
+
+function initPaginaAdmin() {
+    setNomeLoja(); // depois você pode buscar isso do backend
+    carregarArmacoes();
+    carregarLentes();
+    configurarEventos();
+}
