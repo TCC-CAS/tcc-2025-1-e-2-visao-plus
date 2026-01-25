@@ -1,11 +1,15 @@
 package com.Gabriel.API_Banco.service;
 
 import com.Gabriel.API_Banco.dto.CriarLenteDTO;
+import com.Gabriel.API_Banco.dto.EditarLenteDTO;
+import com.Gabriel.API_Banco.dto.ListarLentesDTO;
 import com.Gabriel.API_Banco.model.Lente;
 import com.Gabriel.API_Banco.model.Loja;
 import com.Gabriel.API_Banco.repository.LenteRepositorio;
 import com.Gabriel.API_Banco.repository.LojaRepositorio;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LenteService {
@@ -38,5 +42,60 @@ public class LenteService {
         lr.deleteById(id);
     }
 
-    public Lente
+    public Lente editarLente(EditarLenteDTO  dto){
+
+        Lente lente = lr.findById(dto.getId())
+                .orElseThrow(() -> new RuntimeException("Lente não encontrada!"));
+
+        lente.setNome(dto.getNome());
+        lente.setTipo(dto.getTipo());
+        lente.setMarca(dto.getMarca());
+        lente.setModelo(dto.getModelo());
+        lente.setMaterial(dto.getMaterial());
+        lente.setDescricao(dto.getDescricao());
+        lente.setPreco(dto.getPreco());
+
+        return lr.save(lente);
+    }
+
+    public java.util.Optional<Lente> findByIdLente(Long id){
+        return lr.findById(id);
+    }
+
+    public List<ListarLentesDTO> listarLentes(){
+        return lr.findAll().stream()
+                .map(lente -> new ListarLentesDTO(
+                        lente.getNome(),
+                        lente.getTipo(),
+                        lente.getMarca(),
+                        lente.getModelo(),
+                        lente.getMaterial(),
+                        lente.getDescricao(),
+                        lente.getPreco()
+                ))
+                .toList();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
