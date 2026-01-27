@@ -1,78 +1,102 @@
-const API = "http://localhost:8080"; // ajusta se precisar
+/*************************************************
+ * CONFIGURAÇÕES GERAIS
+ *************************************************/
+const API = "http://localhost:8080";
 
+/*************************************************
+ * ESTADO GLOBAL DA PÁGINA
+ *************************************************/
+const state = {
+    usuario: null,
+    loja: null,
+    lojaId: null,
+    armacoes: [],
+    lentes: []
+};
+
+/*************************************************
+ * INICIALIZAÇÃO
+ *************************************************/
 document.addEventListener("DOMContentLoaded", () => {
     initPaginaAdmin();
 });
 
-let lojaIdAtual = null;
-async function setNomeLoja() {
+async function initPaginaAdmin() {
     try {
-        const response = await fetch(`${API}/lojas/buscarLoja`);
-        if (!response.ok) throw new Error("Erro ao buscar loja");
+        carregarUsuarioLogado();
+        carregarLojaDoUsuario();
+        renderizarNomeLoja();
 
-        const loja = await response.json();
-        const Nomeloja = loja.nome;
+        await carregarArmacoes();
+        await carregarLentes();
 
-        lojaIdAtual = loja.id;
-        document.getElementById("nomeLoja").textContent = Nomeloja;
+        configurarEventos();
     } catch (error) {
         console.error(error);
-        alert("Erro ao carregar lojas");
+        alert(error.message);
     }
 }
 
-//FUNÇÕES DE CARREGAMENTO DE API'S - ARMAÇÕES E LENTES
+/*************************************************
+ * USUÁRIO E LOJA
+ *************************************************/
+function carregarUsuarioLogado() {
+    const usuarioString = localStorage.getItem("usuarioLogado");
 
+    if (!usuarioString) {
+        throw new Error("Usuário não está logado");
+    }
+
+    state.usuario = JSON.parse(usuarioString);
+    console.log("USUÁRIO LOGADO:", state.usuario);
+}
+
+function carregarLojaDoUsuario() {
+    if (!state.usuario?.loja) {
+        throw new Error("Usuário não possui loja");
+    }
+
+    state.loja = state.usuario.loja;
+    state.lojaId = state.loja.id;
+
+    if (!state.lojaId) {
+        throw new Error("ID da loja inválido");
+    }
+
+    console.log("OBJETO LOJA:", state.loja);
+}
+
+function renderizarNomeLoja() {
+    document.getElementById("nomeLoja").textContent = state.loja.nome;
+}
+
+/*************************************************
+ * CARREGAMENTO DE ARMAÇÕES
+ *************************************************/
 async function carregarArmacoes() {
-    try {
-        const response = await fetch(`${API}/armacoes/listarArmacoes/${lojaIdAtual}`);
-        if (!response.ok) throw new Error("Erro ao buscar armações");
+    const response = await fetch(
+        `${API}/armacao/listarArmacoes/${state.lojaId}`
+    );
 
-        const armacoes = await response.json();
-        renderizarArmacoes(armacoes);
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao carregar armações"); 
+    if (!response.ok) {
+        throw new Error("Erro ao buscar armações");
     }
+
+    state.armacoes = await response.json();
+    renderizarArmacoes(state.armacoes);
 }
-
-async function carregarLentes() {
-    try {
-        const response = await fetch(`${API}/lentes/listarLentes/${lojaIdAtual}`);
-        if (!response.ok) throw new Error("Erro ao buscar lentes");
-
-        const lentes = await response.json();
-        renderizarLentes(lentes);
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao carregar lentes");
-    }
-}
-
-//FUNÇÕES DE MODAIS
-
-function abrirModal(idModal) {
-    document.getElementById(idModal).classList.remove("hidden");
-}
-
-function fecharModal(idModal) {
-    document.getElementById(idModal).classList.add("hidden");
-}
-
-//FUNÇÕES DE RENDERIZAÇÃO DE ARMAÇÕES
 
 function renderizarArmacoes(armacoes) {
     const container = document.getElementById("armacao-lista");
     container.innerHTML = "";
 
     if (armacoes.length === 0) {
-        container.innerHTML = "<p>Nenhuma Armação cadastrada.</p>";
+        container.innerHTML = "<p>Nenhuma armação cadastrada.</p>";
         return;
     }
 
     armacoes.forEach(armacao => {
-        const cardArmacao = CardArmacao(armacao);
-        container.appendChild(cardArmacao);
+        container.appendChild(CardArmacao(armacao));
     });
 }
 
@@ -91,23 +115,37 @@ function CardArmacao(armacao) {
         <button onclick="abrirModalEditarArmacao(${armacao.id})">Editar</button>
         <button onclick="deletarArmacao(${armacao.id})">Deletar</button>
     `;
+
     return div;
 }
 
-//FUNÇÕES DE RENDERIZAÇÃO DE LENTES
+/*************************************************
+ * CARREGAMENTO DE LENTES
+ *************************************************/
+async function carregarLentes() {
+    const response = await fetch(
+        `${API}/lentes/listarLentes/${state.lojaId}`
+    );
+
+    if (!response.ok) {
+        throw new Error("Erro ao buscar lentes");
+    }
+
+    state.lentes = await response.json();
+    renderizarLentes(state.lentes);
+}
 
 function renderizarLentes(lentes) {
     const container = document.getElementById("lente-lista");
     container.innerHTML = "";
-    
+
     if (lentes.length === 0) {
-        container.innerHTML = "<p>Nenhuma Lente cadastrada.</p>";
+        container.innerHTML = "<p>Nenhuma lente cadastrada.</p>";
         return;
     }
 
     lentes.forEach(lente => {
-        const cardLente = CardLente(lente);
-        container.appendChild(cardLente);
+        container.appendChild(CardLente(lente));
     });
 }
 
@@ -126,48 +164,36 @@ function CardLente(lente) {
         <button onclick="abrirModalEditarLente(${lente.id})">Editar</button>
         <button onclick="deletarLente(${lente.id})">Deletar</button>
     `;
+
     return div;
 }
 
-//FUNÇÕES DE CONFIGURAÇÃO DE EVENTOS
+/*************************************************
+ * MODAIS
+ *************************************************/
+function abrirModal(id) {
+    document.getElementById(id).classList.remove("hidden");
+}
 
+function fecharModal(id) {
+    document.getElementById(id).classList.add("hidden");
+}
+
+/*************************************************
+ * EVENTOS
+ *************************************************/
 function configurarEventos() {
-
-    // Abrir modais
     document.getElementById("btn-adicionar-armacao")
         .addEventListener("click", () => abrirModal("modal-adicionar-armação"));
 
     document.getElementById("btn-adicionar-lente")
         .addEventListener("click", () => abrirModal("modal-adicionar-lente"));
-
-    // Fechar modais
-    document.getElementById("fechar-modal-armação")
-        .addEventListener("click", () => fecharModal("modal-adicionar-armação"));
-
-    document.getElementById("fechar-modal-editar-armação")
-        .addEventListener("click", () => fecharModal("modal-editar-armação"));
-
-    document.getElementById("fechar-modal-lente")
-        .addEventListener("click", () => fecharModal("modal-adicionar-lente"));
-
-    document.getElementById("fechar-modal-editar-lente")
-        .addEventListener("click", () => fecharModal("modal-editar-lente"));
-
-    // Forms
-    document.getElementById("form-adicionar-armação")
-        .addEventListener("submit", adicionarArmacao);
-
-    document.getElementById("form-editar-armação")
-        .addEventListener("submit", salvarEdicaoArmacao);
-
-    document.getElementById("form-adicionar-lente")
-        .addEventListener("submit", adicionarLente);
-
-    document.getElementById("form-editar-lente")
-        .addEventListener("submit", salvarEdicaoLente);
 }
 
-//FUNÇÕES DE ADIÇÃO DE ARMAÇÕES
+/*************************************************
+ * CRUD ARMAÇÕES
+ *************************************************/
+let armacaoEmEdicaoId = null;
 
 async function adicionarArmacao(event) {
     event.preventDefault();
@@ -182,69 +208,27 @@ async function adicionarArmacao(event) {
         preco: precoArmacao.value
     };
 
-    try {
-        await fetch(`${API}/armacoes/criarArmacao`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(armacao)
-        });
-
-        fecharModal("modal-adicionar-armação");
-        carregarArmacoes();
-        event.target.reset();
-
-    } catch (error) {
-        console.error("Erro ao adicionar armação", error);
-    }
-}
-
-
-//FUNÇÕES DE EDIÇÃO DE ARMAÇÕES
-
-let armacaoEmEdicaoId = null;
-
-async function abrirModalEditarArmacao(id) {
-    armacaoEmEdicaoId = id;
-
-    const response = await fetch(`${API}/armacoes/${id}`);
-    const armacao = await response.json();
-
-    nomeArmacaoEdit.value = armacao.nome;
-    tipoArmacaoEdit.value = armacao.tipo;
-    marcaArmacaoEdit.value = armacao.marca;
-    modeloArmacaoEdit.value = armacao.modelo;
-    materialArmacaoEdit.value = armacao.material;
-    descricaoArmacaoEdit.value = armacao.descricao;
-    precoArmacaoEdit.value = armacao.preco;
-
-    abrirModal("modal-editar-armação");
-}
-
-async function salvarEdicaoArmacao(event) {
-    event.preventDefault();
-
-    const armacaoAtualizada = {
-        nome: nomeArmacaoEdit.value,
-        tipo: tipoArmacaoEdit.value,
-        marca: marcaArmacaoEdit.value,
-        modelo: modeloArmacaoEdit.value,
-        material: materialArmacaoEdit.value,
-        descricao: descricaoArmacaoEdit.value,
-        preco: precoArmacaoEdit.value
-    };
-
-    await fetch(`${API}/armacoes/editarArmacao/${armacaoEmEdicaoId}`, {
-        method: "PUT",
+    await fetch(`${API}/armacao/criarArmacao`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(armacaoAtualizada)
+        body: JSON.stringify(armacao)
     });
 
-    fecharModal("modal-editar-armação");
+    fecharModal("modal-adicionar-armação");
     carregarArmacoes();
 }
 
+async function deletarArmacao(id) {
+    await fetch(`${API}/armacao/deletarArmacao/${id}`, {
+        method: "DELETE"
+    });
+    carregarArmacoes();
+}
 
-//FUNÇÕES DE ADIÇÃO DE LENTES
+/*************************************************
+ * CRUD LENTES
+ *************************************************/
+let lenteEmEdicaoId = null;
 
 async function adicionarLente(event) {
     event.preventDefault();
@@ -257,99 +241,24 @@ async function adicionarLente(event) {
         material: materialLente.value,
         descricao: descricaoLente.value,
         preco: precoLente.value,
-        idLoja: lojaIdAtual
+        idLoja: state.lojaId
     };
 
-    try {
-        await fetch(`${API}/lentes/criarLente`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(lente)
-        });
-
-        fecharModal("modal-adicionar-lente");
-        carregarLentes();
-        event.target.reset();
-
-    } catch (error) {
-        console.error("Erro ao adicionar lente", error);
-    }
-}
-
-//FUNÇÕES DE EDIÇÃO DE LENTES
-
-let lenteEmEdicaoId = null;
-
-async function abrirModalEditarLente(id) {
-    lenteEmEdicaoId = id;
-
-    const response = await fetch(`${API}/lentes/${id}`);
-    const lente = await response.json();
-
-    nomeLenteEdit.value = lente.nome;
-    tipoLenteEdit.value = lente.tipo;
-    marcaLenteEdit.value = lente.marca;
-    modeloLenteEdit.value = lente.modelo;
-    materialLenteEdit.value = lente.material;
-    descricaoLenteEdit.value = lente.descricao;
-    precoLenteEdit.value = lente.preco;
-
-    abrirModal("modal-editar-lente");
-}
-
-
-async function salvarEdicaoLente(event) {
-    event.preventDefault();
-
-    const lenteAtualizada = {
-        nome: nomeLenteEdit.value,
-        tipo: tipoLenteEdit.value,
-        marca: marcaLenteEdit.value,
-        modelo: modeloLenteEdit.value,
-        material: materialLenteEdit.value,
-        descricao: descricaoLenteEdit.value,
-        preco: precoLenteEdit.value
-    };
-
-    await fetch(`${API}/lentes/editarLente/${lenteEmEdicaoId}`, {
-        method: "PUT",
+    await fetch(`${API}/lentes/criarLente`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(lenteAtualizada)
+        body: JSON.stringify(lente)
     });
 
-    fecharModal("modal-editar-lente");
+    fecharModal("modal-adicionar-lente");
     carregarLentes();
 }
-
-//FUNÇÕES DE DELEÇÃO DE ARMAÇÕES
-
-async function deletarArmacao(id) {
-    try {
-        await fetch(`${API}/armacoes/deletarArmacao/${id}`, {
-            method: "DELETE"
-        });
-        carregarArmacoes();
-    } catch (error) {
-        console.error("Erro ao deletar armação", error);
-    }
-}
-
-//FUNÇÕES DE DELEÇÃO DE LENTES
 
 async function deletarLente(id) {
-    try {
-        await fetch(`${API}/lentes/deletarLente/${id}`, {
-            method: "DELETE"
-        });
-        carregarLentes();
-    } catch (error) {
-        console.error("Erro ao deletar lente", error);
-    }
+    await fetch(`${API}/lentes/deletarLente/${id}`, {
+        method: "DELETE"
+    });
+    carregarLentes();
 }
 
-function initPaginaAdmin() {
-    setNomeLoja(); // depois você pode buscar isso do backend
-    carregarArmacoes();
-    carregarLentes();
-    configurarEventos();
-}
+
