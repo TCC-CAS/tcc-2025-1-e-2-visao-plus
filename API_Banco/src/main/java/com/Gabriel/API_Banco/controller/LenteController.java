@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*") // libera pro front
 @RestController
 @RequestMapping("/lentes")
-@CrossOrigin(origins = "*") // libera pro front
+
 public class LenteController {
 
     private final LenteService lenteService;
