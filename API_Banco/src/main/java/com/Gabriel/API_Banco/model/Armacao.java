@@ -1,10 +1,5 @@
 package com.Gabriel.API_Banco.model;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -16,6 +11,10 @@ public class Armacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_armacao")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_loja")
+    private Loja loja;
 
     @Column(name = "nome_armacao")
     private String nome;
@@ -31,6 +30,9 @@ public class Armacao {
 
     @Column(name = "material_armacao")
     private String material;
+
+    @Column(name = "descricao")
+    private String descricao;
 
     @Column(name = "preco_armacao")
     private Double preco;
