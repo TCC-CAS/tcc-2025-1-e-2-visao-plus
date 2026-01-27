@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/armacao")
-@CrossOrigin(origins = "*")
+
 public class ArmacaoController {
 
     private final ArmacaoService as;
