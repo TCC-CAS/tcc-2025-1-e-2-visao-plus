@@ -228,6 +228,8 @@ async function deletarArmacao(id) {
     carregarArmacoes();
 }
 
+log("Código carregado: ProdutosLoja.js");
+
 /*************************************************
  * CRUD LENTES
  *************************************************/
