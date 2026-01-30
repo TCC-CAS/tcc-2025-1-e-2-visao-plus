@@ -14,7 +14,7 @@ public class Lente {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_loja")
+    @JoinColumn(name = "id_loja", nullable = false)
     private Loja loja;
 
     @Column(name = "nome_lente")
