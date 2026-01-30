@@ -51,4 +51,5 @@ public class CriarLenteDTO {
     public Double getPreco(){ return preco;}
     public void setPreco(Double preco) {this.preco = preco;}
     public Long getIdLoja(){return idLoja;}
+    public void setIdLoja(Long idLoja){this.idLoja = idLoja;}
 }
