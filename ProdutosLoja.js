@@ -190,7 +190,7 @@ function configurarEventos() {
         .addEventListener("click", () => abrirModal("modal-adicionar-lente"));
 }
 
-
+/
 /*************************************************
  * CRUD ARMAÇÕES
  *************************************************/
