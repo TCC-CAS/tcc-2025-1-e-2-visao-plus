@@ -184,10 +184,34 @@ function fecharModal(id) {
  *************************************************/
 function configurarEventos() {
     document.getElementById("btn-adicionar-armacao")
-        .addEventListener("click", () => abrirModal("modal-adicionar-armação"));
+        .addEventListener("click", () =>
+            abrirModal("modal-adicionar-armação")
+        );
 
     document.getElementById("btn-adicionar-lente")
-        .addEventListener("click", () => abrirModal("modal-adicionar-lente"));
+        .addEventListener("click", () =>
+            abrirModal("modal-adicionar-lente")
+        );
+
+    document.getElementById("")
+
+    document.getElementById("form-adicionar-armacao")
+        .addEventListener("submit", adicionarArmacao);
+
+    document.getElementById("form-adicionar-lente")
+        .addEventListener("submit", adicionarLente);
+
+    document.getElementById("fechar-modal-armação")
+        .addEventListener("click", () =>
+            fecharModal("modal-adicionar-armação")
+        );  
+    
+    document.getElementById("fechar-modal-lente")
+        .addEventListener("click", () =>
+            fecharModal("modal-adicionar-lente")
+        );  
+    
+    document.getElementById("")
 }
 
 /*************************************************
@@ -208,8 +232,11 @@ async function adicionarArmacao(event) {
         modelo: modeloArmacao.value,
         material: materialArmacao.value,
         descricao: descricaoArmacao.value,
-        preco: precoArmacao.value
+        preco: precoArmacao.value,
+        idLoja: state.lojaId
     };
+
+    console.log(armacao);
 
     await fetch(`${API}/armacao/criarArmacao`, {
         method: "POST",
@@ -219,6 +246,7 @@ async function adicionarArmacao(event) {
 
     fecharModal("modal-adicionar-armação");
     carregarArmacoes();
+    document.getElementById("form-adicionar-armacao").reset();
 }
 
 async function deletarArmacao(id) {
@@ -255,6 +283,7 @@ async function adicionarLente(event) {
 
     fecharModal("modal-adicionar-lente");
     carregarLentes();
+    document.getElementById("form-adicionar-lente").reset();
 }
 
 async function deletarLente(id) {
