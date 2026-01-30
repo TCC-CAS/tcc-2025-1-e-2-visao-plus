@@ -39,4 +39,5 @@ public class Loja {
     @JsonIgnore
     private List<Produto> produtos;
 
+
 }
