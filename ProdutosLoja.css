@@ -57,7 +57,7 @@ header {
    ========================= */
 
 /* Ícone padrão */
-.icon {
+.iconcart {
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -79,6 +79,14 @@ header {
     margin-left: 5px;
 }
 
+/* Ícone de loja */
+.iconstore {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
 /* Ícone de admin */
 .iconadmin {
     width: 50px;
@@ -87,13 +95,7 @@ header {
     margin-left: 0px;
 }
 
-/* Ícone de loja */
-.iconstore {
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    margin-left: 15px;
-}
+
 
 /* Efeito hover nos ícones */
 .icon:hover,
@@ -362,37 +364,6 @@ input {
 
 .icon-pencil:hover {
     transform: scale(1.2);
-}
-
-.info-pedir-loja p {
-    margin: 30px 5px 30px 5px;
-    text-align: center; /* Centraliza o texto */
-    font-size: 16px;
-}
-
-.info-usuario p {
-    margin: 15px 0;
-    text-align: left; /* As infos ficam à esquerda */
-    font-size: 16px;
-}
-
-.info-usuario strong {
-    color: #555; /* Deixa o label em destaque */
-}
-
-.info-loja p {
-    margin: 15px 0;
-    text-align: left; /* As infos ficam à esquerda */
-    font-size: 16px;
-}
-
-.info-loja strong {
-    color: #555; /* Deixa o label em destaque */
-}
-
-#map {
-    width: 100%;
-    height: 100%;
 }
 
 .barra-vertical {
