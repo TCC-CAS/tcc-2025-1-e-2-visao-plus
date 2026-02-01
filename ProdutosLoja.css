@@ -204,36 +204,6 @@ header {
     font-family: Arial, sans-serif;
 }
 
-#secao-pedir_loja {
-    flex: 1;
-    text-align: top;
-    text-align: center;
-    align-items: center;
-    padding: 20px;
-    margin: 0px 20px 0px 0;
-    border-radius: 10px;
-}
-.perfil-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin-bottom: 15px;
-}
-
-.perfil-header .titulo-perfil {
-    margin: 0;
-}
-
-.button-icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 6px;
-    background-color: #7399a6;
-}
-
-
 .button{
     background-color: #ccc; /* Azul bebê suave */
     color: white;
