@@ -56,6 +56,13 @@ header {
    ÍCONES
    ========================= */
 
+.iconhome {
+    width: 23px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 0px;
+}
+
 /* Ícone padrão */
 .iconcart {
     width: 30px;
@@ -64,12 +71,6 @@ header {
     margin-left: 5px;
 }
 
-.iconhome {
-    width: 23px;
-    height: 30px;
-    cursor: pointer;
-    margin-left: 0px;
-}
 
 /* Ícone de usuário */
 .iconuser {
