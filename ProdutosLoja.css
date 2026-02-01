@@ -220,6 +220,32 @@ header {
     background-color: #9f9d9d; /* Azul bebê mais escuro ao passar o mouse */
 }
 
+.btn-salvar {
+    background-color: #ccc; /* Verde */
+}
+
+.btn-salvar:hover {
+    background-color: #9f9d9d; /* Verde mais escuro ao passar o mouse */
+}
+
+.btn-adicionar {
+    background-color: #ccc; /* Azul bebê suave */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 15px;
+}
+
+.btn-adicionar:hover {
+    background-color: #9f9d9d; /* Azul mais escuro ao passar o mouse */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
 
 /* =========================
    MODAL DE EDIÇÃO
@@ -325,8 +351,13 @@ input {
    LENTES 
    ========================= */
 
+.lente-section{
+    padding: 20px;
+    margin: 20px;
+}
 
 .lente-lista{
+    margin-top: 5%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
@@ -346,5 +377,85 @@ input {
     background-color: #b9b6b6;
     cursor: pointer;
 }
+
+.card-lente h3{
+    font-size: 18px;
+    margin-bottom: 8px;
+    margin-top: 0%;
+    color: #156783;
+}
+
+.card-lente p{
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.card-lente button{
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+/* =========================
+   ARMAÇÕES
+   ========================= */
+
+.armacao-section{
+    padding: 20px;
+    margin: 20px;
+}
+
+.armacao-lista{
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.card-armacao{
+    background: #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 8px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.card-armacao:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #b9b6b6;
+    cursor: pointer;
+}
+
+.card-armacao h3{
+    font-size: 18px;
+    margin-bottom: 8px;
+    margin-top: 0%;
+    color: #156783;
+}
+
+.card-armacao p{
+    font-size: 14px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.card-armacao button{
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
 
 
