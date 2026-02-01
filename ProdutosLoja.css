@@ -320,31 +320,13 @@ input {
     transform: scale(1.2);
 }
 
-.barra-vertical {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-    margin: 20px 20px 20px 0;
-    border-radius: 10px;
-    background-color: #156783;
-}
 
-.lista-usuarios {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
-}
+/* =========================
+   LENTES 
+   ========================= */
 
-.card-usuario {
-    background: #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    font-size: 8px;
-    }
 
-.lista-lojas{
+.lente-lista{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
