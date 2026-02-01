@@ -304,6 +304,10 @@ input {
     color: #333;
 }
 
+/* =========================
+   LÁPIS DE EDIÇÃO
+   ========================= */
+
 .icon-pencil{
     width: 20px;
     height: 20px;
@@ -346,13 +350,6 @@ input {
     gap: 16px;
 }
 
-.card-usuario:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    background-color: #b9b6b6;
-    cursor: pointer;
-    
-}
-
 .card-lente{
     background: #ccc;
     border-radius: 8px;
@@ -368,53 +365,4 @@ input {
     cursor: pointer;
 }
 
-.barra-vertical h3 {
-    color: white;
-    margin-bottom: 15px;
-    margin-top: 5px;
-    font-size: 24px;
-    text-align: center;
-}
-
-.barra-vertical h2{
-    color: #333;
-    margin-bottom: 15px;
-    margin-top: 5px;
-    font-size: 18px;
-    text-align: center;
-}
-
-.barra-vertical ul {
-    list-style: none;
-    padding: 0;
-}
-
-.barra-vertical p {
-    color: #333;
-    margin-bottom: 10px;
-    text-align: left;
-    margin-top: 0px;
-}
-
-.barra-vertical button{
-    background-color: #938f8f; /* Azul bebê suave */
-    color: white;
-    border: none;
-    padding: 8px;   
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-size: 14px;
-    margin-right: 5px;
-}
-
-.barra-vertical button:hover {
-    background-color: #9f9d9d; /* Azul bebê mais escuro ao passar o mouse */
-}
-
-.barra-vertical li {
-    color: white;
-    margin: 10px 0;
-}
 
