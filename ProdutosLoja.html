@@ -48,32 +48,40 @@
 
     <!-- Conteúdo Principal -->
     <section class="main-content" id="Conteudo-Principal">
-        <p class="titulo-secao">Administração de Produtos - </p> <span id="nomeLoja"></span>
+        
+        <div class="titulo-wrapper">
+            <p class="titulo-secao">Administração de Produtos -</p>
+            <span id="nomeLoja" class="span"></span>
+        </div>
+        
+        <div class="listas-wrapper">
 
-        <!--lista de armações-->
-        <section class="armacao-section">
+            <!--lista de armações-->
+            <section class="armacao-section">
 
-            <h3>Minhas Armações</h3>
+                <h3>Minhas Armações</h3>
 
-            <button class="btn-adicionar" id="btn-adicionar-armacao">
-                + Adicionar Produto
-            </button>
-            <section id="armacao-lista" class="armacao-lista"></section>
+                <button class="btn-adicionar" id="btn-adicionar-armacao">
+                    + Adicionar Produto
+                </button>
+                <section id="armacao-lista" class="lista-horizontal"></section>
 
-        </section>
+            </section>
 
-        <!--lista de lentes-->
-        <section class="lente-section">
+            <!--lista de lentes-->
+            <section class="lente-section">
 
-            <h3>Minhas Lentes</h3>
+                <h3>Minhas Lentes</h3>
 
-            <button class="btn-adicionar" id="btn-adicionar-lente">
-                + Adicionar Produto
-            </button>
-            <section id="lente-lista" class="lente-lista"></section>
+                <button class="btn-adicionar" id="btn-adicionar-lente">
+                    + Adicionar Produto
+                </button>
+                <section id="lente-lista" class="lista-horizontal"></section>
 
 
-        </section>
+            </section>
+
+        </div>
 </body>
 
 <!-- Modal para adicionar armação -->
@@ -209,4 +217,5 @@
 </div>
 
 <script src="ProdutosLoja.js"></script>
+
 </html>
