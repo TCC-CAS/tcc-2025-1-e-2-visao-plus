@@ -220,6 +220,11 @@ header {
     background-color: #9f9d9d; /* Azul bebê mais escuro ao passar o mouse */
 }
 
+
+/* =========================
+   MODAL DE EDIÇÃO
+   ========================= */
+   
 .modal {
     position: fixed;
     inset: 0;
