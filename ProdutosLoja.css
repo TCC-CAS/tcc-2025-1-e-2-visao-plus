@@ -224,7 +224,7 @@ header {
 /* =========================
    MODAL DE EDIÇÃO
    ========================= */
-   
+
 .modal {
     position: fixed;
     inset: 0;
@@ -256,6 +256,8 @@ header {
     cursor: pointer;
     font-size: 22px;
 }
+
+/* Formulário dentro do modal */
 
 form {
     display: flex;
