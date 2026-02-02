@@ -105,7 +105,7 @@ function CardArmacao(armacao) {
     div.classList.add("card-armacao");
 
     div.innerHTML = `
-        <h3>${armacao.nome}</h3>
+        <h4>${armacao.nome}</h4>
         <p>Marca: ${armacao.marca}</p>
         <p>Modelo: ${armacao.modelo}</p>
         <p>Material: ${armacao.material}</p>
@@ -154,7 +154,7 @@ function CardLente(lente) {
     div.classList.add("card-lente");
 
     div.innerHTML = `
-        <h3>${lente.nome}</h3>
+        <h4>${lente.nome}</h4>
         <p>Tipo: ${lente.tipo}</p>
         <p>Marca: ${lente.marca}</p>
         <p>Modelo: ${lente.modelo}</p>
