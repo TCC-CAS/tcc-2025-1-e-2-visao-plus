@@ -253,6 +253,23 @@ async function deletarArmacao(id) {
     carregarArmacoes();
 }
 
+function abrirModalEditarArmacao(id) {
+    const armacao = state.armacoes.find(a => a.id === id);
+    if (!armacao) return;
+
+    armacaoEmEdicaoId = id;
+
+    nomeArmacaoEdit.value = armacao.nome;
+    tipoArmacaoEdit.value = armacao.tipo;
+    marcaArmacaoEdit.value = armacao.marca;
+    modeloArmacaoEdit.value = armacao.modelo;
+    materialArmacaoEdit.value = armacao.material;
+    descricaoArmacaoEdit.value = armacao.descricao;
+    precoArmacaoEdit.value = armacao.preco;
+
+    abrirModal("modal-editar-armação");
+}
+
 /*************************************************
  * CRUD LENTES
  *************************************************/
