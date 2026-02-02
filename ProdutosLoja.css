@@ -273,7 +273,7 @@ header {
 
 
 .fechar-modal {
-    color: #0e4c5a;
+    color: red;
     position: absolute;
     right: 10px;
     top: 5px;
