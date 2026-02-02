@@ -348,4 +348,47 @@ async function deletarLente(id) {
     carregarLentes();
 }
 
+function abrirModalEditarLente(id) {
+    const lente = state.lentes.find(l => l.id === id);
+    if (!lente) return;
+
+    lenteEmEdicaoId = id;
+
+    nomeLenteEdit.value = lente.nome;
+    tipoLenteEdit.value = lente.tipo;
+    marcaLenteEdit.value = lente.marca;
+    modeloLenteEdit.value = lente.modelo;
+    materialLenteEdit.value = lente.material;
+    descricaoLenteEdit.value = lente.descricao;
+    precoLenteEdit.value = lente.preco;
+
+    abrirModal("modal-editar-lente");
+}
+
+async function salvarEdicaoLente(event) {
+    event.preventDefault();
+
+    const armacao = {
+        nome: nomeArmacaoEdit.value,
+        tipo: tipoArmacaoEdit.value,
+        marca: marcaArmacaoEdit.value,
+        modelo: modeloArmacaoEdit.value,
+        material: materialArmacaoEdit.value,
+        descricao: descricaoArmacaoEdit.value,
+        preco: precoArmacaoEdit.value,
+        idLoja: state.lojaId
+    };
+
+    await fetch(`${API}/armacao/editarArmacao/${armacaoEmEdicaoId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(armacao)
+    });
+
+    fecharModal("modal-editar-armação");
+    carregarArmacoes();
+    armacaoEmEdicaoId = null;
+}
+
+
 
