@@ -278,6 +278,31 @@ function abrirModalEditarArmacao(id) {
     abrirModal("modal-editar-armação");
 }
 
+async function salvarEdicaoArmacao(event) {
+    event.preventDefault();
+
+    const armacao = {
+        nome: nomeArmacaoEdit.value,
+        tipo: tipoArmacaoEdit.value,
+        marca: marcaArmacaoEdit.value,
+        modelo: modeloArmacaoEdit.value,
+        material: materialArmacaoEdit.value,
+        descricao: descricaoArmacaoEdit.value,
+        preco: precoArmacaoEdit.value,
+        idLoja: state.lojaId
+    };
+
+    await fetch(`${API}/armacao/editarArmacao/${armacaoEmEdicaoId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(armacao)
+    });
+
+    fecharModal("modal-editar-armação");
+    carregarArmacoes();
+    armacaoEmEdicaoId = null;
+}
+
 /*************************************************
  * CRUD LENTES
  *************************************************/
