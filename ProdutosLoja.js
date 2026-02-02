@@ -368,26 +368,26 @@ function abrirModalEditarLente(id) {
 async function salvarEdicaoLente(event) {
     event.preventDefault();
 
-    const armacao = {
-        nome: nomeArmacaoEdit.value,
-        tipo: tipoArmacaoEdit.value,
-        marca: marcaArmacaoEdit.value,
-        modelo: modeloArmacaoEdit.value,
-        material: materialArmacaoEdit.value,
-        descricao: descricaoArmacaoEdit.value,
-        preco: precoArmacaoEdit.value,
+    const lente = {
+        nome: nomeLenteEdit.value,
+        tipo: tipoLenteEdit.value,
+        marca: marcaLenteEdit.value,
+        modelo: modeloLenteEdit.value,
+        material: materialLenteEdit.value,
+        descricao: descricaoLenteEdit.value,
+        preco: precoLenteEdit.value,
         idLoja: state.lojaId
     };
 
-    await fetch(`${API}/armacao/editarArmacao/${armacaoEmEdicaoId}`, {
+    await fetch(`${API}/lentes/editarLente/${lenteEmEdicaoId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(armacao)
+        body: JSON.stringify(lente)
     });
 
-    fecharModal("modal-editar-armação");
-    carregarArmacoes();
-    armacaoEmEdicaoId = null;
+    fecharModal("modal-editar-lente");
+    carregarLentes();
+    lenteEmEdicaoId = null;
 }
 
 
