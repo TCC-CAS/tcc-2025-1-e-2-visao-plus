@@ -220,6 +220,14 @@ function configurarEventos() {
         .addEventListener("click", () =>
             fecharModal("modal-editar-armação")
         );
+
+    document.getElementById("form-editar-lente")
+        .addEventListener("submit", salvarEdicaoLente);
+
+    document.getElementById("fechar-modal-editar-lente")
+        .addEventListener("click", () =>
+            fecharModal("modal-editar-lente")
+        );
 }
 
 /*************************************************
