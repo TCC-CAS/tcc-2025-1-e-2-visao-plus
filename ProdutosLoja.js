@@ -215,9 +215,6 @@ function configurarEventos() {
 }
 
 /*************************************************
- * ENTENDIMENTO DE MUDANÇAS - código não manda pro banco de dados
- *************************************************/
-/*************************************************
  * CRUD ARMAÇÕES
  *************************************************/
 let armacaoEmEdicaoId = null;
