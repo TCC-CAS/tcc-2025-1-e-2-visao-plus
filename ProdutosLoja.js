@@ -112,8 +112,8 @@ function CardArmacao(armacao) {
         <p>Tipo: ${armacao.tipo}</p>
         <p>Descrição: ${armacao.descricao}</p>
         <p>Preço: R$ ${armacao.preco}</p>
-        <button onclick="abrirModalEditarArmacao(${armacao.id})">Editar</button>
-        <button onclick="deletarArmacao(${armacao.id})">Deletar</button>
+        <button onclick="abrirModalEditarArmacao(${armacao.id})" class="btn-editar">Editar</button>
+        <button onclick="deletarArmacao(${armacao.id})" class="btn-deletar">Deletar</button>
     `;
 
     return div;
@@ -161,8 +161,8 @@ function CardLente(lente) {
         <p>Material: ${lente.material}</p>
         <p>Descrição: ${lente.descricao}</p>
         <p>Preço: R$ ${lente.preco}</p>
-        <button onclick="abrirModalEditarLente(${lente.id})">Editar</button>
-        <button onclick="deletarLente(${lente.id})">Deletar</button>
+        <button onclick="abrirModalEditarLente(${lente.id})" class="btn-editar">Editar</button>
+        <button onclick="deletarLente(${lente.id})" class="btn-deletar">Deletar</button>
     `;
 
     return div;
