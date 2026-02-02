@@ -113,11 +113,18 @@ header {
     display: block;
 }
 
-.dropdown a {
-    display: block;
+/* Links dentro do dropdown */
+.dropdown a,
+.dropdown p {
     color: #156783;
     text-decoration: none;
+    display: block;
     padding: 5px 0;
+}
+
+/* Hover nos links do dropdown */
+.dropdown a:hover {
+    background-color: #f0f0f0;
 }
 
 /* =========================
