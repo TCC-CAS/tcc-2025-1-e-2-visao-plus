@@ -2,84 +2,80 @@
    CONFIGURAÇÕES GERAIS
    ========================= */
 
-/* Fonte padrão do site */
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f8ff;
 }
 
-
 /* =========================
    HEADER / BARRA SUPERIOR
    ========================= */
 
-/* Header principal (barra azul) */
 header {
-    display: flex;                    /* Logo à esquerda e menus à direita */
-    justify-content: space-between;   /* Espaça logo e menus */
-    align-items: center;              /* Centraliza verticalmente */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: #156783;
     padding: 10px 20px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    position: relative;               /* Referência para elementos absolutos */
 }
 
-/* Logo do site */
 .logo {
     color: white;
     font-size: 13px;
     font-weight: bold;
 }
 
-
 /* =========================
    MENUS DO HEADER
    ========================= */
 
-/* Container do menu do usuário (ícones à direita) */
 #menu-usuario {
-    display: flex;          /* <<< ISSO resolve os ícones em linha */
-    align-items: center;    /* Centraliza os ícones verticalmente */
-    gap: 15px;              /* Espaço entre os ícones */
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
-
-/* Menu visitante (login / cadastro) */
-#menu-visitante a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-    font-weight: bold;
-}
-
-
 
 /* =========================
    ÍCONES
    ========================= */
 
-.iconhome,
+.iconhome {
+    width: 23px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 0px;
+}
+
 .iconcart,
-.iconuser,
-.iconstore{
+.iconuser{
     width: 30px;
     height: 30px;
     cursor: pointer;
-    margin-left: 5px;
+    transition: transform 0.2s;
+    margin-left: 15px;
+}
+
+
+/* Ícone de loja */
+.iconstore {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 15px;
     transition: transform 0.2s;
 }
+
+
 /* Ícone de admin */
 .iconadmin {
+    width: 50px;
+    height: 50px;
     cursor: pointer;
     margin-left: 0px;
     transition: transform 0.2s;
 }
-
-.iconhome { width: 23px; height: 30px; }
-.iconcart { width: 30px; height: 30px; }
-.iconuser { width: 40px; height: 40px; }
-.iconstore { width: 30px; height: 30px; }
-.iconadmin { width: 50px; height: 50px; }
 
 .iconhome:hover,
 .iconcart:hover,
@@ -116,8 +112,7 @@ header {
     display: block;
 }
 
-.dropdown a,
-.dropdown p {
+.dropdown a {
     display: block;
     color: #156783;
     text-decoration: none;
@@ -132,6 +127,8 @@ header {
     display: flex;
     flex-direction: column;
     padding: 24px;
+    height: calc(100vh - 80px);
+    box-sizing: border-box;
 }
 
 /* =========================
@@ -139,14 +136,21 @@ header {
    ========================= */
 
 .titulo-wrapper {
-    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 40px;
+    margin-top: 15px;
 }
 
 .titulo-secao,
 .span {
+    
     font-size: 30px;
     color: #156783;
+    margin: 0;
 }
 
 /* =========================
@@ -154,24 +158,67 @@ header {
    ========================= */
 
 .listas-wrapper {
-    display: flex;
     gap: 40px;
-    align-items: flex-start;
+    min-height: 0;
 }
 
 .armacao-section,
 .lente-section {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
-    min-width: 0;
+    padding-top: 0%;
+    min-height: 0;
+    background-color: #b5d7df;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.armacao-section h3,
+.lente-section h3 {
+    background-color: #156783;
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 1%;
+    color: white;
+    font-size: 24px;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
 /* =========================
-   LISTAS COM SCROLL HORIZONTAL
+   BOTÃO ADICIONAR
    ========================= */
 
-.armacao-lista,
-.lente-lista {
+.btn-adicionar {
+    background-color: #ffffff;
+    color: #156783;
+    border-radius: 10px;
+    padding: 15px;
+    width: 15%;
+    flex-shrink: 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid #156783;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 1%;
+    cursor: pointer;
+}
+
+.btn-adicionar:hover {
+    background-color: #9e9e9e;
+}
+
+/* =========================
+   LISTA COM SCROLL HORIZONTAL
+   ========================= */
+
+.lista-horizontal {
     display: flex;
     gap: 16px;
     overflow-x: auto;
@@ -180,38 +227,29 @@ header {
     scroll-behavior: smooth;
 }
 
-.armacao-lista::-webkit-scrollbar,
-.lente-lista::-webkit-scrollbar {
+.lista-horizontal::-webkit-scrollbar {
     height: 6px;
 }
 
-.armacao-lista::-webkit-scrollbar-thumb,
-.lente-lista::-webkit-scrollbar-thumb {
+.lista-horizontal::-webkit-scrollbar-thumb {
     background: #b0b0b0;
     border-radius: 4px;
 }
 
 /* =========================
-   CARDS (UNIFICADOS)
+   CARDS
    ========================= */
 
 .card-armacao,
 .card-lente {
-    background: #ccc;
-    border-radius: 8px;
+    background: #ffffff;
+    border-radius: 10px;
     padding: 16px;
     min-width: 260px;
     max-width: 260px;
     flex-shrink: 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.card-armacao:hover,
-.card-lente:hover {
-    background-color: #b9b6b6;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    border-left: 5px solid #156783;
 }
 
 .card-armacao h3,
@@ -225,25 +263,6 @@ header {
 .card-lente p {
     font-size: 14px;
     color: #333;
-}
-
-/* =========================
-   BOTÕES
-   ========================= */
-
-.btn-adicionar {
-    background-color: #ccc;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 15px;
-    margin-bottom: 16px;
-}
-
-.btn-adicionar:hover {
-    background-color: #9f9d9d;
 }
 
 /* =========================
@@ -272,51 +291,43 @@ header {
     position: relative;
 }
 
-
 .fechar-modal {
-    color: rgb(178, 61, 61);
     position: absolute;
-    align-self: right;
     right: 10px;
     top: 5px;
     cursor: pointer;
     font-size: 22px;
+    color: rgb(178, 61, 61);
 }
+
+/* =========================
+   FORMULÁRIOS
+   ========================= */
 
 form {
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 0 auto;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 label {
-    margin: 2px;
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 4px 0;
 }
 
-input {
-    margin: 5px;
-    padding: 10px;
-    border: 1px solid #ccc;
+input,
+textarea {
+    margin-bottom: 8px;
+    padding: 8px;
     border-radius: 5px;
-    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid #ccc;
 }
 
-.btn-salvar{
+.btn-salvar {
     background-color: #156783;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 15px;
-    margin-top: 10px;
 }
 
 .btn-salvar:hover {
