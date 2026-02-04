@@ -31,7 +31,7 @@ header {
    MENUS DO HEADER
    ========================= */
 
-#menu-usuario,#menu-perfil,#menu-vendedor {
+#menu-usuario,#menu-perfil,#menu-vendedor,#menu-carrinho {
     display: flex;
     align-items: center;
     gap: 15px;
