@@ -49,8 +49,7 @@ header {
     transition: transform 0.2s;
 }
 
-.iconcart,
-.iconuser{
+.iconcart{
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -58,6 +57,14 @@ header {
     margin-left: 15px;
 }
 
+/* Ícone de usuário */
+.iconuser {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: transform 0.2s;
+}
 
 /* Ícone de loja */
 .iconstore {
