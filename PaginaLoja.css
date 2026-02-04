@@ -31,7 +31,7 @@ header {
    MENUS DO HEADER
    ========================= */
 
-#menu-usuario {
+#menu-usuario,#menu-perfil {
     display: flex;
     align-items: center;
     gap: 15px;
