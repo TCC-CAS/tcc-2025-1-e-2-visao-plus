@@ -78,6 +78,9 @@ function carregarLojaDoUsuario() {
 
 function renderizarDadosLoja() {
     document.getElementById("nomeLoja").textContent = state.loja.nome;
+    document.getElementById("DescricaoLoja").textContent = state.loja.descricao;
+    document.getElementById("EmailLoja").textContent = state.loja.email;
+    document.getElementById("EnderecoLoja").textContent = state.loja.endereco;
 }
 
 /*************************************************
