@@ -25,7 +25,7 @@ async function initPaginaAdmin() {
     try {
         carregarUsuarioLogado();
         carregarLojaDoUsuario();
-        renderizarNomeLoja();
+        renderizarDadosLoja();
 
         await carregarArmacoes();
         await carregarLentes();
@@ -66,7 +66,7 @@ function carregarLojaDoUsuario() {
     console.log("OBJETO LOJA:", state.loja);
 }
 
-function renderizarNomeLoja() {
+function renderizarDadosLoja() {
     document.getElementById("nomeLoja").textContent = state.loja.nome;
 }
 
