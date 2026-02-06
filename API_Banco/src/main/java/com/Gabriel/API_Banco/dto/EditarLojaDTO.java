@@ -9,6 +9,7 @@ public class EditarLojaDTO {
     private String endereco;
     private String cep;
     private Long id;
+    private String descricao;
 
     // getters e setters
     public Long getId() {return id;}
@@ -47,5 +48,7 @@ public class EditarLojaDTO {
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
     }
+    public String getDescricao(){return descricao;}
+    public void setDescricao(String descricao){this.descricao = descricao;}
 
 }
