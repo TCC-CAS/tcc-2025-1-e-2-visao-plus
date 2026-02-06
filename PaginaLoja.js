@@ -19,7 +19,7 @@ state.configuracao = {
     fonteSecundaria: "",
     corPrimaria: "",
     corSecundaria: "",
-    layout: "",
+    layoutPagina: "",
     mostrarPreco: true,
     mostrarMarca: true
 };
@@ -125,8 +125,6 @@ function CardArmacao(armacao) {
         <p>Tipo: ${armacao.tipo}</p>
         <p>Descrição: ${armacao.descricao}</p>
         ${state.configuracao.mostrarPreco ? `<p>Preço: R$ ${armacao.preco}</p>` : ""}
-        <button onclick="abrirModalEditarArmacao(${armacao.id})" class="btn-editar">Editar</button>
-        <button onclick="deletarArmacao(${armacao.id})" class="btn-deletar">Deletar</button>
     `;
 
     return div;
@@ -174,8 +172,6 @@ function CardLente(lente) {
         <p>Material: ${lente.material}</p>
         <p>Descrição: ${lente.descricao}</p>
         ${state.configuracao.mostrarPreco ? `<p>Preço: R$ ${lente.preco}</p>` : ""}
-        <button onclick="abrirModalEditarLente(${lente.id})" class="btn-editar">Editar</button>
-        <button onclick="deletarLente(${lente.id})" class="btn-deletar">Deletar</button>
     `;
 
     return div;
@@ -184,8 +180,13 @@ function CardLente(lente) {
 /*************************************************
  * CONFIGURAÇÕES DA LOJA
  *************************************************/
+function atualizarCards() {
+    renderizarArmacoes(state.armacoes);
+    renderizarLentes(state.lentes);
+}
+
 async function carregarConfiguracoesLoja() {
-    const response = await fetch(`${API}/loja/configuracao/${state.lojaId}`);
+    const response = await fetch(`${API}/configuracao/buscar/${state.lojaId}`);
 
     if (!response.ok) {
         throw new Error("Erro ao carregar configurações da loja");
@@ -201,7 +202,9 @@ function preencherInputsConfiguracao() {
     document.getElementById("fonteSecundaria").value = state.configuracao.fonteSecundaria;
     document.getElementById("corPrimaria").value = state.configuracao.corPrimaria;
     document.getElementById("corSecundaria").value = state.configuracao.corSecundaria;
-    document.getElementById("layoutPagina").value = state.configuracao.layout;
+    document.getElementById("layoutPagina").value = state.configuracao.layoutPagina;
+    document.getElementById("mostrarPreco").checked = !!state.configuracao.mostrarPreco;
+    document.getElementById("mostrarMarca").checked = !!state.configuracao.mostrarMarca;
 }
 
 function montarConfiguracaoDTO() {
@@ -210,7 +213,7 @@ function montarConfiguracaoDTO() {
         fonteSecundaria: document.getElementById("fonteSecundaria").value,
         corPrimaria: document.getElementById("corPrimaria").value,
         corSecundaria: document.getElementById("corSecundaria").value,
-        layout: document.getElementById("layoutPagina").value,
+        layoutPagina: document.getElementById("layoutPagina").value,
         mostrarPreco: document.getElementById("mostrarPreco").checked,
         mostrarMarca: document.getElementById("mostrarMarca").checked
     };
@@ -220,7 +223,7 @@ async function salvarConfiguracoes() {
     const dto = montarConfiguracaoDTO();
 
     const response = await fetch(
-        `${API}/loja/configuracao/${state.lojaId}`,
+        `${API}/configuracao/editar/${state.lojaId}`,
         {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -234,6 +237,7 @@ async function salvarConfiguracoes() {
 
     state.configuracao = dto;
     aplicarConfiguracaoPreview();
+    atualizarCards();
 
     alert("Configurações salvas com sucesso!");
 }
@@ -244,7 +248,7 @@ function resetarConfiguracoes() {
         fonteSecundaria: "Helvetica",
         corPrimaria: "#000000",
         corSecundaria: "#ffffff",
-        layout: "padrao",
+        layoutPagina: "padrao",
         mostrarPreco: true,
         mostrarMarca: true
     };
@@ -256,10 +260,32 @@ function resetarConfiguracoes() {
 
 function aplicarConfiguracaoPreview() {
     const preview = document.querySelector(".pre-visualizacao");
+    const cards = document.querySelectorAll(".card-armacao, .card-lente");
+    const cardsh = document.querySelectorAll(".card-armacao h4, .card-lente h4");
+    const cardsp = document.querySelectorAll(".card-armacao p, .card-lente p");
 
     preview.style.fontFamily = state.configuracao.fontePrimaria;
     preview.style.backgroundColor = state.configuracao.corSecundaria;
-    preview.style.color = state.configuracao.corPrimaria;
+    
+    cards.forEach(card => {
+        card.style.backgroundColor = state.configuracao.corSecundaria;
+        card.style.color = state.configuracao.corPrimaria;
+        card.style.fontFamily = state.configuracao.fontePrimaria;
+        card.style.borderColor = state.configuracao.corPrimaria;
+        card.style
+    });
+
+    cardsh.forEach(h4 => {
+        h4.style.color = state.configuracao.corPrimaria;
+        h4.style.backgroundColor = state.configuracao.corSecundaria;
+        h4.style.fontFamily = state.configuracao.fonteSecundaria;
+    });
+
+    cardsp.forEach(p => {
+        p.style.color = state.configuracao.corPrimaria;
+        p.style.backgroundColor = state.configuracao.corSecundaria;
+        p.style.fontFamily = state.configuracao.fontePrimaria;
+    });
 
     // Nome, descrição etc
     document.getElementById("NomeLoja").textContent = state.loja.nome;
@@ -284,11 +310,11 @@ function fecharModal(id) {
  *************************************************/
 function configurarEventos() {
     document
-        .getElementById("btnSalvarConfig")
+        .getElementById("salvarConfiguracoes")
         .addEventListener("click", salvarConfiguracoes);
 
     document
-        .getElementById("btnResetarConfig")
+        .getElementById("resetarConfiguracoes")
         .addEventListener("click", resetarConfiguracoes);
 
     // Preview ao vivo
@@ -296,6 +322,8 @@ function configurarEventos() {
         input.addEventListener("change", () => {
             state.configuracao = montarConfiguracaoDTO();
             aplicarConfiguracaoPreview();
+            aplicarConfiguracaoPreview();
+            atualizarCards();
         });
     });
 }

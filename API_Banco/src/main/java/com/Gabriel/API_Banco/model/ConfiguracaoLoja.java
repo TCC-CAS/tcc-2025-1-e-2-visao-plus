@@ -26,7 +26,6 @@ public class ConfiguracaoLoja {
     @Column(name = "corFundo")
     private String corFundo;
 
-
     @Column(name = "fontePrimaria")
     private String fontePrimaria;
 
@@ -36,8 +35,8 @@ public class ConfiguracaoLoja {
     @Column(name = "layout_pagina")
     private String layoutPagina;
 
-    @Column(name = "mostrar_banner")
-    private boolean mostrarBanner;
+    @Column(name = "mostrar_marca")
+    private Boolean mostrarMarca;
 
     @Column(name = "layout_produtos")
     private String layoutProdutos;
@@ -46,5 +45,5 @@ public class ConfiguracaoLoja {
     private Integer produtosLinha;
 
     @Column(name= "mostrar_preco")
-    private boolean mostrarPreco;
+    private Boolean mostrarPreco;
 }

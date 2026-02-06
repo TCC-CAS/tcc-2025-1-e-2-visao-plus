@@ -71,17 +71,17 @@
 
                 <div class="campo-config">
                     <label for="corPrimaria">Cor principal</label>
-                    <input type="color" id="corPrimaria" name="corPrimaria">
+                    <input type="color" id="corPrimaria" name="corPrimaria" class="config-input">
                 </div>
 
                 <div class="campo-config">
                     <label for="corSecundaria">Cor secundária</label>
-                    <input type="color" id="corSecundaria" name="corSecundaria">
+                    <input type="color" id="corSecundaria" name="corSecundaria" class="config-input">
                 </div>
 
                 <div class="campo-config">
                     <label for="corFundo">Cor de fundo</label>
-                    <input type="color" id="corFundo" name="corFundo">
+                    <input type="color" id="corFundo" name="corFundo" class="config-input">
                 </div>
             </section>
 
@@ -91,19 +91,21 @@
 
                 <div class="campo-config">
                     <label for="fontePrimaria">Fonte primária</label>
-                    <select id="fontePrimaria">
+                    <select id="fontePrimaria" class="config-input">
                         <option value="Poppins">Poppins</option>
                         <option value="Roboto">Roboto</option>
                         <option value="Montserrat">Montserrat</option>
                         <option value="Open Sans">Open Sans</option>
+                        <option value="Arial">Arial</option>
                     </select>
                 </div>
 
                 <div class="campo-config">
                     <label for="fonteSecundaria">Fonte secundária</label>
-                    <select id="fonteSecundaria">
+                    <select id="fonteSecundaria" class="config-input">
                         <option value="Roboto">Roboto</option>
                         <option value="Open Sans">Open Sans</option>
+                        <option value="Helvetica">Helvetica</option>
                     </select>
                 </div>
             </section>
@@ -114,17 +116,18 @@
 
                 <div class="campo-config">
                     <label for="layoutPagina">Layout geral</label>
-                    <select id="layoutPagina">
+                    <select id="layoutPagina" class="config-input">
                         <option value="classico">Clássico</option>
                         <option value="centralizado">Centralizado</option>
+                        <option value="padrao">Padrão</option>
                         <option value="wide">Wide</option>
                     </select>
                 </div>
 
                 <div class="campo-config">
                     <label>
-                        <input type="checkbox" id="mostrarBanner">
-                        Mostrar banner no topo
+                        <input type="checkbox" id="mostrarMarca" class="config-input">
+                        Mostrar marca
                     </label>
                 </div>
             </section>
@@ -135,7 +138,7 @@
 
                 <div class="campo-config">
                     <label for="layoutProdutos">Layout dos produtos</label>
-                    <select id="layoutProdutos">
+                    <select id="layoutProdutos" class="config-input">
                         <option value="grid">Grid</option>
                         <option value="lista">Lista</option>
                         <option value="carrossel">Carrossel</option>
@@ -144,7 +147,7 @@
 
                 <div class="campo-config">
                     <label for="produtosPorLinha">Produtos por linha</label>
-                    <select id="produtosPorLinha">
+                    <select id="produtosPorLinha" class="config-input">
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -153,7 +156,7 @@
 
                 <div class="campo-config">
                     <label>
-                        <input type="checkbox" id="mostrarPreco">
+                        <input type="checkbox" id="mostrarPreco" class="config-input">
                         Mostrar preço
                     </label>
                 </div>
