@@ -280,7 +280,21 @@ function fecharModal(id) {
  * EVENTOS
  *************************************************/
 function configurarEventos() {
-    
+    document
+        .getElementById("btnSalvarConfig")
+        .addEventListener("click", salvarConfiguracoes);
+
+    document
+        .getElementById("btnResetarConfig")
+        .addEventListener("click", resetarConfiguracoes);
+
+    // Preview ao vivo
+    document.querySelectorAll(".config-input").forEach(input => {
+        input.addEventListener("change", () => {
+            state.configuracao = montarConfiguracaoDTO();
+            aplicarConfiguracaoPreview();
+        });
+    });
 }
 
 
