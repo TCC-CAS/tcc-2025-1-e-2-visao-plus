@@ -11,7 +11,7 @@ public class ConfiguracaoLoja {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_config")
-    private Long config;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "id_loja")
@@ -34,17 +34,17 @@ public class ConfiguracaoLoja {
     private String fonteSecundaria;
 
     @Column(name = "layout_pagina")
-    private String layout_pagina;
+    private String layoutPagina;
 
     @Column(name = "mostrar_banner")
-    private boolean mostrar_banner;
+    private boolean mostrarBanner;
 
     @Column(name = "layout_produtos")
-    private String layout_produtos;
+    private String layoutProdutos;
 
     @Column(name= "produtos_linha")
-    private Integer produtos_linha;
+    private Integer produtosLinha;
 
     @Column(name= "mostrar_preco")
-    private boolean mostrar_preco;
+    private boolean mostrarPreco;
 }
