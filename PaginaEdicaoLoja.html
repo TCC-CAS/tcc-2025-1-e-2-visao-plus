@@ -3,26 +3,24 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Página Principal</title>
-    <link rel="stylesheet" href="PaginaPrincipal.css">
+    <title>Página Loja</title>
+    <link rel="stylesheet" href="PaginaLoja.css">
 </head>
 
 <body>
     <header>
-
         <!-- Sempre visível -->
         <div class="logo">
             <h1>VisionPlus+</h1>
         </div>
 
-        <!-- VISITANTE (não logado) -->
-        <div id="menu-visitante">
-            <a href="Login.html">Login</a>
-            <a href="Cadastro.html">Cadastrar</a>
-        </div>
-
         <!-- USUÁRIO LOGADO -->
         <div id="menu-usuario">
+            <div id="menu-principal" class="profile-menu">
+                <a href="PaginaPrincipal.html">
+                    <img src="pngfind.com-address-icon-png-807569.png" class="iconhome" alt="Ícone">
+                </a>
+            </div>
 
             <!-- Perfil (todos os logados) -->
             <div id="menu-perfil" class="profile-menu">
@@ -35,7 +33,7 @@
 
             <!-- CLIENTE -->
             <div id="menu-carrinho" class="cart-menu">
-                <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
+                <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="iconcart">
             </div>
 
             <!-- VENDEDOR -->
@@ -44,7 +42,6 @@
                 <div class="dropdown">
                     <a href="ProdutosLoja.html">Meus Produtos</a>
                     <a href="AdministracaoLoja.html">Administração Loja</a>
-                    <a href="PaginaEdicaoLoja.html">Minha Loja</a>
                 </div>
             </div>
             <!-- ADMIN -->
@@ -55,38 +52,36 @@
                     <a href="#">Usuários</a>
                 </div>
             </div>
-
         </div>
-
     </header>
 
-    <!-- COTAÇÕES (cliente e vendedor) -->
-    <section id="secao-cotacoes" class="products-carousel">
-        <h2>Cotações Recentes</h2>
-    </section>
-
     <section class="main-content">
-        <!-- MAPA (todos) -->
-        <section id="secao-mapa" class="map-container">
-            <div id="map">Mapa aqui</div>
+        <h1 class="titulo-secao">
+            <span id="nomeLoja"></span>
+        </h1>
+
+        <section class="Dados da loja">
+            <p><span id="DescricaoLoja"></span></p>
+            <p>Contato: <span id="EmailLoja"></span></p>
+            <p>Endereço: <span id="EnderecoLoja"></span></p>
         </section>
 
-        <!-- LOJAS -->
-        <section id="secao-lojas" class="sidebar">
-            <h3>Lojas Próximas</h3>
-            <section id="lista-lojas" class="lista-lojas"></section>
+        <!--lista de armações-->
+        <section class="armacao-section">
+            <h3>Minhas Armações</h3>
+            <section id="armacao-lista" class="lista-horizontal"></section>
+        </section>
+
+        <!--lista de lentes-->
+        <section class="lente-section">
+            <h3>Minhas Lentes</h3>
+            <section id="lente-lista" class="lista-horizontal"></section>
         </section>
     </section>
-
-    <!-- ADMIN -->
-    <section id="secao-admin" class="map-container">
-        <h2 id="map">Dashboard Administrativo</h2>
-    </section>
-
-    <script src="PaginaPrincipal.js"></script>
 
 </body>
 
-<script src="ListasLojas.js"></script>
+<script src="PaginaLoja.js"></script>
+
 
 </html>
