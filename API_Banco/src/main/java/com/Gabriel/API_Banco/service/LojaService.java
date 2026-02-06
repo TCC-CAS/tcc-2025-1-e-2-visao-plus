@@ -60,6 +60,7 @@ public class LojaService {
         loja.setCnpj(dto.getCnpj());
         loja.setCep(dto.getCep());
         loja.setEndereco(dto.getEndereco());
+        loja.setDescricao(dto.getDescricao());
 
         return r.save(loja);
     }
@@ -72,7 +73,8 @@ public class LojaService {
                         loja.getEmail(),
                         loja.getCnpj(),
                         loja.getCep(),
-                        loja.getEndereco()
+                        loja.getEndereco(),
+                        loja.getDescricao()
                 ))
                 .toList();
     }
