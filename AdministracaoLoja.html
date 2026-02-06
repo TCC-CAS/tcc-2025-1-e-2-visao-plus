@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Página Perfil</title>
-    <link rel="stylesheet" href="PaginaPerfil.css">
+    <link rel="stylesheet" href="ProdutosLoja.css">
 </head>
 
 <body>
@@ -22,17 +22,26 @@
                 </a>
             </div>
 
+            <!-- Perfil (todos os logados) -->
+            <div id="menu-perfil" class="profile-menu">
+                <img src="9742847.png" class="iconuser">
+                <div class="dropdown">
+                    <a href="PaginaPerfil.html">Perfil</a>
+                    <a href="#" onclick="logout()">Sair</a>
+                </div>
+            </div>
+
             <!-- CLIENTE -->
             <div id="menu-carrinho" class="cart-menu">
-                <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
+                <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="iconcart">
             </div>
 
             <!-- VENDEDOR -->
             <div id="menu-vendedor" class="profile-menu">
                 <img src="store1.png" class="iconstore">
                 <div class="dropdown">
-                    <a href="#">Meus Produtos</a>
-                    <a href="#">Minhas Vendas</a>
+                    <a href="ProdutosLoja.html">Meus Produtos</a>
+                    <a href="PaginaLoja.html">Minha Loja</a>
                 </div>
             </div>
             <!-- ADMIN -->
@@ -45,6 +54,7 @@
             </div>
         </div>
     </header>
+
 
     <h2 class="titulo-secao">
         Loja
