@@ -273,6 +273,23 @@ section.Dados p {
 }
 
 /* =========================
+   TEMA DINÂMICO DA LOJA
+   ========================= */
+
+.pre-visualizacao {
+    --cor-primaria: #156783;
+    --cor-secundaria: #ffffff;
+    --cor-fundo: #b5d7df;
+
+    --fonte-primaria: Arial, Helvetica, sans-serif;
+    --fonte-secundaria: Helvetica, Arial, sans-serif;
+
+    background-color: var(--cor-fundo);
+    font-family: var(--fonte-primaria);
+    color: var(--cor-primaria);
+}
+
+/* =========================
    LISTAS DE PRODUTOS
    ========================= */
 
