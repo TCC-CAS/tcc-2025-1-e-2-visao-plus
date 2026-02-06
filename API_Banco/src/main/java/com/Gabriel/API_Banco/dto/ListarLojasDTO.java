@@ -6,5 +6,6 @@ public record ListarLojasDTO(
         String email,
         String cnpj,
         String cep,
-        String endereco
+        String endereco,
+        String descricao
 ) {}
