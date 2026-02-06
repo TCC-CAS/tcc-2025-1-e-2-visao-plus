@@ -180,6 +180,7 @@ header {
 
 .painel-secao {
     margin-bottom: 30px;
+
 }
 
 .painel-secao h3 {
@@ -187,6 +188,7 @@ header {
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
     color: #156783;
+    width: 100%;
 }
 
 /* =========================
