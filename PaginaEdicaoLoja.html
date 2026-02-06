@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Página Loja</title>
-    <link rel="stylesheet" href="PaginaLoja.css">
+    <title>Página de Edição da Loja</title>
+    <link rel="stylesheet" href="PaginaEdicaoLoja.css">
 </head>
 
 <body>
@@ -59,6 +59,114 @@
         <h1 class="titulo-secao">
             <span id="nomeLoja"></span>
         </h1>
+
+        <section class="painel-edicao-loja">
+
+            <h2>Personalização da Loja</h2>
+            <p>Ajuste a aparência da sua loja como os clientes irão ver.</p>
+
+            <!-- IDENTIDADE VISUAL -->
+            <section class="painel-secao">
+                <h3>Identidade Visual</h3>
+
+                <div class="campo-config">
+                    <label for="corPrimaria">Cor principal</label>
+                    <input type="color" id="corPrimaria" name="corPrimaria">
+                </div>
+
+                <div class="campo-config">
+                    <label for="corSecundaria">Cor secundária</label>
+                    <input type="color" id="corSecundaria" name="corSecundaria">
+                </div>
+
+                <div class="campo-config">
+                    <label for="corFundo">Cor de fundo</label>
+                    <input type="color" id="corFundo" name="corFundo">
+                </div>
+            </section>
+
+            <!-- TIPOGRAFIA -->
+            <section class="painel-secao">
+                <h3>Tipografia</h3>
+
+                <div class="campo-config">
+                    <label for="fontePrimaria">Fonte primária</label>
+                    <select id="fontePrimaria">
+                        <option value="Poppins">Poppins</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="Open Sans">Open Sans</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label for="fonteSecundaria">Fonte secundária</label>
+                    <select id="fonteSecundaria">
+                        <option value="Roboto">Roboto</option>
+                        <option value="Open Sans">Open Sans</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- LAYOUT -->
+            <section class="painel-secao">
+                <h3>Layout da Página</h3>
+
+                <div class="campo-config">
+                    <label for="layoutPagina">Layout geral</label>
+                    <select id="layoutPagina">
+                        <option value="classico">Clássico</option>
+                        <option value="centralizado">Centralizado</option>
+                        <option value="wide">Wide</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarBanner">
+                        Mostrar banner no topo
+                    </label>
+                </div>
+            </section>
+
+            <!-- PRODUTOS -->
+            <section class="painel-secao">
+                <h3>Exibição de Produtos</h3>
+
+                <div class="campo-config">
+                    <label for="layoutProdutos">Layout dos produtos</label>
+                    <select id="layoutProdutos">
+                        <option value="grid">Grid</option>
+                        <option value="lista">Lista</option>
+                        <option value="carrossel">Carrossel</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label for="produtosPorLinha">Produtos por linha</label>
+                    <select id="produtosPorLinha">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarPreco">
+                        Mostrar preço
+                    </label>
+                </div>
+            </section>
+
+            <!-- AÇÕES -->
+            <section class="painel-acoes">
+                <button id="salvarConfiguracoes">Salvar configurações</button>
+                <button id="resetarConfiguracoes">Resetar configurações</button>
+            </section>
+
+        </section>
+
 
         <section class="Dados da loja">
             <p><span id="DescricaoLoja"></span></p>
