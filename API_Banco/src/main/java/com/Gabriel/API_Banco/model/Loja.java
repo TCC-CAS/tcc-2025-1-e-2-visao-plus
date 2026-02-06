@@ -35,6 +35,9 @@ public class Loja {
     @Column(name= "endereco")
     private String endereco;
 
+    @Column(name = "descricao")
+    private String descricao;
+
     @OneToMany(mappedBy = "loja", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     private List<Produto> produtos;
