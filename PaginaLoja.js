@@ -39,7 +39,7 @@ async function initPaginaAdmin() {
 
         await carregarArmacoes();
         await carregarLentes();
-
+        await carregarConfiguracoesLoja();
         configurarEventos();
     } catch (error) {
         console.error(error);
