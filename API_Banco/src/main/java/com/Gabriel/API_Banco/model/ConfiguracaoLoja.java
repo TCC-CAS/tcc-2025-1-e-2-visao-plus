@@ -13,8 +13,8 @@ public class ConfiguracaoLoja {
     @Column(name = "id_config")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "id_loja")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_loja", nullable = false, unique = true)
     private Loja loja;
 
     @Column(name = "corPrimaria")
