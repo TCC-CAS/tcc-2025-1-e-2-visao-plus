@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
             nome: nome,
             email: email,
             senha: senha,
-            tipo_usuario: "Comum"
+            tipoUsuario: "Comum"
         };
 
 
@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(mensagem);
 
             form.reset();
+            window.location.href = "Login.html";
 
         } catch (error) {
             console.error(error);
