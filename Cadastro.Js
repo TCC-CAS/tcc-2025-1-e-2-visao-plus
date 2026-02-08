@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             form.reset();
             window.location.href = "Login.html";
+            
 
         } catch (error) {
             console.error(error);
