@@ -19,9 +19,11 @@ state.configuracao = {
     fonteSecundaria: "",
     corPrimaria: "",
     corSecundaria: "",
+    corFundo: "",
     layoutPagina: "",
     mostrarPreco: true,
-    mostrarMarca: true
+    mostrarMarca: true,
+    produtosLinha: 3
 };
 
 /*************************************************
@@ -41,6 +43,7 @@ async function initPaginaAdmin() {
         await carregarLentes();
         await carregarConfiguracoesLoja();
         configurarEventos();
+        atualizarCards();
     } catch (error) {
         console.error(error);
         alert(error.message);
@@ -180,6 +183,48 @@ function CardLente(lente) {
 /*************************************************
  * CONFIGURAÇÕES DA LOJA
  *************************************************/
+function aplicarLayoutPagina() {
+    const preview = document.querySelector(".pre-visualizacao");
+
+    preview.classList.remove(
+        "layout-padrao",
+        "layout-centralizado",
+        "layout-fullwidth",
+        "layout-grid"
+    );
+
+    preview.classList.add(`layout-${state.configuracao.layoutPagina}`);
+}
+
+function aplicarLayoutProdutos() {
+    const armacoes = document.querySelector(".armacao-section");
+    const lentes = document.querySelector(".lente-section");
+
+    armacoes.classList.remove(
+        "produtos-horizontal",
+        "produtos-grid",
+        "produtos-lista"
+    );
+
+    lentes.classList.remove(
+        "produtos-horizontal",
+        "produtos-grid",
+        "produtos-lista"
+    );
+
+    armacoes.classList.add(`produtos-${state.configuracao.layoutProdutos}`);
+    lentes.classList.add(`produtos-${state.configuracao.layoutProdutos}`);
+}
+
+function aplicarProdutosPorLinha() {
+    const preview = document.querySelector(".pre-visualizacao");
+
+    preview.style.setProperty(
+        "--produtos-linha",
+        state.configuracao.produtosLinha || 3
+    );
+}
+
 function atualizarCards() {
     renderizarArmacoes(state.armacoes);
     renderizarLentes(state.lentes);
@@ -195,6 +240,7 @@ async function carregarConfiguracoesLoja() {
     state.configuracao = await response.json();
     preencherInputsConfiguracao();
     aplicarConfiguracaoPreview();
+    atualizarCards();
 }
 
 function preencherInputsConfiguracao() {
@@ -202,9 +248,12 @@ function preencherInputsConfiguracao() {
     document.getElementById("fonteSecundaria").value = state.configuracao.fonteSecundaria;
     document.getElementById("corPrimaria").value = state.configuracao.corPrimaria;
     document.getElementById("corSecundaria").value = state.configuracao.corSecundaria;
+    document.getElementById("corFundo").value = state.configuracao.corFundo;
     document.getElementById("layoutPagina").value = state.configuracao.layoutPagina;
     document.getElementById("mostrarPreco").checked = !!state.configuracao.mostrarPreco;
     document.getElementById("mostrarMarca").checked = !!state.configuracao.mostrarMarca;
+    document.getElementById("produtosPorLinha").value = state.configuracao.produtosLinha || 3;
+    atualizarCards();
 }
 
 function montarConfiguracaoDTO() {
@@ -213,9 +262,12 @@ function montarConfiguracaoDTO() {
         fonteSecundaria: document.getElementById("fonteSecundaria").value,
         corPrimaria: document.getElementById("corPrimaria").value,
         corSecundaria: document.getElementById("corSecundaria").value,
+        corFundo: document.getElementById("corFundo").value,
         layoutPagina: document.getElementById("layoutPagina").value,
         mostrarPreco: document.getElementById("mostrarPreco").checked,
-        mostrarMarca: document.getElementById("mostrarMarca").checked
+        mostrarMarca: document.getElementById("mostrarMarca").checked,
+        produtosLinha: Number(document.getElementById("produtosPorLinha").value)
+
     };
 }
 
@@ -259,35 +311,21 @@ function resetarConfiguracoes() {
 }
 
 function aplicarConfiguracaoPreview() {
+    atualizarCards();
     const preview = document.querySelector(".pre-visualizacao");
-    const cards = document.querySelectorAll(".card-armacao, .card-lente");
-    const cardsh = document.querySelectorAll(".card-armacao h4, .card-lente h4");
-    const cardsp = document.querySelectorAll(".card-armacao p, .card-lente p");
 
-    preview.style.fontFamily = state.configuracao.fontePrimaria;
-    preview.style.backgroundColor = state.configuracao.corSecundaria;
-    
-    cards.forEach(card => {
-        card.style.backgroundColor = state.configuracao.corSecundaria;
-        card.style.color = state.configuracao.corPrimaria;
-        card.style.fontFamily = state.configuracao.fontePrimaria;
-        card.style.borderColor = state.configuracao.corPrimaria;
-        card.style
-    });
+    preview.style.setProperty("--cor-primaria", state.configuracao.corPrimaria);
+    preview.style.setProperty("--cor-secundaria", state.configuracao.corSecundaria);
+    preview.style.setProperty("--cor-fundo", state.configuracao.corFundo);
 
-    cardsh.forEach(h4 => {
-        h4.style.color = state.configuracao.corPrimaria;
-        h4.style.backgroundColor = state.configuracao.corSecundaria;
-        h4.style.fontFamily = state.configuracao.fonteSecundaria;
-    });
+    preview.style.setProperty("--fonte-primaria", state.configuracao.fontePrimaria);
+    preview.style.setProperty("--fonte-secundaria", state.configuracao.fonteSecundaria);
 
-    cardsp.forEach(p => {
-        p.style.color = state.configuracao.corPrimaria;
-        p.style.backgroundColor = state.configuracao.corSecundaria;
-        p.style.fontFamily = state.configuracao.fontePrimaria;
-    });
+    aplicarLayoutPagina();
+    aplicarLayoutProdutos();
+    aplicarProdutosPorLinha();
 
-    // Nome, descrição etc
+    // Dados da loja
     document.getElementById("NomeLoja").textContent = state.loja.nome;
     document.getElementById("DescricaoLoja").textContent = state.loja.descricao;
     document.getElementById("EmailLoja").textContent = state.loja.email;
