@@ -97,6 +97,7 @@ async function salvarLoja(e) {
 
         alert("Loja atualizada com sucesso!");
         document.getElementById("modal-editar-loja").classList.add("hidden");
+        preencherInformacoesLoja();
     } else {
         alert("Erro ao atualizar loja");
     }
