@@ -1,41 +1,74 @@
 // js/core/produtos.js
-
 import { apiFetch } from "./api.js";
 
-/**
- * Buscar todas as armações
- */
-export async function buscarArmacoes() {
-    return await apiFetch("/armacoes");
+/* =========================
+   BUSCAS
+========================= */
+
+export async function buscarLentesPorLoja(lojaId) {
+    return await apiFetch(`/lentes/loja/${lojaId}`);
 }
 
-/**
- * Buscar todas as lentes
- */
-export async function buscarLentes() {
-    return await apiFetch("/lentes");
+export async function buscarArmacoesPorLoja(lojaId) {
+    return await apiFetch(`/armacoes/loja/${lojaId}`);
 }
 
-/**
- * Buscar armações com filtro
- */
-export async function buscarArmacoesComFiltro(filtros = {}) {
-    const params = new URLSearchParams(filtros).toString();
-    return await apiFetch(`/armacoes?${params}`);
+export async function buscarLentePorId(id) {
+    return await apiFetch(`/lentes/${id}`);
 }
 
-/**
- * Buscar lentes com filtro
- */
-export async function buscarLentesComFiltro(filtros = {}) {
-    const params = new URLSearchParams(filtros).toString();
-    return await apiFetch(`/lentes?${params}`);
+export async function buscarArmacaoPorId(id) {
+    return await apiFetch(`/armacoes/${id}`);
 }
 
-/**
- * Buscar produto por ID (genérico)
- */
-export async function buscarProdutoPorId(tipo, id) {
-    return await apiFetch(`/${tipo}/${id}`);
+/* =========================
+   CRIAÇÃO
+========================= */
+
+export async function criarLente(dadosLente) {
+    return await apiFetch("/lentes", {
+        method: "POST",
+        body: JSON.stringify(dadosLente)
+    });
 }
-/**/
+
+export async function criarArmacao(dadosArmacao) {
+    return await apiFetch("/armacoes", {
+        method: "POST",
+        body: JSON.stringify(dadosArmacao)
+    });
+}
+
+/* =========================
+   ATUALIZAÇÃO
+========================= */
+
+export async function atualizarLente(id, dadosAtualizados) {
+    return await apiFetch(`/lentes/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(dadosAtualizados)
+    });
+}
+
+export async function atualizarArmacao(id, dadosAtualizados) {
+    return await apiFetch(`/armacoes/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(dadosAtualizados)
+    });
+}
+
+/* =========================
+   DELEÇÃO
+========================= */
+
+export async function deletarLente(id) {
+    return await apiFetch(`/lentes/${id}`, {
+        method: "DELETE"
+    });
+}
+
+export async function deletarArmacao(id) {
+    return await apiFetch(`/armacoes/${id}`, {
+        method: "DELETE"
+    });
+}
