@@ -80,7 +80,7 @@ public class ArmacaoService {
     }
 
     public List<ListarArmacaoDTO> listarArmacaoPorLoja(Long idLoja){
-        return ar.findAll().stream()
+        return ar.findByLoja_Id(idLoja).stream()
                 .map(armacao -> new ListarArmacaoDTO(
                         armacao.getId(),
                         armacao.getNome(),
