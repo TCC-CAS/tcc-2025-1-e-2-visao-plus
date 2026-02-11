@@ -53,3 +53,13 @@ export async function salvarConfiguracoesLoja(lojaId, configuracao) {
 
     return true;
 }
+
+export async function listarLojas() {
+    const response = await fetch(`${API}/lojas/listarLojas`);
+
+    if (!response.ok) {
+        throw new Error("Erro ao buscar lojas");
+    }
+
+    return await response.json();
+}
