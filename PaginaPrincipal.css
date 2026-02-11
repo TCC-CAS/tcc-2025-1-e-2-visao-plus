@@ -86,6 +86,7 @@ body {
     background: #ccc;
     border-radius: 8px;
     padding: 16px;
+    transition: transform 0.2s;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     font-size: 8px;
 }
@@ -94,6 +95,7 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     background-color: #b9b6b6;
     cursor: pointer;
+    transform: scale(1.02);
 }
 
 /* Sidebar */
