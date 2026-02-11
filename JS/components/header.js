@@ -27,6 +27,14 @@ export function configurarHeader() {
     `;
 
     configurarEventosHeader();
+    chamarEstilização();
+}
+
+function chamarEstilização() {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "css/Header.css";
+    document.head.appendChild(link);
 }
 
 function montarMenuVisitante() {
