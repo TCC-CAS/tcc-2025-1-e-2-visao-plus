@@ -2,14 +2,18 @@
 
 export function abrirModal(idModal) {
     const modal = document.getElementById(idModal);
-    if (!modal) return;
-
-    modal.classList.add("ativo");
+    if (!modal) {
+        console.error("Modal não encontrado:", idModal);
+        return;
+    }
+    modal.classList.remove("hidden");
 }
 
 export function fecharModal(idModal) {
     const modal = document.getElementById(idModal);
-    if (!modal) return;
-
-    modal.classList.remove("ativo");
+    if (!modal) {
+        console.error("Modal não encontrado:", idModal);
+        return;
+    }
+    modal.classList.add("hidden");
 }

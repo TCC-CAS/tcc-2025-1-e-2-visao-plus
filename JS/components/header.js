@@ -3,7 +3,7 @@
 import { getUsuarioLogado, logout } from "../core/auth.js";
 import { getLojaAtual } from "../core/loja.js";
 
-export function carregarHeader() {
+export function configurarHeader() {
     const header = document.getElementById("app-header");
     if (!header) return;
 
