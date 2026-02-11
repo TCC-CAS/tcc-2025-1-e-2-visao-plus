@@ -5,34 +5,51 @@
     <meta charset="UTF-8">
     <title>Produtos Loja</title>
     <link rel="stylesheet" href="ProdutosLoja.css">
+    <link rel="stylesheet" href="PaginaPrincipal.css">
 </head>
 
 <body>
+
+    <!-- HEADER UNIVERSAL 
+    <header id="app-header"></header>
+    -->
+
     <header>
+
         <!-- Sempre visível -->
         <div class="logo">
             <h1>VisionPlus+</h1>
         </div>
-
         <!-- USUÁRIO LOGADO -->
         <div id="menu-usuario">
+
             <div id="menu-principal" class="profile-menu">
                 <a href="PaginaPrincipal.html">
                     <img src="pngfind.com-address-icon-png-807569.png" class="iconhome" alt="Ícone">
                 </a>
             </div>
 
+            <!-- Perfil (todos os logados) -->
+            <div id="menu-perfil" class="profile-menu">
+                <img src="9742847.png" class="iconuser">
+                <div class="dropdown">
+                    <a href="PaginaPerfil.html">Perfil</a>
+                    <a href="#" onclick="logout()">Sair</a>
+                </div>
+            </div>
+
             <!-- CLIENTE -->
             <div id="menu-carrinho" class="cart-menu">
-                <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="iconcart">
+                <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
             </div>
 
             <!-- VENDEDOR -->
             <div id="menu-vendedor" class="profile-menu">
                 <img src="store1.png" class="iconstore">
                 <div class="dropdown">
-                    <a href="AdministracaoLoja.html">Administração Loja</a>
-                    <a href="PaginaEdicaoLoja.html">Minha Loja</a>
+                    
+                    <a href="AdminLoja.html">Administração Loja</a>
+                    <a href="PaginaLoja.html">Minha Loja</a>
                 </div>
             </div>
             <!-- ADMIN -->
@@ -43,7 +60,9 @@
                     <a href="#">Usuários</a>
                 </div>
             </div>
+
         </div>
+
     </header>
 
     <!-- Conteúdo Principal -->
@@ -217,5 +236,6 @@
 </div>
 
 <script src="ProdutosLoja.js"></script>
+<!--<script type="module" src="/js/pages/produtosLoja.js"></script>-->
 
 </html>
