@@ -114,3 +114,12 @@ function configurarEventosHeader() {
     }
 }
 
+window.addEventListener("scroll", () => {
+    const headerElement = document.querySelector("header");
+
+    if (window.scrollY > 50) {
+        headerElement.classList.add("shrink");
+    } else {
+        headerElement.classList.remove("shrink");
+    }
+});
