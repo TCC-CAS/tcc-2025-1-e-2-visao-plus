@@ -7,7 +7,7 @@ let lojaAtual = null;
 /**
  * Busca a loja do usuário logado
  */
-export async function buscarLojaDoUsuario(usuario) {
+export async function getLojaDoUsuario(usuario) {
     if (!usuario?.loja?.id) return null;
 
     lojaAtual = usuario.loja;
