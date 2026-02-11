@@ -5,35 +5,35 @@ import { apiFetch } from "./api.js";
    BUSCAS
 ========================= */
 
-export async function buscarLentesPorLoja(lojaId) {
-    return await apiFetch(`/lentes/loja/${lojaId}`);
+export async function listarLentesPorLoja(lojaId) {
+    return await apiFetch(`/lentes/listarLentes/${lojaId}`);
 }
 
-export async function buscarArmacoesPorLoja(lojaId) {
-    return await apiFetch(`/armacoes/loja/${lojaId}`);
+export async function listarArmacoesPorLoja(lojaId) {
+    return await apiFetch(`/armacao/listarArmacoes/${lojaId}`);
 }
 
-export async function buscarLentePorId(id) {
+export async function listarLentePorId(id) {
     return await apiFetch(`/lentes/${id}`);
 }
 
-export async function buscarArmacaoPorId(id) {
-    return await apiFetch(`/armacoes/${id}`);
+export async function listarArmacaoPorId(id) {
+    return await apiFetch(`/armacao/${id}`);
 }
 
 /* =========================
    CRIAÇÃO
 ========================= */
 
-export async function criarLente(dadosLente) {
-    return await apiFetch("/lentes", {
+export async function salvarLente(dadosLente) {
+    return await apiFetch("/lentes/criarLente", {
         method: "POST",
         body: JSON.stringify(dadosLente)
     });
 }
 
-export async function criarArmacao(dadosArmacao) {
-    return await apiFetch("/armacoes", {
+export async function salvarArmacao(dadosArmacao) {
+    return await apiFetch("/armacao/criarArmacao", {
         method: "POST",
         body: JSON.stringify(dadosArmacao)
     });
@@ -44,14 +44,14 @@ export async function criarArmacao(dadosArmacao) {
 ========================= */
 
 export async function atualizarLente(id, dadosAtualizados) {
-    return await apiFetch(`/lentes/${id}`, {
+    return await apiFetch(`/lentes/editarLente/${id}`, {
         method: "PUT",
         body: JSON.stringify(dadosAtualizados)
     });
 }
 
 export async function atualizarArmacao(id, dadosAtualizados) {
-    return await apiFetch(`/armacoes/${id}`, {
+    return await apiFetch(`/armacao/editarArmacao/${id}`, {
         method: "PUT",
         body: JSON.stringify(dadosAtualizados)
     });
