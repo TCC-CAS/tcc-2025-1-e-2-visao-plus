@@ -72,7 +72,7 @@ header.shrink .icon {
    ========================= */
 
 
-#menu-usuario {
+#menu-usuario, #menu-visitante {
     display: flex;
     align-items: center;
     gap: 15px;

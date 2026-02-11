@@ -19,6 +19,11 @@ function configurarTela() {
     // Tentamos descobrir se tem alguém logado
     const usuario = getUsuarioLogado();
 
+    if (!usuario) {
+        // Se não tiver ninguém logado, não mostramos nada
+        return;
+    }
+
     console.log("Usuário logado:", usuario);
 
     // Agora decide pelo tipo
