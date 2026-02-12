@@ -64,6 +64,12 @@ function montarMenuUsuario(usuario) {
 
 function montarPerfil() {
     return `
+        <div id="menu-principal" class="profile-menu">
+                <a href="PaginaPrincipal.html">
+                    <img src="pngfind.com-address-icon-png-807569.png" class="iconhome" alt="Ícone">
+                </a>
+        </div>
+
         <div id="menu-perfil" class="profile-menu">
             <img src="9742847.png" class="iconuser">
             <div class="dropdown">
