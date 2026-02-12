@@ -32,6 +32,13 @@ header.shrink .logo {
     transition: all 0.3s ease;
 }
 
+header.shrink .iconhome {
+    width: 25px;
+    height: 31px;
+    transition: all 0.3s ease;
+    margin-right: 1px;
+}
+
 header.shrink .iconuser {
     width: 40px;
     height: 40px;
@@ -72,7 +79,7 @@ header.shrink .icon {
    ========================= */
 
 
-#menu-usuario, #menu-visitante {
+#menu-usuario, #menu-visitante, #menu-admin, #menu-loja{
     display: flex;
     align-items: center;
     gap: 15px;
@@ -95,10 +102,10 @@ header.shrink .icon {
    ========================= */
 
 .iconhome {
-    width: 23px;
-    height: 30px;
+    width: 30px;
+    height: 37px;
     cursor: pointer;
-    margin-left: 0px;
+    margin-right: 1px;
     transition: transform 0.2s;
 }
 
@@ -137,7 +144,8 @@ header.shrink .icon {
 .iconuser:hover,
 .iconstore:hover,
 .iconadmin:hover,
-.icon:hover {
+.icon:hover, 
+.iconhome:hover {
     transform: scale(1.1);
 }
 
