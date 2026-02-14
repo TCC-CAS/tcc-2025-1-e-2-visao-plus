@@ -2,6 +2,12 @@
 import { apiFetch , API } from "./api.js";
 import { getUsuarioLogado, setUsuarioLogado } from "./auth.js";
 
+export async function buscarDadosUsuario() {
+    const usuario = getUsuarioLogado();
+    if (!usuario) return null;
+    return usuario;
+}
+
 export async function editarDadosUsuario(dadosUsuario) {
     try {
         const response = await fetch(`${API}/usuarios/editarUsuario`, {
