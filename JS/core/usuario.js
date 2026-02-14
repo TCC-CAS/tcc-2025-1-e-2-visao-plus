@@ -2,6 +2,33 @@
 import { apiFetch , API } from "./api.js";
 import { getUsuarioLogado, setUsuarioLogado } from "./auth.js";
 
+export async function criarUsuario(dadosUsuario) {
+    try {
+            const response = await fetch(`${API}/usuarios/registrar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(dadosUsuario)
+            });
+
+            if (!response.ok) {
+                throw new Error("Erro ao cadastrar usuário");
+            }
+
+            const mensagem = await response.text();
+            alert(mensagem);
+
+            form.reset();
+            window.location.href = "Login.html";
+            
+
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao conectar com a API");
+        }   
+}
+
 export async function buscarDadosUsuario() {
     const usuario = getUsuarioLogado();
     if (!usuario) return null;
