@@ -36,6 +36,7 @@ async function configurarTela() {
 }
 
 async function configurarEventos() {
+    
 
 async function carregarUsuarios() {
     const usuarios = await listarUsuarios();
