@@ -8,14 +8,6 @@ import { criarCardLoja } from "../components/cards.js";
 import { configurarHeader } from "../components/header.js";
 
 
-document.addEventListener("DOMContentLoaded", init);
-
-async function init() {
-    configurarTela();
-    configurarEventos();
-    configurarHeader();
-}
-
 async function configurarTela() {
     const usuario = getUsuarioLogado();
     if (!usuario) return;
@@ -70,4 +62,12 @@ async function carregarLojas() {
 
         container.appendChild(card);
     });
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+async function init() {
+    configurarTela();
+    configurarEventos();
+    configurarHeader();
 }
