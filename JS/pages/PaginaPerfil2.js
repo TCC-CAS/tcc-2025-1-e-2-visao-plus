@@ -67,7 +67,8 @@ async function carregarLojas() {
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
+    configurarHeader();
     configurarTela();
     configurarEventos();
-    configurarHeader();
+    
 }
