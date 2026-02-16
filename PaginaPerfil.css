@@ -5,9 +5,9 @@
 /* Fonte padrão do site */
 body {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-top: 150px; /* espaço inicial do header */
 }
-
-
 /* =========================
    HEADER / BARRA SUPERIOR
    ========================= */
