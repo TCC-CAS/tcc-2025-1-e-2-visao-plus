@@ -81,6 +81,9 @@ async function configurarEventos() {
     document.getElementById("edit-cep-loja").value = usuario.loja?.cep || "";
     document.getElementById("edit-endereco-loja").value = usuario.loja?.endereco || "";
     
+    //Eventos de submit dos formulários
+    document.getElementById("form-editar-perfil").addEventListener("submit", salvarPerfil);
+    document.getElementById("form-editar-loja").addEventListener("submit", salvarLoja);
     }
 
 function montarDtoUsuario() {
