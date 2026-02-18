@@ -10,8 +10,8 @@ import { buscarDadosUsuario, editarDadosUsuario } from "../core/usuario.js";
 import { getLojaDoUsuario, editarDadosLoja } from "../core/loja.js";
 
 const usuario = getUsuarioLogado();
-console.log("Usuário logado:", buscarDadosUsuario());
-console.log("Loja do usuário:", getLojaDoUsuario(usuario));
+console.log("Usuário logado:", await buscarDadosUsuario());
+console.log("Loja do usuário:",await getLojaDoUsuario(usuario));
 
 async function configurarTela() {
     
@@ -128,14 +128,7 @@ function montarDtoLoja() {
 async function salvarLoja(e) {
     e.preventDefault();
 
-    const dadosLoja = {
-        id: usuario.loja.id,
-        nome: document.getElementById("edit-nome-loja").value,
-        email: document.getElementById("edit-email-loja").value,
-        cnpj: document.getElementById("edit-cnpj-loja").value,
-        cep: document.getElementById("edit-cep-loja").value,
-        endereco: document.getElementById("edit-endereco-loja").value
-    };
+    dadosLoja = montarDtoLoja();
 
     console.log("DTO Loja:", dadosLoja);
 
