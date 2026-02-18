@@ -128,8 +128,6 @@ function montarDtoLoja() {
 async function salvarLoja(e) {
     e.preventDefault();
 
-    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
-
     const dadosLoja = {
         id: usuario.loja.id,
         nome: document.getElementById("edit-nome-loja").value,
