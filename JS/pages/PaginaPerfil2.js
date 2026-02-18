@@ -72,10 +72,15 @@ async function configurarEventos() {
     document.getElementById("fechar-modal-loja-admin").addEventListener("click", () => fecharModal("modal-editar-loja-admin"));
 
 
-    //Evento de edição de pergil e loja
+    //Evento de edição de perfil e loja
     document.getElementById("edit-nome-usuario").value = usuario.nome;
     document.getElementById("edit-email-usuario").value = usuario.email;
-
+    document.getElementById("edit-nome-loja").value = usuario.loja?.nome || "";
+    document.getElementById("edit-email-loja").value = usuario.loja?.email || "";
+    document.getElementById("edit-cnpj-loja").value = usuario.loja?.cnpj || "";
+    document.getElementById("edit-cep-loja").value = usuario.loja?.cep || "";
+    document.getElementById("edit-endereco-loja").value = usuario.loja?.endereco || "";
+    
     }
 
 function montarDtoUsuario() {
