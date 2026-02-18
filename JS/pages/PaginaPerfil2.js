@@ -9,11 +9,10 @@ import { configurarHeader } from "../components/header.js";
 import { buscarDadosUsuario, editarDadosUsuario } from "../core/usuario.js";
 import { getLojaDoUsuario, editarDadosLoja } from "../core/loja.js";
 
-const usuario = getUsuarioLogado();
-console.log("Usuário logado:", await buscarDadosUsuario());
+let usuario = null;
+let loja = null;
 
-const loja = await getLojaDoUsuario(usuario);
-console.log("Loja do usuário:", loja);
+
 
 async function configurarTela() {
     
@@ -70,6 +69,7 @@ async function configurarEventos() {
 
     //Eventos de fechamento de modais
     document.getElementById("fechar-modal-perfil").addEventListener("click", () => fecharModal("modal-editar-perfil"));
+    document.getElementById("fechar-modal-loja").addEventListener("click", () => fecharModal("modal-editar-loja"));
     document.getElementById("fechar-modal-admin").addEventListener("click", () => fecharModal("modal-editar-usuario-admin"));
     document.getElementById("fechar-modal-loja-admin").addEventListener("click", () => fecharModal("modal-editar-loja-admin"));
 
@@ -192,12 +192,25 @@ async function carregarLojas() {
     });
 }
 
+
+
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
     configurarHeader();
-    configurarTela();
+
+    usuario = await getUsuarioLogado();
+    console.log("Usuário logado:", usuario);
+
+    if (!usuario) return;
+
+    loja = await getLojaDoUsuario(usuario);
+    usuario.loja = loja;
+
+    console.log("Loja do usuário:", loja);
+
+    await configurarTela();
     configurarEventos();
-    preencherInformacoesLoja();
     preencherInformacoesUsuario();
+    preencherInformacoesLoja();
 }

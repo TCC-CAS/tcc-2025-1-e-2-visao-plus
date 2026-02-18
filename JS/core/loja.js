@@ -84,9 +84,7 @@ export async function listarLojas() {
 export async function editarDadosLoja(dadosLoja) {
     const response = await fetch(`${API}/lojas/editarLoja`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosLoja)
     });
 
@@ -94,4 +92,7 @@ export async function editarDadosLoja(dadosLoja) {
         console.error("Erro ao editar loja:", response.statusText);
         return null;
     }
+
+    return await response.json();
 }
+
