@@ -11,7 +11,9 @@ import { getLojaDoUsuario, editarDadosLoja } from "../core/loja.js";
 
 const usuario = getUsuarioLogado();
 console.log("Usuário logado:", await buscarDadosUsuario());
-console.log("Loja do usuário:",await getLojaDoUsuario(usuario));
+
+const loja = await getLojaDoUsuario(usuario);
+console.log("Loja do usuário:", loja);
 
 async function configurarTela() {
     
@@ -51,12 +53,12 @@ function preencherInformacoesUsuario() {
 
 function preencherInformacoesLoja() {
     
-    if (usuario && usuario.loja) {
-        document.getElementById("nomeLoja").textContent = usuario.loja.nome;
-        document.getElementById("emailLoja").textContent = usuario.loja.email;
-        document.getElementById("cnpjLoja").textContent = usuario.loja.cnpj;
-        document.getElementById("enderecoLoja").textContent = usuario.loja.endereco;
-        document.getElementById("cepLoja").textContent = usuario.loja.cep;
+    if (usuario && loja) {
+        document.getElementById("nomeLoja").textContent = loja.nome;
+        document.getElementById("emailLoja").textContent = loja.email;
+        document.getElementById("cnpjLoja").textContent = loja.cnpj;
+        document.getElementById("enderecoLoja").textContent = loja.endereco;
+        document.getElementById("cepLoja").textContent = loja.cep;
     }
 }
 
@@ -128,18 +130,20 @@ function montarDtoLoja() {
 async function salvarLoja(e) {
     e.preventDefault();
 
-    dadosLoja = montarDtoLoja();
+    const dadosLoja = montarDtoLoja();
 
     console.log("DTO Loja:", dadosLoja);
 
     const lojaAtualizada = await editarDadosLoja(dadosLoja);
 
     if (lojaAtualizada) {
+        
         usuario.loja = lojaAtualizada;
-        localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
 
+        localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+        localStorage.setItem("lojaAtual", JSON.stringify(lojaAtualizada));
         alert("Loja atualizada com sucesso!");
-        document.getElementById("modal-editar-loja").classList.add("hidden");
+        fecharModal("modal-editar-loja");
         preencherInformacoesLoja();
     } else {
         alert("Erro ao atualizar loja");

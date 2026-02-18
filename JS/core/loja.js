@@ -6,12 +6,29 @@ let lojaAtual = null;
 
 /**
  * Busca a loja do usuário logado
- */
-export async function getLojaDoUsuario(usuario) {
+ *
+ function getLojaDoUsuario(usuario) {
     if (!usuario?.loja?.id) return null;
 
     lojaAtual = usuario.loja;
     return lojaAtual;
+}
+*/
+
+export async function getLojaDoUsuario(usuario) {
+    const loja = await fetch(`${API}/lojas/buscarLoja`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(usuario.id)
+    });
+
+    if (!loja.ok) {
+        throw new Error("Erro ao buscar loja do usuário");
+    }
+
+    return await loja.json();
 }
 
 /**
