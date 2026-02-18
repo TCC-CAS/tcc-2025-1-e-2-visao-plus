@@ -6,8 +6,11 @@ import { esconderBlocos, mostrarBlocos } from "../components/visibility.js";
 import { criarCardUsuario } from "../components/cards.js";
 import { criarCardLoja } from "../components/cards.js";
 import { configurarHeader } from "../components/header.js";
+import { buscarDadosUsuario, editarDadosUsuario } from "../core/usuario.js";
+import { getLojaDoUsuario, editarDadosLoja } from "../core/loja.js";
 
 const usuario = getUsuarioLogado();
+console.log("Usuário logado:", buscarDadosUsuario());
 
 async function configurarTela() {
     

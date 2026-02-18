@@ -63,3 +63,5 @@ export async function listarLojas() {
 
     return await response.json();
 }
+
+exp
