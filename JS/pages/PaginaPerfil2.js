@@ -110,7 +110,7 @@ async function salvarPerfil(e) {
 
     localStorage.setItem("usuarioLogado", JSON.stringify(usuarioAtualizado));
     alert("Perfil atualizado com sucesso!");
-    document.getElementById("modal-editar-perfil").classList.add("hidden");
+    fecharModal("modal-editar-perfil");
     preencherInformacoesUsuario();
 }
 
