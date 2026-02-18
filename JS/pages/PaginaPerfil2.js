@@ -11,6 +11,7 @@ import { getLojaDoUsuario, editarDadosLoja } from "../core/loja.js";
 
 const usuario = getUsuarioLogado();
 console.log("Usuário logado:", buscarDadosUsuario());
+console.log("Loja do usuário:", getLojaDoUsuario(usuario));
 
 async function configurarTela() {
     
