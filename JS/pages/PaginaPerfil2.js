@@ -77,11 +77,11 @@ async function configurarEventos() {
     //Evento de edição de perfil e loja
     document.getElementById("edit-nome-usuario").value = usuario.nome;
     document.getElementById("edit-email-usuario").value = usuario.email;
-    document.getElementById("edit-nome-loja").value = usuario.loja?.nome || "";
-    document.getElementById("edit-email-loja").value = usuario.loja?.email || "";
-    document.getElementById("edit-cnpj-loja").value = usuario.loja?.cnpj || "";
-    document.getElementById("edit-cep-loja").value = usuario.loja?.cep || "";
-    document.getElementById("edit-endereco-loja").value = usuario.loja?.endereco || "";
+    document.getElementById("edit-nome-loja").value = loja.nome;
+    document.getElementById("edit-email-loja").value = loja.email;
+    document.getElementById("edit-cnpj-loja").value = loja.cnpj;
+    document.getElementById("edit-cep-loja").value = loja.cep;
+    document.getElementById("edit-endereco-loja").value = loja.endereco;    
     
     //Eventos de submit dos formulários
     document.getElementById("form-editar-perfil").addEventListener("submit", salvarPerfil);
@@ -139,6 +139,7 @@ async function salvarLoja(e) {
     if (lojaAtualizada) {
         
         usuario.loja = lojaAtualizada;
+        loja = lojaAtualizada;
 
         localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
         localStorage.setItem("lojaAtual", JSON.stringify(lojaAtualizada));
