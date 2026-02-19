@@ -179,18 +179,7 @@ async function carregarUsuarios() {
                 abrirModal("modal-editar-usuario-admin");
                 preencherFormularioEditarUsuarioAdmin(u);
             },
-            onDeletar: (id) => {
-                if (confirm("Tem certeza que deseja deletar este usuário?")) {
-                    deletarUsuario(id)                        .then(() => {
-                            alert("Usuário deletado com sucesso!");
-                            carregarUsuarios(); // Recarrega a lista de usuários após deleção
-                        })
-                        .catch(err => {
-                            console.error("Erro ao deletar usuário:", err);
-                            alert("Ocorreu um erro ao deletar o usuário. Tente novamente.");
-                        }); 
-                }
-            }
+            onDeletar: (id) => {deletarUsuario(id)}
         });
 
         container.appendChild(card);
