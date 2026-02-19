@@ -1,3 +1,5 @@
+import {editarDadosUsuario} from "../core/usuario.js";
+
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("#cadastroLojaForm");
 
@@ -9,11 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const dto = {
             nome: document.querySelector("#nome").value,
             email: document.querySelector("#email").value,
-            cep: document.querySelector("#cep").value,
             cnpj: document.querySelector("#cnpj").value,
+            cep: document.querySelector("#cep").value,
             endereco: document.querySelector("#endereco").value,
             idUsuario: obterUsuarioLogado.id
         };
+
+        const dtoUsuario ={
+            id: obterUsuarioLogado.id,
+            nome: document.querySelector("#nome").value,
+            email: document.querySelector("#email").value,
+            senha: obterUsuarioLogado.senha,
+            tipoUsuario: "Vendedor"
+        }
 
         try {
             const response = await fetch("http://localhost:8080/lojas/criarLoja", {
@@ -30,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             alert("Loja criada com sucesso!");
             form.reset();
-
+            await editarDadosUsuario(dtoUsuario);
             setTimeout(() => {
                 window.location.href = "./PaginaPerfil.html";
             }, 100);
