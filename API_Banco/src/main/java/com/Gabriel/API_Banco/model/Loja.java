@@ -1,5 +1,6 @@
 package com.Gabriel.API_Banco.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class Loja {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
+    @JsonBackReference
     private Usuario dono;
 
     @Column(name = "nome")
