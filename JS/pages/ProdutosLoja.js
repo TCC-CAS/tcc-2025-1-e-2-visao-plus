@@ -1,3 +1,5 @@
+import {configurarHeader} from "../components/header.js";
+
 /*************************************************
  * CONFIGURAÇÕES GERAIS
  *************************************************/
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function initPaginaAdmin() {
     try {
+        configurarHeader();
         carregarUsuarioLogado();
         carregarLojaDoUsuario();
         renderizarNomeLoja();
