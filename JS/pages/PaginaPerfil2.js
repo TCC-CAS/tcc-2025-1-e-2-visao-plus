@@ -6,8 +6,7 @@ import { esconderBlocos, mostrarBlocos } from "../components/visibility.js";
 import { criarCardUsuario } from "../components/cards.js";
 import { criarCardLoja } from "../components/cards.js";
 import { configurarHeader } from "../components/header.js";
-import { buscarDadosUsuario, editarDadosUsuario } from "../core/usuario.js";
-import { getLojaDoUsuario, editarDadosLoja } from "../core/loja.js";
+import { getLojaDoUsuario } from "../core/loja.js";
 
 //===================================INICIALIZAÇÃO DE VARIÁVEIS PRINCIPAIS=====================================================//
 
@@ -211,7 +210,7 @@ document
     };
 
     try {
-        await atualizarUsuario(usuarioAtualizado);
+        await editarDadosUsuario(usuarioAtualizado);
         alert("Usuário atualizado com sucesso!");
         fecharModal("modal-editar-usuario-admin");
         carregarUsuarios();
@@ -278,7 +277,7 @@ document
     };
 
     try {
-        await atualizarLoja(lojaAtualizada);
+        await editarDadosLoja(lojaAtualizada);
         alert("Loja atualizada com sucesso!");
         fecharModal("modal-editar-loja-admin");
         carregarLojas();
