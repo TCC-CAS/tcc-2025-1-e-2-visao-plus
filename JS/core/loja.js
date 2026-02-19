@@ -96,3 +96,9 @@ export async function editarDadosLoja(dadosLoja) {
     return await response.json();
 }
 
+export async function deletarLoja(id) {
+    const response = await fetch(`${API}/lojas/deletarLoja/${id}`, {
+        method: "DELETE"
+    });
+}
+
