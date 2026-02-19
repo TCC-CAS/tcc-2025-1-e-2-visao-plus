@@ -82,15 +82,20 @@ async function configurarEventos() {
     //Evento de edição de perfil e loja
     document.getElementById("edit-nome-usuario").value = usuario.nome;
     document.getElementById("edit-email-usuario").value = usuario.email;
+
+    if (loja) {
     document.getElementById("edit-nome-loja").value = loja.nome;
     document.getElementById("edit-email-loja").value = loja.email;
     document.getElementById("edit-cnpj-loja").value = loja.cnpj;
     document.getElementById("edit-cep-loja").value = loja.cep;
-    document.getElementById("edit-endereco-loja").value = loja.endereco;    
+    document.getElementById("edit-endereco-loja").value = loja.endereco;
+    }    
     
     //Eventos de submit dos formulários
     document.getElementById("form-editar-perfil").addEventListener("submit", salvarPerfil);
+    if (loja) {
     document.getElementById("form-editar-loja").addEventListener("submit", salvarLoja);
+    }
     }
 
 //===================================EDIÇÃO DO USUÁRIO=====================================================//
@@ -126,6 +131,9 @@ async function salvarPerfil(e) {
 //===================================EDIÇÃO DA LOJA=====================================================//
 
 function montarDtoLoja() {
+
+    if (!loja) return null;
+
     return {
         id: usuario.loja.id,
         nome: document.getElementById("edit-nome-loja").value,
@@ -282,18 +290,22 @@ document
 document.addEventListener("DOMContentLoaded", init);
 
 async function init() {
-    configurarHeader();
-
     usuario = await getUsuarioLogado();
     console.log("Usuário logado:", usuario);
 
     if (!usuario) return;
 
+    if (usuario.tipoUsuario === "Vendedor" || usuario.tipoUsuario === "Admin") {
     loja = await getLojaDoUsuario(usuario);
     usuario.loja = loja;
 
     console.log("Loja do usuário:", loja);
+    } else {
+        console.log("Usuário não é vendedor ou admin, pulando busca de loja.");
+    }
 
+
+    configurarHeader();
     await configurarTela();
     configurarEventos();
     preencherInformacoesUsuario();
