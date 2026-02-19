@@ -41,5 +41,15 @@ public class ProdutoService {
         return produtoRepo.findByLoja(loja);
     }
 
+    public Produto atualizarProduto(Long idProduto, CriarProdutoDTO dto) {
+
+        Produto produto = produtoRepo.findById(idProduto)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        produto.setNomeProduto(dto.getNome());
+        produto.setValor(dto.getValor());
+
+        return produtoRepo.save(produto);
+    }
 
 }
