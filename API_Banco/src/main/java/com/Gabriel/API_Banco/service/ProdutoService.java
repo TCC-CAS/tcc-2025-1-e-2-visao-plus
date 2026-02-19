@@ -1,5 +1,6 @@
 package com.Gabriel.API_Banco.service;
 
+import com.Gabriel.API_Banco.dto.CriarProdutoDTO;
 import com.Gabriel.API_Banco.model.Loja;
 import com.Gabriel.API_Banco.model.Produto;
 import com.Gabriel.API_Banco.repository.LojaRepositorio;
@@ -23,7 +24,7 @@ public class ProdutoService {
                 .orElseThrow(() -> new RuntimeException("Loja não encontrada"));
 
         Produto produto = new Produto();
-        produto.setNome(dto.getNome());
+        produto.setNomeProduto(dto.getNome());
         produto.setValor(dto.getValor());
         produto.setLoja(loja);
 
