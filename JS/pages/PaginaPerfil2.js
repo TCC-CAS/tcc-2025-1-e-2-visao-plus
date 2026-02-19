@@ -1,6 +1,6 @@
 import { getUsuarioLogado} from "../core/auth.js";
-import { listarUsuarios, deletarUsuario } from "../core/usuario.js";
-import { listarLojas } from "../core/loja.js";
+import { listarUsuarios, deletarUsuario, editarDadosUsuario } from "../core/usuario.js";
+import { listarLojas, editarDadosLoja, deletarLoja } from "../core/loja.js";
 import { abrirModal, fecharModal } from "../components/modals.js";
 import { esconderBlocos, mostrarBlocos } from "../components/visibility.js";
 import { criarCardUsuario } from "../components/cards.js";
@@ -9,10 +9,12 @@ import { configurarHeader } from "../components/header.js";
 import { buscarDadosUsuario, editarDadosUsuario } from "../core/usuario.js";
 import { getLojaDoUsuario, editarDadosLoja } from "../core/loja.js";
 
+//===================================INICIALIZAÇÃO DE VARIÁVEIS PRINCIPAIS=====================================================//
+
 let usuario = null;
 let loja = null;
 
-
+//===================================CONFIGURAÇÃO DA VISUALIZAÇÃO=====================================================//
 
 async function configurarTela() {
     
@@ -41,6 +43,8 @@ async function configurarTela() {
     }
 }
 
+//===================================DADOS LOJA E USUÁRIO=====================================================//
+
 function preencherInformacoesUsuario() {
 
     if (usuario) {
@@ -60,6 +64,8 @@ function preencherInformacoesLoja() {
         document.getElementById("cepLoja").textContent = loja.cep;
     }
 }
+
+//===================================EVENTOS DE COMPONENTES=====================================================//
 
 async function configurarEventos() {
     //Eventos de abertura de modais
@@ -88,6 +94,8 @@ async function configurarEventos() {
     document.getElementById("form-editar-loja").addEventListener("submit", salvarLoja);
     }
 
+//===================================EDIÇÃO DO USUÁRIO=====================================================//
+
 function montarDtoUsuario() {
     return {
         id: usuario.id,
@@ -115,6 +123,8 @@ async function salvarPerfil(e) {
     fecharModal("modal-editar-perfil");
     preencherInformacoesUsuario();
 }
+
+//===================================EDIÇÃO DA LOJA=====================================================//
 
 function montarDtoLoja() {
     return {
@@ -150,7 +160,14 @@ async function salvarLoja(e) {
         alert("Erro ao atualizar loja");
     }
 }
+//===================================ADMIN DE USUÁRIOS=====================================================//
 
+async function preencherFormularioEditarUsuarioAdmin(usuario) {
+    document.getElementById("admin-id-usuario").value = usuario.id;
+    document.getElementById("admin-nome-usuario").value = usuario.nome;
+    document.getElementById("admin-email-usuario").value = usuario.email;
+    document.getElementById("admin-tipo-usuario").value = usuario.tipoUsuario;
+}
 
 async function carregarUsuarios() {
     const usuarios = await listarUsuarios();
@@ -159,7 +176,10 @@ async function carregarUsuarios() {
 
     usuarios.forEach(usuario => {
         const card = criarCardUsuario(usuario, {
-            onEditar: (u) => abrirModal("modal-editar-usuario-admin"),
+            onEditar: (u) => {
+                abrirModal("modal-editar-usuario-admin");
+                preencherFormularioEditarUsuarioAdmin(u);
+            },
             onDeletar: (id) => {
                 if (confirm("Tem certeza que deseja deletar este usuário?")) {
                     deletarUsuario(id)                        .then(() => {
@@ -178,22 +198,98 @@ async function carregarUsuarios() {
     });
 }
 
+document
+  .getElementById("form-editar-usuario-admin")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const usuarioAtualizado = {
+        id: document.getElementById("admin-id-usuario").value,
+        nome: document.getElementById("admin-nome-usuario").value,
+        email: document.getElementById("admin-email-usuario").value,
+        tipoUsuario: document.getElementById("admin-tipo-usuario").value
+    };
+
+    try {
+        await atualizarUsuario(usuarioAtualizado);
+        alert("Usuário atualizado com sucesso!");
+        fecharModal("modal-editar-usuario-admin");
+        carregarUsuarios();
+    } catch (err) {
+        console.error("Erro ao atualizar usuário:", err);
+        alert("Erro ao atualizar usuário");
+    }
+});
+
+
+//===================================ADMIN DE LOJAS=====================================================//
+
+async function preencherFormularioEditarLojaAdmin(loja) {
+    document.getElementById("admin-id-loja").value = loja.id;
+    document.getElementById("admin-nome-loja").value = loja.nome;
+    document.getElementById("admin-email-loja").value = loja.email;
+    document.getElementById("admin-cnpj-loja").value = loja.cnpj;
+    document.getElementById("admin-cep-loja").value = loja.cep;
+    document.getElementById("admin-endereco-loja").value = loja.endereco;
+}
+
 async function carregarLojas() {
     const lojas = await listarLojas();
-    const container = document.getElementById("admin-lojas");
+    const container = document.getElementById("lista-lojas");
     container.innerHTML = "";
 
     lojas.forEach(loja => {
         const card = criarCardLoja(loja, {
-            onEditar: (l) => abrirModal("modal-editar-loja-admin"),
-            onDeletar: (id) => console.log("Deletar loja com ID:", id) // Implementar função de deletar loja
+            onEditar: (l) => {
+                abrirModal("modal-editar-loja-admin");
+                preencherFormularioEditarLojaAdmin(l);
+            },
+            onDeletar: (id) => {
+                if (confirm("Tem certeza que deseja deletar esta loja?")) {
+                    deletarLoja(id)
+                        .then(() => {
+                            alert("Loja deletada com sucesso!");
+                            carregarLojas(); // Recarrega a lista de lojas após deleção
+                        })
+                        .catch(err => {
+                            console.error("Erro ao deletar loja:", err);
+                            alert("Ocorreu um erro ao deletar a loja. Tente novamente.");
+                        });
+                }
+            }
         });
 
         container.appendChild(card);
     });
 }
 
+document
+  .getElementById("form-editar-loja-admin")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
 
+    const lojaAtualizada = {
+        id: document.getElementById("admin-id-loja").value,
+        nome: document.getElementById("admin-nome-loja").value,
+        email: document.getElementById("admin-email-loja").value,
+        cnpj: document.getElementById("admin-cnpj-loja").value,
+        cep: document.getElementById("admin-cep-loja").value,
+        endereco: document.getElementById("admin-endereco-loja").value
+    };
+
+    try {
+        await atualizarLoja(lojaAtualizada);
+        alert("Loja atualizada com sucesso!");
+        fecharModal("modal-editar-loja-admin");
+        carregarLojas();
+    } catch (err) {
+        console.error("Erro ao atualizar loja:", err);
+        alert("Erro ao atualizar loja");
+    }
+});
+
+
+//===================================INICIALIZADOR=====================================================//
 
 document.addEventListener("DOMContentLoaded", init);
 
