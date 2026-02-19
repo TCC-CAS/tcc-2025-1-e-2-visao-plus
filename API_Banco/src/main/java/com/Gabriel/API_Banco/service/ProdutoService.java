@@ -7,6 +7,8 @@ import com.Gabriel.API_Banco.repository.LojaRepositorio;
 import com.Gabriel.API_Banco.repository.ProdutoRepositorio;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProdutoService {
 
@@ -29,6 +31,14 @@ public class ProdutoService {
         produto.setLoja(loja);
 
         return produtoRepo.save(produto);
+    }
+
+    public List<Produto> listarPorLoja(Long idLoja) {
+
+        Loja loja = lojaRepo.findById(idLoja)
+                .orElseThrow(() -> new RuntimeException("Loja não encontrada"));
+
+        return produtoRepo.findByLoja(loja);
     }
 
 
