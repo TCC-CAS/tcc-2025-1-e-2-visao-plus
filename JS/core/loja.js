@@ -16,20 +16,27 @@ let lojaAtual = null;
 */
 
 export async function getLojaDoUsuario(usuario) {
-    const loja = await fetch(`${API}/lojas/buscarLoja`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(usuario.id)
+    try {
+        const response = await fetch(`${API}/lojas/buscarLoja`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario.id)
     });
 
-    if (!loja.ok) {
-        throw new Error("Erro ao buscar loja do usuário");
-    }
+    if (!response.ok) {
+            return null; // usuário não tem loja
+        }
 
-    return await loja.json();
+        return await response.json();
+
+    } catch (error) {
+        console.error("Erro ao buscar loja:", error);
+        return null;
+    }
 }
+
 
 /**
  * Retorna a loja já carregada (se existir)
