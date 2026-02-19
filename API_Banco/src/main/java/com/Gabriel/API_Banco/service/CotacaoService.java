@@ -56,4 +56,9 @@ public class CotacaoService {
 
         return cotacaoRepo.save(cotacao);
     }
+
+    public Produto buscarPorId(Long idProduto) {
+        return produtoRepo.findById(idProduto)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+    }
 }
