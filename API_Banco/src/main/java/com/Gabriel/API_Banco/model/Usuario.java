@@ -1,6 +1,7 @@
 package com.Gabriel.API_Banco.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class Usuario {
     private Long id;
 
     @OneToOne(mappedBy = "dono", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JsonIgnore
+    @JsonManagedReference
     private Loja loja;
 
     @Column(name = "nome")
