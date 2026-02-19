@@ -52,4 +52,12 @@ public class ProdutoService {
         return produtoRepo.save(produto);
     }
 
+    public void deletarProduto(Long idProduto) {
+
+        Produto produto = produtoRepo.findById(idProduto)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        produtoRepo.delete(produto);
+    }
+
 }
