@@ -66,12 +66,12 @@ function montarPerfil() {
     return `
         <div id="menu-principal" class="profile-menu">
                 <a href="PaginaPrincipal.html">
-                    <img src="pngfind.com-address-icon-png-807569.png" class="iconhome" alt="Ícone">
+                    <img src="imgs/pngfind.com-address-icon-png-807569.png" class="iconhome" alt="Ícone">
                 </a>
         </div>
 
         <div id="menu-perfil" class="profile-menu">
-            <img src="9742847.png" class="iconuser">
+            <img src="imgs/9742847.png" class="iconuser">
             <div class="dropdown">
                 <a href="PaginaPerfil.html">Perfil</a>
                 <a href="#" id="btn-logout">Sair</a>
@@ -83,7 +83,7 @@ function montarPerfil() {
 function montarCarrinho() {
     return `
         <div id="menu-carrinho" class="cart-menu">
-            <img src="231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
+            <img src="imgs/231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
         </div>
     `;
 }
@@ -91,7 +91,7 @@ function montarCarrinho() {
 function montarMenuVendedor() {
     return `
         <div id="menu-vendedor" class="profile-menu">
-            <img src="store1.png" class="iconstore">
+            <img src="imgs/store1.png" class="iconstore">
                 <div class="dropdown">
                     <a href="ProdutosLoja.html">Meus Produtos</a>
                     <a href="AdminLoja.html">Administração Loja</a>
@@ -104,7 +104,7 @@ function montarMenuVendedor() {
 function montarMenuAdmin() {
     return `
         <div id="menu-admin" class="profile-menu">
-                <img src="pngadmin.png" class="iconadmin">
+                <img src="imgs/pngadmin.png" class="iconadmin">
                 <div class="dropdown">
                     <a href="#">Painel Admin</a>
                     <a href="#">Usuários</a>
