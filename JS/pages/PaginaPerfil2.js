@@ -240,9 +240,9 @@ async function carregarLojas() {
                 abrirModal("modal-editar-loja-admin");
                 preencherFormularioEditarLojaAdmin(l);
             },
-            onDeletar: (id) => {
+            onDeletar: () => {
                 if (confirm("Tem certeza que deseja deletar esta loja?")) {
-                    deletarLoja(id)
+                    deletarLoja(loja.id)
                         .then(() => {
                             alert("Loja deletada com sucesso!");
                             carregarLojas(); // Recarrega a lista de lojas após deleção
