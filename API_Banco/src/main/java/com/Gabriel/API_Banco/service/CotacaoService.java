@@ -21,18 +21,14 @@ public class CotacaoService {
     private final CotacaoRepositorio cotacaoRepo;
     private final UsuarioRepositorio usuarioRepo;
     private final LojaRepositorio lojaRepo;
-    private final ProdutoRepositorio produtoRepo;
+    private final ProdutoService produtoService;
 
-    public CotacaoService(
-            CotacaoRepositorio cotacaoRepo,
-            UsuarioRepositorio usuarioRepo,
-            LojaRepositorio lojaRepo,
-            ProdutoRepositorio produtoRepo) {
+    public CotacaoService(CotacaoRepositorio cotacaoRepo, UsuarioRepositorio usuarioRepo, LojaRepositorio lojaRepo, ProdutoService produtoService) {
 
         this.cotacaoRepo = cotacaoRepo;
         this.usuarioRepo = usuarioRepo;
         this.lojaRepo = lojaRepo;
-        this.produtoRepo = produtoRepo;
+        this.produtoService = produtoService;
     }
 
     public Cotacao criarCotacao(CriarCotacaoDTO dto) {
@@ -43,8 +39,8 @@ public class CotacaoService {
         Loja loja = lojaRepo.findById(dto.getIdLoja())
                 .orElseThrow(() -> new RuntimeException("Loja não encontrada"));
 
-        Produto produto = produtoRepo.findById(dto.getIdProduto())
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        // cria produto primeiro
+        Produto produto = produtoService.criarProduto(dto.getProduto());
 
         Cotacao cotacao = new Cotacao();
         cotacao.setUsuario(usuario);
@@ -57,8 +53,6 @@ public class CotacaoService {
         return cotacaoRepo.save(cotacao);
     }
 
-    public Produto buscarPorId(Long idProduto) {
-        return produtoRepo.findById(idProduto)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
-    }
 }
+
+
