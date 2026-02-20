@@ -53,6 +53,8 @@ public class CotacaoService {
         return cotacaoRepo.save(cotacao);
     }
 
+    //public Cotacao respostaCotacaoLoja()
+
 }
 
 
