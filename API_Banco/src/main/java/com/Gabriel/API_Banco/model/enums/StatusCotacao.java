@@ -3,7 +3,8 @@ package com.Gabriel.API_Banco.model.enums;
 
 public enum StatusCotacao {
     SOLICITADA,
-    EM_ANALISE,
+    RESPONDIDA,
     APROVADA,
-    REJEITADA
+    REJEITADA,
+    CANCELADA
 }
