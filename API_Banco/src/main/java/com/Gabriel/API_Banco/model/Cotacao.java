@@ -1,4 +1,5 @@
 package com.Gabriel.API_Banco.model;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -35,21 +36,33 @@ public class Cotacao {
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
-    @Column(name = "valor_base")
-    private BigDecimal valorBase;   // copiado do produto
-
-    @Column(name = "valor_final")
-    private BigDecimal valorFinal;  // definido pelo vendedor
-
-    @Column(name = "data_criacao")
-    private LocalDate dataCriacao;
-
     @ManyToOne
     @JoinColumn(name = "id_loja")
     private Loja loja;
 
+    @Column(name = "valor_base")
+    private BigDecimal valorBase;
+
+    @Column(name = "valor_final")
+    private BigDecimal valorFinal;
+
+    @Column(name = "prazo_entrega_confirmado")
+    private Integer prazoEntregaConfirmado;
+
+    @Column(name = "data_criacao")
+    private LocalDate dataCriacao;
+
+    @Column(name = "data_resposta")
+    private LocalDate dataResposta;
+
     @Column(name = "data_aprovacao")
     private LocalDate dataAprovacao;
+
+    @Column(name = "observacao_cliente")
+    private String observacaoCliente;
+
+    @Column(name = "observacao_loja")
+    private String observacaoLoja;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_cotacao")
