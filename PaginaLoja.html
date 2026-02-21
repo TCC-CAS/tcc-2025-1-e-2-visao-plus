@@ -3,40 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Página Loja</title>
-    <link rel="stylesheet" href="css/pages/ProdutosLoja.css">
+    <title>Loja</title>
+    <link rel="stylesheet" href="css/pages/PaginaPrincipal.css">
 </head>
 
 <body>
+
     <div id="app-header"></div>
 
-    <section class="main-content">
-        <h1 class="titulo-secao">
-            <span id="nomeLoja"></span>
-        </h1>
+    <section class="loja-header">
+        <h1 id="loja-nome"></h1>
+        <p id="loja-email"></p>
+        <p id="loja-endereco"></p>
+    </section>
 
-        <section class="Dados da loja">
-            <p><span id="DescricaoLoja"></span></p>
-            <p>Contato: <span id="EmailLoja"></span></p>
-            <p>Endereço: <span id="EnderecoLoja"></span></p>
-        </section>
+    <section>
+        <h2>Produtos</h2><br>
 
-        <!--lista de armações-->
-        <section class="armacao-section">
-            <h3>Minhas Armações</h3>
-            <section id="armacao-lista" class="lista-horizontal"></section>
-        </section>
+        <h2>Lentes</h2>
+        <div id="lista-lentes"></div>
 
-        <!--lista de lentes-->
-        <section class="lente-section">
-            <h3>Minhas Lentes</h3>
-            <section id="lente-lista" class="lista-horizontal"></section>
-        </section>
+        <h2>Armações</h2>
+        <div id="lista-armacoes"></div>
     </section>
 
 </body>
 
 <script type="module" src="JS/pages/PaginaLoja.js"></script>
-
 
 </html>
