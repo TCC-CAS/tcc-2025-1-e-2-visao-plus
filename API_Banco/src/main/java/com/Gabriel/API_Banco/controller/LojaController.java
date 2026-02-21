@@ -44,6 +44,13 @@ public class LojaController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Loja> findById(@PathVariable Long id) {
+        return lojaService.findByIdLoja(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/editarLoja")
     public ResponseEntity<Loja> editarLoja(@RequestBody EditarLojaDTO dto){
         Loja loja = lojaService.editarLoja(dto);
