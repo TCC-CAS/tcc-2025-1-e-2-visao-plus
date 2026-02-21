@@ -37,6 +37,16 @@ export async function getLojaDoUsuario(usuario) {
     }
 }
 
+export async function buscarLojaPorId(id) {
+    const response = await fetch(`${API}/lojas/${id}`);
+
+    if (!response.ok) {
+        throw new Error("Loja não encontrada");
+    }
+
+    return await response.json();
+}
+
 
 /**
  * Retorna a loja já carregada (se existir)
