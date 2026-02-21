@@ -47,6 +47,10 @@ public class LojaService {
         return r.findByEmail(email);
     }
 
+    public java.util.Optional<Loja> findByIdLoja(Long idLoja) {
+        return r.findById(idLoja);
+    }
+
     public java.util.Optional<Loja> findByIdUsuario(Long idUsuario) {
         return r.findByDonoId(idUsuario);
     }
