@@ -77,6 +77,10 @@ function criarCardLoja(loja) {
         <p><strong>${loja.endereco}</strong></p>
     `;
 
+    div.addEventListener("click", () => {
+        window.location.href = `PaginaLoja.html?id=${loja.id}`;
+    });
+
     return div;
 }
 
