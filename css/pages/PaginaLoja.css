@@ -104,3 +104,29 @@ section h2 {
     color: #777;
     font-style: italic;
 }
+
+/* =========================
+   RESPONSIVIDADE
+   ========================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding-top: 120px;
+    }
+
+    .loja-header {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    section {
+        margin: 15px;
+    }
+
+    #lista-lentes,
+    #lista-armacoes {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+}
