@@ -60,3 +60,35 @@ section h2 {
     gap: 16px;
     margin-bottom: 30px;
 }
+
+/* =========================
+   CARD DE PRODUTO
+   ========================= */
+
+.card-produto {
+    background-color: white;
+    border: 1px solid #156783;
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+}
+
+.card-produto h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.card-produto p {
+    font-size: 14px;
+    margin: 4px 0;
+    color: #555;
+}
+
+/* Hover */
+.card-produto:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background-color: #f9fbfd;
+}
