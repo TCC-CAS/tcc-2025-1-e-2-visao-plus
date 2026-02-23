@@ -43,6 +43,25 @@ h1, h2, h3 {
    SEÇÃO DE PRODUTOS
    ========================= */
 
+.lentes, .armacoes {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lentes h2, .armacoes h2 {
+    font-size: 22px;
+    color: #156783;
+    margin-bottom: 15px;
+    text-align: center;
+}  
+
+.lentes .produtos, .armacoes .produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
 section {
     margin: 20px;
 }
