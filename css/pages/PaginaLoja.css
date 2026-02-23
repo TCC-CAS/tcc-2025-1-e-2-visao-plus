@@ -9,3 +9,32 @@ body {
     padding-top: 150px; /* espaço do header fixo */
     background-color: #f5f7fa;
 }
+
+/* Títulos */
+h1, h2, h3 {
+    margin: 0;
+}
+
+/* =========================
+   HEADER DA LOJA
+   ========================= */
+
+.loja-header {
+    background-color: #156783;
+    color: white;
+    padding: 25px 40px;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.loja-header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.loja-header p {
+    margin: 3px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
