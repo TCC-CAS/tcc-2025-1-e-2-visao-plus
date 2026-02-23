@@ -1,0 +1,11 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+   ========================= */
+
+/* Fonte padrão do site */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-top: 150px; /* espaço do header fixo */
+    background-color: #f5f7fa;
+}
