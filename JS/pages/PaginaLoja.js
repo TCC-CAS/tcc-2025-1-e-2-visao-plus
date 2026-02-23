@@ -81,12 +81,13 @@ function criarCardLente(lente) {
 
   div.innerHTML = `
     <h3>${lente.nome}</h3>
-    <p>R$ ${lente.preco.toFixed(2)}</p>
+    <p><strong>Preço:</strong> R$ ${lente.preco.toFixed(2)}</p>
+    <p><strong>Descrição:</strong> ${lente.descricao}</p>
   `;
 
   div.addEventListener("click", () => {
     selecionarLente(lente);
-  });
+  }); 
 
   return div;
 }
