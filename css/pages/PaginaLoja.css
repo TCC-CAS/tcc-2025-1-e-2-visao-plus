@@ -92,3 +92,15 @@ section h2 {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     background-color: #f9fbfd;
 }
+
+/* =========================
+   ESTADO VAZIO
+   ========================= */
+
+#lista-lentes p,
+#lista-armacoes p {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
