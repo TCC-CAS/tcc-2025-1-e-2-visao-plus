@@ -5,6 +5,7 @@ import com.Gabriel.API_Banco.model.Cotacao;
 import com.Gabriel.API_Banco.service.CotacaoService;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*") // Permite requisições do frontend
 @RestController
 @RequestMapping("/cotacoes")
 public class CotacaoController {
