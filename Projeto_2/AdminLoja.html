@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Edição da Loja</title>
+    <link rel="stylesheet" href="css/pages/AdminLoja.css">
+</head>
+
+<body>
+    <div id="app-header"></div>
+
+    <section class="main-content">
+        <h1 class="titulo-secao">
+            Configuração da loja: <span id="nomeLoja"></span>
+        </h1>
+
+        <section class="painel-edicao-loja">
+
+            <h2>Personalização da Loja</h2>
+            <p>Ajuste a aparência da sua loja como os clientes irão ver.</p>
+
+            <!-- IDENTIDADE VISUAL -->
+            <section class="painel-secao">
+                <h3>Identidade Visual</h3>
+
+                <div class="campo-config">
+                    <label for="corPrimaria">Cor principal</label>
+                    <input type="color" id="corPrimaria" name="corPrimaria" class="config-input">
+                </div>
+
+                <div class="campo-config">
+                    <label for="corSecundaria">Cor secundária</label>
+                    <input type="color" id="corSecundaria" name="corSecundaria" class="config-input">
+                </div>
+
+                <div class="campo-config">
+                    <label for="corFundo">Cor de fundo</label>
+                    <input type="color" id="corFundo" name="corFundo" class="config-input">
+                </div>
+            </section>
+
+            <!-- TIPOGRAFIA -->
+            <section class="painel-secao">
+                <h3>Tipografia</h3>
+
+                <div class="campo-config">
+                    <label for="fontePrimaria">Fonte primária</label>
+                    <select id="fontePrimaria" class="config-input">
+                        <option value="Poppins">Poppins</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="Open Sans">Open Sans</option>
+                        <option value="Arial">Arial</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label for="fonteSecundaria">Fonte secundária</label>
+                    <select id="fonteSecundaria" class="config-input">
+                        <option value="Roboto">Roboto</option>
+                        <option value="Open Sans">Open Sans</option>
+                        <option value="Helvetica">Helvetica</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- LAYOUT -->
+            <section class="painel-secao">
+                <h3>Layout da Página</h3>
+
+                <div class="campo-config">
+                    <label for="layoutPagina">Layout geral</label>
+                    <select id="layoutPagina" class="config-input">
+                        <option value="padrao">Padrão</option>
+                        <option value="centralizado">Centralizado</option>
+                        <option value="fullwidth">Wide</option>
+                        <option value="grid">Grid</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarMarca" class="config-input">
+                        Mostrar marca
+                    </label>
+                </div>
+            </section>
+
+            <!-- PRODUTOS -->
+            <section class="painel-secao">
+                <h3>Exibição de Produtos</h3>
+
+                <div class="campo-config">
+                    <label for="layoutProdutos">Layout dos produtos</label>
+                    <select id="layoutProdutos" class="config-input">
+                        <option value="grid">Grid</option>
+                        <option value="lista">Lista</option>
+                        <option value="horizontal">Carrossel</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label for="produtosPorLinha">Produtos por linha</label>
+                    <select id="produtosPorLinha" class="config-input">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarPreco" class="config-input">
+                        Mostrar preço
+                    </label>
+                </div>
+            </section>
+
+            <!-- AÇÕES -->
+            <section class="painel-acoes">
+                <button id="salvarConfiguracoes">Salvar configurações</button>
+                <button id="resetarConfiguracoes">Resetar configurações</button>
+            </section>
+
+        </section>
+
+        <section class="pre-visualizacao layout-padrao">
+            <section class="Dados da loja">
+                <p><span id="NomeLoja"></span></p>
+                <p>Descrição da Loja:<span id="DescricaoLoja"></span></p>
+                <p>Contato: <span id="EmailLoja"></span></p>
+                <p>Endereço: <span id="EnderecoLoja"></span></p>
+            </section>
+
+            <!--lista de armações-->
+            <section class="armacao-section">
+                <h3>Minhas Armações</h3>
+                <section id="armacao-lista" class="lista-horizontal"></section>
+            </section>
+
+            <!--lista de lentes-->
+            <section class="lente-section">
+                <h3>Minhas Lentes</h3>
+                <section id="lente-lista" class="lista-horizontal"></section>
+            </section>
+        </section>
+    </section>
+
+
+</body>
+
+<script type="module" src="JS/pages/AdminLoja.js"></script>
+
+
+</html>

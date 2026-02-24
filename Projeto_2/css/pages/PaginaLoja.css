@@ -1,0 +1,152 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+   ========================= */
+
+/* Fonte padrão do site */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-top: 100px; /* espaço do header fixo */
+    background-color: #f5f7fa;
+}
+
+/* Títulos */
+h1, h2, h3 {
+    margin: 0;
+}
+
+/* =========================
+   HEADER DA LOJA
+   ========================= */
+
+.loja-header {
+    background-color: #156783;
+    color: white;
+    padding: 25px 40px;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.loja-header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.loja-header p {
+    margin: 3px 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* =========================
+   SEÇÃO DE PRODUTOS
+   ========================= */
+
+.lentes, .armacoes {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lentes h2, .armacoes h2 {
+    font-size: 22px;
+    color: #156783;
+    margin-bottom: 15px;
+    text-align: center;
+}  
+
+.lentes .produtos, .armacoes .produtos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+section {
+    margin: 20px;
+}
+
+section h2 {
+    margin-bottom: 10px;
+    color: #156783;
+    text-align: center;
+}
+
+/* Containers das listas */
+#lista-lentes,
+#lista-armacoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   CARD DE PRODUTO
+   ========================= */
+
+.card-produto {
+    background-color: white;
+    border: 1px solid #156783;
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+}
+
+.card-produto h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.card-produto p {
+    font-size: 14px;
+    margin: 4px 0;
+    color: #555;
+}
+
+/* Hover */
+.card-produto:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background-color: #f9fbfd;
+}
+
+/* =========================
+   ESTADO VAZIO
+   ========================= */
+
+#lista-lentes p,
+#lista-armacoes p {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #777;
+    font-style: italic;
+}
+
+/* =========================
+   RESPONSIVIDADE
+   ========================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding-top: 120px;
+    }
+
+    .loja-header {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    section {
+        margin: 15px;
+    }
+
+    #lista-lentes,
+    #lista-armacoes {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+}

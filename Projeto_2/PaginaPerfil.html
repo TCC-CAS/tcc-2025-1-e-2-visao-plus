@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página Perfil</title>
+    <link rel="stylesheet" href="css/pages/PaginaPerfil.css">
+</head>
+
+<body>
+    <div id="app-header"></div>
+
+    <h2 class="titulo-secao">
+        Dados do Perfil
+    </h2>
+
+    <section class="main-content">
+
+        <!-- seção usuário, sempre mostrar -->
+        <section id="secao-usuario" class="perfil-bloco">
+            <div class="perfil-header">
+                <h2 class="titulo-perfil">Perfil do Usuário</h2>
+                <button id="editar-perfil" class="button button-icon" title="Editar informações do usuário">
+                    <img src="imgs/pngpencil.png" class="icon-pencil">
+                </button>
+            </div>
+            <div class="info-usuario">
+                <p><strong>Nome:</strong> <span id="nomeUsuario"></span></p>
+                <p><strong>Email:</strong> <span id="emailUsuario"></span></p>
+                <p><strong>Tipo de Usuário:</strong> <span id="tipoUsuario"></span></p>
+            </div>
+        </section>
+
+        <!-- Modal para editar usuário -->
+
+        <div id="modal-editar-perfil" class="modal hidden">
+
+
+            <!-- caixa branca -->
+            <div class="modal-content">
+                <span id="fechar-modal-perfil" class="fechar-modal">&times;</span>
+
+                <h2>Editar Perfil</h2>
+
+                <form id="form-editar-perfil">
+                    <label>Nome: <br><input id="edit-nome-usuario" required> </label>
+                    <label>Email: <br><input id="edit-email-usuario" type="email" required> </label>
+
+                    <button type="submit" class="button">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- seção loja, mostrar quando o usuário for vendedor -->
+        <section id="secao-loja" class="perfil-bloco">
+            <div class="perfil-header">
+                <h2 class="titulo-perfil">Minha Loja</h2>
+                <button id="editar-loja" class="button button-icon" title="Editar informações da loja">
+                    <img src="imgs/pngpencil.png" class="icon-pencil">
+                </button>
+            </div>
+            <div class="info-loja">
+                <p><strong>Nome:</strong> <span id="nomeLoja"></span></p>
+                <p><strong>Email:</strong> <span id="emailLoja"></span></p>
+                <p><strong>CNPJ:</strong> <span id="cnpjLoja"></span></p>
+                <p><strong>Endereço:</strong> <span id="enderecoLoja"></span></p>
+                <p><strong>CEP:</strong> <span id="cepLoja"></span></p>
+            </div>
+        </section>
+
+        <!-- Modal para editar loja -->
+
+        <div id="modal-editar-loja" class="modal hidden">
+            <div class="modal-content">
+                <span id="fechar-modal-loja" class="fechar-modal">&times;</span>
+
+                <h2>Editar Loja</h2>
+
+                <form id="form-editar-loja">
+                    <label>Nome da Loja: <br><input id="edit-nome-loja" required> </label>
+                    <label>Email da Loja: <br><input id="edit-email-loja" type="email" required> </label>
+                    <label>CNPJ: <br><input id="edit-cnpj-loja" required> </label>
+                    <label>CEP: <br><input id="edit-cep-loja" required> </label>
+                    <label>Endereço: <br><input id="edit-endereco-loja" required> </label>
+
+                    <button type="submit" class="button">Salvar</button>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- seção pedir loja, mostrar quando o usuário for cliente somente-->
+        <section id="secao-pedir_loja" class="perfil-bloco">
+            <h2 class="titulo-perfil">Solicitar Abertura de Loja</h2>
+            <div class="info-pedir-loja">
+                <p><strong>Você ainda não possui uma loja. Clique no botão abaixo para solicitar a abertura de uma
+                        loja.</strong></p>
+                <a href="CadastroLoja.html" id="btn-solicitar-loja" class="button">
+                    Solicitar Abertura de Loja
+                </a>
+            </div>
+        </section>
+    </section>
+
+    <section id="secao-cotacoes" class="products-carousel">
+        <h2 class="titulo-secao">Cotações Recentes</h2>
+    </section>
+
+    <!-- Administração -->
+    
+    <section id="secao-admin" class="barra-vertical">
+
+        <h3 class="titulo-secao">Administração</h3>
+
+        <!--Seção de administração dos usuários-->
+        <section>
+            <h3>Usuários</h3>
+            <section id="admin-usuarios" class="lista-usuarios"></section><br>
+        </section>
+
+        <!--Seção de administração das lojas-->
+        <section>
+            <h3>Lojas</h3>
+            <section id="lista-lojas" class="lista-lojas"></section>
+        </section>
+    </section>
+
+</body>
+
+
+
+<!-- Modal editar usuário (Admin) -->
+<div id="modal-editar-usuario-admin" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-admin" class="fechar-modal">&times;</span>
+
+        <h2>Editar Usuário</h2>
+
+        <form id="form-editar-usuario-admin">
+            <input type="hidden" id="admin-id-usuario">
+
+            <label>
+                Nome:<br>
+                <input id="admin-nome-usuario" required>
+            </label>
+
+            <label>
+                Email:<br>
+                <input id="admin-email-usuario" type="email" required>
+            </label>
+
+            <label>
+                Tipo de Usuário:<br>
+                <select id="admin-tipo-usuario">
+                    <option value="Comum">Cliente</option>
+                    <option value="Vendedor">Vendedor</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </label>
+
+            <button type="submit" class="button">Salvar</button>
+        </form>
+    </div>
+</div>
+
+<div id="modal-editar-loja-admin" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-loja-admin" class="fechar-modal">&times;</span>
+
+        <h2>Editar Loja</h2>
+
+        <form id="form-editar-loja-admin">
+            <input type="hidden" id="admin-id-loja">
+
+            <label>
+                Nome da Loja:<br>
+                <input id="admin-nome-loja" required>
+            </label>
+
+            <label>
+                Email da Loja:<br>
+                <input id="admin-email-loja" type="email" required>
+            </label>
+
+            <label>
+                CNPJ:<br>
+                <input id="admin-cnpj-loja" required>
+            </label>
+
+            <label>
+                CEP:<br>
+                <input id="admin-cep-loja" required>
+            </label>
+
+            <label>
+                Endereço:<br>
+                <input id="admin-endereco-loja" required>
+            </label>
+
+            <button type="submit" class="button">Salvar</button>
+        </form>
+    </div>
+</div>
+<script type="module" src="js/pages/PaginaPerfil.js"></script>
+<!--
+<script src="js/pages/ListaUsuarios.js"></script>
+<script type="module" src="JS/components/header.js"></script>
+<script src="js/pages/AdminLojas.js"></script>
+<script src="js/pages/PaginaPerfi.js"></script>
+
+<script src="js/pages/editarLoja.js"></script>
+<script src="js/pages/editarPerfil.js"></script>
+--> 
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loja</title>
+    <link rel="stylesheet" href="css/pages/PaginaLoja.css">
+</head>
+
+<body>
+
+    <div id="app-header"></div>
+
+    <section class="loja-header">
+        <h1 id="loja-nome"></h1>
+        <p id="loja-email"></p>
+        <p id="loja-endereco"></p>
+    </section>
+
+    <section>
+        <h2>Produtos</h2><br>
+
+        <section class="lentes">
+            <h2>Lentes</h2>
+            <div id="lista-lentes"></div>
+        </section>
+
+        <section class="armacoes">
+            <h2>Armações</h2>
+            <div id="lista-armacoes"></div>
+        </section>
+
+    </section>
+
+</body>
+
+<div id="modal-cotacao" class="modal hidden">
+    <!-- caixa branca -->
+    <div class="modal-content">
+        <span id="fechar-modal-cotacao" class="fechar-modal">&times;</span>
+
+        <h2>Cotação</h2>
+
+        <form id="form-cotacao">
+            <label></label>
+            <label>Nome: <br><input id="edit-nome-usuario" required> </label>
+            <label>Email: <br><input id="edit-email-usuario" type="email" required> </label>
+
+            <button type="submit" class="button">Salvar</button>
+        </form>
+    </div>
+</div>
+
+</section>
+
+<script type="module" src="JS/pages/PaginaLoja.js"></script>
+
+</html>
