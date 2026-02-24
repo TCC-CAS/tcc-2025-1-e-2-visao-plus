@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos Loja</title>
+    <link rel="stylesheet" href="css/pages/ProdutosLoja.css">
+    <link rel="stylesheet" href="css/pages/PaginaPrincipal.css">
+</head>
+
+<body>
+
+    <!-- HEADER UNIVERSAL -->
+    <header id="app-header"></header>
+    
+
+    <!-- Conteúdo Principal -->
+    <section class="main-content" id="Conteudo-Principal">
+        
+        <div class="titulo-wrapper">
+            <p class="titulo-secao">Administração de Produtos -</p>
+            <span id="nomeLoja" class="span"></span>
+        </div>
+        
+        <div class="listas-wrapper">
+
+            <!--lista de armações-->
+            <section class="armacao-section">
+
+                <h3>Minhas Armações</h3>
+
+                <button class="btn-adicionar" id="btn-adicionar-armacao">
+                    + Adicionar Produto
+                </button>
+                <section id="armacao-lista" class="lista-horizontal"></section>
+
+            </section>
+
+            <!--lista de lentes-->
+            <section class="lente-section">
+
+                <h3>Minhas Lentes</h3>
+
+                <button class="btn-adicionar" id="btn-adicionar-lente">
+                    + Adicionar Produto
+                </button>
+                <section id="lente-lista" class="lista-horizontal"></section>
+
+
+            </section>
+
+        </div>
+</body>
+
+<!-- Modal para adicionar armação -->
+<div id="modal-adicionar-armação" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-armação" class="fechar-modal">&times;</span>
+
+        <h2>Adicionar Armação</h2>
+        <form id="form-adicionar-armacao">
+            <label for="nomeArmacao">Nome da Armação:</label>
+            <input type="text" id="nomeArmacao" name="nomeArmacao" required>
+
+            <label for="tipoArmacao">Tipo da Armação:</label>
+            <input type="text" id="tipoArmacao" name="tipoArmacao" required>
+
+            <label for="marcaArmacao">Marca da Armação:</label>
+            <input type="text" id="marcaArmacao" name="marcaArmacao" required>
+
+            <label for="modeloArmacao">Modelo da Armação:</label>
+            <input type="text" id="modeloArmacao" name="modeloArmacao" required>
+
+            <label for="materialArmacao">Material da Armação:</label>
+            <input type="text" id="materialArmacao" name="materialArmacao" required>
+
+            <label for="descricaoArmacao">Descrição:</label>
+            <textarea id="descricaoArmacao" name="descricaoArmacao" required></textarea>
+
+            <label for="precoArmacao">Preço:</label>
+            <input type="number" id="precoArmacao" name="precoArmacao" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Armacao</button>
+        </form>
+    </div>
+</div>
+
+<!--Modal para editar Armacao-->
+<div id="modal-editar-armação" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-editar-armação" class="fechar-modal">&times;</span>
+
+        <h2>Editar Armação</h2>
+        <form id="form-editar-armação">
+            <label for="nomeArmacaoEdit">Nome da Armação:</label>
+            <input type="text" id="nomeArmacaoEdit" name="nomeArmacaoEdit" required>
+
+            <label for="tipoArmacaoEdit">Tipo da Armação:</label>
+            <input type="text" id="tipoArmacaoEdit" name="tipoArmacaoEdit" required>
+
+            <label for="marcaArmacaoEdit">Marca da Armação:</label>
+            <input type="text" id="marcaArmacaoEdit" name="marcaArmacaoEdit" required>
+
+            <label for="modeloArmacaoEdit">Modelo da Armação:</label>
+            <input type="text" id="modeloArmacaoEdit" name="modeloArmacaoEdit" required>
+
+            <label for="materialArmacaoEdit">Material da Armação:</label>
+            <input type="text" id="materialArmacaoEdit" name="materialArmacaoEdit" required>
+
+            <label for="descricaoArmacaoEdit">Descrição:</label>
+            <textarea id="descricaoArmacaoEdit" name="descricaoArmacaoEdit" required></textarea>
+
+            <label for="precoArmacaoEdit">Preço:</label>
+            <input type="number" id="precoArmacaoEdit" name="precoArmacaoEdit" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Armacao</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal para adicionar lente -->
+<div id="modal-adicionar-lente" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-lente" class="fechar-modal">&times;</span>
+
+        <h2>Adicionar Lente</h2>
+        <form id="form-adicionar-lente">
+            <label for="nomeLente">Nome da Lente:</label>
+            <input type="text" id="nomeLente" name="nomeLente" required>
+
+            <label for="tipoLente">Tipo da Lente:</label>
+            <input type="text" id="tipoLente" name="tipoLente" required>
+
+            <label for="marcaLente">Marca da Lente:</label>
+            <input type="text" id="marcaLente" name="marcaLente" required>
+
+            <label for="modeloLente">Modelo da Lente:</label>
+            <input type="text" id="modeloLente" name="modeloLente" required>
+
+            <label for="materialLente">Material da Lente:</label>
+            <input type="text" id="materialLente" name="materialLente" required>
+
+            <label for="descricaoLente">Descrição:</label>
+            <textarea id="descricaoLente" name="descricaoLente" required></textarea>
+
+            <label for="precoLente">Preço:</label>
+            <input type="number" id="precoLente" name="precoLente" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Lente</button>
+        </form>
+    </div>
+</div>
+
+<!--Modal para editar Lente-->
+<div id="modal-editar-lente" class="modal hidden">
+    <div class="modal-content">
+        <span id="fechar-modal-editar-lente" class="fechar-modal">&times;</span>
+
+        <h2>Editar Lente</h2>
+        <form id="form-editar-lente">
+            <label for="nomeLenteEdit">Nome do Produto:</label>
+            <input type="text" id="nomeLenteEdit" name="nomeLenteEdit" required>
+
+            <label for="tipoLenteEdit">Tipo da Lente:</label>
+            <input type="text" id="tipoLenteEdit" name="tipoLenteEdit" required>
+
+            <label for="marcaLenteEdit">Marca da Lente:</label>
+            <input type="text" id="marcaLenteEdit" name="marcaLenteEdit" required>
+
+            <label for="modeloLenteEdit">Modelo da Lente:</label>
+            <input type="text" id="modeloLenteEdit" name="modeloLenteEdit" required>
+
+            <label for="materialLenteEdit">Material da Lente:</label>
+            <input type="text" id="materialLenteEdit" name="materialLenteEdit" required>
+
+            <label for="descricaoLenteEdit">Descrição:</label>
+            <textarea id="descricaoLenteEdit" name="descricaoLenteEdit" required></textarea>
+
+            <label for="precoLenteEdit">Preço:</label>
+            <input type="number" id="precoLenteEdit" name="precoLenteEdit" step="0.01" required>
+
+            <button type="submit" class="btn-salvar">Salvar Lente</button>
+        </form>
+    </div>
+</div>
+
+<script type="module" src="JS/pages/ProdutosLoja.js"></script>
+<!--<script type="module" src="/js/pages/produtosLoja.js"></script>-->
+
+</html>
