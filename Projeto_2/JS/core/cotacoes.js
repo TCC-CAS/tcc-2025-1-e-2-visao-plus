@@ -1,27 +1,12 @@
-import { apiFetch, API } from "./api";
-import { listarLentePorId, listarArmacaoPorId } from "./produtos";
-import {getUsuarioLogado} from "./auth";
-import {getLojaDoUsuario} from "./loja";
+import { API } from "./api.js"; // API = "http://localhost:8080"
 
 export async function criarCotacao(dadosCotacao) {
+    const response = await fetch(`${API}/cotacoes/criarCotacao`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosCotacao),
+    });
 
-    try {
-        const responde = await fetch(`${API}/cotacoes/criarCotacao`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dadosCotacao),
-        });
-
-        if (!responde.ok) {
-            throw new Error(`Erro na requisição: ${responde.status}`);
-        }
-
-        const data = await responde.json();
-        return data;
-    } catch (error) {
-        console.error("Erro ao criar cotação:", error);
-        throw error;
-    }
+    if (!response.ok) throw new Error(`Erro na requisição: ${response.status}`);
+    return response.json();
 }
