@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="css/pages/PaginaLoja.css">
 </head>
 
+<button id="btn-cotacao" class="btn-cotacao-flutuante">
+  🧾 Cotação
+</button>
+
 <body>
 
     <div id="app-header"></div>
@@ -34,22 +38,43 @@
 
 </body>
 
-<div id="modal-cotacao" class="modal hidden">
-    <!-- caixa branca -->
-    <div class="modal-content">
-        <span id="fechar-modal-cotacao" class="fechar-modal">&times;</span>
+<div id="modal-cotacao" class="modal-cotacao">
+    <div class="modal-cotacao-content">
+
+        <button id="fechar-modal-cotacao" class="fechar-modal">✕</button>
 
         <h2>Cotação</h2>
 
-        <form id="form-cotacao">
-            <label></label>
-            <span id="Lente"></span>
-            <span id="Armacao"></span>
-            <label>Nome: <br><input id="edit-nome-usuario" required> </label>
-            <label>Email: <br><input id="edit-email-usuario" type="email" required> </label>
+        <div class="resumo-produtos">
+            <div id="Lente"></div>
+            <div id="Armacao"></div>
+        </div>
 
-            <button type="submit" class="button">Salvar</button>
+        <form id="form-cotacao">
+
+            <label>
+                Grau esquerdo
+                <input id="grau-esq" type="number" step="0.25">
+            </label>
+
+            <label>
+                Grau direito
+                <input id="grau-dir" type="number" step="0.25">
+            </label>
+
+            <label>
+                Nome
+                <input id="edit-nome-usuario" required>
+            </label>
+
+            <label>
+                Email
+                <input id="edit-email-usuario" type="email" required>
+            </label>
+
+            <button type="submit" class="button">Enviar cotação</button>
         </form>
+
     </div>
 </div>
 
