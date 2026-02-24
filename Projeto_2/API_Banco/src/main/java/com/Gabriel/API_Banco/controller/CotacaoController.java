@@ -20,4 +20,6 @@ public class CotacaoController {
     public Cotacao criar(@RequestBody CriarCotacaoDTO dto) {
         return cotacaoService.criarCotacao(dto);
     }
+
+    @GetMapping("/listarCotacoes")
 }
