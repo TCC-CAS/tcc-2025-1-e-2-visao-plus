@@ -1,8 +1,7 @@
 import { configurarHeader } from "../components/header.js";
 import { buscarLojaPorId } from "../core/loja.js";
-import { getUsuarioLogado } from "../core/auth.js";
-import { listarArmacoesPorLoja } from "../core/produtos.js";
-import { listarLentesPorLoja } from "../core/produtos.js";
+import { listarArmacoesPorLoja, listarLentesPorLoja } from "../core/produtos.js";
+import { adicionarProdutoCotacao } from "../components/modalCotacao.js";
 
 function getIdDaUrl() {
   const params = new URLSearchParams(window.location.search);
@@ -49,7 +48,7 @@ async function carregarProdutos() {
   }
 }
 
-async function renderizarProdutos(lentes, armacoes) {
+function renderizarProdutos(lentes, armacoes) {
   const containerLentes = document.getElementById("lista-lentes");
   const containerArmacoes = document.getElementById("lista-armacoes");
 
@@ -60,8 +59,7 @@ async function renderizarProdutos(lentes, armacoes) {
     containerLentes.innerHTML = "<p>Nenhuma lente cadastrada.</p>";
   } else {
     lentes.forEach(lente => {
-      const card = criarCardLente(lente);
-      containerLentes.appendChild(card);
+      containerLentes.appendChild(criarCardLente(lente));
     });
   }
 
@@ -69,8 +67,7 @@ async function renderizarProdutos(lentes, armacoes) {
     containerArmacoes.innerHTML = "<p>Nenhuma armação cadastrada.</p>";
   } else {
     armacoes.forEach(armacao => {
-      const card = criarCardArmacao(armacao);
-      containerArmacoes.appendChild(card);
+      containerArmacoes.appendChild(criarCardArmacao(armacao));
     });
   }
 }
@@ -82,12 +79,12 @@ function criarCardLente(lente) {
   div.innerHTML = `
     <h3>${lente.nome}</h3>
     <p><strong>Preço:</strong> R$ ${lente.preco.toFixed(2)}</p>
-    <p><strong>Descrição:</strong> ${lente.descricao}</p>
+    <p><strong>Descrição:</strong> ${lente.descricao || ""}</p>
   `;
 
   div.addEventListener("click", () => {
-    selecionarLente(lente);
-  }); 
+    adicionarProdutoCotacao(lente, "lente");
+  });
 
   return div;
 }
@@ -95,30 +92,18 @@ function criarCardLente(lente) {
 function criarCardArmacao(armacao) {
   const div = document.createElement("div");
   div.classList.add("card-produto");
+
   div.innerHTML = `
     <h3>${armacao.nome}</h3>
     <p><strong>Preço:</strong> R$ ${armacao.preco.toFixed(2)}</p>
-    <p><strong>Descrição:</strong> ${armacao.descricao}</p>
+    <p><strong>Descrição:</strong> ${armacao.descricao || ""}</p>
   `;
 
   div.addEventListener("click", () => {
-    selecionarArmacao(armacao);
+    adicionarProdutoCotacao(armacao, "armacao");
   });
 
   return div;
-}
-
-let lenteSelecionada = null;
-let armacaoSelecionada = null;
-
-function selecionarLente(lente) {
-  lenteSelecionada = lente;
-  console.log("Lente escolhida:", lente);
-}
-
-function selecionarArmacao(armacao) {
-  armacaoSelecionada = armacao;
-  console.log("Armação escolhida:", armacao);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
