@@ -150,3 +150,135 @@ section h2 {
     }
 
 }
+/* =========================
+   DRAWER COTAÇÃO (FLUTUANTE)
+   ========================= */
+
+.modal-cotacao {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 0;          /* não ocupa tela */
+    pointer-events: none;
+    z-index: 900;      /* abaixo do botão */
+    
+}
+
+.modal-cotacao h2 {
+    font-size: 30px;
+    color: #156783;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: Arial;
+}
+
+/* painel */
+.modal-cotacao-content {
+    position: absolute;
+    top: 120px;
+    bottom: 40px;
+    right: -420px;
+    width: 360px;
+
+    background: white;
+    border-radius: 12px 0 0 12px;
+    box-shadow: -6px 0 20px rgba(0,0,0,0.25);
+
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    transition: right 0.3s ease;
+    pointer-events: auto; /* só ele recebe clique */
+}
+
+/* aberto */
+.modal-cotacao.ativo .modal-cotacao-content {
+    right: 20px;
+}
+
+/* botão fechar */
+.fechar-modal {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* resumo */
+.resumo-produtos {
+    background: #f1f5f9;
+    border: 1px solid #dbe3ea;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+/* form */
+#form-cotacao {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#form-cotacao label {
+    font-size: 13px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 15px;
+}
+
+#form-cotacao input {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+#form-cotacao button {
+    margin-top: 10px;
+    background: #156783;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    cursor: pointer;
+    font-family: Arial;
+    font-size: 20px;
+}
+
+/* ===============================
+     BOTÃO DE COTAÇÃO FLUTUANTE 
+   =============================== */
+
+.btn-cotacao-flutuante {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 1000;
+
+    background: #156783;
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.25s ease;
+}
+
+.btn-cotacao-flutuante.ativo {
+    opacity: 1;
+    transform: translateY(0);
+}
