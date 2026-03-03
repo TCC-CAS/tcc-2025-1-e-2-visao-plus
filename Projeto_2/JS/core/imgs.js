@@ -68,3 +68,5 @@ export function carregarFotoUsuario(usuario) {
         imgFoto.src = "imgs/9742847.png";
     }
 }
+
+export function carregarFotoLoja
