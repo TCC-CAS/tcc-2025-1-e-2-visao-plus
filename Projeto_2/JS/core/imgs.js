@@ -69,4 +69,7 @@ export function carregarFotoUsuario(usuario) {
     }
 }
 
-export function carregarFotoLoja
+export function carregarFotoLoja(usuario) {
+
+    console.log("FotoUrl recebida:", usuario.loja.fotoUrl);
+}

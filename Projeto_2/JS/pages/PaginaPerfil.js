@@ -324,6 +324,8 @@ async function init() {
     //Funções de imagem de perfil
     carregarFotoUsuario(usuario);
     salvarFotoPerfil();
+
+    
     
     chamarEstilizacao();
     initScrollCotacoes();
