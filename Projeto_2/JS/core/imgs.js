@@ -187,7 +187,7 @@ export function carregarFotoLoja(usuario) {
             alert("Erro ao atualizar foto");
         }
     });
-}
+
 
 export function carregarFotoLoja(usuario) {
 
