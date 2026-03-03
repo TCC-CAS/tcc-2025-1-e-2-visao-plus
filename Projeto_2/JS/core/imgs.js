@@ -1,6 +1,8 @@
 import { API } from "../core/api.js";
 import { getUsuarioLogado } from "../core/auth.js";
 
+//====================================ELEMENTOS FOTO PERFIL========================================//
+
 const form = document.getElementById("form-foto-perfil");
 const inputFoto = document.getElementById("inputFoto");
 const imgFoto = document.getElementById("fotoPerfil");
@@ -68,6 +70,8 @@ export function carregarFotoUsuario(usuario) {
         imgFoto.src = "imgs/9742847.png";
     }
 }
+
+//====================================ELEMENTOS FOTO LOJA========================================//
 
 export function carregarFotoLoja(usuario) {
 
