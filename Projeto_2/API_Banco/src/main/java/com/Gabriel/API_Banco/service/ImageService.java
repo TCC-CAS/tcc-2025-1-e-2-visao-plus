@@ -64,4 +64,47 @@ public class ImageService {
         }
     }
 
+    public void deleteImage(String imageUrl) {
+
+        if (imageUrl == null || imageUrl.isBlank()) {
+            return;
+        }
+
+        try {
+            String publicId = extrairPublicId(imageUrl);
+
+            Map result = cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+
+            if (!"ok".equals(result.get("result"))) {
+                System.out.println("Imagem não encontrada no Cloudinary.");
+            }
+
+            System.out.println("Resultado delete: " + result);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao deletar imagem do Cloudinary", e);
+        }
+    }
+
+    private String extrairPublicId(String imageUrl) {
+
+        // Exemplo URL:
+        // https://res.cloudinary.com/xxx/image/upload/v1712345678/lojas/abc123.jpg
+
+        String[] partes = imageUrl.split("/upload/");
+
+        if (partes.length < 2) {
+            throw new RuntimeException("URL inválida do Cloudinary");
+        }
+
+        String caminhoComVersao = partes[1];
+        // v1712345678/lojas/abc123.jpg
+
+        String semVersao = caminhoComVersao.replaceFirst("v\\d+/", "");
+        // lojas/abc123.jpg
+
+        return semVersao.substring(0, semVersao.lastIndexOf("."));
+        // lojas/abc123
+    }
+
 }
