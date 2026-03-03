@@ -71,5 +71,5 @@ export function carregarFotoUsuario(usuario) {
 
 export function carregarFotoLoja(usuario) {
 
-    console.log("FotoUrl recebida:", usuario.loja.fotoUrl);
+    console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
 }
