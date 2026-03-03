@@ -7,7 +7,7 @@ import { criarCardUsuario } from "../components/cards.js";
 import { criarCardLoja } from "../components/cards.js";
 import { configurarHeader } from "../components/header.js";
 import { getLojaDoUsuario } from "../core/loja.js";
-import { carregarFotoUsuario, salvarFotoPerfil, carregarFotoLoja } from "../core/imgs.js";
+import { carregarFotoUsuario, salvarFotoPerfil, carregarFotoLoja, salvarFotoLoja } from "../core/imgs.js";
 import { listarCotacoesPorUsuario, criarCardCotacao, chamarEstilizacao, initScrollCotacoes } from "../core/cotacoes.js";
 
 //===================================INICIALIZAÇÃO DE VARIÁVEIS PRINCIPAIS=====================================================//
@@ -327,6 +327,7 @@ async function init() {
 
     //Função de imagem da loja
     carregarFotoLoja(usuario);
+    salvarFotoLoja();
     
     chamarEstilizacao();
     initScrollCotacoes();
