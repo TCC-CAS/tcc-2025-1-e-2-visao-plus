@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Usuário</title>
-    <link rel="stylesheet" href="css/pages/Estilo1.css">
+    <link rel="stylesheet" href="css/pages/Cadastro.css">
+
 </head>
+
 <body>
-    <h1>Cadastro de Usuário</h1>
-    <form id="cadastroForm">
-        <label for="nome">Nome de usuário:</label>
-        <input type="text" id="nome" name="nome" required><br>
+    <div class="container-cadastro">
+        <h1>Cadastro de Usuário</h1>
+        <form id="cadastroForm">
+            <label for="nome">Nome de usuário:</label>
+            <input type="text" id="nome" name="nome" placeholder="Nome de usuário" required><br>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="E-mail" required><br>
 
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required><br>
+            <div id="erroSenha" class="erro-senha"></div>
 
-        <label for="confirmarSenha">Confirmar Senha:</label>
-        <input type="password" id="confirmarSenha" name="confirmarSenha" required><br>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" placeholder="Senha" required><br>
+            <div id="regrasCard" class="regras-card">
+                <h4>Regras da senha:</h4>
+                <ul>
+                    <li id="regraTamanho">Mínimo 8 caracteres</li>
+                    <li id="regraMaiuscula">Pelo menos 1 letra maiúscula</li>
+                    <li id="regraMinuscula">Pelo menos 1 letra minúscula</li>
+                    <li id="regraNumero">Pelo menos 1 número</li>
+                    <li id="regraEspecial">Pelo menos 1 caractere especial</li>
+                    <li id="regraProibido">Não pode conter &lt; ou &gt;</li>
+                </ul>
+            </div>
 
-        <button type="submit">Registrar</button>
-    </form>
-    <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+            <label for="confirmarSenha">Confirmar Senha:</label>
+            <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme a senha"
+                required><br>
+
+            <button type="submit">Registrar</button>
+        </form>
+        <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+    </div>
     <script src="JS/pages/Cadastro.Js"></script>
 </body>
+
 </html>
