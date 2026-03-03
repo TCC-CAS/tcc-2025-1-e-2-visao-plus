@@ -1,5 +1,5 @@
 /* Área geral */
-.foto-perfil-area {
+.foto-perfil-area, .foto-loja-area {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,7 +8,7 @@
 }
 
 /* Imagem de perfil */
-#fotoPerfil {
+#fotoPerfil, #fotoLoja {
     width: 170px;
     height: 170px;
     border-radius: 50%;
@@ -20,13 +20,13 @@
 }
 
 /* Hover elegante */
-#fotoPerfil:hover {
+#fotoPerfil:hover, #fotoLoja:hover {
     transform: scale(1.05);
     filter: brightness(0.9);
 }
 
 /* Formulário */
-#form-foto-perfil {
+#form-foto-perfil, #form-foto-loja {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,12 +34,12 @@
 }
 
 /* Input file */
-#inputFoto {
+#inputFoto, #inputFotoLoja {
     font-size: 14px;
 }
 
 /* Botão */
-#form-foto-perfil button {
+#form-foto-perfil button, #form-foto-loja button {
     background: #156783;
     color: white;
     padding: 8px 18px;
@@ -50,7 +50,7 @@
     transition: all 0.3s ease;
 }
 
-#form-foto-perfil button:hover {
+#form-foto-perfil button:hover, #form-foto-loja button:hover {
     background: #7399a6;
     transform: translateY(-2px);
 }
