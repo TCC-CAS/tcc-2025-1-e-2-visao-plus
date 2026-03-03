@@ -95,6 +95,11 @@ public class LojaService {
         Loja loja = r.findById(id)
                 .orElseThrow(() -> new RuntimeException("Loja não encontrada"));
 
+        // Se já existir imagem, deletar antes
+        if (loja.getFotoUrl() != null) {
+            imageService.deleteImage(loja.getFotoUrl());
+        }
+
         String imageUrl = imageService.uploadImage(file);
 
         loja.setFotoUrl(imageUrl);
@@ -103,5 +108,7 @@ public class LojaService {
 
         return imageUrl;
     }
+
+
 
 }
