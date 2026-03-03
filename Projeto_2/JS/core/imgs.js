@@ -86,6 +86,7 @@ export function salvarFotoLoja() {
 
         const usuario = getUsuarioLogado();
         const usuarioId = usuario.id;
+        const lojaId = usuario.loja.id;
 
         const file = inputFotoLoja.files[0];
 
@@ -99,7 +100,7 @@ export function salvarFotoLoja() {
 
         try {
             const response = await fetch(
-                `${API}/usuarios/setarFotoPerfil/${usuarioId}`,
+                `${API}/lojas/${lojaId}/foto`,
                 {
                     method: "POST",
                     body: formData
@@ -128,6 +129,7 @@ export function salvarFotoLoja() {
     });
 }
 
+
 export function carregarFotoLoja(usuario) {
 
     console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
@@ -137,59 +139,6 @@ export function carregarFotoLoja(usuario) {
         imgFotoLoja.src = usuario.loja.fotoUrl;
         console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
     } else {
-        imgFotoLoja.src = "imgs/9742847.png";
+        imgFotoLoja.src = "imgs/store1.png";
     }
-}
-    if (!form) return; // evita erro se não existir na página
-
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const usuario = getUsuarioLogado();
-        const usuarioId = usuario.id;
-
-        const file = inputFoto.files[0];
-
-        if (!file) {
-            alert("Selecione uma imagem!");
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const response = await fetch(
-                `${API}/usuarios/setarFotoPerfil/${usuarioId}`,
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Erro ao enviar imagem");
-            }
-
-            const imageUrl = await response.text();
-
-            // Atualiza imagem na tela
-            imgFoto.src = imageUrl;
-
-            //Atualiza localStorage
-            usuario.fotoUrl = imageUrl;
-            localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
-
-            alert("Foto atualizada com sucesso!");
-
-        } catch (error) {
-            console.error(error);
-            alert("Erro ao atualizar foto");
-        }
-    });
-
-
-export function carregarFotoLoja(usuario) {
-
-    console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
 }
