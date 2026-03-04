@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const regraProibido = document.querySelector("#regraProibido");
 
     // Função para mostrar o card por 4 segundos
-     function mostrarRegrasCard() {
+    function mostrarRegrasCard() {
         regrasCard.classList.add("mostrar");
 
         setTimeout(() => {
@@ -140,7 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (!response.ok) {
-                throw new Error("Erro ao cadastrar usuário");
+                const mensagemErro = await response.text();
+                throw new Error(mensagemErro);
             }
 
             const mensagem = await response.text();
@@ -150,8 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = "Login.html";
 
         } catch (error) {
-            console.error(error);
-            alert("Erro ao conectar com a API");
+            alert(error.message);
         }
 
     });
