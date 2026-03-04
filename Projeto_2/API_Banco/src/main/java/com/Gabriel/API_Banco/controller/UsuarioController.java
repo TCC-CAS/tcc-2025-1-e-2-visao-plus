@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
 import com.Gabriel.API_Banco.dto.ListarLojasDTO;
 import com.Gabriel.API_Banco.dto.ListarUsuariosDTO;
+import com.Gabriel.API_Banco.exceptions.UsuarioExceptions;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,15 @@ public class UsuarioController {
     }
 
     @PostMapping("/registrar")
-    public String registrarUsuario(@RequestBody Usuario usuario) {
-        s.salvar(usuario);
-        return "Usuário " + usuario.getNome() + " salvo com sucesso!";
+    public ResponseEntity<?> registrarUsuario(@RequestBody Usuario usuario) {
+        try {
+            Usuario novo = s.salvar(usuario);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Usuário " + novo.getNome() + " salvo com sucesso!");
+        } catch (UsuarioExceptions e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/login")
