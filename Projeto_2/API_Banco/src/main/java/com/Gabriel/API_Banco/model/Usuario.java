@@ -21,10 +21,10 @@ public class Usuario {
     @JsonManagedReference
     private Loja loja;
 
-    @Column(name = "nome")
+    @Column(name = "nome", unique = true)
     private String nome;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "senha")
