@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
 import com.Gabriel.API_Banco.dto.ListarUsuariosDTO;
+import com.Gabriel.API_Banco.exceptions.UsuarioExceptions;
 import com.Gabriel.API_Banco.repository.LojaRepositorio;
 import org.springframework.stereotype.Service;
 import com.Gabriel.API_Banco.model.Usuario;
@@ -27,7 +28,18 @@ public class UsuarioService {
     }
 
 
+
+
     public Usuario salvar(Usuario usuario) {
+
+        if (r.existsByEmail(usuario.getEmail())) {
+            throw new UsuarioExceptions("Email já cadastrado");
+        }
+
+        if (r.existsByNome(usuario.getNome())) {
+            throw new UsuarioExceptions("Nome de usuário já cadastrado");
+        }
+
         return r.save(usuario);
     }
 
