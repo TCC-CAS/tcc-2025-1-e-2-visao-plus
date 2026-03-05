@@ -8,6 +8,7 @@ import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
 import com.Gabriel.API_Banco.dto.ListarLojasDTO;
 import com.Gabriel.API_Banco.dto.ListarUsuariosDTO;
 import com.Gabriel.API_Banco.exceptions.UsuarioExceptions;
+import com.Gabriel.API_Banco.repository.UsuarioRepositorio;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class UsuarioController {
 
     private final UsuarioService s;
+    private final UsuarioRepositorio r;
 
-    public UsuarioController(UsuarioService s) {
+    public UsuarioController(UsuarioService s, UsuarioRepositorio r) {
         this.s = s;
+        this.r = r;
     }
 
     @PostMapping("/registrar")
@@ -42,6 +45,16 @@ public class UsuarioController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUsuario(@RequestBody Usuario usuario) {
+
+        // Busca nome no banco, para validar o nome do usuário e se ele está cadastrado
+        Optional<Usuario> nomeNoBanco = s.consultarPorNome(usuario.getNome());
+
+        if (nomeNoBanco.isEmpty()) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Username não encontrado!");
+        }
+
         // Busca email no banco, para validar primeiro o email do usuário e se ele está cadastrado
         Optional<Usuario> usuarioNoBanco = s.consultarPorEmail(usuario.getEmail());
 
@@ -49,7 +62,7 @@ public class UsuarioController {
         if (usuarioNoBanco.isEmpty()) {
             return ResponseEntity
                     .status(HttpStatus.NOT_FOUND)
-                    .body("Usuário não encontrado!");
+                    .body("Email não encontrado!");
         }
 
         //Se a validação do email der certo, ele vai pegar a senha para comparar
@@ -99,6 +112,16 @@ public class UsuarioController {
     public ResponseEntity<String> getFoto(@PathVariable Long id){
         String url = s.getFotoPerfil(id);
         return ResponseEntity.ok(url);
+    }
+
+    @GetMapping("/existe-email")
+    public boolean existeEmail(@RequestParam String email) {
+        return r.existsByEmail(email);
+    }
+
+    @GetMapping("/existe-nome")
+    public boolean existeNome(@RequestParam String nome) {
+        return r.existsByNome(nome);
     }
 
 
