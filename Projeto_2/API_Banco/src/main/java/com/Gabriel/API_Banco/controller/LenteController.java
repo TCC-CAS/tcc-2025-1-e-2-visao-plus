@@ -9,7 +9,9 @@ import com.Gabriel.API_Banco.service.LenteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin(origins = "*") // libera pro front
@@ -57,5 +59,14 @@ public class LenteController {
     public ResponseEntity<Void> deletarLente(@PathVariable Long id) {
         lenteService.deletarLente(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/foto")
+    public ResponseEntity<String> uploadFotoLente(@PathVariable Long id,@RequestParam("file") MultipartFile file
+    ) throws IOException {
+
+        String url = lenteService.atualizarFotoLente(id, file);
+
+        return ResponseEntity.ok(url);
     }
 }
