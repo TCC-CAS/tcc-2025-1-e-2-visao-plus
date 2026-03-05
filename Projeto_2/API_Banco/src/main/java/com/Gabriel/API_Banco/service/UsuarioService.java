@@ -46,6 +46,7 @@ public class UsuarioService {
     public Optional<Usuario> consultarPorEmail(String email) {
         return r.findByEmail(email);
     }
+    public Optional<Usuario> consultarPorNome(String nome){return r.findByNome(nome);}
 
     public Usuario editarUsuario(EditarUsuarioDTO dto) {
 
@@ -85,12 +86,17 @@ public class UsuarioService {
         Usuario usuario = r.findById(usuarioId)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        String imageUrl = imageService.uploadProfileImage(file);
+        String urlAntiga = usuario.getFotoUrl();
+        String urlNova = imageService.uploadProfileImage(file);
 
-        usuario.setFotoUrl(imageUrl);
+        usuario.setFotoUrl(urlNova);
         r.save(usuario);
 
-        return imageUrl;
+        if(urlAntiga != null &&  !urlAntiga.isBlank()) {
+            imageService.deleteImage(urlAntiga);
+        }
+
+        return urlNova;
     }
 
     public String getFotoPerfil(Long id){
