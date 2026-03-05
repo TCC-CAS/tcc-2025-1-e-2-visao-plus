@@ -115,9 +115,15 @@ function CardArmacao(armacao) {
         <p>Tipo: ${armacao.tipo}</p>
         <p>Descrição: ${armacao.descricao}</p>
         <p>Preço: R$ ${armacao.preco}</p>
-        <button onclick="abrirModalEditarArmacao(${armacao.id})" class="btn-editar">Editar</button>
-        <button onclick="deletarArmacao(${armacao.id})" class="btn-deletar">Deletar</button>
+        <button class="btn-editar">Editar</button>
+        <button class="btn-deletar">Deletar</button>
     `;
+
+    const btnEditar = div.querySelector(".btn-editar");
+    const btnDeletar = div.querySelector(".btn-deletar");
+
+    btnEditar.addEventListener("click", () => abrirModalEditarArmacao(armacao.id));
+    btnDeletar.addEventListener("click", () => deletarArmacao(armacao.id));
 
     return div;
 }
@@ -164,9 +170,15 @@ function CardLente(lente) {
         <p>Material: ${lente.material}</p>
         <p>Descrição: ${lente.descricao}</p>
         <p>Preço: R$ ${lente.preco}</p>
-        <button onclick="abrirModalEditarLente(${lente.id})" class="btn-editar">Editar</button>
-        <button onclick="deletarLente(${lente.id})" class="btn-deletar">Deletar</button>
+        <button class="btn-editar">Editar</button>
+        <button class="btn-deletar">Deletar</button>
     `;
+
+    const btnEditar = div.querySelector(".btn-editar");
+    const btnDeletar = div.querySelector(".btn-deletar");
+
+    btnEditar.addEventListener("click", () => abrirModalEditarLente(lente.id));
+    btnDeletar.addEventListener("click", () => deletarLente(lente.id));
 
     return div;
 }
