@@ -207,7 +207,9 @@ input {
 
 /* ===== COLUNA ESQUERDA (INFOS) ===== */
 .info-usuario, .info-loja {
+    display: flex;
     flex: 1;
+    flex-direction: column;
     background: white;
     padding: 35px;
     border-radius: 14px;
