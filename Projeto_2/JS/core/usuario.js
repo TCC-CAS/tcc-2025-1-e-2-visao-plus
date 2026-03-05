@@ -1,32 +1,32 @@
 // js/core/usuario.js
-import { apiFetch , API } from "./api.js";
+import { apiFetch, API } from "./api.js";
 import { getUsuarioLogado, setUsuarioLogado } from "./auth.js";
 
 export async function criarUsuario(dadosUsuario) {
     try {
-            const response = await fetch(`${API}/usuarios/registrar`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dadosUsuario)
-            });
+        const response = await fetch(`${API}/usuarios/registrar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dadosUsuario)
+        });
 
-            if (!response.ok) {
-                throw new Error("Erro ao cadastrar usuário");
-            }
+        if (!response.ok) {
+            throw new Error("Erro ao cadastrar usuário");
+        }
 
-            const mensagem = await response.text();
-            alert(mensagem);
+        const mensagem = await response.text();
+        alert(mensagem);
 
-            form.reset();
-            window.location.href = "Login.html";
-            
+        form.reset();
+        window.location.href = "Login.html";
 
-        } catch (error) {
-            console.error(error);
-            alert("Erro ao conectar com a API");
-        }   
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao conectar com a API");
+    }
 }
 
 export async function buscarDadosUsuario() {
@@ -81,3 +81,39 @@ export async function deletarUsuario(id) {
         alert("Erro ao deletar usuário");
     }
 }
+
+//===================================================
+//          FUNÇÕES DE VALIDAÇÃO
+//===================================================
+
+export async function validarEmail(email) {
+    try {
+        const response = await fetch(
+            `${API}/usuarios/existe-email?email=${encodeURIComponent(email)}`
+        );
+
+        if (!response.ok) return false;
+
+        return await response.json();
+
+    } catch (error) {
+        console.error("Erro ao validar email:", error);
+        return false;
+    }
+};
+
+export async function validarNomeUsuario(nome) {
+    try {
+        const response = await fetch(
+            `${API}/usuarios/existe-nome?nome=${encodeURIComponent(nome)}`
+        );
+
+        if (!response.ok) return false;
+
+        return await response.json();
+
+    } catch (error) {
+        console.error("Erro ao validar nome de usuário:", error);
+        return false;
+    }
+};
