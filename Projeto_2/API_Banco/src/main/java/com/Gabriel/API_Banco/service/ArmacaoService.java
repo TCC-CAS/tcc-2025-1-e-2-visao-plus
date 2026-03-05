@@ -5,6 +5,7 @@ import com.Gabriel.API_Banco.dto.EditarArmacaoDTO;
 import com.Gabriel.API_Banco.dto.ListarArmacaoDTO;
 import com.Gabriel.API_Banco.model.Armacao;
 import com.Gabriel.API_Banco.model.Loja;
+import com.Gabriel.API_Banco.model.Usuario;
 import com.Gabriel.API_Banco.repository.ArmacaoRepositorio;
 import com.Gabriel.API_Banco.repository.LojaRepositorio;
 import org.springframework.stereotype.Service;
@@ -105,13 +106,17 @@ public class ArmacaoService {
         Armacao armacao = ar.findById(id)
                 .orElseThrow(() -> new RuntimeException("Armação não encontrada"));
 
-        String imageUrl = imageService.uploadImage(file);
+        String urlAntiga = armacao.getFotoUrl();
+        String urlNova = imageService.uploadImage(file);
 
-        armacao.setFotoUrl(imageUrl);
-
+        armacao.setFotoUrl(urlNova);
         ar.save(armacao);
 
-        return imageUrl;
+        if(urlAntiga != null && !urlAntiga.isBlank()){
+            imageService.deleteImage(urlAntiga);
+        }
+
+        return urlNova;
     }
 
 
