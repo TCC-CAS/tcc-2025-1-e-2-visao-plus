@@ -1,3 +1,5 @@
+import { validarEmail, validarNomeUsuario } from "../core/usuario.js";
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.querySelector("#cadastroForm");
@@ -14,13 +16,83 @@ document.addEventListener("DOMContentLoaded", () => {
     const regraEspecial = document.querySelector("#regraEspecial");
     const regraProibido = document.querySelector("#regraProibido");
 
+    const inputNome = document.querySelector("#nome");
+    const inputEmail = document.querySelector("#email");
+    const msgNome = document.querySelector("#msgNome");
+    const msgEmail = document.querySelector("#msgEmail");
+    const msgSenha = document.querySelector("#msgSenha");
+
+    let timeoutNome;
+    let timeoutEmail;
+    let nomeDisponivel = false;
+    let emailDisponivel = false;
+
+    function mostrarMensagem(elemento, texto, tipo) {
+        elemento.textContent = texto;
+        elemento.classList.remove("sucesso", "erro");
+        elemento.classList.add("mostrar", tipo);
+
+        setTimeout(() => {
+            elemento.classList.remove("mostrar");
+        }, 7000);
+    }
+
+
+    inputNome.addEventListener("input", () => {
+        clearTimeout(timeoutNome);
+
+        timeoutNome = setTimeout(async () => {
+            const nome = inputNome.value.trim();
+
+            if (nome.length < 3) {
+                msgNome.textContent = "";
+                return;
+            }
+
+            const existe = await validarNomeUsuario(nome);
+
+            if (existe) {
+                mostrarMensagem(msgNome, "Nome já cadastrado", "erro");
+                nomeDisponivel = false;
+            } else {
+                mostrarMensagem(msgNome, "Nome disponível", "sucesso");
+                nomeDisponivel = true;
+            }
+        }, 600);
+    });
+
+
+    inputEmail.addEventListener("input", () => {
+        clearTimeout(timeoutEmail);
+
+        timeoutEmail = setTimeout(async () => {
+            const email = inputEmail.value.trim();
+
+            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexEmail.test(email)) {
+                msgEmail.textContent = "";
+                return;
+            }
+
+            const existe = await validarEmail(email);
+
+            if (existe) {
+                mostrarMensagem(msgEmail, "Email já cadastrado", "erro");
+                emailDisponivel = false;
+            } else {
+                mostrarMensagem(msgEmail, "Email disponível", "sucesso");
+                emailDisponivel = true;
+            }
+        }, 600);
+    });
+
     // Função para mostrar o card por 4 segundos
     function mostrarRegrasCard() {
         regrasCard.classList.add("mostrar");
 
         setTimeout(() => {
             regrasCard.classList.remove("mostrar");
-        }, 4000);
+        }, 7000);
     }
 
     function atualizarRegra(elemento, condicao) {
@@ -79,15 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return senhaEhValida;
     }
 
-    function validarEmail(email) {
-        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regexEmail.test(email);
-    }
 
-    function validarNomeUsuario(nome) {
-        const regexNome = /^[a-zA-Z\s]+$/;
-        return regexNome.test(nome);
-    }
 
     senhaInput.addEventListener("input", validarSenhaTempoReal);
 
@@ -99,6 +163,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const senha = document.querySelector("#senha").value;
         const confirmarSenha = document.querySelector("#confirmarSenha").value;
 
+
+
         // Validação básica
         if (!nome || !email || !senha || !confirmarSenha) {
             alert("Por favor, preencha todos os campos.");
@@ -109,15 +175,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const senhaValida = validarSenhaTempoReal();
 
         if (!senhaValida) {
-            erroSenhaDiv.textContent = "A senha não atende aos requisitos.";
+            mostrarMensagem(msgSenha, "Senha não atende aos requisitos", "erro");
             mostrarRegrasCard();
             return;
         } else {
-            erroSenhaDiv.textContent = "";
+            mostrarMensagem(msgSenha, "Senha válida", "sucesso");
         }
 
         if (senha !== confirmarSenha) {
-            erroSenhaDiv.textContent = "As senhas não conferem!";
+            mostrarMensagem(msgSenha, "As senhas não conferem!", "erro");
+            return;
+        }
+
+        if (!nomeDisponivel || !emailDisponivel) {
+            alert("Corrija os campos antes de continuar.");
             return;
         }
 
