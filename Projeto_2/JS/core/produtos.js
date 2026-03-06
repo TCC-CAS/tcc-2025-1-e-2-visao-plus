@@ -68,7 +68,7 @@ export async function deletarLente(id) {
 }
 
 export async function deletarArmacao(id) {
-    return await apiFetch(`/armacoes/${id}`, {
+    return await apiFetch(`/armacao/${id}`, {
         method: "DELETE"
     });
 }
