@@ -201,7 +201,7 @@ export function salvarFotoLente() {
         }
     });
 }
-
+ 
 
 export function carregarFotoLente(Lente) {
 
