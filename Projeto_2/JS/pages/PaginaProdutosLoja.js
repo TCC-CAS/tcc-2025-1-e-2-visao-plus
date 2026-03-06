@@ -198,6 +198,7 @@ async function deletarProduto(tipo, id) {
 
 async function abrirModalEditarProduto(tipo, id) {
     abrirModal(`modal-editar-${tipo}`);
+    const produto = state[produtoService[tipo].stateKey].find(p => p.id === id);
 
 
 
