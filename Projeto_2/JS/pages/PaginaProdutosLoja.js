@@ -200,6 +200,16 @@ async function abrirModalEditarProduto(tipo, id) {
     abrirModal(`modal-editar-${tipo}`);
     const produto = state[produtoService[tipo].stateKey].find(p => p.id === id);
 
+    const form = document.getElementById(`form-editar-${tipo}`);
+    form.dataset.produtoId = id;
+
+    form.nome.value = produto.nome;
+    form.tipo.value = produto.tipo;
+    form.marca.value = produto.marca;
+    form.modelo.value = produto.modelo;
+    form.material.value = produto.material;
+    form.descricao.value = produto.descricao;
+    form.preco.value = produto.preco;
 
 
 
