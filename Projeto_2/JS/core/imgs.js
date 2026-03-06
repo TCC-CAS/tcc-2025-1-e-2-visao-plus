@@ -203,16 +203,16 @@ export function salvarFotoLente() {
 }
 
 
-export function carregarFotoLoja(usuario) {
+export function carregarFotoLente(Lente) {
 
-    console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
-    if (!imgFotoLoja) return;
+    console.log("FotoUrl Lente recebida:", loja.lente.fotoUrl);
+    if (!imgFotoLente) return;
 
     if (usuario?.loja?.fotoUrl && usuario.loja.fotoUrl.trim() !== "") {
-        imgFotoLoja.src = usuario.loja.fotoUrl;
-        console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
+        imgFotoLente.src = usuario.loja.fotoUrl;
+        console.log("FotoUrl Lente recebida:", usuario.loja.fotoUrl);
     } else {
-        imgFotoLoja.src = "imgs/store1.png";
+        imgFotoLente.src = "imgs/store1.png";
     }
 }
 
