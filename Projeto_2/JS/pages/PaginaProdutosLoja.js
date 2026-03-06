@@ -108,20 +108,21 @@ function configurarEventos() {
     //FORMS DE EDIÇÃO DE PRODUTOS
     /*
     document.getElementById("form-editar-armacao")
-        .addEventListener("submit", salvarEdicaoArmacao);
+        .addEventListener("submit", salvarEdicaoArmacao);*/
 
     document.getElementById("fechar-modal-editar-armacao")
         .addEventListener("click", () =>
             fecharModal("modal-editar-armacao")
         );
-
+    
+    /*
     document.getElementById("form-editar-lente")
-        .addEventListener("submit", salvarEdicaoLente);
+        .addEventListener("submit", salvarEdicaoLente);*/
 
     document.getElementById("fechar-modal-editar-lente")
         .addEventListener("click", () =>
             fecharModal("modal-editar-lente")
-        );*/
+        );
 
 
 }
@@ -196,9 +197,10 @@ async function deletarProduto(tipo, id) {
 }
 
 async function abrirModalEditarProduto(tipo, id) {
-    const produto = state[produtoService[tipo].stateKey].find(p => p.id === id);
+    abrirModal(`modal-editar-${tipo}`);
 
-    // Preencher o formulário de edição com os dados do produto
+
+
 
 }
 
