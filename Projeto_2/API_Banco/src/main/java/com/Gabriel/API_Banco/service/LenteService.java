@@ -78,7 +78,8 @@ public class LenteService {
                         lente.getModelo(),
                         lente.getMaterial(),
                         lente.getDescricao(),
-                        lente.getPreco()
+                        lente.getPreco(),
+                        lente.getFotoUrl()
                 ))
                 .toList();
     }
@@ -94,7 +95,8 @@ public class LenteService {
                         lente.getModelo(),
                         lente.getMaterial(),
                         lente.getDescricao(),
-                        lente.getPreco()
+                        lente.getPreco(),
+                        lente.getFotoUrl()
                 ))
                 .toList();
     }
