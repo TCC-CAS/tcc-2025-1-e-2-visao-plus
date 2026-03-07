@@ -62,13 +62,13 @@ export async function atualizarArmacao(id, dadosAtualizados) {
 ========================= */
 
 export async function deletarLente(id) {
-    return await apiFetch(`/lentes/${id}`, {
+    return await apiFetch(`/lentes/deletarLente/${id}`, {
         method: "DELETE"
     });
 }
 
 export async function deletarArmacao(id) {
-    return await apiFetch(`/armacao/${id}`, {
+    return await apiFetch(`/armacao/deletarArmacao/${id}`, {
         method: "DELETE"
     });
 }
