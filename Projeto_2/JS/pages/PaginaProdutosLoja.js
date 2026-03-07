@@ -12,9 +12,25 @@ import {
     deletarArmacao,
     deletarLente
 } from "../core/produtos.js";
-
+import { uploadFotoArmacao, uploadFotoLente } from "../core/imgs.js";
 import { configurarHeader } from "../components/header.js";
 
+/*********************************************************
+ * MENSAGENS
+ ********************************************************/
+function mostrarMensagem(elemento, texto, tipo) {
+        elemento.textContent = texto;
+        elemento.classList.remove("sucesso", "erro");
+        elemento.classList.add("mostrar", tipo);
+
+        setTimeout(() => {
+            elemento.classList.remove("mostrar");
+        }, 4000);
+    }
+
+/*********************************************************
+ * SERVIÇOS DE PRODUTOS
+ ********************************************************/
 const produtoService = {
     armacao: {
         listar: listarArmacoesPorLoja,
@@ -32,7 +48,6 @@ const produtoService = {
     }
 };
 
-
 /*************************************************
  * ESTADO GLOBAL DA PÁGINA
 *************************************************/
@@ -43,8 +58,6 @@ const state = {
     armacoes: [],
     lentes: []
 };
-
-
 
 /*************************************************
  * USUÁRIO E LOJA
@@ -83,15 +96,13 @@ function configurarEventos() {
             abrirModal("modal-adicionar-lente")
         );
 
-
-
     //FORMS DE ADICIONAR PRODUTOS
 
-    /*document.getElementById("form-adicionar-armacao")
-        .addEventListener("submit", adicionarArmacao);
+    document.getElementById("form-adicionar-armacao")
+        .addEventListener("submit", (e) => adicionarProduto("armacao", e));
 
     document.getElementById("form-adicionar-lente")
-        .addEventListener("submit", adicionarLente);*/
+        .addEventListener("submit", (e) => adicionarProduto("lente", e));
 
     //SPANS DE FECHAR MODAIS
     document.getElementById("fechar-modal-armacao")
@@ -104,7 +115,6 @@ function configurarEventos() {
             fecharModal("modal-adicionar-lente")
         );
 
-
     //FORMS DE EDIÇÃO DE PRODUTOS
     /*
     document.getElementById("form-editar-armacao")
@@ -114,7 +124,6 @@ function configurarEventos() {
         .addEventListener("click", () =>
             fecharModal("modal-editar-armacao")
         );
-    
     /*
     document.getElementById("form-editar-lente")
         .addEventListener("submit", salvarEdicaoLente);*/
@@ -123,8 +132,6 @@ function configurarEventos() {
         .addEventListener("click", () =>
             fecharModal("modal-editar-lente")
         );
-
-
 }
 
 /*************************************************
@@ -165,6 +172,7 @@ function criarCardProduto(tipo, produto) {
     div.classList.add(`card-${tipo}`);
 
     div.innerHTML = `
+        <img src="${produto.fotoUrl || "imgs/default-product.png"}" alt="Foto ${tipo}" class="produto">
         <h4>${produto.nome}</h4>
         <p>Tipo: ${produto.tipo}</p>
         <p>Marca: ${produto.marca}</p>
@@ -189,32 +197,229 @@ function criarCardProduto(tipo, produto) {
  * CRUD DE PRODUTOS NA TELA
 *************************************************/
 
+async function adicionarProduto(tipo, e) {
+
+   
+    e.preventDefault();
+
+    const get = (campo) => document.getElementById(`${campo}-${tipo}`);
+
+    const dados = {
+        idLoja: loja.id,
+        nome: get("nome").value,
+        tipo: get("tipo").value,
+        marca: get("marca").value,
+        modelo: get("modelo").value,
+        material: get("material").value,
+        descricao: get("descricao").value,
+        preco: Number(get("preco").value)
+    };
+
+    try {
+
+        const produtoCriado = await produtoService[tipo].salvar(dados);
+
+        await carregarArmacoes();
+        await carregarLentes();
+
+        fecharModal(`modal-adicionar-${tipo}`);
+
+        mostrarMensagem(
+            msgProdutosLoja,
+            "Produto adicionado com sucesso!",
+            "sucesso"
+        );
+        document.getElementById(`form-adicionar-${tipo}`).reset();
+
+    } catch (error) {
+
+        console.error(error);
+
+        mostrarMensagem(
+            msgProdutosLoja,
+            "Erro ao adicionar produto!",
+            "erro"
+        );
+    }
+}
+
 async function deletarProduto(tipo, id) {
     const service = produtoService[tipo];
 
     await service.deletar(id);
-    await carregarProdutos(tipo);
+    await carregarArmacoes();
+    await carregarLentes();
 }
 
 async function abrirModalEditarProduto(tipo, id) {
     abrirModal(`modal-editar-${tipo}`);
+
     const produto = state[produtoService[tipo].stateKey].find(p => p.id === id);
 
+    if (!produto) {
+        console.error("Produto não encontrado", id);
+        return;
+    }
+
     const form = document.getElementById(`form-editar-${tipo}`);
-    form.dataset.produtoId = id;
 
-    form.nome.value = produto.nome;
-    form.tipo.value = produto.tipo;
-    form.marca.value = produto.marca;
-    form.modelo.value = produto.modelo;
-    form.material.value = produto.material;
-    form.descricao.value = produto.descricao;
-    form.preco.value = produto.preco;
+    
+    document.getElementById(`form-foto-${tipo}-edit`).dataset.produtoId = id;
 
+    const get = (campo) => document.getElementById(`${campo}-${tipo}-edit`);
+    document.getElementById(`preview-foto-${tipo}-edit`).src = produto.fotoUrl || "imgs/default-product.png";
+    get("nome").value = produto.nome;
+    get("tipo").value = produto.tipo;
+    get("marca").value = produto.marca;
+    get("modelo").value = produto.modelo;
+    get("material").value = produto.material;
+    get("descricao").value = produto.descricao;
+    get("preco").value = produto.preco;
 
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+
+        const dadosAtualizados = {
+            fotoUrl: get("foto").src,
+            nome: get("nome").value,
+            tipo: get("tipo").value,
+            marca: get("marca").value,
+            modelo: get("modelo").value,
+            material: get("material").value,
+            descricao: get("descricao").value,
+            preco: Number(get("preco").value)
+        };
+
+        try {
+            await produtoService[tipo].atualizar(id, dadosAtualizados);
+            await carregarArmacoes();
+            await carregarLentes();
+            fecharModal(`modal-editar-${tipo}`);
+            mostrarMensagem(msgProdutosLoja, "Produto atualizado com sucesso!", "sucesso");
+        } catch (error) {
+            console.error(error);
+            mostrarMensagem(msgProdutosLoja, "Erro ao atualizar produto!", "erro");
+        }
+    };
+}
+
+function configurarPreviewImagem(inputId, previewId) {
+
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+
+    input.addEventListener("change", () => {
+
+        const file = input.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
+}
+
+async function configurarUploadImagem(formId, inputId, previewId, uploadFunction) {
+
+    const form = document.getElementById(formId);
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+
+    form.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const produtoId = form.dataset.produtoId;
+
+        if (!produtoId) {
+            alert("Produto ainda não foi criado");
+            return;
+        }
+
+        const file = input.files[0];
+        if (!file) {
+            mostrarMensagem(msgProdutosLoja, "Selecione uma imagem!", "erro");
+            return;
+        }
+
+        try {
+
+            const urlImagem = await uploadFunction(produtoId, file);
+
+            preview.src = urlImagem;
+
+            await carregarArmacoes();
+            await carregarLentes();
+            mostrarMensagem(msgProdutosLoja, "Produto atualizado com sucesso!", "sucesso");
+
+        } catch (error) {
+            console.error(error);
+            mostrarMensagem(msgProdutosLoja, "Erro ao atualizar produto!", "erro");
+        }
+
+    });
 
 }
 
+
+function configurarFotos() {
+
+    // ARMAÇÃO CRIAR
+    configurarPreviewImagem(
+        "foto-armacao-criar",
+        "preview-foto-armacao"
+    );
+
+    configurarUploadImagem(
+        "form-foto-armacao",
+        "foto-armacao-criar",
+        "preview-foto-armacao",
+        uploadFotoArmacao
+    );
+
+    // ARMAÇÃO EDITAR
+    configurarPreviewImagem(
+        "foto-armacao-edit",
+        "preview-foto-armacao-edit"
+    );
+
+    configurarUploadImagem(
+        "form-foto-armacao-edit",
+        "foto-armacao-edit",
+        "preview-foto-armacao-edit",
+        uploadFotoArmacao
+    );
+
+    // LENTE CRIAR
+    configurarPreviewImagem(
+        "foto-lente-criar",
+        "preview-foto-lente"
+    );
+
+    configurarUploadImagem(
+        "form-foto-lente",
+        "foto-lente-criar",
+        "preview-foto-lente",
+        uploadFotoLente
+    );
+
+    // LENTE EDITAR
+    configurarPreviewImagem(
+        "foto-lente-edit",
+        "preview-foto-lente-edit"
+    );
+
+    configurarUploadImagem(
+        "form-foto-lente-edit",
+        "foto-lente-edit",
+        "preview-foto-lente-edit",
+        uploadFotoLente
+    );
+}
 
 /*************************************************
  * INICIALIZAÇÃO
@@ -231,6 +436,7 @@ async function initPaginaAdmin() {
         //await carregarLentes();
 
         configurarEventos();
+        configurarFotos();
         carregarArmacoes();
         carregarLentes();
     } catch (error) {
