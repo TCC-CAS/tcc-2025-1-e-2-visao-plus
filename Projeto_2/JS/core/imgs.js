@@ -145,75 +145,38 @@ export function carregarFotoLoja(usuario) {
 
 //====================================ELEMENTOS FOTO LENTE========================================//
 
-const formLente = document.getElementById("form-foto-lente");
-const inputFotoLente = document.getElementById("inputFotoLente");
-const imgFotoLente = document.getElementById("fotoLente");
+export async function uploadFotoLente(lenteId, file) {
 
-export function salvarFotoLente() {
+    const formData = new FormData();
+    formData.append("file", file);
 
-    if (!formLente) return; // evita erro se não existir na página
-
-    formLente.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const usuario = getUsuarioLogado();
-        const usuarioId = usuario.id;
-        const lojaId = usuario.loja.id;
-        const lenteId = usuario.loja.lente.id;
-
-        const file = inputFotoLente.files[0];
-
-        if (!file) {
-            alert("Selecione uma imagem!");
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append("file", file);
-
-        try {
-            const response = await fetch(
-                `${API}/lentes/${lenteId}/foto`,
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error("Erro ao enviar imagem");
-            }
-
-            const imageUrl = await response.text();
-
-            // Atualiza imagem na tela
-            imgFotoLoja.src = imageUrl;
-
-            //Atualiza localStorage
-            usuario.loja.fotoUrl = imageUrl;
-            localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
-
-            alert("Foto atualizada com sucesso!");
-
-        } catch (error) {
-            console.error(error);
-            alert("Erro ao atualizar foto");
-        }
+    const response = await fetch(`${API}/lentes/${lenteId}/foto`, {
+        method: "POST",
+        body: formData
     });
-}
- 
 
-export function carregarFotoLente(Lente) {
-
-    console.log("FotoUrl Lente recebida:", loja.lente.fotoUrl);
-    if (!imgFotoLente) return;
-
-    if (usuario?.loja?.fotoUrl && usuario.loja.fotoUrl.trim() !== "") {
-        imgFotoLente.src = usuario.loja.fotoUrl;
-        console.log("FotoUrl Lente recebida:", usuario.loja.fotoUrl);
-    } else {
-        imgFotoLente.src = "imgs/store1.png";
+    if (!response.ok) {
+        throw new Error("Erro ao enviar foto da lente");
     }
+
+    return await response.text();
 }
 
 //====================================ELEMENTOS FOTO ARMAÇÃO========================================//
+
+export async function uploadFotoArmacao(idProduto, file) {
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(`${API}/armacao/${idProduto}/foto`, {
+        method: "POST",
+        body: formData
+    });
+
+    if (!response.ok) {
+        throw new Error("Erro ao enviar foto da armação");
+    }
+
+    return await response.text();
+}
