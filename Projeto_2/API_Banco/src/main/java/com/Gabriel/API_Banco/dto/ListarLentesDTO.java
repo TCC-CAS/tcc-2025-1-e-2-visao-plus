@@ -10,6 +10,7 @@ public class ListarLentesDTO {
     private String material;
     private String descricao;
     private Double preco;
+    private String fotoUrl;
 
     // construtor vazio (obrigatório pra frameworks)
     public ListarLentesDTO() {
@@ -24,7 +25,8 @@ public class ListarLentesDTO {
             String modelo,
             String material,
             String descricao,
-            Double preco
+            Double preco,
+            String fotoUrl
     ) {
         this.id = id;
         this.nome = nome;
@@ -34,6 +36,7 @@ public class ListarLentesDTO {
         this.material = material;
         this.descricao = descricao;
         this.preco = preco;
+        this.fotoUrl = fotoUrl;
     }
 
     // getters e setters
@@ -101,6 +104,11 @@ public class ListarLentesDTO {
         this.preco = preco;
     }
 
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
 
-
+    public void setFotoUrl(String fotoUrl){
+        this.fotoUrl = fotoUrl;
+    }
 }
