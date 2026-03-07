@@ -6,6 +6,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #f0f8ff;
 }
+
 /* =========================
    CONTEÚDO PRINCIPAL
    ========================= */
@@ -34,7 +35,7 @@ body {
 
 .titulo-secao,
 .span {
-    
+
     font-size: 30px;
     color: #156783;
     margin: 0;
@@ -51,15 +52,15 @@ body {
 
 .armacao-section,
 .lente-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+
+    background: white;
+
+    border-radius: 14px;
+
     padding: 20px;
-    padding-top: 0%;
-    min-height: 0;
-    background-color: #b5d7df;
-    border-radius: 10px;
-    margin-bottom: 20px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+
 }
 
 .armacao-section h3,
@@ -79,39 +80,87 @@ body {
    ========================= */
 
 .btn-adicionar {
-    background-color: #ffffff;
-    color: #156783;
+
+    background: linear-gradient(135deg, #156783, #1b8aa8);
+
+    color: white;
+
+    border: none;
+
     border-radius: 10px;
-    padding: 15px;
-    width: 15%;
-    flex-shrink: 0;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
-    border-left: 5px solid #156783;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
-    justify-content: center;
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 1%;
+
+    padding: 10px 16px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
     cursor: pointer;
+
+    width: fit-content;
+
+    box-shadow: 0 6px 18px rgba(21, 103, 131, 0.25);
+
+    transition: transform 0.15s, box-shadow 0.15s;
+
 }
 
 .btn-adicionar:hover {
-    background-color: #9e9e9e;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 10px 22px rgba(21, 103, 131, 0.35);
+
 }
 
-.btn-editar, .btn-deletar {
-    background-color: #156783;
-    color: white;
+.btn-editar,
+.btn-deletar {
+
     border: none;
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
+
+    padding: 8px 12px;
+
+    font-size: 13px;
+
     cursor: pointer;
+
+    transition: all 0.15s ease;
+
 }
 
-.btn-editar:hover, .btn-deletar:hover {
-    background-color: #0e4c5a;
+.btn-editar {
+
+    background: #156783;
+    color: white;
+
+}
+
+.btn-editar:hover {
+
+    background: #0e4c5a;
+
+}
+
+.btn-deletar {
+
+    background: #ef4444;
+    color: white;
+
+}
+
+.btn-deletar:hover {
+
+    background: #dc2626;
+
+}
+
+.card-botoes {
+
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+
 }
 
 /* =========================
@@ -132,8 +181,10 @@ body {
 }
 
 .lista-horizontal::-webkit-scrollbar-thumb {
-    background: #b0b0b0;
-    border-radius: 4px;
+
+    background: #156783;
+    border-radius: 6px;
+
 }
 
 /* =========================
@@ -142,45 +193,78 @@ body {
 
 .card-armacao,
 .card-lente {
-    background: #ffffff;
-    border-radius: 10px;
-    padding: 16px;
-    min-width: 260px;
-    max-width: 260px;
-    flex-shrink: 0;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
-    border-left: 5px solid #156783;
+
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+
+    min-width: 250px;
+    max-width: 250px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+    border: 1px solid #e4eef2;
+}
+
+.card-armacao:hover,
+.card-lente:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+
 }
 
 .card-armacao h4,
 .card-lente h4 {
-    background-color: #156783;
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 1%;
+
     font-size: 18px;
-    color: white;
-    margin-top: 0;
+    font-weight: bold;
+
+    color: #156783;
+
+    margin-bottom: 4px;
+
 }
 
 .card-armacao p,
 .card-lente p {
     font-size: 14px;
     color: #333;
+    margin-top: 0px;
 }
 
 /* =========================
    MODAL
    ========================= */
+.modal-body {
+
+    display: flex;
+    gap: 30px;
+
+}
 
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(15, 23, 42, 0.6);
+
+    backdrop-filter: blur(4px);
+
     display: flex;
+    align-items: flex-start;
+    padding-top: 60px;
     justify-content: center;
-    align-items: center;
-    z-index: 1000;
+
+    z-index: 9999;
+
+    animation: fadeIn 0.2s ease;
 }
 
 .hidden {
@@ -188,20 +272,62 @@ body {
 }
 
 .modal-content {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 350px;
     position: relative;
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+
+    width: 1000px;
+    /* antes 500px */
+    max-width: 90%;
+
+    max-height: 80vh;
+    /* impede de ultrapassar a tela */
+    overflow-y: auto;
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+
+    animation: modalEnter 0.25s ease;
 }
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
 
 .fechar-modal {
     position: absolute;
-    right: 10px;
-    top: 5px;
+    right: 12px;
+    top: 12px;
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+
     cursor: pointer;
-    font-size: 22px;
-    color: rgb(178, 61, 61);
+
+    font-size: 18px;
+
+    transition: 0.2s;
+}
+
+.fechar-modal:hover {
+
+    background: #fee2e2;
+    color: #dc2626;
+
 }
 
 /* =========================
@@ -211,18 +337,27 @@ body {
 form {
     display: flex;
     flex-direction: column;
+    gap: 12px;
 }
 
-label {
-    margin: 4px 0;
+form label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
 }
 
-input,
-textarea {
-    margin-bottom: 8px;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+form input,
+form textarea,
+form select {
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #cbd5e1;
+
+    font-size: 14px;
+
+    transition: all 0.2s ease;
 }
 
 .btn-salvar {
@@ -236,4 +371,135 @@ textarea {
 
 .btn-salvar:hover {
     background-color: #0e4c5a;
+}
+
+/* =========================
+   FOTOS
+   ========================= */
+
+.foto-produto {
+
+    width: 100%;
+    height: 140px;
+
+    object-fit: contain;
+
+    background: #f6f9fb;
+
+    border-radius: 10px;
+
+    padding: 8px;
+}
+
+.input-foto {
+
+    font-size: 12px;
+    margin-top: 4px;
+
+}
+
+.foto-preview {
+    width: 120px;
+    height: 400px;
+    border: 1px dashed #bbb;
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.foto-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* FOTO ESQUERDA */
+
+.foto-armacao-area,
+.foto-lente-area{
+
+    width: 500px;
+    height: 580px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.foto-armacao-area img,
+.foto-lente-area img{
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #f6f9fb;
+
+    border-radius: 10px;
+
+    padding: 10px;
+
+    border: 1px solid #e2e8f0;
+
+}
+
+/* FORM DIREITA */
+
+.modal-body form{
+
+    flex: 1;
+
+}
+
+/*================================================
+    MENSAGENS DE DISPONIBILIDADE
+=================================================*/
+
+/* Container das mensagens */
+#mensagensTopo {
+    position: fixed;
+    top: 1%;
+    left: 30%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 99999;
+}
+
+/* Toast base */
+.toast {
+    min-width: 280px;
+    max-width: 400px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Mostrar */
+.toast.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sucesso */
+.toast.sucesso {
+    background-color: #2ecc71;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+}
+
+/* Erro */
+.toast.erro {
+    background-color: #e74c3c;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
 }
