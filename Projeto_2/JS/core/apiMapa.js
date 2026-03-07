@@ -5,3 +5,4 @@ export async function carregarMapa() {
         <div id="mapa"></div>
     `;
 }
+
