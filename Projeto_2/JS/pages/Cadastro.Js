@@ -1,6 +1,9 @@
 import { validarEmail, validarNomeUsuario } from "../core/usuario.js";
+import { configurarHeader } from "../components/header2.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    configurarHeader();
 
     const form = document.querySelector("#cadastroForm");
 
