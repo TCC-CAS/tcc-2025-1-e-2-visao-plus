@@ -86,17 +86,14 @@ function montarCarrinho() {
             <img src="imgs/231-2317482_white-shopping-cart-png-download-buy-icon-white.png" class="icon">
         </div>
     `;
-}
+} 
 
 function montarMenuVendedor() {
     return `
         <div id="menu-vendedor" class="profile-menu">
-            <img src="imgs/store1.png" class="iconstore">
-                <div class="dropdown">
-                    <a href="ProdutosLoja.html">Meus Produtos</a>
-                    <a href="AdminLoja.html">Administração Loja</a>
-                    <a href="PaginaLoja.html">Minha Loja</a>
-                </div>
+            <a href="CentralLoja.html">
+                    <img src="imgs/store1.png" class="iconstore" alt="Ícone">
+                </a>                
         </div>
     `;
 }
