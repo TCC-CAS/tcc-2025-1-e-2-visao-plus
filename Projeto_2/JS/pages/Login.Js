@@ -1,4 +1,9 @@
+
+import { configurarHeader } from "../components/header2.js";
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    configurarHeader();
 
     const form = document.querySelector("#loginForm");
     const msgLogin = document.querySelector("#msgLogin");
