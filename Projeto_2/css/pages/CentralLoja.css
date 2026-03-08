@@ -1,0 +1,100 @@
+
+
+/* Layout geral */
+body {
+    display: flex;
+    height: 100vh;
+    font-family: Arial;
+    padding-top: 5%;
+}
+
+/* MENU LATERAL */
+#barra-menu {
+    width: 220px;
+    background-color: #f4f4f4;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#barra-menu a {
+    text-decoration: none;
+    color: #555;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+#barra-menu a:hover {
+    background-color: #e0e0e0;
+}
+
+/* ÁREA PRINCIPAL */
+#central-loja {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+}
+
+#central-loja h1 {
+    margin-bottom: 30px;
+}
+
+/* CARDS DO DASHBOARD */
+.dashboard-cards {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.card {
+    width: 260px;
+    height: 160px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1% 2% 3% 2%;
+    background: #fafafa;
+
+    align-items: center;
+    object-fit: contain;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+    margin-top: 0%;
+    color: #444;
+}
+
+.card-body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1% 2% 3% 2%;
+}
+
+.chart{
+    width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    padding: 1% 2% 3% 2%;
+}
+
+/* BOTÃO */
+.botao-adicionar {
+    background-color: #2d8fe2;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botao-adicionar:hover {
+    background-color: #1e6fb5;
+}
