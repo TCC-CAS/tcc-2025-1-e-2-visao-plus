@@ -83,9 +83,14 @@ function criarCardLoja(loja) {
     div.classList.add("card-loja");
 
     div.innerHTML = `
-        <h2>${loja.nome}</h2>
-        <p><strong>${loja.email}</strong></p>
-        <p><strong>${loja.endereco}</strong></p>
+        <div class="imagem-loja">
+            <img src="${loja.fotoUrl || "imgs/store1.png"}" alt="${loja.nome}">
+        </div>
+        <div class="dados-loja">
+            <h2>${loja.nome}</h2>
+            <p><strong>${loja.email}</strong></p>
+            <p><strong>${loja.endereco}</strong></p>
+        </div>
     `;
 
     div.addEventListener("click", () => {
