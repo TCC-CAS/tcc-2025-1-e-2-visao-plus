@@ -2,7 +2,7 @@ import { configurarHeader } from "../components/header.js";
 import { buscarLojaPorId } from "../core/loja.js";
 import { listarArmacoesPorLoja, listarLentesPorLoja } from "../core/produtos.js";
 import { adicionarProdutoCotacao } from "../components/modalCotacao.js";
-import { abrirModal,fecharModal } from "../components/modals.js";
+import { abrirModal, fecharModal } from "../components/modals.js";
 
 /* =========================
    VISUALIZAÇÃO DA PÁGINA
@@ -85,10 +85,17 @@ function criarCardLente(lente) {
   div.classList.add("card-produto");
 
   div.innerHTML = `
-    <h3>${lente.nome}</h3>
-    <p><strong>Preço:</strong> R$ ${lente.preco.toFixed(2)}</p>
-    <p><strong>Descrição:</strong> ${lente.descricao || ""}</p>
+    <div class="produto">
+      <div class="imagem-produto">
+        <img src="${lente.fotoUrl || "imgs/store1.png"}" alt="${lente.nome}">
+      </div>
 
+      <div class="dados-produto">
+      <h3>${lente.nome}</h3>
+      <p><strong>Preço:</strong> R$ ${lente.preco.toFixed(2)}</p>
+      <p><strong>Descrição:</strong> ${lente.descricao || ""}</p>
+      </div>
+    </div>
     <button class="btn-cotar">+ Cotar</button>
   `;
 
@@ -134,7 +141,7 @@ document
   ?.addEventListener("click", () => {
     document.getElementById("modal-produto").classList.remove("ativo");
   });
-  
+
 
 
 function criarCardArmacao(armacao) {
@@ -142,9 +149,17 @@ function criarCardArmacao(armacao) {
   div.classList.add("card-produto");
 
   div.innerHTML = `
-    <h3>${armacao.nome}</h3>
-    <p><strong>Preço:</strong> R$ ${armacao.preco.toFixed(2)}</p>
-    <p><strong>Descrição:</strong> ${armacao.descricao || ""}</p>
+    <div class="produto">
+      <div class="imagem-produto">
+        <img src="${armacao.fotoUrl || "imgs/store1.png"}" alt="${armacao.nome}">
+      </div>
+
+      <div class="dados-produto">
+        <h3>${armacao.nome}</h3>
+        <p><strong>Preço:</strong> R$ ${armacao.preco.toFixed(2)}</p>
+        <p><strong>Descrição:</strong> ${armacao.descricao || ""}</p>
+      </div>
+    </div>
 
     <button class="btn-cotar">+ Cotar</button>
   `;
