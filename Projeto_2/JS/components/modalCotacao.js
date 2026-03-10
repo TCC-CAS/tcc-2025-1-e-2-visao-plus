@@ -18,17 +18,31 @@ const spanLente = document.getElementById("Lente");
 const spanArmacao = document.getElementById("Armacao");
 const btnFecharModal = document.getElementById("fechar-modal-cotacao");
 const formCotacao = document.getElementById("form-cotacao");
+const imgLente = document.getElementById("foto-lente");
+const imgArmacao = document.getElementById("foto-armacao");
+
+
 
 // ------------------------------
 // Funções públicas
 // ------------------------------
+function imagensProdutos() {
+    if (imgLente) {
+        imgLente.src = lenteSelecionada?.fotoUrl || "imgs/store1.png";
+    }
+
+    if (imgArmacao) {
+        imgArmacao.src = armacaoSelecionada?.fotoUrl || "imgs/store1.png";
+    }
+}
+
 export function adicionarProdutoCotacao(produto, tipo) {
     if (tipo === "lente") {
         lenteSelecionada = produto;
     } else {
         armacaoSelecionada = produto;
     }
-
+    imagensProdutos();
     atualizarResumo();
     atualizarBotao();
 }
@@ -41,6 +55,7 @@ export function alternarCotacao() {
 // Funções internas
 // ------------------------------
 function atualizarResumo() {
+
     spanLente.innerHTML = lenteSelecionada
         ? `Lente: ${lenteSelecionada.nome} 
            <button id="remover-lente">✕</button>`
@@ -62,6 +77,7 @@ function atualizarResumo() {
         atualizarResumo();
         atualizarBotao();
     });
+
 }
 
 function atualizarBotao() {
