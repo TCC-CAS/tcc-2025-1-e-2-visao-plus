@@ -66,6 +66,12 @@
             <version>2.3.2</version>
         </dependency>
 
+        <!-- EMAIL -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
         <!-- DOTENV -->
         <dependency>
             <groupId>io.github.cdimascio</groupId>
