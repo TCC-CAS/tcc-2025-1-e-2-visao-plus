@@ -7,18 +7,25 @@
     <link rel="stylesheet" href="css/pages/PaginaLoja.css">
 </head>
 
-<button id="btn-cotacao" class="btn-cotacao-flutuante">
-    🧾 Cotação
-</button>
+
 
 <body>
+
+    <button id="btn-cotacao" class="btn-cotacao-flutuante">
+        🧾 Cotação
+    </button>
 
     <div id="app-header"></div>
 
     <section class="loja-header">
-        <h1 id="loja-nome"></h1>
-        <p id="loja-email"></p>
-        <p id="loja-endereco"></p>
+        <div class="foto-loja">
+            <img src="" id="loja-foto" alt="Foto-da-loja" class="loja-foto">
+        </div>
+        <div class="dados-loja">
+            <h1 id="loja-nome"></h1>
+            <p id="loja-email"></p>
+            <p id="loja-endereco"></p>
+        </div>
     </section>
 
     <section>
@@ -44,8 +51,17 @@
             <h2>Cotação</h2>
 
             <div class="resumo-produtos">
-                <div id="Lente"></div>
-                <div id="Armacao"></div>
+
+                <div class="produto-resumo">
+                    <img id="foto-lente" src="imgs/store1.png">
+                    <div id="Lente"></div>
+                </div>
+
+                <div class="produto-resumo">
+                    <img id="foto-armacao" src="imgs/store1.png">
+                    <div id="Armacao"></div>
+                </div>
+
             </div>
 
             <form id="form-cotacao">
@@ -81,6 +97,9 @@
 
             <button id="fechar-modal-produto">✕</button>
 
+            <div class="produto-imagem-modal">
+                <img id="produto-imagem" src="" alt="Produto">
+            </div>
 
             <span id="produto-nome"></span>
             <span id="produto-tipo"></span>
