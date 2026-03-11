@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
 import com.Gabriel.API_Banco.dto.ListarLojasDTO;
 import com.Gabriel.API_Banco.dto.ListarUsuariosDTO;
+import com.Gabriel.API_Banco.dto.recuperaSenhaDTO;
 import com.Gabriel.API_Banco.exceptions.UsuarioExceptions;
 import com.Gabriel.API_Banco.repository.UsuarioRepositorio;
 import org.apache.coyote.Response;
@@ -124,6 +125,10 @@ public class UsuarioController {
         return r.existsByNome(nome);
     }
 
+    @PostMapping("/recuperarSenha")
+    public ResponseEntity<?> recuperarSenha(@RequestBody recuperaSenhaDTO dto){
 
+        return ResponseEntity.ok(s.recuperaSenha(dto));
+    }
 
 }
