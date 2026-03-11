@@ -4,10 +4,17 @@ import { getLojaAtual } from "../core/loja.js";
 import { listarLojas } from "../core/loja.js";
 import { listarCotacoesPorUsuario, criarCardCotacao, chamarEstilizacao, initScrollCotacoes } from "../core/cotacoes.js";
 import { initBuscaLojas, chamarEstilizacaoSearchBar } from "../components/searchBar.js";
+import { inicializarMapa } from "../core/apiMapa.js";
 
 let lojasCache = [];
 
+async function carregarMapa(){
 
+    const oticas = await listarLojas();
+
+    inicializarMapa(oticas);
+
+}
 
 function esconderTodosOsBlocos() {
     // Seções
@@ -122,6 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
     chamarEstilizacao();
     initScrollCotacoes();    
     carregarCotacoes(getUsuarioLogado().id);
+
+    carregarMapa();
 });
 
 
