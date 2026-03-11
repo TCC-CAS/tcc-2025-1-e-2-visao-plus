@@ -30,13 +30,15 @@ public class CotacaoService {
     private final UsuarioRepositorio usuarioRepo;
     private final LojaRepositorio lojaRepo;
     private final ProdutoService produtoService;
+    private final EmailService emailService;
 
-    public CotacaoService(CotacaoRepositorio cotacaoRepo, UsuarioRepositorio usuarioRepo, LojaRepositorio lojaRepo, ProdutoService produtoService) {
+    public CotacaoService(CotacaoRepositorio cotacaoRepo, UsuarioRepositorio usuarioRepo, LojaRepositorio lojaRepo, ProdutoService produtoService, EmailService emailService) {
 
         this.cotacaoRepo = cotacaoRepo;
         this.usuarioRepo = usuarioRepo;
         this.lojaRepo = lojaRepo;
         this.produtoService = produtoService;
+        this.emailService = emailService;
     }
 
     public List<ListarCotacoesDTO> listarPorUsuario(Long idUsuario) {
@@ -103,8 +105,13 @@ public class CotacaoService {
         cotacao.setValorBase(produto.getValor());
         cotacao.setDataCriacao(LocalDate.now());
         cotacao.setStatus(StatusCotacao.SOLICITADA);
+        cotacao.setDataResposta(LocalDate.now().plusDays(7));
 
-        return cotacaoRepo.save(cotacao);
+        Cotacao cotacaoSalva = cotacaoRepo.save(cotacao);
+
+        emailService.criacaoDeCotacao(cotacaoSalva);
+
+        return cotacaoSalva;
     }
 
     //public Cotacao respostaCotacaoLoja()
