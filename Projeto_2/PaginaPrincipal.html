@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Página Principal</title>
     <link rel="stylesheet" href="css/pages/PaginaPrincipal.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 
 <body>
@@ -26,8 +27,8 @@
     <section class="main-content">
         <!-- MAPA (todos) -->
         <section id="secao-mapa" class="map-container">
-            <img src="imgs/MapaIlustrativo.png" alt="FotoMapa" class="mapa-ilustrativo">
-
+            <!--<img src="imgs/MapaIlustrativo.png" alt="FotoMapa" class="mapa-ilustrativo">-->
+            <div id="mapa-oticas"></div>
         </section>
 
         <!-- LOJAS -->
@@ -53,6 +54,7 @@
 </body>
 
 <!--<script src="JS/pages/PaginaPrincipal.js"></script>-->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script type="module" src="JS/pages/PaginaPrincipal.js"></script>
 
 </html>
