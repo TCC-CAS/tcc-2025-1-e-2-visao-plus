@@ -6,13 +6,18 @@ import java.util.Optional;
 
 import com.Gabriel.API_Banco.dto.EditarUsuarioDTO;
 import com.Gabriel.API_Banco.dto.ListarUsuariosDTO;
+import com.Gabriel.API_Banco.dto.recuperaSenhaDTO;
 import com.Gabriel.API_Banco.exceptions.UsuarioExceptions;
 import com.Gabriel.API_Banco.repository.LojaRepositorio;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.Gabriel.API_Banco.model.Usuario;
 import com.Gabriel.API_Banco.repository.UsuarioRepositorio;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.UUID;
+
+
 
 @Service
 public class UsuarioService {
@@ -20,11 +25,13 @@ public class UsuarioService {
     private final UsuarioRepositorio r;
     private final LojaRepositorio lr;
     private final ImageService imageService;
+    private final EmailService emailService;
 
-    public UsuarioService(UsuarioRepositorio r, LojaRepositorio lr, ImageService imageService) {
+    public UsuarioService(UsuarioRepositorio r, LojaRepositorio lr, ImageService imageService, EmailService emailService) {
         this.r = r;
         this.lr = lr;
         this.imageService = imageService;
+        this.emailService = emailService;
     }
 
 
@@ -105,5 +112,23 @@ public class UsuarioService {
 
         return usuario.getFotoUrl();
     }
+
+    public ResponseEntity<?> recuperaSenha(recuperaSenhaDTO dto){
+
+        Optional<Usuario> usuarioOpt = r.findByEmail(dto.getEmail());
+
+        if(!usuarioOpt.isPresent()){
+            return ResponseEntity.badRequest().body("Email não encontrado");
+        }
+
+        Usuario usuario = usuarioOpt.get();
+
+        String senha;
+        senha = usuario.getSenha();
+        emailService.recuperacaoSenha(dto.getEmail(), "", senha);
+
+        return ResponseEntity.ok("Email enviado!");
+    }
+
 
 }
