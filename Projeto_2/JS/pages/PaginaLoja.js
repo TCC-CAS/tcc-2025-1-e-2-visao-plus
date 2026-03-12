@@ -22,7 +22,7 @@ async function carregarLoja() {
     }
 
     const loja = await buscarLojaPorId(id);
-    document.getElementById("loja-foto").src = loja.fotoUrl;
+    document.getElementById("loja-foto").src = loja.fotoUrl || "imgs/store1.png";
     document.getElementById("loja-nome").textContent = loja.nome;
     document.getElementById("loja-email").textContent = loja.email;
     document.getElementById("loja-endereco").textContent = loja.endereco;
