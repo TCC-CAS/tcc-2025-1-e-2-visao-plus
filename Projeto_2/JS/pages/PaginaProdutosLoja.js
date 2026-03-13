@@ -19,14 +19,14 @@ import { configurarHeader } from "../components/header.js";
  * MENSAGENS
  ********************************************************/
 function mostrarMensagem(elemento, texto, tipo) {
-        elemento.textContent = texto;
-        elemento.classList.remove("sucesso", "erro");
-        elemento.classList.add("mostrar", tipo);
+    elemento.textContent = texto;
+    elemento.classList.remove("sucesso", "erro");
+    elemento.classList.add("mostrar", tipo);
 
-        setTimeout(() => {
-            elemento.classList.remove("mostrar");
-        }, 4000);
-    }
+    setTimeout(() => {
+        elemento.classList.remove("mostrar");
+    }, 4000);
+}
 
 /*********************************************************
  * SERVIÇOS DE PRODUTOS
@@ -199,7 +199,7 @@ function criarCardProduto(tipo, produto) {
 
 async function adicionarProduto(tipo, e) {
 
-   
+
     e.preventDefault();
 
     const get = (campo) => document.getElementById(`${campo}-${tipo}`);
@@ -254,6 +254,23 @@ async function deletarProduto(tipo, id) {
 async function abrirModalEditarProduto(tipo, id) {
     abrirModal(`modal-editar-${tipo}`);
 
+    const textarea = document.getElementById(`descricao-${tipo}-edit`);
+    const contador = document.getElementById(`contador-${tipo}-edit`);
+
+    textarea.oninput = () => {
+        const tamanho = textarea.value.length;
+
+        contador.textContent = tamanho + " / 500";
+
+        if (tamanho > 450) {
+            contador.classList.add("contadorNOK");
+            contador.classList.remove("contadorOk");
+        } else {
+            contador.classList.add("contadorOk");
+            contador.classList.remove("contadorNOK");
+        }
+    };
+
     const produto = state[produtoService[tipo].stateKey].find(p => p.id === id);
 
     if (!produto) {
@@ -263,7 +280,7 @@ async function abrirModalEditarProduto(tipo, id) {
 
     const form = document.getElementById(`form-editar-${tipo}`);
 
-    
+
     document.getElementById(`form-foto-${tipo}-edit`).dataset.produtoId = id;
 
     const get = (campo) => document.getElementById(`${campo}-${tipo}-edit`);
@@ -420,6 +437,8 @@ function configurarFotos() {
         uploadFotoLente
     );
 }
+
+
 
 /*************************************************
  * INICIALIZAÇÃO
