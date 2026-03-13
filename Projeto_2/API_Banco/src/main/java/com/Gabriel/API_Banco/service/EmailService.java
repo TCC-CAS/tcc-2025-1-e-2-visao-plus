@@ -53,10 +53,29 @@ public class EmailService {
         message.setText(
                 "Olá, "+ cotacao.getUsuario().getNome() +"!\n\n" +
                         "Obrigado por utilizar da VisionPlus+ para realizar uma cotação!\n" +
-                        "Até o prazo: " +cotacao.getDataResposta().format(formatter) +
-                        "Estaremos acompanhando, para garantir de que seu pedido seja atendido!\n" +
+                        "Estaremos acompanhando, para garantir de que seu pedido seja atendido " +
+                        "até o prazo: " +cotacao.getDataResposta().format(formatter) + ".\n" +
                         "Caso tenha algum comentário ou observação, sinta-se à vontade para usar o chat da cotação!\n"+
                         "Muito obrigado, novamente, por confiar na VisionPlus+!"
+        );
+
+        mailSender.send(message);
+
+    }
+
+    public void respostaCotacao(Cotacao cotacao){
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        message.setTo(cotacao.getUsuario().getEmail());
+        message.setSubject("Cotação Respondida!");
+
+        message.setText(
+                "Olá, "+ cotacao.getUsuario().getNome() +"!\n\n" +
+                        "Informamos que a sua cotação para a loja " + cotacao.getLoja().getNome() + " foi respondida! \n"+
+                        "Venha conferir o status da sua cotação!\n" +
+                        "Muito obrigado por confiar na VisionPlus+!"
         );
 
         mailSender.send(message);
