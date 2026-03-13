@@ -32,7 +32,7 @@ public class Lente {
     @Column(name = "material_lente")
     private String material;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", columnDefinition = "TEXT")
     private String descricao;
 
     @Column(name = "preco_lente")
