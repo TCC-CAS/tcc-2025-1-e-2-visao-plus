@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ListarCotacoesDTO {
+    private Long idCotacao;
     private Long idUsuario;
     private Loja loja;
     private ListarProdutosDTO produto;
