@@ -1,5 +1,6 @@
 import { API } from "./api.js"; // API = "http://localhost:8080"
 import { buscarLojaPorId } from "./loja.js";
+import {abrirModalCotacao} from "../components/ModalCotacaoResposta.js"
 
 export async function criarCotacao(dadosCotacao) {
     const response = await fetch(`${API}/cotacoes/criarCotacao`, {
@@ -29,6 +30,7 @@ export function criarCardCotacao(cotacao) {
 
     const card = document.createElement("div");
     card.classList.add("card", "mb-3", "shadow-sm");
+    
 
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
@@ -50,7 +52,7 @@ export function criarCardCotacao(cotacao) {
         <h5 class="card-title mb-2">${nomeProduto}</h5>
         <h6 class="card-subtitle mb-3 text-muted">Loja ${loja.nome}</h6>
 
-        <div class="dados"
+        <div class="dados"> 
         <p class="mb-1"><strong>Status:</strong> ${status}</p>
 
         <p class="mb-1">
@@ -62,6 +64,15 @@ export function criarCardCotacao(cotacao) {
         <p class="mb-1"><strong>Prazo:</strong> ${prazo} dias</p>
         </div>
     `;
+
+    const botao = document.createElement("button");
+    botao.classList.add("btn", "btn-primary", "mt-2");
+    botao.innerText = "Responder";
+    botao.addEventListener("click", () => {
+        abrirModalCotacao(cotacao);
+    });
+
+    cardBody.appendChild(botao);
 
     card.appendChild(cardBody);
     return card;
