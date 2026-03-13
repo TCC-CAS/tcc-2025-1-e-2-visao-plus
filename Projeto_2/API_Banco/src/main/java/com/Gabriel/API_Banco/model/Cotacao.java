@@ -58,10 +58,10 @@ public class Cotacao {
     @Column(name = "data_aprovacao")
     private LocalDate dataAprovacao;
 
-    @Column(name = "observacao_cliente")
+    @Column(name = "observacao_cliente", columnDefinition = "TEXT")
     private String observacaoCliente;
 
-    @Column(name = "observacao_loja")
+    @Column(name = "observacao_loja", columnDefinition = "TEXT")
     private String observacaoLoja;
 
     @Enumerated(EnumType.STRING)
