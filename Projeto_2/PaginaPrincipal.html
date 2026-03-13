@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="css/pages/PaginaPrincipal.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body>
+    <div id="app-header"></div>
+
+    <!-- COTAÇÕES (cliente e vendedor) -->
+    <section id="secao-cotacoes" class="products-carousel">
+        <h2>Cotações Recentes</h2>
+
+        <div class="cotacoes-wrapper">
+            <button class="scroll-btn left" id="scroll-left">‹</button>
+
+            <div id="lista-cotacoes" class="lista-cotacoes"></div>
+
+            <button class="scroll-btn right" id="scroll-right">›</button>
+        </div>
+    </section>
+
+    <section class="main-content">
+        <!-- MAPA (todos) -->
+        <section id="secao-mapa" class="map-container">
+            <!--<img src="imgs/MapaIlustrativo.png" alt="FotoMapa" class="mapa-ilustrativo">-->
+            <div id="mapa-oticas"></div>
+        </section>
+
+        <!-- LOJAS -->
+        <section id="secao-lojas" class="sidebar">
+            <h3>Lojas Próximas</h3>
+
+            <!-- BARRA DE BUSCA -->
+            <input type="text" id="busca-lojas" placeholder="Buscar lojas..." class="input-busca-lojas">
+
+            <section id="lista-lojas" class="lista-lojas"></section>
+        </section>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="secao-admin" class="map-container">
+        <h2 id="map">Dashboard Administrativo</h2>
+    </section>
+
+
+
+
+
+</body>
+
+<!--<script src="JS/pages/PaginaPrincipal.js"></script>-->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="JS/pages/PaginaPrincipal.js"></script>
+
+</html>

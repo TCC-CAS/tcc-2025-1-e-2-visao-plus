@@ -1,0 +1,197 @@
+body {
+    background-color: #f0f8ff; /* Fundo azul muito claro */
+    font-size: 16px;
+    padding-top: 3%;
+}
+
+.container-cadastro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 35px;
+    background-color: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+    margin: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    margin: 8px 0 15px 0;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+button {
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background-color: #0e4e5e;
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+}
+
+h1 {
+    color: #156783;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+    font-family: Arial;
+}
+
+a {
+    color: #156783;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+/*==================================================
+    CARD DE ERRO DA SENHA
+==================================================*/
+
+.regras-card {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 250px;
+    padding: 15px;
+    background: white;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
+    z-index: 999;
+}
+
+.regras-card.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.regras-card h4 {
+    margin-top: 0;
+}
+
+.erro-senha {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/*==================================================
+    RESPONSIVO
+==================================================*/
+
+.regras-card li {
+    list-style: none;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.valido {
+    color: #00c853;
+}
+
+.invalido {
+    color: red;
+}
+
+input.senha-valida {
+    border: 2px solid #00c853;
+}
+
+input.senha-invalida {
+    border: 2px solid red;
+}
+
+/*================================================
+    MENSAGENS DE DISPONIBILIDADE
+=================================================*/
+
+/* Container das mensagens */
+#mensagensTopo {
+    position: fixed;
+    top: 1%;
+    left: 20%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+}
+
+/* Toast base */
+.toast {
+    min-width: 280px;
+    max-width: 400px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Mostrar */
+.toast.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sucesso */
+.toast.sucesso {
+    background-color: #2ecc71;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+}
+
+/* Erro */
+.toast.erro {
+    background-color: #e74c3c;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+}
