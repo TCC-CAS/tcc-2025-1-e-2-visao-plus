@@ -137,7 +137,7 @@ formCotacao?.addEventListener("submit", async (event) => {
             grauEsquerdo,
             idUsuario: usuario.id,
             idLoja,
-            valor: lenteSelecionada?.preco || armacaoSelecionada?.preco || 0,
+            valor: lenteSelecionada?.preco + armacaoSelecionada?.preco || 0,
             prazoEntrega: 7 // valor default
         },
         idUsuario: usuario.id,
