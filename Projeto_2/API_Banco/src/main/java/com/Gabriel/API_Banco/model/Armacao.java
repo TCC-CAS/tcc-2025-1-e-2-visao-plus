@@ -31,7 +31,7 @@ public class Armacao {
     @Column(name = "material_armacao")
     private String material;
 
-    @Column(name = "descricao")
+    @Column(name = "descricao", columnDefinition = "TEXT")
     private String descricao;
 
     @Column(name = "preco_armacao")
