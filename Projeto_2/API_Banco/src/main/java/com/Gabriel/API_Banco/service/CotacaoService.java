@@ -1,15 +1,13 @@
 package com.Gabriel.API_Banco.service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.Gabriel.API_Banco.dto.ListarCotacoesDTO;
-import com.Gabriel.API_Banco.dto.ListarLentesDTO;
-import com.Gabriel.API_Banco.dto.ListarProdutosDTO;
+import com.Gabriel.API_Banco.dto.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.Gabriel.API_Banco.dto.CriarCotacaoDTO;
 import com.Gabriel.API_Banco.model.Cotacao;
 import com.Gabriel.API_Banco.model.Loja;
 import com.Gabriel.API_Banco.model.Produto;
@@ -60,6 +58,7 @@ public class CotacaoService {
                     );
 
                     return new ListarCotacoesDTO(
+                            cotacao.getId(),
                             cotacao.getUsuario().getId(),
                             cotacao.getLoja(),
                             produtoDTO,
@@ -112,6 +111,83 @@ public class CotacaoService {
         emailService.criacaoDeCotacao(cotacaoSalva);
 
         return cotacaoSalva;
+    }
+
+    public Cotacao responderCotacao(Long id, ResponderCotacaoDTO dto, Long idLojaLogada) {
+
+        Cotacao cotacao = cotacaoRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cotação não encontrada"));
+
+        if (!cotacao.getLoja().getId().equals(idLojaLogada)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Esta cotação não pertence à sua loja"
+            );
+        }
+
+        if (cotacao.getStatus() != StatusCotacao.SOLICITADA &&
+                cotacao.getStatus() != StatusCotacao.NEGOCIANDO) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Cotação não pode ser respondida neste estado"
+            );
+        }
+
+        if (dto.getValorFinal() == null || dto.getPrazoEntrega() == null) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Valor final e prazo são obrigatórios"
+            );
+        }
+
+        cotacao.setValorFinal(dto.getValorFinal());
+        cotacao.setPrazoEntregaConfirmado(dto.getPrazoEntrega());
+        cotacao.setObservacaoLoja(dto.getObservacaoLoja());
+        cotacao.setDataResposta(LocalDate.now());
+        cotacao.setStatus(StatusCotacao.NEGOCIANDO);
+
+        Cotacao cotacaoSalva = cotacaoRepo.save(cotacao);
+
+        emailService.respostaCotacao(cotacaoSalva);
+
+        return cotacaoSalva;
+    }
+
+    public Cotacao aprovarCotacao(Long idCotacao) {
+
+        Cotacao cotacao = cotacaoRepo.findById(idCotacao)
+                .orElseThrow(() -> new RuntimeException("Cotação não encontrada"));
+
+        if (cotacao.getStatus() != StatusCotacao.NEGOCIANDO) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Apenas cotações respondidas podem ser aprovadas"
+            );
+        }
+
+        cotacao.setStatus(StatusCotacao.APROVADA);
+        cotacao.setDataAprovacao(LocalDate.now());
+
+        return cotacaoRepo.save(cotacao);
+    }
+
+    public Cotacao registrarPagamento(Long idCotacao) {
+
+        Cotacao cotacao = cotacaoRepo.findById(idCotacao)
+                .orElseThrow(() -> new RuntimeException("Cotação não encontrada"));
+
+        if (cotacao.getStatus() != StatusCotacao.APROVADA) {
+
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Pagamento só pode ocorrer após aprovação"
+            );
+        }
+
+        cotacao.setStatus(StatusCotacao.RESERVADA);
+
+        return cotacaoRepo.save(cotacao);
     }
 
     //public Cotacao respostaCotacaoLoja()
