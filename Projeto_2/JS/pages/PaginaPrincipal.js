@@ -129,9 +129,12 @@ document.addEventListener("DOMContentLoaded", () => {
     chamarEstilizacao();
     initScrollCotacoes();   
     carregarMapa();
-     
-    carregarCotacoes(getUsuarioLogado().id);
-
+    
+    getUsuarioLogado;
+    const usuario = getUsuarioLogado();
+    if(usuario != null){
+        carregarCotacoes(usuario.id);
+    }
     
 });
 
