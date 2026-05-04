@@ -33,7 +33,6 @@ function configurarTela() {
 
     if (!usuario) {
         // Se não tiver ninguém logado, não mostramos nada
-        
         return;
     }
 
