@@ -127,10 +127,12 @@ document.addEventListener("DOMContentLoaded", () => {
     chamarEstilizacaoSearchBar();
 
     chamarEstilizacao();
-    initScrollCotacoes();    
+    initScrollCotacoes();   
+    carregarMapa();
+     
     carregarCotacoes(getUsuarioLogado().id);
 
-    carregarMapa();
+    
 });
 
 
