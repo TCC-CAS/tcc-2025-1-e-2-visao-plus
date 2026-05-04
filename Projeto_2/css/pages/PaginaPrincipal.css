@@ -8,6 +8,10 @@ body {
     margin: 0;
     padding-top: 80px; /* espaço inicial do header */
 }
+
+.div-invisivel{
+    padding-top: 3rem;
+}
 /* =========================
    CARROSSEL DE PRODUTOS
    ========================= */

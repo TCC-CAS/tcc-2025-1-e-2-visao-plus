@@ -20,6 +20,7 @@ function esconderTodosOsBlocos() {
     // Seções
     document.getElementById("secao-cotacoes").style.display = "none";
     document.getElementById("secao-admin").style.display = "none";
+    document.getElementById("div-invisivel").style.display = "none";
 }
 
 
@@ -33,6 +34,7 @@ function configurarTela() {
 
     if (!usuario) {
         // Se não tiver ninguém logado, não mostramos nada
+        document.getElementById("div-invisivel").style.display = "block";
         return;
     }
 
