@@ -102,12 +102,36 @@ function criarCardLoja(loja) {
         </div>
     `;
 
-    div.addEventListener("click", () => {
-        window.location.href = `PaginaLoja.html?id=${loja.id}`;
-    });
+    // Agora abre o modal em vez de redirecionar direto
+    div.addEventListener("click", () => abrirModalLoja(loja));
 
     return div;
 }
+
+function abrirModalLoja(loja) {
+    document.getElementById("modal-foto").src = loja.fotoUrl || "imgs/store1.png";
+    document.getElementById("modal-nome").textContent = loja.nome;
+    document.getElementById("modal-cidade").textContent = loja.cidade || "";
+    document.getElementById("modal-email").textContent = loja.email || "—";
+    document.getElementById("modal-endereco").textContent = loja.endereco || "—";
+    document.getElementById("modal-telefone").textContent = loja.telefone || "—";
+
+    document.getElementById("modal-btn-ver").onclick = () => {
+        window.location.href = `PaginaLoja.html?id=${loja.id}`;
+    };
+
+    document.getElementById("modal-loja").classList.add("ativo");
+}
+
+function fecharModal() {
+    document.getElementById("modal-loja").classList.remove("ativo");
+}
+
+// Fecha clicando no X ou fora do modal
+document.getElementById("modal-fechar").addEventListener("click", fecharModal);
+document.getElementById("modal-loja").addEventListener("click", (e) => {
+    if (e.target === e.currentTarget) fecharModal();
+});
 
 async function carregarCotacoes(idUsuario) {
     const container = document.getElementById("lista-cotacoes");
