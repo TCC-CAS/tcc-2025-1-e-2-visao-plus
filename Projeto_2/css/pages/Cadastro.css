@@ -195,3 +195,167 @@ input.senha-invalida {
     background-color: #e74c3c;
     box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
 }
+
+/*==================================================
+    MODAL TERMOS DE USO
+==================================================*/
+
+.modal-termos-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-termos-overlay.ativo {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-termos-box {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    width: 90%;
+    max-width: 540px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(16px);
+    transition: transform 0.25s ease;
+}
+
+.modal-termos-overlay.ativo .modal-termos-box {
+    transform: translateY(0);
+}
+
+.modal-termos-box h2 {
+    color: #156783;
+    margin: 0 0 16px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.modal-termos-conteudo {
+    overflow-y: auto;
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.modal-termos-conteudo::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-termos-conteudo::-webkit-scrollbar-thumb {
+    background: #156783;
+    border-radius: 6px;
+}
+
+.modal-termos-rodape {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.checkbox-termos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.checkbox-termos input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: #156783;
+    cursor: pointer;
+}
+
+.modal-termos-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-cancelar-termos {
+    background-color: transparent;
+    color: #156783;
+    border: 2px solid #156783;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+    transition: 0.2s;
+}
+
+.btn-cancelar-termos:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-1px);
+}
+
+.btn-aceitar-termos {
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+    transition: 0.2s;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.btn-aceitar-termos.habilitado {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.btn-aceitar-termos.habilitado:hover {
+    background-color: #0e4e5e;
+    transform: translateY(-1px);
+}
+
+/*==================================================
+    BOTÃO DE SUBMIT COM LOADING
+==================================================*/
+
+button[type="submit"].carregando {
+    background-color: #aaa;
+    cursor: not-allowed;
+    transform: none;
+    pointer-events: none;
+}
+
+button[type="submit"].carregando::after {
+    content: " ⏳";
+}
+
+.label-termos-aceitos {
+    font-size: 13px;
+    color: #156783;
+    text-align: center;
+    margin-top: 6px;
+    font-style: italic;
+}
