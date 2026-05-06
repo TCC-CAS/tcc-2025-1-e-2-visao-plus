@@ -249,7 +249,6 @@ body {
     transition: opacity 0.25s ease;
 }
 
-
 .modal-overlay.ativo {
     opacity: 1;
     pointer-events: all;
@@ -260,13 +259,13 @@ body {
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 20px;
-    padding: 28px 32px;
-    width: 360px;
+    border-radius: 2vh;
+    padding: 3.5vh 4vh;
+    width: 40vw;
     max-width: 90vw;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1vh 4vh rgba(0, 0, 0, 0.3);
     position: relative;
-    transform: translateY(16px);
+    transform: translateY(2vh);
     transition: transform 0.25s ease;
 }
 
@@ -276,15 +275,15 @@ body {
 
 .modal-fechar {
     position: absolute;
-    top: 14px;
-    right: 16px;
+    top: 1.5vh;
+    right: 2vh;
     background: rgba(255, 255, 255, 0.2);
     border: none;
     color: white;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
+    width: 4vh;
+    height: 4vh;
+    font-size: 2.2vh;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -298,14 +297,14 @@ body {
 .modal-header {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 20px;
+    gap: 2vh;
+    margin-bottom: 2.5vh;
 }
 
 .modal-header img {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
+    width: 9vh;
+    height: 9vh;
+    border-radius: 1.2vh;
     object-fit: cover;
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -313,52 +312,52 @@ body {
 .modal-header h2 {
     margin: 0;
     color: white;
-    font-size: 18px;
+    font-size: 2.4vh;
     font-weight: 600;
 }
 
 .modal-header p {
-    margin: 3px 0 0;
+    margin: 0.4vh 0 0;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 13px;
+    font-size: 1.8vh;
 }
 
 .modal-campo {
     background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 10px 14px;
+    border-radius: 1.2vh;
+    padding: 1.4vh 2vh;
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 1.5vh;
+    margin-bottom: 1.2vh;
 }
 
 .modal-campo .icone {
-    font-size: 15px;
+    font-size: 2vh;
 }
 
 .modal-campo .label {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 11px;
+    font-size: 1.4vh;
     margin: 0;
 }
 
 .modal-campo .valor {
     color: white;
-    font-size: 13px;
+    font-size: 1.8vh;
     margin: 0;
 }
 
 .modal-btn-ver {
     width: 100%;
-    margin-top: 20px;
-    padding: 11px;
-    border-radius: 10px;
+    margin-top: 2.5vh;
+    padding: 1.5vh;
+    border-radius: 1.2vh;
     background: white;
     color: #156783;
     border: none;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 1.8vh;
     cursor: pointer;
     transition: background 0.15s;
 }
