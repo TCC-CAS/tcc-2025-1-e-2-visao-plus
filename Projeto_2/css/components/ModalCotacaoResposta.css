@@ -3,185 +3,328 @@
    ========================= */
 
 .modal-cotacao {
-  position: fixed;
-  inset: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  z-index: 1100;
-
-  background: rgba(0,0,0,0.35);
-  backdrop-filter: blur(2px);
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
 }
 
 .modal-cotacao.ativo {
-  opacity: 1;
-  pointer-events: auto;
+    opacity: 1;
+    pointer-events: auto;
 }
 
-/* card */
-
 .modal-cotacao-content {
-
-  background: white;
-
-  width: 420px;
-  max-width: 92%;
-
-  border-radius: 16px;
-
-  padding: 0px 26px 24px 26px;
-
-  box-shadow: 0 18px 45px rgba(0,0,0,0.25);
-
-  position: relative;
-
-  transform: translateY(20px) scale(0.96);
-  transition: transform 0.25s ease;
+    background: white;
+    width: 85vw;
+    max-width: 860px;
+    max-height: 88vh;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.25s ease;
 }
 
 .modal-cotacao.ativo .modal-cotacao-content {
-  transform: translateY(0) scale(1);
+    transform: translateY(0) scale(1);
 }
 
-/* título */
+/* ── Header ── */
 
-.modal-cotacao-content h3 {
-
-  font-size: 3vh;
-  font-weight: bold;
-
-  color: #156783;
-
-  margin-bottom: 18px;
+.modal-cotacao-header {
+    background: #156783;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
 }
 
-/* dados da cotação */
-
-.cotacao-info {
-
-  background: #f8fafc;
-
-  padding: 12px 14px;
-
-  border-radius: 10px;
-
-  margin-bottom: 18px;
-
-  font-size: 2vh;
-
-  color: #333;
-
-  line-height: 1.5;
+.modal-cotacao-titulo {
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
 }
 
-/* inputs */
-
-.modal-cotacao-content input,
-.modal-cotacao-content textarea {
-
-  width: 100%;
-
-  border-radius: 8px;
-
-  border: 1px solid #d1d5db;
-
-  margin-bottom: 12px;
-
-  font-size: 2vh;
-
-  outline: none;
-
-  transition: border 0.15s, box-shadow 0.15s;
+.modal-status-badge {
+    background: rgba(255, 255, 255, 0.18);
+    color: white;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
 }
 
-.modal-cotacao-content input:focus,
-.modal-cotacao-content textarea:focus {
-
-  border-color: #156783;
-
-  box-shadow: 0 0 0 2px rgba(21,103,131,0.15);
+.modal-cotacao-fechar {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
 }
 
-.modal-cotacao-content textarea {
-  resize: vertical;
-  min-height: 70px;
+.modal-cotacao-fechar:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
-/* botões */
+/* ── Body dividido ── */
 
-.modal-cotacao-botoes {
-
-  display: flex;
-  gap: 10px;
-
-  margin-top: 8px;
+.modal-cotacao-body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
 }
 
-#btnEnviarResposta {
+/* ── Painel esquerdo ── */
 
-  flex: 1;
-
-  border: none;
-  border-radius: 10px;
-
-  padding: 11px;
-
-  background: linear-gradient(135deg,#156783,#1b8aa8);
-
-  color: white;
-
-  font-weight: bold;
-  font-size: 15px;
-
-  cursor: pointer;
-
-  box-shadow: 0 6px 18px rgba(21,103,131,0.35);
-
-  transition: transform 0.15s, box-shadow 0.15s;
+.painel-esquerdo {
+    width: 42%;
+    border-right: 1px solid #e5e7eb;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
 }
 
-#btnEnviarResposta:hover {
-
-  transform: translateY(-1px);
-
-  box-shadow: 0 8px 22px rgba(21,103,131,0.45);
+.painel-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 8px;
 }
 
-#btnEnviarResposta:active {
-
-  transform: translateY(0);
-
-  box-shadow: 0 4px 12px rgba(21,103,131,0.35);
+.cotacao-dados {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 12px 14px;
 }
 
-#btnFecharModal {
-
-  flex: 1;
-
-  border: none;
-
-  border-radius: 10px;
-
-  padding: 11px;
-
-  background: #e2e8f0;
-
-  color: #333;
-
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: background 0.15s;
+.dado-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
 }
 
-#btnFecharModal:hover {
-  background: #cbd5e1;
+.dado-row:last-child {
+    border-bottom: none;
+}
+
+.dado-chave {
+    color: #6b7280;
+}
+
+.dado-valor {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* ── Resposta box ── */
+
+.resposta-box {
+    background: #f0f9ff;
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.resposta-box input,
+.resposta-box textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    outline: none;
+    background: white;
+    box-sizing: border-box;
+    transition: border 0.15s, box-shadow 0.15s;
+}
+
+.resposta-box input:focus,
+.resposta-box textarea:focus {
+    border-color: #156783;
+    box-shadow: 0 0 0 2px rgba(21, 103, 131, 0.15);
+}
+
+.resposta-box textarea {
+    resize: vertical;
+    min-height: 65px;
+}
+
+.resposta-box #btnEnviarResposta {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    background: #156783;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+    margin-top: 2px;
+}
+
+.resposta-box #btnEnviarResposta:hover {
+    background: #0e4e5e;
+    transform: translateY(-1px);
+}
+
+/* ── Painel direito: chat ── */
+
+.painel-direito {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.chat-mensagens {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f8fafc;
+}
+
+.chat-mensagens::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-mensagens::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 6px;
+}
+
+.chat-vazio {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+    margin-top: 40px;
+}
+
+/* ── Bolhas ── */
+
+.chat-msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+    gap: 3px;
+}
+
+.chat-msg.deles {
+    align-self: flex-start;
+}
+
+.chat-msg.minha {
+    align-self: flex-end;
+}
+
+.chat-bubble {
+    padding: 9px 13px;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.chat-msg.deles .chat-bubble {
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #111827;
+    border-bottom-left-radius: 4px;
+}
+
+.chat-msg.minha .chat-bubble {
+    background: #156783;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.chat-meta {
+    font-size: 11px;
+    color: #9ca3af;
+}
+
+.chat-msg.minha .chat-meta {
+    text-align: right;
+}
+
+/* ── Input do chat ── */
+
+.chat-input-area {
+    padding: 12px 14px;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: white;
+    flex-shrink: 0;
+}
+
+.chat-input-area input {
+    flex: 1;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    padding: 9px 16px;
+    font-size: 13px;
+    outline: none;
+    background: #f8fafc;
+    transition: border 0.15s;
+}
+
+.chat-input-area input:focus {
+    border-color: #156783;
+}
+
+.chat-input-area #btnEnviarChat {
+    background: #156783;
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
+}
+
+.chat-input-area #btnEnviarChat:hover {
+    background: #0e4e5e;
+}
+
+.chat-input-area #btnEnviarChat:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
 }
