@@ -7,6 +7,8 @@ public enum StatusCotacao {
 
     NEGOCIANDO,     // loja respondeu
 
+    PROPOSTA_ENVIADA, //loja mandou proposta
+
     APROVADA,       // usuário aprovou
 
     REJEITADA,      // usuário rejeitou
