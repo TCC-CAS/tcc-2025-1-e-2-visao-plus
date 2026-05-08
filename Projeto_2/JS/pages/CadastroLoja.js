@@ -1,57 +1,141 @@
-import {editarDadosUsuario} from "../core/usuario.js";
-import { configurarHeader } from "../components/header2.js";
+import { configurarHeader } from "../components/header.js";
+import { getUsuarioLogado } from "../core/auth.js";
+import { getLojaAtual } from "../core/loja.js";
+import { listarLojas } from "../core/loja.js";
+import { listarCotacoesPorUsuario, criarCardCotacao, chamarEstilizacao, initScrollCotacoes } from "../core/cotacoes.js";
+import { initBuscaLojas, chamarEstilizacaoSearchBar } from "../components/searchBar.js";
+import { inicializarMapa } from "../core/apiMapa.js";
+
+let lojasCache = [];
+
+async function carregarMapa(){
+
+    const oticas = await listarLojas();
+
+    inicializarMapa(oticas);
+
+}
+
+function esconderTodosOsBlocos() {
+    // Seções
+    document.getElementById("secao-cotacoes").style.display = "none";
+    document.getElementById("secao-admin").style.display = "none";
+    document.getElementById("div-invisivel").style.display = "none";
+}
+
+
+function configurarTela() {
+
+    // Primeiro, escondemos tudo
+    esconderTodosOsBlocos();
+
+    // Tentamos descobrir se tem alguém logado
+    const usuario = getUsuarioLogado();
+
+    if (!usuario) {
+        // Se não tiver ninguém logado, não mostramos nada
+        document.getElementById("div-invisivel").style.display = "block";
+        return;
+    }
+
+    console.log("Usuário logado:", usuario);
+
+    // Agora decide pelo tipo
+    if (usuario.tipoUsuario === "Comum") {
+
+        document.getElementById("secao-cotacoes").style.display = "block";
+
+    } else if (usuario.tipoUsuario === "Vendedor") {
+
+        document.getElementById("secao-cotacoes").style.display = "block";
+
+    } else if (usuario.tipoUsuario === "Admin") {
+
+        document.getElementById("secao-admin").style.display = "block";
+        document.getElementById("secao-cotacoes").style.display = "block";
+    }
+}
+
+async function carregarLojas() {
+    try {
+        const lojas = await listarLojas();
+        lojasCache = lojas;
+
+        renderizarLojas(lojas);
+        initBuscaLojas(lojas);
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao carregar lojas");
+    }
+}
+
+window.renderizarLojas = renderizarLojas;
+
+function renderizarLojas(lojas) {
+    const container = document.getElementById("lista-lojas");
+    container.innerHTML = "";
+
+    if (lojas.length === 0) {
+        container.innerHTML = "<p>Nenhuma loja cadastrada.</p>";
+        return;
+    }
+
+    lojas.forEach(loja => {
+        const card = criarCardLoja(loja);
+        container.appendChild(card);
+    });
+}
+
+function criarCardLoja(loja) {
+    const div = document.createElement("div");
+    div.classList.add("card-loja");
+
+    div.innerHTML = `
+        <div class="imagem-loja">
+            <img src="${loja.fotoUrl || "imgs/store1.png"}" alt="${loja.nome}">
+        </div>
+        <div class="dados-loja">
+            <h2>${loja.nome}</h2>
+            <p><strong>${loja.email}</strong></p>
+            <p><strong>${loja.endereco}</strong></p>
+        </div>
+    `;
+
+    div.addEventListener("click", () => {
+        window.location.href = `PaginaLoja.html?id=${loja.id}`;
+    });
+
+    return div;
+}
+
+async function carregarCotacoes(idUsuario) {
+    const container = document.getElementById("lista-cotacoes");
+    container.innerHTML = "";
+
+    const cotacoes = await listarCotacoesPorUsuario(idUsuario);
+
+    cotacoes.forEach(c => {
+        const card = criarCardCotacao(c);
+        container.appendChild(card);
+    });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     configurarHeader();
-    const form = document.querySelector("#cadastroLojaForm");
+    configurarTela();
+    carregarLojas();
 
-    form.addEventListener("submit", async (event) => {
-        event.preventDefault();
+    chamarEstilizacaoSearchBar();
 
-        const obterUsuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-
-        const dto = {
-            nome: document.querySelector("#nome").value,
-            email: document.querySelector("#email").value,
-            cnpj: document.querySelector("#cnpj").value,
-            cep: document.querySelector("#cep").value,
-            endereco: document.querySelector("#endereco").value,
-            idUsuario: obterUsuarioLogado.id
-        };
-
-        const dtoUsuario ={
-            id: obterUsuarioLogado.id,
-            nome: document.querySelector("#nome").value,
-            email: document.querySelector("#email").value,
-            senha: obterUsuarioLogado.senha,
-            tipoUsuario: "Vendedor"
-        }
-
-        try {
-            const response = await fetch("http://localhost:8080/lojas/criarLoja", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(dto)
-            });
-
-            if (!response.ok) {
-                throw new Error("Erro ao cadastrar loja");
-            }
-
-            alert("Loja criada com sucesso!");
-            form.reset();
-            await editarDadosUsuario(dtoUsuario);
-            setTimeout(() => {
-                window.location.href = "./PaginaPerfil.html";
-            }, 100);
-
-
-
-        } catch (error) {
-            console.error(error);
-            alert("Erro ao conectar com a API");
-        }
-    });
+    chamarEstilizacao();
+    initScrollCotacoes();   
+    carregarMapa();
+    
+    getUsuarioLogado;
+    const usuario = getUsuarioLogado();
+    if(usuario != null){
+        carregarCotacoes(usuario.id);
+    }
+    
 });
