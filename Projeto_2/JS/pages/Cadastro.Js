@@ -30,6 +30,45 @@ document.addEventListener("DOMContentLoaded", () => {
     let nomeDisponivel = false;
     let emailDisponivel = false;
 
+    // ── Termos de uso ──────────────────────────────────────
+    const modalTermos       = document.getElementById("modalTermos");
+    const checkTermos       = document.getElementById("checkTermos");
+    const checkModalTermos  = document.getElementById("checkModalTermos");
+    const btnAceitarTermos  = document.getElementById("btnAceitarTermos");
+    const btnCancelarTermos = document.getElementById("btnCancelarTermos");
+    const abrirTermos       = document.getElementById("abrirTermos");
+    const avisoTermos       = document.getElementById("avisoTermos");
+
+    checkModalTermos.addEventListener("change", () => {
+        btnAceitarTermos.classList.toggle("habilitado", checkModalTermos.checked);
+    });
+
+    abrirTermos.addEventListener("click", (e) => {
+        e.preventDefault();
+        checkModalTermos.checked = false;
+        btnAceitarTermos.classList.remove("habilitado");
+        modalTermos.classList.add("ativo");
+    });
+
+    btnCancelarTermos.addEventListener("click", () => {
+        modalTermos.classList.remove("ativo");
+        checkTermos.checked = false;
+    });
+
+    btnAceitarTermos.addEventListener("click", () => {
+        checkTermos.checked = true;
+        checkTermos.disabled = false;
+        modalTermos.classList.remove("ativo");
+        avisoTermos.style.display = "none";
+    });
+
+    modalTermos.addEventListener("click", (e) => {
+        if (e.target === modalTermos) {
+            modalTermos.classList.remove("ativo");
+        }
+    });
+
+    // ── Toasts ─────────────────────────────────────────────
     function mostrarMensagem(elemento, texto, tipo) {
         elemento.textContent = texto;
         elemento.classList.remove("sucesso", "erro");
@@ -40,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 7000);
     }
 
-
+    // ── Validação de nome ──────────────────────────────────
     inputNome.addEventListener("input", () => {
         clearTimeout(timeoutNome);
 
@@ -64,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 600);
     });
 
-
+    // ── Validação de email ─────────────────────────────────
     inputEmail.addEventListener("input", () => {
         clearTimeout(timeoutEmail);
 
@@ -89,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 600);
     });
 
-    // Função para mostrar o card por 4 segundos
+    // ── Regras da senha ────────────────────────────────────
     function mostrarRegrasCard() {
         regrasCard.classList.add("mostrar");
 
@@ -108,9 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Função que valida a senha e retorna mensagem de erro
     function validarSenhaTempoReal() {
-
         const senha = senhaInput.value;
 
         const regexMaiuscula = /[A-Z]/;
@@ -119,17 +156,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const regexEspecial = /[!@#$%^&*(),.?":{}|<>]/;
         const regexProibido = /[<>]/;
 
-        const tamanhoValido = senha.length >= 8;
+        const tamanhoValido  = senha.length >= 8;
         const maiusculaValida = regexMaiuscula.test(senha);
         const minusculaValida = regexMinuscula.test(senha);
-        const numeroValido = regexNumero.test(senha);
+        const numeroValido   = regexNumero.test(senha);
         const especialValido = regexEspecial.test(senha);
         const proibidoValido = !regexProibido.test(senha);
 
-        atualizarRegra(regraTamanho, tamanhoValido);
+        atualizarRegra(regraTamanho,  tamanhoValido);
         atualizarRegra(regraMaiuscula, maiusculaValida);
         atualizarRegra(regraMinuscula, minusculaValida);
-        atualizarRegra(regraNumero, numeroValido);
+        atualizarRegra(regraNumero,   numeroValido);
         atualizarRegra(regraEspecial, especialValido);
         atualizarRegra(regraProibido, proibidoValido);
 
@@ -154,27 +191,31 @@ document.addEventListener("DOMContentLoaded", () => {
         return senhaEhValida;
     }
 
-
-
     senhaInput.addEventListener("input", validarSenhaTempoReal);
+
+    // ── Submit ─────────────────────────────────────────────
+    const btnSubmit = document.querySelector("button[type='submit']");
+    let processando = false;
 
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const nome = document.querySelector("#nome").value.trim();
-        const email = document.querySelector("#email").value.trim();
-        const senha = document.querySelector("#senha").value;
-        const confirmarSenha = document.querySelector("#confirmarSenha").value;
+        // Bloqueia se os termos não foram aceitos
+        if (!checkTermos.checked) {
+            avisoTermos.style.display = "block";
+            return;
+        }
 
+        const nome           = inputNome.value.trim();
+        const email          = inputEmail.value.trim();
+        const senha          = senhaInput.value;
+        const confirmarSenha = confirmarSenhaInput.value;
 
-
-        // Validação básica
         if (!nome || !email || !senha || !confirmarSenha) {
             alert("Por favor, preencha todos os campos.");
             return;
         }
 
-        // Validação da senha usando função
         const senhaValida = validarSenhaTempoReal();
 
         if (!senhaValida) {
@@ -195,7 +236,12 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Criar objeto usuário
+        // Bloqueia duplo envio
+        if (processando) return;
+        processando = true;
+        btnSubmit.classList.add("carregando");
+        btnSubmit.textContent = "Registrando...";
+
         const usuario = {
             nome: nome,
             email: email,
@@ -203,13 +249,10 @@ document.addEventListener("DOMContentLoaded", () => {
             tipoUsuario: "Comum"
         };
 
-        // Enviar dados para API
         try {
             const response = await fetch("http://localhost:8080/usuarios/registrar", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(usuario)
             });
 
@@ -219,14 +262,18 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const mensagem = await response.text();
-
-            alert(mensagem); // aqui pode manter
+            alert(mensagem);
             form.reset();
+            checkTermos.checked = false;
             window.location.href = "Login.html";
 
         } catch (error) {
             alert(error.message);
-        }
 
+        } finally {
+            processando = false;
+            btnSubmit.classList.remove("carregando");
+            btnSubmit.textContent = "Registrar";
+        }
     });
 });
