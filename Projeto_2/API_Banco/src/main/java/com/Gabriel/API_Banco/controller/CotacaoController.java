@@ -1,9 +1,6 @@
 package com.Gabriel.API_Banco.controller;
 
-import com.Gabriel.API_Banco.dto.CriarCotacaoDTO;
-import com.Gabriel.API_Banco.dto.ListarCotacoesDTO;
-import com.Gabriel.API_Banco.dto.ListarLentesDTO;
-import com.Gabriel.API_Banco.dto.ResponderCotacaoDTO;
+import com.Gabriel.API_Banco.dto.*;
 import com.Gabriel.API_Banco.model.Cotacao;
 import com.Gabriel.API_Banco.service.CotacaoService;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +30,23 @@ public class CotacaoController {
         return ResponseEntity.ok(cotacaoService.listarPorUsuario(idUsuario));
     }
 
-    @PostMapping("/cotacoes/{id}/responder")
-    public Cotacao responder(@PathVariable Long id,
-                             @RequestBody ResponderCotacaoDTO dto,
-                             @RequestParam Long idLojaLogada) {
+    @GetMapping("/listarCotacoesPL/{idLoja}")
+    public ResponseEntity<List<ListarCotacoesDTO>> listarPorLoja(@PathVariable Long idLoja) {
+        return ResponseEntity.ok(cotacaoService.listarPorLoja(idLoja));
+    }
 
-        return cotacaoService.responderCotacao(id, dto, idLojaLogada);
+    // Loja envia proposta com valor + prazo
+    @PatchMapping("/{id}/responder")
+    public ResponseEntity<Cotacao> responder(@PathVariable Long id,
+                                             @RequestBody ResponderCotacaoDTO dto,
+                                             @RequestParam Long idLojaLogada) {
+        return ResponseEntity.ok(cotacaoService.enviarProposta(id, dto, idLojaLogada));
+    }
+
+    // Todas as outras transições de status
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Cotacao> transicionarStatus(@PathVariable Long id,
+                                                      @RequestBody StatusTransicaoDTO dto) {
+        return ResponseEntity.ok(cotacaoService.transicionarStatus(id, dto));
     }
 }
