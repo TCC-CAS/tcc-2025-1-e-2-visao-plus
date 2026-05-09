@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface CotacaoRepositorio extends JpaRepository<Cotacao, Long>{
 
     List<Cotacao> findByUsuarioId(Long id);
+    List<Cotacao> findByLojaId(Long id);
 }
