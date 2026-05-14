@@ -31,4 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
      // Montar carrossel de cotações recebidas
     montarCarrosselCotacoes("secao-cotacoes-loja");
 
-})
+    // Navegar para página da loja
+    const btnMinhaLoja = document.getElementById("MinhaLoja");
+    if (btnMinhaLoja) {
+        btnMinhaLoja.addEventListener("click", () => {
+            window.location.href = `PaginaLoja.html?id=${loja.id}`;
+        });
+    }
+
+});
