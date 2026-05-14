@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-
+     if (usuario.tipoUsuario !== "Vendedor") {
+        alert("Você não tem permissão para acessar este painel");
+        window.location.href = "PaginaPrincipal.html";
+        return;
+    }
+ 
 
 })
