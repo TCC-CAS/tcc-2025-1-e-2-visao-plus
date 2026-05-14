@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const loja = usuario.loja;
- 
+
     if (!loja) {
         alert("Você não possui uma loja cadastrada");
         window.location.href = "CadastroLoja.html";
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Configurar header
     configurarHeader();
 
-     // Montar carrossel de cotações recebidas
+    // Montar carrossel de cotações recebidas
     montarCarrosselCotacoes("secao-cotacoes-loja");
 
     // Navegar para página da loja
