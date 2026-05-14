@@ -17,5 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    const loja = usuario.loja;
+ 
+    if (!loja) {
+        alert("Você não possui uma loja cadastrada");
+        window.location.href = "CadastroLoja.html";
+        return;
+    }
+
 
 })
