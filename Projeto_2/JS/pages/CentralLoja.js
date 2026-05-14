@@ -3,4 +3,10 @@ import { montarCarrosselCotacoes } from "../components/CarrosselCotacoes.js";
 import { getUsuarioLogado } from "../core/auth.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const usuario = getUsuarioLogado();})
+    const usuario = getUsuarioLogado();
+
+
+
+
+
+})
