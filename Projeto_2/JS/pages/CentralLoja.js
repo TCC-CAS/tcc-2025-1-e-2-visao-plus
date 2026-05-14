@@ -28,5 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Configurar header
     configurarHeader();
 
+     // Montar carrossel de cotações recebidas
+    montarCarrosselCotacoes("secao-cotacoes-loja");
 
 })
