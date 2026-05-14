@@ -25,5 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    // Configurar header
+    configurarHeader();
+
 
 })
