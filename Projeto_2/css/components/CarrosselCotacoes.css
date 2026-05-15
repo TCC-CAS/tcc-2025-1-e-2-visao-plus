@@ -72,4 +72,36 @@
     opacity: 1;
 }
  
-
+.carrossel-body.fechado {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+}
+ 
+/* ===== ESTADOS VAZIOS ===== */
+.cotacoes-loading,
+.cotacoes-vazio {
+    color: #9ca3af;
+    font-size: 13px;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+ 
+/* ===== SCROLL BUTTONS (override pra ficar dentro do wrapper) ===== */
+.carrossel-cotacoes-wrapper .cotacoes-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+ 
+.carrossel-cotacoes-wrapper .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+ 
+.carrossel-cotacoes-wrapper .scroll-btn.left  { left:  -12px; }
+.carrossel-cotacoes-wrapper .scroll-btn.right { right: -12px; }
