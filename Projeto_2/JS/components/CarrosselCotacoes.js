@@ -24,4 +24,11 @@ export function montarCarrosselCotacoes(containerId) {
         console.warn(`Container não encontrado: ${containerId}`);
         return;
     }
+
+    const usuario = getUsuarioLogado();
+    if (!usuario) {
+        console.warn("Usuário não logado");
+        return;
+    }
+ 
 }
