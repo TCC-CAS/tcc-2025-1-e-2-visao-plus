@@ -57,5 +57,18 @@ export function montarCarrosselCotacoes(containerId) {
  
         </div>
     `;
+
+    // Toggle collapse
+    const body   = container.querySelector("#carrossel-body");
+    const toggle = container.querySelector("#carrossel-toggle");
+    const icone  = container.querySelector("#carrossel-toggle-icone");
+    let aberto   = true;
+ 
+    toggle.addEventListener("click", () => {
+        aberto = !aberto;
+        body.classList.toggle("fechado", !aberto);
+        icone.textContent = aberto ? "▾" : "▸";
+        toggle.setAttribute("aria-label", aberto ? "Minimizar" : "Expandir");
+    });
  
 }
