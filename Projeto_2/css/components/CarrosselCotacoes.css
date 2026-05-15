@@ -57,3 +57,19 @@
     transition: background 0.15s, color 0.15s;
 }
  
+.carrossel-toggle:hover {
+    background: #f0f9ff;
+    color: #156783;
+    border-color: #156783;
+}
+ 
+/* ===== BODY COLAPSÁVEL ===== */
+.carrossel-body {
+    padding: 10px 20px 16px;
+    overflow: hidden;
+    max-height: 400px;
+    transition: max-height 0.35s ease, padding 0.35s ease, opacity 0.25s ease;
+    opacity: 1;
+}
+ 
+
