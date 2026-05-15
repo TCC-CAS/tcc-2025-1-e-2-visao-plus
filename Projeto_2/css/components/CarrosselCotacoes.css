@@ -18,3 +18,15 @@
     border-bottom: 1px solid #e5e7eb;
     cursor: default;
 }
+ 
+.carrossel-header-esq {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+ 
+.carrossel-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
