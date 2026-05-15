@@ -1,0 +1,343 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+   ========================= */
+
+/* Fonte padrão do site */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-top: 150px; /* espaço inicial do header */
+}
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+   ========================= */
+
+.main-content {
+    display: flex;
+    justify-content: center; /* Centraliza o bloco na página */
+    margin-top: 1px;
+    font-family: Arial, sans-serif;
+}
+
+/* Mapa */
+.perfil-bloco {
+    width: 400px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    display: flex;
+    flex-direction: column; /* garante que os elementos fiquem empilhados */
+}
+
+#secao-usuario {
+    flex: 1;
+    text-align: top;
+    padding: 20px;
+    margin: 0px 1% 0px 1%;
+    border-radius: 10px;
+}
+
+#secao-loja {
+    flex: 1;
+    text-align: top;
+    padding: 20px;
+    margin: 0px 1% 0px 1%;
+    border-radius: 10px;
+}
+
+#secao-pedir_loja {
+    flex: 1;
+    text-align: top;
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0px 1% 0px 1%;
+    border-radius: 10px;
+}
+.perfil-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.perfil-header .titulo-perfil {
+    margin: 0;
+}
+
+/* ===== CONTAINER PRINCIPAL DO PERFIL ===== */
+.dados-usuario, .dados-loja {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    padding: 40px 60px;
+    background: #f9f9f9;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.button-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 6px;
+    background-color: #7399a6;
+}
+
+
+.button{
+    background-color: #ccc; /* Azul bebê suave */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 15px;
+}
+
+.button:hover {
+    background-color: #9f9d9d; /* Azul bebê mais escuro ao passar o mouse */
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    position: relative;
+    background: white;
+    width: 350px;
+    padding: 20px;
+    border-radius: 8px;
+    margin: auto;
+}
+
+.fechar-modal {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+    margin: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+.titulo-secao{
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 30px;
+    color: #156783;
+    padding-bottom: 5px;
+}
+
+.titulo-perfil {
+    text-align: center; /* Centraliza o título */
+    margin-top: 0px;
+    margin-bottom: 1px;
+    font-size: 24px;
+    color: #333;
+}
+
+.icon-pencil{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    vertical-align: middle; /* Alinha o ícone com o texto */
+    align-items: center;
+}
+
+.icon-pencil:hover {
+    transform: scale(1.2);
+}
+
+.info-pedir-loja p {
+    margin: 30px 5px 30px 5px;
+    text-align: center; /* Centraliza o texto */
+    font-size: 16px;
+}
+
+/* ===== COLUNA ESQUERDA (INFOS) ===== */
+.info-usuario, .info-loja {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background: white;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.info-usuario p, .info-loja p {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.info-usuario strong, .info-loja strong {
+    color: #156783;
+    font-weight: 600;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.barra-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    margin: 20px 20px 20px 0;
+    border-radius: 10px;
+    background-color: #156783;
+}
+
+.lista-usuarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.card-usuario {
+    background: #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 8px;
+    }
+
+.lista-lojas{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.card-usuario:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #b9b6b6;
+    cursor: pointer;
+    
+}
+
+.card-loja{
+    background: #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-size: 8px;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.card-loja:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background-color: #b9b6b6;
+    cursor: pointer;
+}
+
+.barra-vertical h3 {
+    color: white;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.barra-vertical h2{
+    color: #333;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.barra-vertical ul {
+    list-style: none;
+    padding: 0;
+}
+
+.barra-vertical p {
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-top: 0px;
+}
+
+.barra-vertical button{
+    background-color: #938f8f; /* Azul bebê suave */
+    color: white;
+    border: none;
+    padding: 8px;   
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.barra-vertical button:hover {
+    background-color: #9f9d9d; /* Azul bebê mais escuro ao passar o mouse */
+}
+
+.barra-vertical li {
+    color: white;
+    margin: 10px 0;
+}
+
+/* =========================
+   CARROSSEL DE PRODUTOS
+   ========================= */
+
+.products-carousel {
+    padding: 20px 2% 200px 2%;
+    text-align: center;
+}

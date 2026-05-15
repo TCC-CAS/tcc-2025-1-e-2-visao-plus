@@ -1,0 +1,189 @@
+/* =========================
+   HEADER COMPONENT
+   ========================= */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    max-height: 70px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #156783;
+    padding: 20px 30px;
+    backdrop-filter: blur(8px);
+
+    transition: all 0.3s ease;
+}
+
+header.shrink {
+    padding: 8px 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    min-height: 55px;
+}
+
+header.shrink .logo {
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+header.shrink .iconhome {
+    width: 25px;
+    height: 31px;
+    transition: all 0.3s ease;
+    margin-right: 1px;
+}
+
+header.shrink .iconuser {
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+header.shrink .iconstore {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease;
+}
+
+header.shrink .iconadmin {
+    width: 50px;
+    height: 50px;
+    transition: all 0.3s ease;
+}
+
+header.shrink .icon {
+    width: 30px;
+    height: 30px;
+    transition: all 0.3s ease;
+}
+
+
+/* =========================
+   LOGO
+   ========================= */
+
+.logo {
+    color: white;
+    font-size: 18px;
+    margin: 0;
+}
+
+/* =========================
+   MENUS
+   ========================= */
+
+
+#menu-usuario, #menu-visitante, #menu-admin, #menu-loja{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 50px;
+}
+
+/* Links visitante */
+#menu-visitante a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#menu-visitante a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   ÍCONES
+   ========================= */
+
+.iconhome {
+    width: 30px;
+    height: 37px;
+    cursor: pointer;
+    margin-right: 1px;
+    transition: transform 0.2s;
+}
+
+.iconuser {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: transform 0.2s;
+}
+
+.iconstore {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-left: 20px;
+}
+
+.iconadmin {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-left: 1px;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-left: 5px;
+}
+
+.iconuser:hover,
+.iconstore:hover,
+.iconadmin:hover,
+.icon:hover, 
+.iconhome:hover {
+    transform: scale(1.1);
+}
+
+/* =========================
+   DROPDOWN
+   ========================= */
+
+.profile-menu,
+.cart-menu {
+    position: relative;
+}
+
+.dropdown {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #156783;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 150px;
+    z-index: 100;
+}
+
+.profile-menu:hover .dropdown,
+.cart-menu:hover .dropdown {
+    display: block;
+}
+
+.dropdown a {
+    color: #156783;
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+}
+
+.dropdown a:hover {
+    background-color: #f0f0f0;
+}

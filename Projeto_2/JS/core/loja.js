@@ -1,0 +1,121 @@
+// js/core/loja.js
+
+import { API } from "./api.js";
+
+let lojaAtual = null;
+
+/**
+ * Busca a loja do usuário logado
+ *
+ function getLojaDoUsuario(usuario) {
+    if (!usuario?.loja?.id) return null;
+
+    lojaAtual = usuario.loja;
+    return lojaAtual;
+}
+*/
+
+export async function getLojaDoUsuario(usuario) {
+    try {
+        const response = await fetch(`${API}/lojas/buscarLoja`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario.id)
+    });
+
+    if (!response.ok) {
+            return null; // usuário não tem loja
+        }
+
+        return await response.json();
+
+    } catch (error) {
+        console.error("Erro ao buscar loja:", error);
+        return null;
+    }
+}
+
+export async function buscarLojaPorId(id) {
+    const response = await fetch(`${API}/lojas/${id}`);
+
+    if (!response.ok) {
+        throw new Error("Loja não encontrada");
+    }
+
+    return await response.json();
+}
+
+
+/**
+ * Retorna a loja já carregada (se existir)
+ */
+export function getLojaAtual() {
+    return lojaAtual;
+}
+
+/**
+ * Busca as configurações da loja
+ */
+export async function buscarConfiguracoesLoja(lojaId) {
+    const response = await fetch(`${API}/configuracao/buscar/${lojaId}`);
+
+    if (!response.ok) {
+        throw new Error("Erro ao buscar configurações da loja");
+    }
+
+    return await response.json();
+}
+
+/**
+ * Salva as configurações da loja
+ */
+export async function salvarConfiguracoesLoja(lojaId, configuracao) {
+    const response = await fetch(
+        `${API}/configuracao/editar/${lojaId}`,
+        {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(configuracao)
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Erro ao salvar configurações da loja");
+    }
+
+    return true;
+}
+
+export async function listarLojas() {
+    const response = await fetch(`${API}/lojas/listarLojas`);
+
+    if (!response.ok) {
+        throw new Error("Erro ao buscar lojas");
+    }
+
+    return await response.json();
+}
+
+export async function editarDadosLoja(dadosLoja) {
+    const response = await fetch(`${API}/lojas/editarLoja`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dadosLoja)
+    });
+
+    if (!response.ok) {
+        console.error("Erro ao editar loja:", response.statusText);
+        return null;
+    }
+
+    return await response.json();
+}
+
+export async function deletarLoja(id) {
+    const response = await fetch(`${API}/lojas/deletarLoja/${id}`, {
+        method: "DELETE"
+    });
+}
+

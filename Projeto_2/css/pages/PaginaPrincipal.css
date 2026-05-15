@@ -1,0 +1,367 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+   ========================= */
+
+/* Fonte padrão do site */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding-top: 80px; /* espaço inicial do header */
+}
+
+.div-invisivel{
+    padding-top: 3rem;
+}
+/* =========================
+   CARROSSEL DE PRODUTOS
+   ========================= */
+
+.products-carousel {
+    padding: 20px;
+    text-align: center;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px;
+}
+
+.product {
+    min-width: 200px;
+    border: 1px solid #156783;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+}
+
+.product img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.product button {
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+   ========================= */
+
+.main-content {
+    display: flex;
+    height: 75vh;
+}
+
+/* Mapa */
+.map-container {
+    flex: 3;
+    background-color: white;
+    border: 1px solid #156783;
+    margin: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa-oticas {
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================
+    LISTA DE LOJAS
+   ========================= */
+.lista-lojas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    overflow-y: auto;
+    padding-right: 4px;
+
+    flex: 1; /* ocupa espaço restante */
+
+    margin-top: 8px;
+    padding-right: 6px;
+
+    /* REMOVE QUALQUER FUNDO */
+    background: transparent;
+}
+
+.lista-lojas::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lista-lojas::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.4);
+    border-radius: 6px;
+}
+
+.lista-lojas::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* CARD DE LOJA  que não faz nada na real*/
+
+/* CARD DA LOJA */
+.card-loja {
+    background: #ffffff89;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* imagem da loja */
+.imagem-loja {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.imagem-loja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* dados da loja */
+.dados-loja {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-loja .dados-loja h2 {
+    align-self: self-start;
+    font-size: 16px;
+    margin: 0;
+    color: white;
+}
+
+.card-loja .dados-loja p {
+    font-size: 12px;
+    margin: 2px 0;
+    color: #444;
+}
+
+/* hover bonito */
+.card-loja:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+/* ESTILIZAÇÃO DO SIDEBAR QUE ATUALMENTE MUDA O CARD DA LOJA SLA PQ*/
+
+/* Sidebar */
+.sidebar {
+    flex: 1;
+    background-color: #156783;
+    padding: 16px;
+    margin: 5px 20px 20px 0;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    height: calc(75vh - 40px); /* acompanha o mapa */
+    overflow: hidden; /* impede vazamento */
+}
+
+.sidebar h3 {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 600;
+
+    margin: 0 0 12px 4px; /* respiro lateral */
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+.sidebar h2 {
+    color: #156783;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.sidebar p {
+    color: #156783;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-top: 0px;
+}
+
+.sidebar button {
+    background-color: white;
+    color: #156783;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sidebar button:hover {
+    background-color: #f0f0f0;
+}
+
+.mapa-ilustrativo {
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ========================= 
+   MODAL GLASSMORPHISM
+   ========================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-overlay.ativo {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-glass {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 2vh;
+    padding: 3.5vh 4vh;
+    width: 40vw;
+    max-width: 90vw;
+    box-shadow: 0 1vh 4vh rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: translateY(2vh);
+    transition: transform 0.25s ease;
+}
+
+.modal-overlay.ativo .modal-glass {
+    transform: translateY(0);
+}
+
+.modal-fechar {
+    position: absolute;
+    top: 1.5vh;
+    right: 2vh;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 4vh;
+    height: 4vh;
+    font-size: 2.2vh;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-fechar:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 2vh;
+    margin-bottom: 2.5vh;
+}
+
+.modal-header img {
+    width: 9vh;
+    height: 9vh;
+    border-radius: 1.2vh;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: white;
+    font-size: 2.4vh;
+    font-weight: 600;
+}
+
+.modal-header p {
+    margin: 0.4vh 0 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.8vh;
+}
+
+.modal-campo {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1.2vh;
+    padding: 1.4vh 2vh;
+    display: flex;
+    align-items: center;
+    gap: 1.5vh;
+    margin-bottom: 1.2vh;
+}
+
+.modal-campo .icone {
+    font-size: 2vh;
+}
+
+.modal-campo .label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.4vh;
+    margin: 0;
+}
+
+.modal-campo .valor {
+    color: white;
+    font-size: 1.8vh;
+    margin: 0;
+}
+
+.modal-btn-ver {
+    width: 100%;
+    margin-top: 2.5vh;
+    padding: 1.5vh;
+    border-radius: 1.2vh;
+    background: white;
+    color: #156783;
+    border: none;
+    font-weight: bold;
+    font-size: 1.8vh;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.modal-btn-ver:hover {
+    background: #e8f4f8;
+}
