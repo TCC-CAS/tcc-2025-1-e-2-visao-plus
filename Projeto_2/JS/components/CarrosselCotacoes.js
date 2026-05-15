@@ -30,5 +30,32 @@ export function montarCarrosselCotacoes(containerId) {
         console.warn("Usuário não logado");
         return;
     }
+    
+    const ehLoja = usuario.tipoUsuario === "Vendedor";
+    const titulo = ehLoja ? "Cotações recebidas" : "Minhas cotações";
+ 
+    container.innerHTML = `
+        <div class="carrossel-cotacoes-wrapper" id="carrossel-cotacoes-wrapper">
+ 
+            <div class="carrossel-header" id="carrossel-header">
+                <div class="carrossel-header-esq">
+                    <span class="carrossel-titulo">${titulo}</span>
+                    <span class="carrossel-badge" id="carrossel-badge">0</span>
+                </div>
+                <button class="carrossel-toggle" id="carrossel-toggle" aria-label="Minimizar">
+                    <span id="carrossel-toggle-icone">▾</span>
+                </button>
+            </div>
+ 
+            <div class="carrossel-body" id="carrossel-body">
+                <div class="cotacoes-wrapper">
+                    <button class="scroll-btn left"  id="scroll-left-cotacoes">‹</button>
+                    <div class="lista-cotacoes" id="lista-cotacoes-componente"></div>
+                    <button class="scroll-btn right" id="scroll-right-cotacoes">›</button>
+                </div>
+            </div>
+ 
+        </div>
+    `;
  
 }
