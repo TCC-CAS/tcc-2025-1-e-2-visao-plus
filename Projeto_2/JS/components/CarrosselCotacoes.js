@@ -82,4 +82,51 @@ export function montarCarrosselCotacoes(containerId) {
  
     // Carrega cotações
     carregarCotacoes(container, usuario, ehLoja);
+
+async function carregarCotacoes(container, usuario, ehLoja) {
+    const lista  = container.querySelector("#lista-cotacoes-componente");
+    const badge  = container.querySelector("#carrossel-badge");
+ 
+    lista.innerHTML = `<p class="cotacoes-loading">Carregando...</p>`;
+ 
+    try {
+        let cotacoes = [];
+ 
+        if (ehLoja) {
+            // Loja: busca as cotações que chegaram pra ela
+            const loja = await getLojaDoUsuario(usuario);
+            if (!loja) {
+                lista.innerHTML = `<p class="cotacoes-vazio">Nenhuma loja cadastrada.</p>`;
+                badge.textContent = "0";
+                return;
+            }
+            cotacoes = await listarCotacoesPorLoja(loja.id);
+        } else {
+            // Cliente: busca suas próprias cotações
+            cotacoes = await listarCotacoesPorUsuario(usuario.id);
+        }
+ 
+        badge.textContent = cotacoes.length;
+ 
+        if (cotacoes.length === 0) {
+            lista.innerHTML = `<p class="cotacoes-vazio">${ehLoja ? "Nenhuma cotação recebida." : "Nenhuma cotação enviada."}</p>`;
+            return;
+        }
+ 
+        lista.innerHTML = "";
+ 
+        cotacoes.forEach(cotacao => {
+            // callback atualiza o card quando status muda no modal
+            const card = criarCardCotacao(cotacao, (cotacaoAtualizada) => {
+                // Recarrega a lista inteira quando status muda
+                carregarCotacoes(container, usuario, ehLoja);
+            });
+            lista.appendChild(card);
+        });
+ 
+    } catch (error) {
+        console.error("Erro ao carregar cotações:", error);
+        lista.innerHTML = `<p class="cotacoes-vazio">Erro ao carregar cotações.</p>`;
+    }
+}
 }
