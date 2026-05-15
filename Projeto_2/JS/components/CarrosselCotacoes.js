@@ -70,5 +70,16 @@ export function montarCarrosselCotacoes(containerId) {
         icone.textContent = aberto ? "▾" : "▸";
         toggle.setAttribute("aria-label", aberto ? "Minimizar" : "Expandir");
     });
+
+    // Scroll
+    const lista    = container.querySelector("#lista-cotacoes-componente");
+    const btnLeft  = container.querySelector("#scroll-left-cotacoes");
+    const btnRight = container.querySelector("#scroll-right-cotacoes");
+    const scrollAmount = 5 * 260;
  
+    btnRight.addEventListener("click", () => lista.scrollBy({ left:  scrollAmount, behavior: "smooth" }));
+    btnLeft.addEventListener ("click", () => lista.scrollBy({ left: -scrollAmount, behavior: "smooth" }));
+ 
+    // Carrega cotações
+    carregarCotacoes(container, usuario, ehLoja);
 }
