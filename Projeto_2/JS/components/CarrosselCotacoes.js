@@ -13,3 +13,15 @@ function injetarEstilizacao() {
     // CSS das cotações também
     chamarEstilizacao();
 }
+
+// ── Monta o HTML do carrossel num container existente ───
+ 
+export function montarCarrosselCotacoes(containerId) {
+    injetarEstilizacao();
+ 
+    const container = document.getElementById(containerId);
+    if (!container) {
+        console.warn(`Container não encontrado: ${containerId}`);
+        return;
+    }
+}
