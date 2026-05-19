@@ -6,6 +6,7 @@ body {
     height: 100vh;
     font-family: Arial;
     padding-top: 5%;
+    flex-direction: wrap;
 }
 
 /* MENU LATERAL */
