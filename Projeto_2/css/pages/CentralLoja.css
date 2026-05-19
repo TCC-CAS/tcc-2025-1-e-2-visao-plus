@@ -1,106 +1,442 @@
+:root {
+    --azul: #156783;
+    --azul-escuro: #0e4e5e;
+    --cinza-bg: #f5f6f8;
+    --cinza-menu: #f1f1f1;
+    --texto: #2f3437;
+    --texto-suave: #6c757d;
+    --borda: #dde2e6;
+    --branco: #ffffff;
 
+    --roxo: #667eea;
+    --roxo-escuro: #764ba2;
 
-/* Layout geral */
+    --verde: #0f6e56;
+    --verde-escuro: #084d3d;
+}
+
+/* ========================================
+   RESET ESCOPADO
+======================================== */
+
+.central-loja,
+.central-loja * {
+    box-sizing: border-box;
+}
+
+/* ========================================
+   BODY
+======================================== */
+
 body {
-    display: flex;
-    height: 100vh;
-    font-family: Arial;
-    padding-top: 5%;
-    flex-direction: wrap;
+    margin: 0;
+    padding-top: 90px;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--cinza-bg);
+    color: var(--texto);
 }
 
-.ConteudoLoja{
-    display: flex;
-    flex-direction: column;
+/* ========================================
+   HEADER
+======================================== */
+
+#app-header {
+    width: 100%;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 50;
 }
 
-/* MENU LATERAL */
+/* ========================================
+   ÁREA PRINCIPAL
+======================================== */
+
+.central-loja {
+    width: 100%;
+    min-height: calc(100vh - 90px);
+}
+
+/* ========================================
+   LAYOUT
+======================================== */
+
+.container-layout {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 90px);
+}
+
+/* ========================================
+   MENU LATERAL
+======================================== */
+
 #barra-menu {
-    width: 220px;
-    background-color: #f4f4f4;
-    border-right: 1px solid #ddd;
-    padding-top: 20px;
+    width: 240px;
+    min-width: 240px;
+    min-height: calc(100vh - 90px);
+    background: var(--cinza-menu);
+    border-right: 1px solid var(--borda);
+    padding: 18px 0;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 6px;
 }
 
 #barra-menu a {
+    display: block;
+
+    padding: 13px 18px;
+
     text-decoration: none;
+
     color: #555;
-    font-size: 16px;
-    padding: 8px;
-    border-radius: 5px;
-    transition: 0.2s;
-}
+    font-size: 14px;
+    font-weight: 500;
 
-#barra-menu a:hover {
-    background-color: #e0e0e0;
-}
+    border-left: 3px solid transparent;
 
-/* ÁREA PRINCIPAL */
-#central-loja {
-    flex: 1;
-    padding: 40px;
-    background-color: #ffffff;
-}
+    transition: 0.2s ease;
 
-#central-loja h1 {
-    margin-bottom: 30px;
-}
-
-/* CARDS DO DASHBOARD */
-.dashboard-cards {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-.card {
-    width: 260px;
-    height: 160px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 1% 2% 3% 2%;
-    background: #fafafa;
-
-    align-items: center;
-    object-fit: contain;
-}
-
-.card h3 {
-    margin-bottom: 10px;
-    margin-top: 0%;
-    color: #444;
-}
-
-.card-body{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1% 2% 3% 2%;
-}
-
-.chart{
-    width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    padding: 1% 2% 3% 2%;
-}
-
-/* BOTÃO */
-.botao-adicionar {
-    background-color: #2d8fe2;
-    color: white;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 20px;
-    font-weight: bold;
     cursor: pointer;
 }
 
-.botao-adicionar:hover {
-    background-color: #1e6fb5;
+#barra-menu a:hover {
+    background: #e7ecef;
+    border-left-color: var(--azul);
+    color: var(--azul);
+}
+
+/* ========================================
+   CONTEÚDO DIREITO
+======================================== */
+
+.conteudo-layout {
+    flex: 1;
+    min-width: 0;
+    min-height: calc(100vh - 90px);
+    display: flex;
+    flex-direction: column;
+    background: var(--branco);
+}
+
+/* ========================================
+   CARROSSEL DE COTAÇÕES
+======================================== */
+
+#secao-cotacoes-loja {
+    padding: 20px 24px;
+    background: var(--branco);
+    border-bottom: 1px solid var(--borda);
+
+    overflow: hidden;
+
+    transition:
+        padding 0.35s ease,
+        min-height 0.35s ease,
+        background 0.25s ease;
+}
+
+/* quando minimizado */
+#secao-cotacoes-loja.recolhido {
+    min-height: unset;
+    padding-bottom: 8px;
+}
+
+#secao-cotacoes-loja h2 {
+    margin: 0 0 16px 0;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: var(--texto);
+}
+
+/* ========================================
+   ANALYTICS
+======================================== */
+
+.painel-analytics {
+    flex: 1;
+    background: #fafafa;
+}
+
+/* ========================================
+   TABS
+======================================== */
+
+.guia-cards {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 18px;
+
+    background: #f8f9fa;
+
+    border-bottom: 1px solid var(--borda);
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    flex-shrink: 0;
+}
+
+.guia-cards::-webkit-scrollbar {
+    height: 6px;
+}
+
+.guia-cards::-webkit-scrollbar-thumb {
+    background: #b5bcc3;
+    border-radius: 10px;
+}
+
+.card-aba {
+    flex-shrink: 0;
+
+    border: 1px solid var(--borda);
+
+    background: var(--branco);
+
+    padding: 12px 22px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #555;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    white-space: nowrap;
+}
+
+.card-aba:hover {
+    background: #eef7fa;
+    border-color: var(--azul);
+    color: var(--azul);
+}
+
+.card-aba.ativo {
+    background: var(--roxo);
+    border-color: var(--roxo);
+
+    color: var(--branco);
+
+    box-shadow: 0 5px 12px rgba(102, 126, 234, 0.25);
+}
+
+/* ========================================
+   CONTEÚDO DINÂMICO
+======================================== */
+
+#conteudo-dinamico {
+    flex: 1;
+    padding: 24px;
+    background: #fafafa;
+}
+
+#conteudo-dinamico.vazio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #adb5bd;
+
+    text-align: center;
+}
+
+#conteudo-dinamico.vazio p {
+    font-size: 16px;
+}
+
+/* ========================================
+   GRID
+======================================== */
+
+.painel-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(180px, 1fr));
+
+    gap: 20px;
+}
+
+/* ========================================
+   CARDS ESTATÍSTICA
+======================================== */
+
+.stat-card {
+    border-radius: 14px;
+
+    padding: 24px;
+
+    color: white;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+    transition: 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card.blue {
+    background: linear-gradient(
+        135deg,
+        var(--azul),
+        var(--azul-escuro)
+    );
+}
+
+.stat-card.green {
+    background: linear-gradient(
+        135deg,
+        var(--verde),
+        var(--verde-escuro)
+    );
+}
+
+.stat-card.purple {
+    background: linear-gradient(
+        135deg,
+        var(--roxo),
+        var(--roxo-escuro)
+    );
+}
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 600;
+
+    opacity: 0.9;
+
+    margin-bottom: 14px;
+}
+
+.stat-value {
+    font-size: 38px;
+    font-weight: 800;
+
+    margin-bottom: 10px;
+}
+
+.stat-meta {
+    font-size: 12px;
+
+    opacity: 0.8;
+}
+
+/* ========================================
+   PLACEHOLDER
+======================================== */
+
+.painel-placeholder {
+    padding: 50px 20px;
+
+    text-align: center;
+
+    color: #adb5bd;
+}
+
+.placeholder-title {
+    font-size: 18px;
+
+    margin-bottom: 12px;
+}
+
+.painel-placeholder small {
+    display: block;
+
+    margin-top: 12px;
+
+    opacity: 0.7;
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+
+#conteudo-dinamico::-webkit-scrollbar,
+#barra-menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+#conteudo-dinamico::-webkit-scrollbar-thumb,
+#barra-menu::-webkit-scrollbar-thumb {
+    background: #b5bcc3;
+    border-radius: 10px;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 1200px) {
+    .painel-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .central-loja {
+        height: auto;
+        overflow: visible;
+    }
+
+    .container-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #barra-menu {
+        width: 100%;
+        min-width: 100%;
+
+        flex-direction: row;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        padding: 0;
+
+        border-right: none;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    #barra-menu a {
+        flex: 1;
+
+        text-align: center;
+
+        border-left: none;
+        border-bottom: 3px solid transparent;
+    }
+
+    #barra-menu a:hover {
+        border-bottom-color: var(--azul);
+    }
+
+    #secao-cotacoes-loja {
+        height: auto;
+        min-height: 260px;
+    }
+
+    .painel-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #conteudo-dinamico {
+        padding: 18px;
+    }
 }
