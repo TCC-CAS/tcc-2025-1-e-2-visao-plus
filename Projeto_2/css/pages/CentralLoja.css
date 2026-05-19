@@ -9,6 +9,10 @@ body {
     flex-direction: wrap;
 }
 
+.ConteudoLoja{
+    display: flex;
+}
+
 /* MENU LATERAL */
 #barra-menu {
     width: 220px;
