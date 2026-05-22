@@ -49,6 +49,8 @@ body {
     border-radius: 10px;
 }
 
+/* =================SEÇÃO DE ABERTURA DE LOJA =========== */
+
 #secao-pedir_loja {
     flex: 1;
     text-align: top;
@@ -57,6 +59,50 @@ body {
     padding: 20px;
     margin: 0px 1% 0px 1%;
     border-radius: 10px;
+}
+
+.info-solicitacao-loja {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+    text-align: left;
+    width: 100%;
+}
+
+.card-minha-solicitacao {
+    background-color: white;
+    border: 1px solid #d8d8d8;
+    border-left: 6px solid #156783;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.card-minha-solicitacao p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.card-minha-solicitacao strong {
+    color: #156783;
+}
+
+.status-pendente {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.info-solicitacao-loja small {
+    color: #555;
+    text-align: center;
+    margin-top: 8px;
 }
 .perfil-header {
     display: flex;

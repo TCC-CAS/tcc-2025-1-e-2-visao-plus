@@ -1,4 +1,4 @@
-import { getUsuarioLogado} from "../core/auth.js";
+import { getUsuarioLogado } from "../core/auth.js";
 import { listarUsuarios, deletarUsuario, editarDadosUsuario } from "../core/usuario.js";
 import { listarLojas, editarDadosLoja, deletarLoja } from "../core/loja.js";
 import { abrirModal, fecharModal } from "../components/modals.js";
@@ -9,6 +9,7 @@ import { configurarHeader } from "../components/header.js";
 import { getLojaDoUsuario } from "../core/loja.js";
 import { carregarFotoUsuario, salvarFotoPerfil, carregarFotoLoja, salvarFotoLoja } from "../core/imgs.js";
 import { listarCotacoesPorUsuario, criarCardCotacao, chamarEstilizacao, initScrollCotacoes } from "../core/cotacoes.js";
+import { buscarSolicitacaoLojaPorUsuario } from "../core/solicitacaoLoja.js";
 
 //===================================INICIALIZAÇÃO DE VARIÁVEIS PRINCIPAIS=====================================================//
 
@@ -18,7 +19,7 @@ let loja = null;
 //===================================CONFIGURAÇÃO DA VISUALIZAÇÃO=====================================================//
 
 async function configurarTela() {
-    
+
     if (!usuario) return;
 
     esconderBlocos([
@@ -56,7 +57,7 @@ function preencherInformacoesUsuario() {
 }
 
 function preencherInformacoesLoja() {
-    
+
     if (usuario && loja) {
         document.getElementById("nomeLoja").textContent = loja.nome;
         document.getElementById("emailLoja").textContent = loja.email;
@@ -64,6 +65,32 @@ function preencherInformacoesLoja() {
         document.getElementById("enderecoLoja").textContent = loja.endereco;
         document.getElementById("cepLoja").textContent = loja.cep;
     }
+}
+
+async function carregarSolicitacaoLojaDoUsuario() {
+    if (!usuario || usuario.tipoUsuario !== "Comum") return;
+
+    const boxSemSolicitacao = document.getElementById("box-sem-solicitacao");
+    const boxSolicitacaoPendente = document.getElementById("box-solicitacao-pendente");
+
+    if (!boxSemSolicitacao || !boxSolicitacaoPendente) return;
+
+    const solicitacao = await buscarSolicitacaoLojaPorUsuario(usuario.id);
+
+    if (!solicitacao) {
+        boxSemSolicitacao.classList.remove("hidden");
+        boxSolicitacaoPendente.classList.add("hidden");
+        return;
+    }
+
+    boxSemSolicitacao.classList.add("hidden");
+    boxSolicitacaoPendente.classList.remove("hidden");
+
+    document.getElementById("minha-solicitacao-nome").textContent = solicitacao.nome || "-";
+    document.getElementById("minha-solicitacao-cnpj").textContent = solicitacao.cnpj || "-";
+    document.getElementById("minha-solicitacao-email").textContent = solicitacao.email || "-";
+    document.getElementById("minha-solicitacao-cep").textContent = solicitacao.cep || "-";
+    document.getElementById("minha-solicitacao-endereco").textContent = solicitacao.endereco || "-";
 }
 
 //===================================EVENTOS DE COMPONENTES=====================================================//
@@ -86,19 +113,19 @@ async function configurarEventos() {
     document.getElementById("edit-email-usuario").value = usuario.email;
 
     if (loja) {
-    document.getElementById("edit-nome-loja").value = loja.nome;
-    document.getElementById("edit-email-loja").value = loja.email;
-    document.getElementById("edit-cnpj-loja").value = loja.cnpj;
-    document.getElementById("edit-cep-loja").value = loja.cep;
-    document.getElementById("edit-endereco-loja").value = loja.endereco;
-    }    
-    
+        document.getElementById("edit-nome-loja").value = loja.nome;
+        document.getElementById("edit-email-loja").value = loja.email;
+        document.getElementById("edit-cnpj-loja").value = loja.cnpj;
+        document.getElementById("edit-cep-loja").value = loja.cep;
+        document.getElementById("edit-endereco-loja").value = loja.endereco;
+    }
+
     //Eventos de submit dos formulários
     document.getElementById("form-editar-perfil").addEventListener("submit", salvarPerfil);
     if (loja) {
-    document.getElementById("form-editar-loja").addEventListener("submit", salvarLoja);
+        document.getElementById("form-editar-loja").addEventListener("submit", salvarLoja);
     }
-    }
+}
 
 //===================================EDIÇÃO DO USUÁRIO=====================================================//
 
@@ -156,7 +183,7 @@ async function salvarLoja(e) {
     const lojaAtualizada = await editarDadosLoja(dadosLoja);
 
     if (lojaAtualizada) {
-        
+
         usuario.loja = lojaAtualizada;
         loja = lojaAtualizada;
 
@@ -189,7 +216,7 @@ async function carregarUsuarios() {
                 abrirModal("modal-editar-usuario-admin");
                 preencherFormularioEditarUsuarioAdmin(u);
             },
-            onDeletar: (id) => {deletarUsuario(id)}
+            onDeletar: (id) => { deletarUsuario(id) }
         });
 
         container.appendChild(card);
@@ -197,27 +224,27 @@ async function carregarUsuarios() {
 }
 
 document
-  .getElementById("form-editar-usuario-admin")
-  .addEventListener("submit", async (e) => {
-    e.preventDefault();
+    .getElementById("form-editar-usuario-admin")
+    .addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    const usuarioAtualizado = {
-        id: document.getElementById("admin-id-usuario").value,
-        nome: document.getElementById("admin-nome-usuario").value,
-        email: document.getElementById("admin-email-usuario").value,
-        tipoUsuario: document.getElementById("admin-tipo-usuario").value
-    };
+        const usuarioAtualizado = {
+            id: document.getElementById("admin-id-usuario").value,
+            nome: document.getElementById("admin-nome-usuario").value,
+            email: document.getElementById("admin-email-usuario").value,
+            tipoUsuario: document.getElementById("admin-tipo-usuario").value
+        };
 
-    try {
-        await editarDadosUsuario(usuarioAtualizado);
-        alert("Usuário atualizado com sucesso!");
-        fecharModal("modal-editar-usuario-admin");
-        carregarUsuarios();
-    } catch (err) {
-        console.error("Erro ao atualizar usuário:", err);
-        alert("Erro ao atualizar usuário");
-    }
-});
+        try {
+            await editarDadosUsuario(usuarioAtualizado);
+            alert("Usuário atualizado com sucesso!");
+            fecharModal("modal-editar-usuario-admin");
+            carregarUsuarios();
+        } catch (err) {
+            console.error("Erro ao atualizar usuário:", err);
+            alert("Erro ao atualizar usuário");
+        }
+    });
 
 
 //===================================ADMIN DE LOJAS=====================================================//
@@ -262,29 +289,29 @@ async function carregarLojas() {
 }
 
 document
-  .getElementById("form-editar-loja-admin")
-  .addEventListener("submit", async (e) => {
-    e.preventDefault();
+    .getElementById("form-editar-loja-admin")
+    .addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    const lojaAtualizada = {
-        id: document.getElementById("admin-id-loja").value,
-        nome: document.getElementById("admin-nome-loja").value,
-        email: document.getElementById("admin-email-loja").value,
-        cnpj: document.getElementById("admin-cnpj-loja").value,
-        cep: document.getElementById("admin-cep-loja").value,
-        endereco: document.getElementById("admin-endereco-loja").value
-    };
+        const lojaAtualizada = {
+            id: document.getElementById("admin-id-loja").value,
+            nome: document.getElementById("admin-nome-loja").value,
+            email: document.getElementById("admin-email-loja").value,
+            cnpj: document.getElementById("admin-cnpj-loja").value,
+            cep: document.getElementById("admin-cep-loja").value,
+            endereco: document.getElementById("admin-endereco-loja").value
+        };
 
-    try {
-        await editarDadosLoja(lojaAtualizada);
-        alert("Loja atualizada com sucesso!");
-        fecharModal("modal-editar-loja-admin");
-        carregarLojas();
-    } catch (err) {
-        console.error("Erro ao atualizar loja:", err);
-        alert("Erro ao atualizar loja");
-    }
-});
+        try {
+            await editarDadosLoja(lojaAtualizada);
+            alert("Loja atualizada com sucesso!");
+            fecharModal("modal-editar-loja-admin");
+            carregarLojas();
+        } catch (err) {
+            console.error("Erro ao atualizar loja:", err);
+            alert("Erro ao atualizar loja");
+        }
+    });
 
 //===================================COTAÇÕES=====================================================//
 
@@ -313,10 +340,14 @@ async function init() {
     if (usuario.tipoUsuario === "Vendedor" || usuario.tipoUsuario === "Admin") {
         loja = await getLojaDoUsuario(usuario);
         usuario.loja = loja;
+        //Função de imagem da loja
+        carregarFotoLoja(usuario);
+        salvarFotoLoja();
     }
 
     configurarHeader();
     await configurarTela();
+    await carregarSolicitacaoLojaDoUsuario();
     configurarEventos();
     preencherInformacoesUsuario();
     preencherInformacoesLoja();
@@ -325,10 +356,8 @@ async function init() {
     carregarFotoUsuario(usuario);
     salvarFotoPerfil();
 
-    //Função de imagem da loja
-    carregarFotoLoja(usuario);
-    salvarFotoLoja();
-    
+
+
     chamarEstilizacao();
     initScrollCotacoes();
     carregarCotacoes(getUsuarioLogado().id);
