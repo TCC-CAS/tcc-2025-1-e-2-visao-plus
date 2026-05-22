@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Página Perfil</title>
     <link rel="stylesheet" href="css/pages/PaginaPerfil.css">
+    <link rel="stylesheet" href="css/pages/AdminSolicitacoesLoja.css">
     <link rel="stylesheet" href="css/components/FotoPerfil.css">
 </head>
 
@@ -120,13 +121,39 @@
 
         <!-- seção pedir loja, mostrar quando o usuário for cliente somente-->
         <section id="secao-pedir_loja" class="perfil-bloco">
-            <h2 class="titulo-perfil">Solicitar Abertura de Loja</h2>
-            <div class="info-pedir-loja">
-                <p><strong>Você ainda não possui uma loja. Clique no botão abaixo para solicitar a abertura de uma
-                        loja.</strong></p>
+            <h2 class="titulo-perfil">Solicitação de Loja</h2>
+
+            <div id="box-sem-solicitacao" class="info-pedir-loja">
+                <p>
+                    <strong>
+                        Você ainda não possui uma loja. Clique no botão abaixo para solicitar a abertura de uma loja.
+                    </strong>
+                </p>
+
                 <a href="CadastroLoja.html" id="btn-solicitar-loja" class="button">
                     Solicitar Abertura de Loja
                 </a>
+            </div>
+
+            <div id="box-solicitacao-pendente" class="info-solicitacao-loja hidden">
+                <h3>Solicitação enviada</h3>
+
+                <p>
+                    Sua solicitação de abertura de loja foi enviada e está aguardando análise do administrador.
+                </p>
+
+                <div class="card-minha-solicitacao">
+                    <p><strong>Nome da loja:</strong> <span id="minha-solicitacao-nome"></span></p>
+                    <p><strong>CNPJ:</strong> <span id="minha-solicitacao-cnpj"></span></p>
+                    <p><strong>Email:</strong> <span id="minha-solicitacao-email"></span></p>
+                    <p><strong>CEP:</strong> <span id="minha-solicitacao-cep"></span></p>
+                    <p><strong>Endereço:</strong> <span id="minha-solicitacao-endereco"></span></p>
+                    <p><strong>Status:</strong> <span class="status-pendente">Pendente</span></p>
+                </div>
+
+                <small>
+                    Aguarde a aprovação. Após aprovação, sua conta será convertida para vendedor.
+                </small>
             </div>
         </section>
     </section>
@@ -158,6 +185,11 @@
         <section>
             <h3>Lojas</h3>
             <section id="lista-lojas" class="lista-lojas"></section>
+        </section>
+
+        <section>
+            <h3>Solicitações de Loja Pendentes</h3>
+            <section id="admin-solicitacoes-loja" class="lista-solicitacoes"></section>
         </section>
     </section>
 
@@ -238,6 +270,7 @@
     </div>
 </div>
 <script type="module" src="JS/pages/PaginaPerfil.js"></script>
+<script type="module" src="JS/pages/AdminSolicitacoesLoja.js"></script>
 <!--
 <script src="js/pages/ListaUsuarios.js"></script>
 <script type="module" src="JS/components/header.js"></script>
