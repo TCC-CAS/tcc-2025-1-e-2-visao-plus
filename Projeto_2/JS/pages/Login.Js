@@ -58,6 +58,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 JSON.stringify(usuarioBackend)
             );
 
+            function redirecionarPorTipo(usuarioBackend) {
+                if (usuarioBackend.tipoUsuario === "Comum") {
+                    window.location.href = "PaginaPrincipal.html";
+                    return;
+                }
+ 
+                if (usuarioBackend.tipoUsuario === "Vendedor") {
+                    window.location.href = "CentralLoja.html"; 
+                    return;
+                }
+
+                if (usuarioBackend.tipoUsuario === "Admin") {
+                    window.location.href = "PaginaPerfil.html";
+                    return;
+                }
+
+                window.location.href = "PaginaPrincipal.html";
+            }
+
             mostrarMensagem(
                 msgLogin,
                 "Login bem-sucedido! Redirecionando...",
@@ -65,8 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             setTimeout(() => {
-                window.location.href = "PaginaPrincipal.html";
-            }, 3000);
+                redirecionarPorTipo(usuarioBackend);
+            }, 1500);
 
         } catch (error) {
             console.error(error);
