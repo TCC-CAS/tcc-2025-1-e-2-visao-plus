@@ -113,21 +113,35 @@ public class UsuarioService {
         return usuario.getFotoUrl();
     }
 
-    public ResponseEntity<?> recuperaSenha(recuperaSenhaDTO dto){
+    public ResponseEntity<?> recuperaSenha(recuperaSenhaDTO dto) {
 
         Optional<Usuario> usuarioOpt = r.findByEmail(dto.getEmail());
 
-        if(!usuarioOpt.isPresent()){
+        if (!usuarioOpt.isPresent()) {
             return ResponseEntity.badRequest().body("Email não encontrado");
         }
 
         Usuario usuario = usuarioOpt.get();
 
-        String senha;
-        senha = usuario.getSenha();
-        emailService.recuperacaoSenha(dto.getEmail(), "", senha);
+        if (!usuario.getNome().equalsIgnoreCase(dto.getNome())) {
+            return ResponseEntity.badRequest().body("Nome de usuário não corresponde ao email informado");
+        }
 
-        return ResponseEntity.ok("Email enviado!");
+        String senhaTemporaria = gerarSenhaTemporaria();
+
+        usuario.setSenha(senhaTemporaria);
+        r.save(usuario);
+
+        String linkLogin = "http://127.0.0.1:5500/Login.html";
+
+        emailService.recuperacaoSenha(dto.getEmail(), linkLogin, senhaTemporaria);
+
+        return ResponseEntity.ok("Email de recuperação enviado com sucesso!");
+    }
+
+    private String gerarSenhaTemporaria() {
+        String uuid = java.util.UUID.randomUUID().toString().replace("-", "");
+        return "Vp@" + uuid.substring(0, 8);
     }
 
 
