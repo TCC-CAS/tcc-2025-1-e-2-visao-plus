@@ -126,9 +126,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/recuperarSenha")
-    public ResponseEntity<?> recuperarSenha(@RequestBody recuperaSenhaDTO dto){
-
-        return ResponseEntity.ok(s.recuperaSenha(dto));
+    public ResponseEntity<?> recuperarSenha(@RequestBody recuperaSenhaDTO dto) {
+        return s.recuperaSenha(dto);
     }
-
 }
