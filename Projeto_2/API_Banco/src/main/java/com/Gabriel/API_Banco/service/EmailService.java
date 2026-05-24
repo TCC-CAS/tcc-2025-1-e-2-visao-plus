@@ -24,19 +24,22 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    public void recuperacaoSenha(String para, String Link, String senha){
+    public void recuperacaoSenha(String para, String link, String senhaTemporaria) {
 
         SimpleMailMessage message = new SimpleMailMessage();
 
         message.setTo(para);
-        message.setSubject("Perdeu sua senha?");
+        message.setSubject("Recuperação de senha - VisionPlus+");
 
         message.setText(
                 "Olá!\n\n" +
-                        "Olá! Vimos que você esqueceu sua senha. Devido a isso viemos relembrá-la:\n" +
-                        senha +
-                        "Caso queira redefinir ela, clique no link abaixo:\n" +
-                        Link
+                        "Recebemos uma solicitação de recuperação de senha para sua conta na VisionPlus+.\n\n" +
+                        "Sua senha temporária é:\n\n" +
+                        senhaTemporaria + "\n\n" +
+                        "Use essa senha para acessar sua conta e, se desejar, altere sua senha depois.\n\n" +
+                        "Link de acesso:\n" +
+                        link + "\n\n" +
+                        "Caso você não tenha solicitado essa recuperação, ignore este e-mail."
         );
 
         mailSender.send(message);
