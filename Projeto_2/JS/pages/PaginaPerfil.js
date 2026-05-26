@@ -107,6 +107,30 @@ async function configurarEventos() {
     document.getElementById("fechar-modal-admin").addEventListener("click", () => fecharModal("modal-editar-usuario-admin"));
     document.getElementById("fechar-modal-loja-admin").addEventListener("click", () => fecharModal("modal-editar-loja-admin"));
 
+    const btnAbrirSenha = document.getElementById("abrir-modal-senha");
+    const btnFecharSenha = document.getElementById("fechar-modal-senha");
+    const btnVoltarPerfil = document.getElementById("voltar-modal-perfil");
+
+    if (btnAbrirSenha) {
+        btnAbrirSenha.addEventListener("click", () => {
+            fecharModal("modal-editar-perfil");
+            abrirModal("modal-editar-senha");
+        });
+    }
+
+    if (btnFecharSenha) {
+        btnFecharSenha.addEventListener("click", () => fecharModal("modal-editar-senha"));
+    }
+
+    if (btnVoltarPerfil) {
+        btnVoltarPerfil.addEventListener("click", () => {
+            fecharModal("modal-editar-senha");
+            abrirModal("modal-editar-perfil");
+        });
+    }
+
+    document.getElementById("form-editar-senha").addEventListener("submit", salvarSenha);
+
 
     //Evento de edição de perfil e loja
     document.getElementById("edit-nome-usuario").value = usuario.nome;
@@ -124,6 +148,92 @@ async function configurarEventos() {
     document.getElementById("form-editar-perfil").addEventListener("submit", salvarPerfil);
     if (loja) {
         document.getElementById("form-editar-loja").addEventListener("submit", salvarLoja);
+    }
+}
+
+function mostrarMensagemSenhaPerfil(texto, tipo) {
+    const msg = document.getElementById("msgSenhaPerfil");
+
+    msg.textContent = texto;
+    msg.classList.remove("sucesso", "erro");
+    msg.classList.add(tipo);
+}
+
+function validarNovaSenha(senha) {
+    const temTamanho = senha.length >= 8;
+    const temMaiuscula = /[A-Z]/.test(senha);
+    const temMinuscula = /[a-z]/.test(senha);
+    const temNumero = /[0-9]/.test(senha);
+    const temEspecial = /[!@#$%^&*(),.?":{}|<>]/.test(senha);
+    const semProibido = !/[<>]/.test(senha);
+
+    return temTamanho && temMaiuscula && temMinuscula && temNumero && temEspecial && semProibido;
+}
+
+async function salvarSenha(e) {
+    e.preventDefault();
+
+    const senhaAtual = document.getElementById("senha-atual").value;
+    const confirmarSenhaAtual = document.getElementById("confirmar-senha-atual").value;
+    const novaSenha = document.getElementById("nova-senha").value;
+    const confirmarNovaSenha = document.getElementById("confirmar-nova-senha").value;
+
+    if (!senhaAtual || !confirmarSenhaAtual || !novaSenha || !confirmarNovaSenha) {
+        mostrarMensagemSenhaPerfil("Preencha todos os campos.", "erro");
+        return;
+    }
+
+    if (senhaAtual !== confirmarSenhaAtual) {
+        mostrarMensagemSenhaPerfil("A confirmação da senha atual não confere.", "erro");
+        return;
+    }
+
+    if (novaSenha !== confirmarNovaSenha) {
+        mostrarMensagemSenhaPerfil("A confirmação da nova senha não confere.", "erro");
+        return;
+    }
+
+    if (!validarNovaSenha(novaSenha)) {
+        mostrarMensagemSenhaPerfil(
+            "A nova senha deve ter 8 caracteres, maiúscula, minúscula, número e caractere especial.",
+            "erro"
+        );
+        return;
+    }
+
+    const dto = {
+        idUsuario: usuario.id,
+        senhaAtual,
+        novaSenha
+    };
+
+    try {
+        const response = await fetch("http://localhost:8080/usuarios/alterarSenha", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dto)
+        });
+
+        if (!response.ok) {
+            const erro = await response.text();
+            mostrarMensagemSenhaPerfil(erro || "Erro ao alterar senha.", "erro");
+            return;
+        }
+
+        mostrarMensagemSenhaPerfil("Senha alterada com sucesso!", "sucesso");
+
+        document.getElementById("form-editar-senha").reset();
+
+        setTimeout(() => {
+            fecharModal("modal-editar-senha");
+            abrirModal("modal-editar-perfil");
+        }, 1500);
+
+    } catch (error) {
+        console.error(error);
+        mostrarMensagemSenhaPerfil("Erro ao conectar com o servidor.", "erro");
     }
 }
 
