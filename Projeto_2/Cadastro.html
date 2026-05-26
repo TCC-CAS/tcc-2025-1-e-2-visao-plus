@@ -16,53 +16,95 @@
 
     <div id="app-header"></div>
 
-    <div class="container-cadastro">
-        <h1>Cadastro de Usuário</h1>
-        <form id="cadastroForm">
+    <main class="auth-page">
+        <section class="auth-shell">
 
-            <label for="nome">Nome de usuário:</label>
-            <input type="text" id="nome" name="nome" autocomplete="username" placeholder="Nome de usuário" required>
+            <!-- LADO ESQUERDO: VISUAL / GIFS -->
+            <section class="auth-visual">
+                <img
+                    id="authGif"
+                    src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxoZGxkZHZtMG54dGtmajh0cnp3M25wZDBnanRkMnEzZnJoNHVkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUOrw1p8ATwqTPX1NC/giphy.gif"
+                    alt="Ilustração animada do VisionPlus+"
+                >
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" autocomplete="username@useremail.com" placeholder="E-mail"
-                required>
+                <div class="auth-visual-overlay"></div>
 
-            <div id="erroSenha" class="erro-senha"></div>
+                <div class="auth-visual-content">
+                    <span class="auth-badge">VisionPlus+</span>
+                    <h2>Seu hub de óticas em poucos cliques</h2>
+                    <p>
+                        Compare óticas, faça cotações e acompanhe suas solicitações
+                        de forma simples, bonita e organizada.
+                    </p>
 
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" autocomplete="current-password" placeholder="Senha" required><br>
-            <div id="regrasCard" class="regras-card">
-                <h4>Regras da senha:</h4>
-                <ul>
-                    <li id="regraTamanho">Mínimo 8 caracteres</li>
-                    <li id="regraMaiuscula">Pelo menos 1 letra maiúscula</li>
-                    <li id="regraMinuscula">Pelo menos 1 letra minúscula</li>
-                    <li id="regraNumero">Pelo menos 1 número</li>
-                    <li id="regraEspecial">Pelo menos 1 caractere especial</li>
-                    <li id="regraProibido">Não pode conter &lt; ou &gt;</li>
-                </ul>
-            </div>
+                    <div class="gif-indicators">
+                        <span class="gif-dot ativo"></span>
+                        <span class="gif-dot"></span>
+                        <span class="gif-dot"></span>
+                    </div>
+                </div>
+            </section>
 
-            <label for="confirmarSenha">Confirmar Senha:</label>
-            <input type="password" id="confirmarSenha" name="confirmarSenha" autocomplete="confirm-password"
-                placeholder="Confirme a senha" required><br>
+            <!-- LADO DIREITO: FORM -->
+            <section class="auth-form-side">
+                <div class="form-card">
+                    <h1>Cadastro de Usuário</h1>
+                    <p class="auth-subtitle">
+                        Crie sua conta para acessar óticas, cotações e reservas.
+                    </p>
 
-            <!-- Checkpoint de termos -->
-            <div class="termos-area">
-                <input type="checkbox" id="checkTermos" disabled>
-                <label for="checkTermos">
-                    Li e aceito os <a href="#" id="abrirTermos">Termos de Uso</a>
-                </label>
-            </div>
+                    <form id="cadastroForm">
+                        <label for="nome">Nome de usuário:</label>
+                        <input type="text" id="nome" name="nome" autocomplete="username"
+                            placeholder="Nome de usuário" required>
 
-            <p id="avisoTermos" class="aviso-termos">
-                Você precisa aceitar os termos de uso para se cadastrar.
-            </p>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email"
+                            placeholder="E-mail" required>
 
-            <button type="submit">Registrar</button>
-        </form>
-        <p>Já tem uma conta? <a href="Login.html">Faça login</a></p>
-    </div>
+                        <div id="erroSenha" class="erro-senha"></div>
+
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" placeholder="Senha" required>
+
+                        <div id="regrasCard" class="regras-card">
+                            <h4>Regras da senha:</h4>
+                            <ul>
+                                <li id="regraTamanho">Mínimo 8 caracteres</li>
+                                <li id="regraMaiuscula">Pelo menos 1 letra maiúscula</li>
+                                <li id="regraMinuscula">Pelo menos 1 letra minúscula</li>
+                                <li id="regraNumero">Pelo menos 1 número</li>
+                                <li id="regraEspecial">Pelo menos 1 caractere especial</li>
+                                <li id="regraProibido">Não pode conter &lt; ou &gt;</li>
+                            </ul>
+                        </div>
+
+                        <label for="confirmarSenha">Confirmar Senha:</label>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha"
+                            placeholder="Confirme a senha" required>
+
+                        <div class="termos-area">
+                            <input type="checkbox" id="checkTermos" disabled>
+                            <label for="checkTermos">
+                                Li e aceito os <a href="#" id="abrirTermos">Termos de Uso</a>
+                            </label>
+                        </div>
+
+                        <p id="avisoTermos" class="aviso-termos">
+                            Você precisa aceitar os termos de uso para se cadastrar.
+                        </p>
+
+                        <button type="submit">Registrar</button>
+                    </form>
+
+                    <p class="auth-footer-link">
+                        Já tem uma conta? <a href="Login.html">Faça login</a>
+                    </p>
+                </div>
+            </section>
+
+        </section>
+    </main>
 
     <!-- MODAL TERMOS DE USO -->
     <div id="modalTermos" class="modal-termos-overlay">
