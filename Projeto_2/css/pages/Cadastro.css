@@ -1,99 +1,298 @@
-body {
-    background-color: #f0f8ff; /* Fundo azul muito claro */
-    font-size: 16px;
-    padding-top: 2%;
+:root {
+    --brand: #156783;
+    --brand-dark: #0e4e5e;
+    --bg-soft: #eef7fb;
+    --text: #24323a;
+    --muted: #6b7b85;
+    --white: #ffffff;
+    --danger: #e74c3c;
+    --success: #2ecc71;
+    --shadow: 0 24px 60px rgba(16, 56, 73, 0.16);
+    --radius-xl: 28px;
+    --radius-lg: 18px;
+    --radius-md: 12px;
 }
 
-.container-cadastro {
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        linear-gradient(180deg, #1e9bd4 0 66px, #ececec 66px 100%);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* ==============================
+   TOASTS
+============================== */
+
+#mensagensTopo {
+    position: fixed;
+    top: 90px;
+    left: 24px;
     display: flex;
     flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 380px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.toast.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.sucesso {
+    background-color: var(--success);
+    box-shadow: 0 6px 20px rgba(46, 204, 113, 0.35);
+}
+
+.toast.erro {
+    background-color: var(--danger);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.35);
+}
+
+/* ==============================
+   LAYOUT PRINCIPAL
+============================== */
+
+.auth-page {
+    width: min(1180px, 94%);
+    margin: 40px auto;
+    padding-bottom: 40px;
+}
+
+.auth-shell {
+    display: flex;
+    min-height: 680px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow);
+}
+
+/* ==============================
+   PAINEL ESQUERDO
+============================== */
+
+.auth-visual {
+    position: relative;
+    flex: 1.05;
+    background: #d81d2d;
+    min-height: 680px;
+    overflow: hidden;
+}
+
+.auth-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.35s ease;
+}
+
+.auth-visual img.trocando {
+    opacity: 0.15;
+}
+
+.auth-visual-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(10, 32, 41, 0.18) 0%,
+            rgba(10, 32, 41, 0.52) 100%
+        );
+}
+
+.auth-visual-content {
+    position: absolute;
+    left: 34px;
+    right: 34px;
+    bottom: 34px;
+    z-index: 2;
+    color: white;
+}
+
+.auth-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    backdrop-filter: blur(4px);
+}
+
+.auth-visual-content h2 {
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 0 0 14px;
+}
+
+.auth-visual-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0 0 24px;
+    max-width: 440px;
+    text-align: left;
+}
+
+.gif-indicators {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.gif-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.gif-dot.ativo {
+    background: #ffffff;
+    transform: scale(1.18);
+}
+
+/* ==============================
+   PAINEL DIREITO
+============================== */
+
+.auth-form-side {
+    flex: 0.95;
+    background: #fff8dc;
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 90vh;
+    padding: 40px 34px;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-card h1 {
+    color: var(--brand);
+    text-align: center;
+    font-size: 34px;
+    margin: 0 0 10px;
+}
+
+.auth-subtitle {
+    color: var(--muted);
+    text-align: center;
+    margin: 0 0 26px;
+    line-height: 1.55;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    border-radius: 15px;
-    padding: 35px;
+    border-radius: 20px;
+    padding: 32px;
     background-color: white;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
     width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
 label {
-    margin: 2px;
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 4px 0 6px;
+    font-weight: 600;
+    color: #33454f;
 }
 
 input {
-    margin: 8px 0 15px 0;
-    padding: 14px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    margin: 0 0 16px 0;
+    padding: 14px 16px;
+    border: 1px solid #d8e0e5;
+    border-radius: 10px;
     font-size: 15px;
+    background: #fbfdfe;
+    transition: 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(21, 103, 131, 0.12);
+    background: #ffffff;
 }
 
 button {
-    background-color: #156783;
+    background-color: var(--brand);
     color: white;
     border: none;
     padding: 14px;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 8px;
     transition: 0.2s ease;
 }
 
 button:hover {
-    background-color: #0e4e5e;
+    background-color: var(--brand-dark);
     transform: translateY(-2px);
-    transition: 0.2s ease;
 }
 
-h1 {
-    color: #156783;
+.auth-footer-link {
+    margin-top: 20px;
     text-align: center;
-    font-size: 32px;
-    margin-bottom: 25px;
-    font-family: Arial;
 }
 
 a {
-    color: #156783;
-    font-family: Arial, Helvetica, sans-serif;
+    color: var(--brand);
+    text-decoration: none;
 }
 
-p {
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+a:hover {
+    text-decoration: underline;
 }
 
-/*==================================================
-    CARD DE ERRO DA SENHA
-==================================================*/
+/* ==============================
+   REGRAS DE SENHA
+============================== */
 
 .regras-card {
     position: fixed;
-    top: 30px;
-    right: 30px;
-    width: 250px;
+    top: 100px;
+    right: 24px;
+    width: 260px;
     padding: 15px;
     background: white;
     color: #333;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.20);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateY(-10px);
-    z-index: 9999;
+    z-index: 999;
 }
 
 .regras-card.mostrar {
@@ -103,27 +302,8 @@ p {
 
 .regras-card h4 {
     margin-top: 0;
+    color: var(--brand);
 }
-
-.erro-senha {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeOut {
-    from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(-10px); }
-}
-
-/*==================================================
-    RESPONSIVO
-==================================================*/
 
 .regras-card li {
     list-style: none;
@@ -147,65 +327,57 @@ input.senha-invalida {
     border: 2px solid red;
 }
 
-/*================================================
-    MENSAGENS DE DISPONIBILIDADE
-=================================================*/
+.erro-senha {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
 
-/* Container das mensagens */
-#mensagensTopo {
-    position: fixed;
-    top: 1%;
-    left: 20%;
-    transform: translateX(-50%);
+/* ==============================
+   TERMOS
+============================== */
+
+.termos-area {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    z-index: 9999999;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0 4px;
+    padding: 12px;
+    background: #f7fbfd;
+    border: 1px solid rgba(21, 103, 131, 0.16);
+    border-radius: 12px;
 }
 
-/* Toast base */
-.toast {
-    min-width: 280px;
-    max-width: 400px;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: 500;
-    text-align: center;
-    color: white;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-    pointer-events: none;
+.termos-area input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--brand);
 }
 
-/* Mostrar */
-.toast.mostrar {
-    opacity: 1;
-    transform: translateY(0);
+.termos-area label {
+    margin: 0;
+    font-size: 13px;
+    font-weight: normal;
 }
 
-/* Sucesso */
-.toast.sucesso {
-    background-color: #2ecc71;
-    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+.aviso-termos {
+    color: var(--danger);
+    font-size: 12px;
+    margin: 0 0 8px;
+    display: none;
+    text-align: left;
 }
 
-/* Erro */
-.toast.erro {
-    background-color: #e74c3c;
-    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
-}
-
-/*==================================================
-    MODAL TERMOS DE USO
-==================================================*/
+/* ==============================
+   MODAL TERMOS
+============================== */
 
 .modal-termos-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -222,14 +394,14 @@ input.senha-invalida {
 
 .modal-termos-box {
     background: white;
-    border-radius: 16px;
-    padding: 32px;
-    width: 90%;
-    max-width: 540px;
-    max-height: 80vh;
+    border-radius: 18px;
+    padding: 28px;
+    width: 92%;
+    max-width: 700px;
+    max-height: 85vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.24);
     transform: translateY(16px);
     transition: transform 0.25s ease;
 }
@@ -239,31 +411,32 @@ input.senha-invalida {
 }
 
 .modal-termos-box h2 {
-    color: #156783;
+    color: var(--brand);
     margin: 0 0 16px;
-    font-size: 20px;
+    font-size: 22px;
     text-align: center;
 }
 
 .modal-termos-conteudo {
     overflow-y: auto;
     flex: 1;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    border: 1px solid #e1e7ea;
+    border-radius: 10px;
     padding: 16px;
-    font-size: 13px;
+    font-size: 14px;
     color: #444;
     line-height: 1.7;
     margin-bottom: 20px;
+    background: #fcfefe;
 }
 
-.modal-termos-conteudo::-webkit-scrollbar {
-    width: 6px;
+.modal-termos-conteudo p {
+    text-align: left;
+    margin-top: 0;
 }
 
-.modal-termos-conteudo::-webkit-scrollbar-thumb {
-    background: #156783;
-    border-radius: 6px;
+.modal-termos-conteudo strong {
+    color: var(--brand);
 }
 
 .modal-termos-rodape {
@@ -285,46 +458,30 @@ input.senha-invalida {
     width: 18px;
     height: 18px;
     margin: 0;
-    accent-color: #156783;
-    cursor: pointer;
+    accent-color: var(--brand);
 }
 
 .modal-termos-btns {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 .btn-cancelar-termos {
     background-color: transparent;
-    color: #156783;
-    border: 2px solid #156783;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
+    color: var(--brand);
+    border: 2px solid var(--brand);
     flex: 1;
-    transition: 0.2s;
 }
 
 .btn-cancelar-termos:hover {
-    background-color: #f0f8ff;
-    transform: translateY(-1px);
+    background-color: #edf8fb;
 }
 
 .btn-aceitar-termos {
-    background-color: #156783;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    flex: 1;
-    transition: 0.2s;
-    opacity: 0.4;
+    background-color: var(--brand);
+    opacity: 0.45;
     pointer-events: none;
+    flex: 1;
 }
 
 .btn-aceitar-termos.habilitado {
@@ -332,145 +489,79 @@ input.senha-invalida {
     pointer-events: all;
 }
 
-.btn-aceitar-termos.habilitado:hover {
-    background-color: #0e4e5e;
-    transform: translateY(-1px);
-}
+/* ==============================
+   LOADING
+============================== */
 
-/*==================================================
-    BOTÃO DE SUBMIT COM LOADING
-==================================================*/
-
+button.carregando,
 button[type="submit"].carregando {
-    background-color: #aaa;
+    background-color: #9aa8af;
     cursor: not-allowed;
     transform: none;
     pointer-events: none;
 }
 
+button.carregando::after,
 button[type="submit"].carregando::after {
     content: " ⏳";
 }
 
-.label-termos-aceitos {
-    font-size: 13px;
-    color: #156783;
-    text-align: center;
-    margin-top: 6px;
-    font-style: italic;
-}
+/* ==============================
+   RESPONSIVO
+============================== */
 
-.container-cadastro {
-    min-height: 90vh;
-    padding: 30px 16px;
-}
-
-
-form {
-    position: relative;
-    border: 1px solid rgba(21, 103, 131, 0.12);
-}
-
-form::before {
-    content: "Crie sua conta para acessar óticas, cotações e reservas.";
-    display: block;
-    color: #555;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 20px;
-    line-height: 1.5;
-}
-
-input:focus {
-    outline: none;
-    border-color: #156783;
-    box-shadow: 0 0 0 3px rgba(21, 103, 131, 0.12);
-}
-
-.termos-area {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 12px 0 4px;
-    padding: 12px;
-    background: #f7fbfd;
-    border: 1px solid rgba(21, 103, 131, 0.15);
-    border-radius: 10px;
-}
-
-.termos-area input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #156783;
-    margin: 0;
-    cursor: pointer;
-}
-
-.termos-area label {
-    font-size: 13px;
-    color: #333;
-    margin: 0;
-    line-height: 1.4;
-}
-
-.termos-area a {
-    color: #156783;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.termos-area a:hover {
-    text-decoration: underline;
-}
-
-.aviso-termos {
-    color: #e74c3c;
-    font-size: 12px;
-    margin: 0 0 8px;
-    display: none;
-    text-align: left;
-}
-
-.modal-termos-box {
-    max-width: 680px;
-}
-
-.modal-termos-conteudo {
-    max-height: 420px;
-}
-
-.modal-termos-conteudo p {
-    text-align: left;
-}
-
-.modal-termos-conteudo strong {
-    color: #156783;
-}
-
-@media (max-width: 600px) {
-    form {
-        padding: 24px;
+@media (max-width: 980px) {
+    .auth-shell {
+        flex-direction: column;
     }
 
-    h1 {
-        font-size: 26px;
+    .auth-visual {
+        min-height: 300px;
+    }
+
+    .auth-form-side {
+        padding: 28px 18px 34px;
+    }
+
+    .auth-visual-content h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 640px) {
+    .auth-page {
+        width: 95%;
+        margin-top: 20px;
+    }
+
+    .form-card h1 {
+        font-size: 28px;
+    }
+
+    form {
+        padding: 22px;
     }
 
     #mensagensTopo {
-        left: 50%;
-        width: calc(100% - 32px);
+        left: 16px;
+        right: 16px;
+        top: 82px;
     }
 
     .toast {
         min-width: unset;
+        max-width: unset;
         width: 100%;
     }
 
     .regras-card {
-        position: fixed;
-        top: 80px;
-        right: 16px;
         left: 16px;
+        right: 16px;
+        top: 140px;
         width: auto;
+    }
+
+    .modal-termos-btns {
+        flex-direction: column;
     }
 }
