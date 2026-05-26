@@ -1,7 +1,7 @@
 body {
     background-color: #f0f8ff; /* Fundo azul muito claro */
     font-size: 16px;
-    padding-top: 3%;
+    padding-top: 2%;
 }
 
 .container-cadastro {
@@ -93,7 +93,7 @@ p {
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateY(-10px);
-    z-index: 999;
+    z-index: 9999;
 }
 
 .regras-card.mostrar {
@@ -160,7 +160,7 @@ input.senha-invalida {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    z-index: 9999;
+    z-index: 9999999;
 }
 
 /* Toast base */
@@ -358,4 +358,119 @@ button[type="submit"].carregando::after {
     text-align: center;
     margin-top: 6px;
     font-style: italic;
+}
+
+.container-cadastro {
+    min-height: 90vh;
+    padding: 30px 16px;
+}
+
+
+form {
+    position: relative;
+    border: 1px solid rgba(21, 103, 131, 0.12);
+}
+
+form::before {
+    content: "Crie sua conta para acessar óticas, cotações e reservas.";
+    display: block;
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+input:focus {
+    outline: none;
+    border-color: #156783;
+    box-shadow: 0 0 0 3px rgba(21, 103, 131, 0.12);
+}
+
+.termos-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0 4px;
+    padding: 12px;
+    background: #f7fbfd;
+    border: 1px solid rgba(21, 103, 131, 0.15);
+    border-radius: 10px;
+}
+
+.termos-area input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #156783;
+    margin: 0;
+    cursor: pointer;
+}
+
+.termos-area label {
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.termos-area a {
+    color: #156783;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.termos-area a:hover {
+    text-decoration: underline;
+}
+
+.aviso-termos {
+    color: #e74c3c;
+    font-size: 12px;
+    margin: 0 0 8px;
+    display: none;
+    text-align: left;
+}
+
+.modal-termos-box {
+    max-width: 680px;
+}
+
+.modal-termos-conteudo {
+    max-height: 420px;
+}
+
+.modal-termos-conteudo p {
+    text-align: left;
+}
+
+.modal-termos-conteudo strong {
+    color: #156783;
+}
+
+@media (max-width: 600px) {
+    form {
+        padding: 24px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    #mensagensTopo {
+        left: 50%;
+        width: calc(100% - 32px);
+    }
+
+    .toast {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .regras-card {
+        position: fixed;
+        top: 80px;
+        right: 16px;
+        left: 16px;
+        width: auto;
+    }
 }
