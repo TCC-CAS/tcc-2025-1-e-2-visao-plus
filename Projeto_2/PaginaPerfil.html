@@ -58,14 +58,64 @@
                 <h2>Editar Perfil</h2>
 
                 <form id="form-editar-perfil">
-                    <label>Nome: <br><input id="edit-nome-usuario" required> </label>
-                    <label>Email: <br><input id="edit-email-usuario" type="email" required> </label>
+                    <label>
+                        Nome:
+                        <input id="edit-nome-usuario" required>
+                    </label>
 
-                    <button type="submit" class="button">Salvar</button>
+                    <label>
+                        Email:
+                        <input id="edit-email-usuario" type="email" required>
+                    </label>
+
+                    <button type="submit" class="button">Salvar dados</button> <br>
+
+                    <button type="button" id="abrir-modal-senha" class="button btn-secundario">
+                        Alterar senha
+                    </button>
                 </form>
             </div>
         </div>
 
+        <div id="modal-editar-senha" class="modal hidden">
+            <div class="modal-content">
+                <span id="fechar-modal-senha" class="fechar-modal">&times;</span>
+
+                <h2>Alterar Senha</h2>
+
+                <form id="form-editar-senha">
+                    <label>
+                        Senha atual:
+                        <input id="senha-atual" type="password" required>
+                    </label>
+
+                    <label>
+                        Confirmar senha atual:
+                        <input id="confirmar-senha-atual" type="password" required>
+                    </label>
+
+                    <hr class="modal-divisor">
+
+                    <label>
+                        Nova senha:
+                        <input id="nova-senha" type="password" required>
+                    </label>
+
+                    <label>
+                        Confirmar nova senha:
+                        <input id="confirmar-nova-senha" type="password" required>
+                    </label>
+
+                    <p id="msgSenhaPerfil" class="mensagem-modal"></p>
+
+                    <button type="submit" class="button">Salvar nova senha</button> <br>
+
+                    <button type="button" id="voltar-modal-perfil" class="button btn-secundario">
+                        Voltar para dados do perfil
+                    </button>
+                </form>
+            </div>
+        </div>
 
         <!-- seção loja, mostrar quando o usuário for vendedor -->
         <section id="secao-loja" class="perfil-bloco">
