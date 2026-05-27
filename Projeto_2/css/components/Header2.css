@@ -29,6 +29,20 @@ header {
     transition: all 0.3s ease;
 }
 
+@keyframes headerGradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    50% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
 header.shrink {
     padding: 8px 30px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
