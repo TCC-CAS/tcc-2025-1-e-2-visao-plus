@@ -13,7 +13,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #156783;
+
+    background: linear-gradient(
+        180deg,
+        #0f4f66 0%,
+        #156783 45%,
+        #2383a3 100%
+    );
+    background-size: 100% 250%;
+    animation: headerGradientMove 8s ease-in-out infinite;
+
     padding: 20px 30px;
     backdrop-filter: blur(8px);
 
