@@ -6,6 +6,14 @@ body {
     padding-top: 70px;
 }
 
+.cadastro-page {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+}
+
 form {
     display: flex;
     flex-direction: column;
