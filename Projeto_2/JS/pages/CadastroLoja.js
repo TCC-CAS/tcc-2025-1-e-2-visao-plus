@@ -374,6 +374,11 @@ formLoja.addEventListener("submit", async (event) => {
         return;
     }
 
+    if (!solicitacao.email) {
+        mostrarMensagem(msgCadastroLoja, "Informe o e-mail da loja.", "erro");
+        return;
+    }
+
     try {
         enviandoSolicitacao = true;
         bloquearBotao(btnEnviarSolicitacao, "Enviando...");
