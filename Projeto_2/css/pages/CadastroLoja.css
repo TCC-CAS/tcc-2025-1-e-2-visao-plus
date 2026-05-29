@@ -1,7 +1,9 @@
 body {
-    background-color: #f0f8ff; /* Fundo azul muito claro */
-    padding-top: 4%;
-    
+    margin: 0;
+    background: #f0f8ff;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #12323d;
+    padding-top: 70px;
 }
 
 form {
