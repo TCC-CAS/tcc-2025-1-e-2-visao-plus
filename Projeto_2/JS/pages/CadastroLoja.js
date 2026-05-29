@@ -378,6 +378,26 @@ formLoja.addEventListener("submit", async (event) => {
         mostrarMensagem(msgCadastroLoja, "Informe o e-mail da loja.", "erro");
         return;
     }
+    
+    if (
+        !solicitacao.razaoSocial ||
+        !solicitacao.nome ||
+        !solicitacao.email ||
+        !solicitacao.cnpj ||
+        !solicitacao.cep ||
+        !solicitacao.logradouro ||
+        !solicitacao.numero ||
+        !solicitacao.bairro ||
+        !solicitacao.cidade ||
+        !solicitacao.uf
+    ) {
+        mostrarMensagem(
+            msgCadastroLoja,
+            "Preencha todos os campos obrigatórios. Apenas descrição e complemento são opcionais.",
+            "erro"
+        );
+        return;
+    }
 
     try {
         enviandoSolicitacao = true;
