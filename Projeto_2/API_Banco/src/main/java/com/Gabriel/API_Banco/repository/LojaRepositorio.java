@@ -13,4 +13,7 @@ public interface LojaRepositorio extends JpaRepository<Loja, Long> {
 
     Optional<Loja> findById(Long id);
 
+    Optional<Loja> findByCnpj(String cnpj);
+
+
 }
