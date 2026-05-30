@@ -103,6 +103,13 @@ public class CotacaoService {
         Loja loja = lojaRepo.findById(dto.getIdLoja())
                 .orElseThrow(() -> new RuntimeException("Loja não encontrada"));
 
+        if (!"Comum".equals(usuario.getTipoUsuario())) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Apenas consumidores podem solicitar cotações."
+            );
+        }
+
         // cria produto primeiro
         Produto produto = produtoService.criarProduto(dto.getProduto());
 
@@ -127,7 +134,7 @@ public class CotacaoService {
     public Cotacao enviarProposta(Long id, ResponderCotacaoDTO dto, Long idLojaLogada) {
 
         Cotacao cotacao = buscarCotacao(id);
-        validarDonoDaLoja(cotacao, idLojaLogada);
+        validarIdDaLoja(cotacao, idLojaLogada);
 
         validarTransicao(
                 cotacao.getStatus(),
@@ -149,7 +156,13 @@ public class CotacaoService {
         cotacao.setStatus(StatusCotacao.PROPOSTA_ENVIADA);
 
         Cotacao salva = cotacaoRepo.save(cotacao);
-        emailService.respostaCotacao(salva);
+
+        try {
+            emailService.respostaCotacao(salva);
+        } catch (Exception e) {
+            System.err.println("Erro ao enviar e-mail de resposta da cotação: " + e.getMessage());
+        }
+
         return salva;
     }
 
@@ -165,11 +178,16 @@ public class CotacaoService {
         switch (novo) {
 
             case NEGOCIANDO -> {
-                // Loja abre o chat (SOLICITADA → NEGOCIANDO)
-                // ou cliente pede revisão (PROPOSTA_ENVIADA → NEGOCIANDO)
                 validarTransicao(atual, novo,
                         Set.of(StatusCotacao.SOLICITADA, StatusCotacao.PROPOSTA_ENVIADA));
-                validarDonoDaLoja(cotacao, idAtor); // só a loja abre o chat
+
+                if (atual == StatusCotacao.SOLICITADA) {
+                    validarDonoDaLoja(cotacao, idAtor);
+                }
+
+                if (atual == StatusCotacao.PROPOSTA_ENVIADA) {
+                    validarDonoDoUsuario(cotacao, idAtor);
+                }
             }
 
             case PROPOSTA_ENVIADA -> {
@@ -204,13 +222,13 @@ public class CotacaoService {
             }
 
             case FINALIZADA -> {
-                // Qualquer lado pode finalizar
                 validarTransicao(atual, novo,
                         Set.of(StatusCotacao.RESERVADA));
+
+                validarParticipanteDaCotacao(cotacao, idAtor);
             }
 
             case CANCELADA -> {
-                // Qualquer lado pode cancelar, de qualquer estado ativo
                 Set<StatusCotacao> cancelaveis = Set.of(
                         StatusCotacao.SOLICITADA,
                         StatusCotacao.NEGOCIANDO,
@@ -219,7 +237,9 @@ public class CotacaoService {
                         StatusCotacao.AGUARDANDO_SINAL,
                         StatusCotacao.RESERVADA
                 );
+
                 validarTransicao(atual, novo, cancelaveis);
+                validarParticipanteDaCotacao(cotacao, idAtor);
             }
 
             default -> throw new ResponseStatusException(
@@ -252,8 +272,39 @@ public class CotacaoService {
         }
     }
 
-    private void validarDonoDaLoja(Cotacao cotacao, Long idAtor) {
-        if (!cotacao.getLoja().getId().equals(idAtor)) {
+    private void validarParticipanteDaCotacao(Cotacao cotacao, Long idUsuario) {
+        boolean ehCliente =
+                cotacao.getUsuario() != null &&
+                        cotacao.getUsuario().getId().equals(idUsuario);
+
+        boolean ehDonoDaLoja =
+                cotacao.getLoja() != null &&
+                        cotacao.getLoja().getDono() != null &&
+                        cotacao.getLoja().getDono().getId().equals(idUsuario);
+
+        if (!ehCliente && !ehDonoDaLoja) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Você não tem permissão para alterar esta cotação"
+            );
+        }
+    }
+
+    private void validarIdDaLoja(Cotacao cotacao, Long idLoja) {
+        if (!cotacao.getLoja().getId().equals(idLoja)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Esta cotação não pertence à sua loja"
+            );
+        }
+    }
+
+    private void validarDonoDaLoja(Cotacao cotacao, Long idUsuario) {
+        if (
+                cotacao.getLoja() == null ||
+                        cotacao.getLoja().getDono() == null ||
+                        !cotacao.getLoja().getDono().getId().equals(idUsuario)
+        ) {
             throw new ResponseStatusException(
                     HttpStatus.FORBIDDEN,
                     "Esta ação é exclusiva da loja responsável pela cotação"
@@ -332,13 +383,17 @@ public class CotacaoService {
         cotacao.setPrazoEntregaConfirmado(dto.getPrazoEntrega());
         cotacao.setObservacaoLoja(dto.getObservacaoLoja());
         cotacao.setDataResposta(LocalDate.now());
-        cotacao.setStatus(StatusCotacao.NEGOCIANDO);
+        cotacao.setStatus(StatusCotacao.PROPOSTA_ENVIADA);
 
-        Cotacao cotacaoSalva = cotacaoRepo.save(cotacao);
+        Cotacao salva = cotacaoRepo.save(cotacao);
 
-        emailService.respostaCotacao(cotacaoSalva);
+        try {
+            emailService.respostaCotacao(salva);
+        } catch (Exception e) {
+            System.err.println("Erro ao enviar e-mail de resposta da cotação: " + e.getMessage());
+        }
 
-        return cotacaoSalva;
+        return salva;
     }
 
     public Cotacao aprovarCotacao(Long idCotacao) {
@@ -346,7 +401,7 @@ public class CotacaoService {
         Cotacao cotacao = cotacaoRepo.findById(idCotacao)
                 .orElseThrow(() -> new RuntimeException("Cotação não encontrada"));
 
-        if (cotacao.getStatus() != StatusCotacao.NEGOCIANDO) {
+        if (cotacao.getStatus() != StatusCotacao.PROPOSTA_ENVIADA) {
 
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
