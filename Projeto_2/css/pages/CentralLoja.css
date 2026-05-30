@@ -440,3 +440,113 @@ body {
         padding: 18px;
     }
 }
+
+/* ==========================================
+   COTAÇÕES DA CENTRAL DA LOJA
+========================================== */
+
+#secao-cotacoes-loja {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(21, 103, 131, 0.12);
+}
+
+#secao-cotacoes-loja h2 {
+    color: #156783;
+    margin-bottom: 18px;
+    font-size: 24px;
+}
+
+#lista-cotacoes-loja {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.card-cotacao {
+    background: #f8fafc;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transition: 0.2s ease;
+}
+
+.card-cotacao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+}
+
+.card-cotacao-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.card-cotacao-topo h3 {
+    margin: 0 0 4px;
+    color: #12323d;
+    font-size: 17px;
+}
+
+.card-cotacao-topo p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.badge-status {
+    color: white;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.card-cotacao-dados {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 14px;
+    border: 1px solid #edf2f7;
+}
+
+.card-cotacao-dados p {
+    margin: 6px 0;
+    color: #334155;
+    font-size: 13px;
+}
+
+.btn-ver-cotacao {
+    width: 100%;
+    background: #156783;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-ver-cotacao:hover {
+    background: #0e4e5e;
+    transform: translateY(-1px);
+}
+
+.cotacoes-vazio {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #64748b;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 18px;
+}
