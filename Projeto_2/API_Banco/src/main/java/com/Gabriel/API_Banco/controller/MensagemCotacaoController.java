@@ -18,12 +18,27 @@ public class MensagemCotacaoController {
     private MensagemCotacaoService mensagemService;
 
     @PostMapping("/enviar")
-    public ResponseEntity<MensagemCotacaoDTO> enviar(@RequestBody EnviarMensagemDTO dto) {
-        return ResponseEntity.ok(mensagemService.enviarMensagem(dto));
+    public ResponseEntity<?> enviar(@RequestBody EnviarMensagemDTO dto) {
+        try {
+            MensagemCotacaoDTO mensagem = mensagemService.enviarMensagem(dto);
+            return ResponseEntity.ok(mensagem);
+        } catch (RuntimeException erro) {
+            return ResponseEntity.badRequest().body(erro.getMessage());
+        }
     }
 
     @GetMapping("/cotacao/{idCotacao}")
-    public ResponseEntity<List<MensagemCotacaoDTO>> listar(@PathVariable Long idCotacao) {
-        return ResponseEntity.ok(mensagemService.listarMensagens(idCotacao));
+    public ResponseEntity<?> listar(
+            @PathVariable Long idCotacao,
+            @RequestParam Long idUsuario
+    ) {
+        try {
+            List<MensagemCotacaoDTO> mensagens =
+                    mensagemService.listarMensagens(idCotacao, idUsuario);
+
+            return ResponseEntity.ok(mensagens);
+        } catch (RuntimeException erro) {
+            return ResponseEntity.badRequest().body(erro.getMessage());
+        }
     }
 }
