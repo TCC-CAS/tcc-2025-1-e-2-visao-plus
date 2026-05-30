@@ -328,3 +328,188 @@
     background: #9ca3af;
     cursor: not-allowed;
 }   
+
+/* ==========================================
+   VARIAÇÕES POR TIPO DE MODAL
+========================================== */
+
+.modal-cotacao-content.modal-consumidor .modal-cotacao-header {
+    background: #156783;
+}
+
+.modal-cotacao-content.modal-loja .modal-cotacao-header {
+    background: #0f5268;
+}
+
+.modal-aviso-papel {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.4;
+}
+
+.acoes-cotacao {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btn-acao-cotacao {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.btn-acao-cotacao:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+.btn-acao-cotacao:disabled,
+.btn-acao-cotacao.carregando {
+    background-color: #aaa !important;
+    color: white !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    pointer-events: none;
+}
+
+.btn-acao-cotacao.carregando::after,
+#btnEnviarResposta.carregando::after,
+#btnEnviarChat.carregando::after {
+    content: " ⏳";
+}
+
+.btn-aprovar {
+    background: #f0fdf4;
+    color: #166534;
+    border-color: rgba(22, 101, 52, 0.2);
+}
+
+.btn-rejeitar,
+.btn-cancelar {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: rgba(153, 27, 27, 0.2);
+}
+
+.btn-negociar,
+.btn-responder {
+    background: #f0f9ff;
+    color: #156783;
+    border-color: rgba(21, 103, 131, 0.2);
+}
+
+.btn-reserva {
+    background: #fffbeb;
+    color: #b45309;
+    border-color: rgba(180, 83, 9, 0.2);
+}
+
+.btn-finalizar {
+    background: #ecfdf5;
+    color: #047857;
+    border-color: rgba(4, 120, 87, 0.2);
+}
+
+.resposta-bloqueada {
+    background: #f9fafb;
+    border: 1px dashed #d1d5db;
+    border-radius: 10px;
+    padding: 12px;
+    color: #6b7280;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ==========================================
+   CORREÇÃO DE TAMANHO DO MODAL / CHAT
+========================================== */
+
+/* Trava o modal em uma altura fixa proporcional à tela */
+.modal-cotacao-content {
+    width: min(94vw, 1100px);
+    height: 84vh;
+    max-height: 84vh;
+    overflow: hidden;
+}
+
+/* O body não pode crescer além do modal */
+.modal-cotacao-body {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Painel esquerdo fica rolável sozinho */
+.painel-esquerdo {
+    width: 42%;
+    min-width: 340px;
+    max-width: 420px;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+/* Painel direito não pode empurrar o modal */
+.painel-direito {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Área de mensagens rola internamente */
+.chat-mensagens {
+    flex: 1;
+    min-height: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Cada mensagem não pode estourar a largura */
+.chat-msg {
+    max-width: 78%;
+    min-width: 0;
+}
+
+/* Bolha quebra texto grande e não deixa vazar */
+.chat-bubble {
+    max-width: 100%;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Área do input sempre fica fixa no rodapé do modal */
+.chat-input-area {
+    flex-shrink: 0;
+}
+
+/* Input também não pode estourar */
+.chat-input-area input {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Evita que a resposta da loja suma por causa do chat */
+#painelAcoes {
+    flex-shrink: 0;
+}
+
+/* Caixa de resposta da loja não deve crescer infinito */
+.resposta-box textarea {
+    max-height: 110px;
+    overflow-y: auto;
+}
