@@ -5,6 +5,7 @@ import com.Gabriel.API_Banco.model.Cotacao;
 import com.Gabriel.API_Banco.service.CotacaoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,8 +22,19 @@ public class CotacaoController {
     }
 
     @PostMapping("/criarCotacao")
-    public Cotacao criar(@RequestBody CriarCotacaoDTO dto) {
-        return cotacaoService.criarCotacao(dto);
+    public ResponseEntity<?> criar(@RequestBody CriarCotacaoDTO dto) {
+        try {
+            Cotacao cotacao = cotacaoService.criarCotacao(dto);
+            return ResponseEntity.ok(cotacao);
+        } catch (ResponseStatusException erro) {
+            return ResponseEntity
+                    .status(erro.getStatusCode())
+                    .body(erro.getReason());
+        } catch (RuntimeException erro) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(erro.getMessage());
+        }
     }
 
     @GetMapping("/listarCotacoesPU/{idUsuario}")
@@ -36,11 +48,33 @@ public class CotacaoController {
     }
 
     // Loja envia proposta com valor + prazo
-    @PatchMapping("/{id}/responder")
-    public ResponseEntity<Cotacao> responder(@PathVariable Long id,
-                                             @RequestBody ResponderCotacaoDTO dto,
-                                             @RequestParam Long idLojaLogada) {
-        return ResponseEntity.ok(cotacaoService.enviarProposta(id, dto, idLojaLogada));
+    @PutMapping("/{id}/responder")
+    public ResponseEntity<?> responder(
+            @PathVariable Long id,
+            @RequestBody ResponderCotacaoDTO dto,
+            @RequestParam Long idLoja
+    ) {
+        try {
+            Cotacao cotacao = cotacaoService.enviarProposta(id, dto, idLoja);
+            return ResponseEntity.ok(cotacao);
+
+        } catch (ResponseStatusException erro) {
+            return ResponseEntity
+                    .status(erro.getStatusCode())
+                    .body(erro.getReason());
+
+        } catch (RuntimeException erro) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(erro.getMessage());
+
+        } catch (Exception erro) {
+            erro.printStackTrace();
+
+            return ResponseEntity
+                    .internalServerError()
+                    .body("Erro interno ao responder cotação.");
+        }
     }
 
     // Todas as outras transições de status
