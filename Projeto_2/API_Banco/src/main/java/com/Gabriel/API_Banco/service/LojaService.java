@@ -85,7 +85,9 @@ public class LojaService {
                             loja.getCep(),
                             loja.getEndereco(),
                             loja.getDescricao(),
-                            loja.getFotoUrl()
+                            loja.getFotoUrl(),
+                            loja.getLatitude(),
+                            loja.getLongitude()
                     ))
                     .toList();
         }
