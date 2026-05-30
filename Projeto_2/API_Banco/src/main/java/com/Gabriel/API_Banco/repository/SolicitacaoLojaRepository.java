@@ -1,5 +1,6 @@
 package com.Gabriel.API_Banco.repository;
 
+import com.Gabriel.API_Banco.model.Loja;
 import com.Gabriel.API_Banco.model.SolicitacaoLoja;
 import com.Gabriel.API_Banco.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,11 +12,11 @@ public interface SolicitacaoLojaRepository extends JpaRepository<SolicitacaoLoja
 
     boolean existsByCnpj(String cnpj);
 
-    boolean existsBySolicitante(Usuario solicitante);
+    boolean existsByUsuario(Usuario usuario);
 
-    Optional<SolicitacaoLoja> findBySolicitante(Usuario solicitante);
+    Optional<SolicitacaoLoja> findByUsuario(Usuario usuario);
 
-    Optional<SolicitacaoLoja> findBySolicitanteId(Long idUsuario);
+    Optional<SolicitacaoLoja> findByUsuarioId(Long idUsuario);
 
     List<SolicitacaoLoja> findAllByOrderByDataSolicitacaoDesc();
 }
