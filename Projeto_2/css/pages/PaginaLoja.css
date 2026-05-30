@@ -565,3 +565,77 @@ section h2 {
     border-radius: 6px;
     object-fit: cover;
 }
+
+/* ==========================================
+   BLOQUEIO DE COTAÇÃO POR PERFIL
+========================================== */
+
+.cotacao-bloqueada,
+.btn-cotacao-flutuante.cotacao-bloqueada,
+.btn-cotar.cotacao-bloqueada,
+#btn-adicionar-cotacao.cotacao-bloqueada {
+    display: none !important;
+}
+
+/* ==========================================
+   TOAST PADRÃO
+========================================== */
+
+#mensagensTopo {
+    position: fixed;
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999999;
+}
+
+.toast {
+    min-width: 280px;
+    max-width: 420px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.toast.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.sucesso {
+    background-color: #2ecc71;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+}
+
+.toast.erro {
+    background-color: #e74c3c;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+}
+
+/* ==========================================
+   BOTÕES COM LOADING
+========================================== */
+
+button.carregando,
+button[type="submit"].carregando,
+#btn-enviar-cotacao.carregando {
+    background-color: #aaa !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    pointer-events: none;
+}
+
+button.carregando::after,
+button[type="submit"].carregando::after,
+#btn-enviar-cotacao.carregando::after {
+    content: " ⏳";
+}
