@@ -8,5 +8,7 @@ public record ListarLojasDTO(
         String cep,
         String endereco,
         String descricao,
-        String fotoUrl
+        String fotoUrl,
+        Double latitude,
+        Double longitude
 ) {}
