@@ -33,7 +33,7 @@ export function configurarHeader() {
 function chamarEstilização() {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "css/components/Header.css";
+    link.href = "css/components/Header2.css";
     document.head.appendChild(link);
 }
 

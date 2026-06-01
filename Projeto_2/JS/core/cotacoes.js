@@ -1,5 +1,4 @@
 import { API } from "./api.js";
-import { abrirModalCotacao } from "../components/ModalCotacaoResposta.js";
 import { getUsuarioLogado } from "./auth.js";
 
 export async function criarCotacao(dadosCotacao) {
@@ -8,7 +7,12 @@ export async function criarCotacao(dadosCotacao) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dadosCotacao),
     });
-    if (!response.ok) throw new Error(`Erro na requisição: ${response.status}`);
+
+    if (!response.ok) {
+        const mensagemErro = await response.text();
+        throw new Error(mensagemErro || `Erro na requisição: ${response.status}`);
+    }
+
     return response.json();
 }
 
@@ -45,50 +49,65 @@ const STATUS_CONFIG = {
     CANCELADA:        { label: "Cancelada",          cor: "#991b1b" },
 };
 
-export function criarCardCotacao(cotacao, onStatusAtualizado) {
+export function criarCardCotacao(cotacao, onAbrir) {
     const usuario = getUsuarioLogado();
-    const ehLoja  = usuario?.tipoUsuario === "Vendedor";
+    const ehLoja = usuario?.tipoUsuario === "Vendedor";
 
-    const card     = document.createElement("div");
-    card.classList.add("card", "mb-3", "shadow-sm");
-    const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
+    const card = document.createElement("div");
+    card.classList.add("card-cotacao");
 
-    const nomeProduto = cotacao.produto?.nome     || "Produto";
-    const nomeLoja    = cotacao.loja?.nome        || "Loja";
-    const status      = cotacao.status            || "SOLICITADA";
-    const valorBase   = cotacao.produto?.valor    ?? "-";
-    const valorFinal  = cotacao.valorFinal        ?? null;
-    const grauDir     = cotacao.produto?.grauDireito  ?? "-";
-    const grauEsq     = cotacao.produto?.grauEsquerdo ?? "-";
+    const nomeProduto = cotacao.produto?.nome || "Produto";
+    const nomeLoja = cotacao.loja?.nome || "Loja";
+    const nomeCliente = cotacao.usuario?.nome || cotacao.nomeUsuario || "Cliente";
 
-    const cfg = STATUS_CONFIG[status] || { label: status, cor: "#6b7280" };
+    const status = cotacao.status || "SOLICITADA";
+    const valorBase = cotacao.produto?.valor ?? cotacao.valorBase ?? "-";
+    const valorFinal = cotacao.valorFinal ?? null;
+    const grauDir = cotacao.produto?.grauDireito ?? "-";
+    const grauEsq = cotacao.produto?.grauEsquerdo ?? "-";
 
-    cardBody.innerHTML = `
-        <h5 class="card-title mb-2">${nomeProduto}</h5>
-        <h6 class="card-subtitle mb-3 text-muted">${ehLoja ? "Cliente" : "Loja"}: ${ehLoja ? cotacao.nomeUsuario ?? "—" : nomeLoja}</h6>
-        <div class="dados">
-            <p class="mb-1">
-                <strong>Status:</strong>
-                <span style="color:${cfg.cor};font-weight:600">${cfg.label}</span>
-            </p>
-            <p class="mb-1"><strong>Grau:</strong> OD ${grauDir} | OE ${grauEsq}</p>
-            <p class="mb-1"><strong>Valor base:</strong> R$ ${valorBase}</p>
-            ${valorFinal ? `<p class="mb-1"><strong>Proposta:</strong> R$ ${valorFinal}</p>` : ""}
+    const cfg = STATUS_CONFIG?.[status] || {
+        label: status.replace(/_/g, " "),
+        cor: "#6b7280"
+    };
+
+    card.innerHTML = `
+        <div class="card-cotacao-topo">
+            <div>
+                <h3>${nomeProduto}</h3>
+                <p>${ehLoja ? "Cliente" : "Loja"}: ${ehLoja ? nomeCliente : nomeLoja}</p>
+            </div>
+
+            <span class="badge-status" style="background:${cfg.cor}">
+                ${cfg.label}
+            </span>
         </div>
+
+        <div class="card-cotacao-dados">
+            <p><strong>Grau:</strong> OD ${grauDir} | OE ${grauEsq}</p>
+            <p><strong>Valor base:</strong> R$ ${valorBase}</p>
+            ${
+                valorFinal
+                    ? `<p><strong>Proposta:</strong> R$ ${valorFinal}</p>`
+                    : `<p><strong>Proposta:</strong> aguardando</p>`
+            }
+        </div>
+
+        <button type="button" class="btn-ver-cotacao">
+            Ver detalhes
+        </button>
     `;
 
-    // Botão principal — abre o modal
-    const botaoAbrir = document.createElement("button");
-    botaoAbrir.classList.add("btn", "btn-primary", "mt-2");
-    botaoAbrir.style.marginRight = "8px";
-    botaoAbrir.innerText = "Ver detalhes";
-    botaoAbrir.addEventListener("click", () => {
-        abrirModalCotacao(cotacao, onStatusAtualizado);
-    });
-    cardBody.appendChild(botaoAbrir);
+    const botaoAbrir = card.querySelector(".btn-ver-cotacao");
 
-    card.appendChild(cardBody);
+    botaoAbrir.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        if (typeof onAbrir === "function") {
+            onAbrir(cotacao);
+        }
+    });
+
     return card;
 }
 

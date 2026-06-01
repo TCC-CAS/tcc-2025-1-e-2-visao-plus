@@ -39,5 +39,9 @@ export function isLogado() {
  */
 export function getTipoUsuario() {
     const usuario = getUsuarioLogado();
-    return usuario?.tipo_usuario || null;
+    return usuario?.tipoUsuario || usuario?.tipo_usuario || null;
+}
+
+export function getNomeUsuario(idUsuario) {
+    
 }
