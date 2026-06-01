@@ -47,20 +47,25 @@ public class ImageService {
         return uploadResult.get("secure_url").toString();
     }
 
+    private static final long TAMANHO_MAXIMO_IMAGEM = 5 * 1024 * 1024;
+
     private void validarImagem(MultipartFile file) {
-
-        if (file.isEmpty()) {
-            throw new RuntimeException("Arquivo vazio.");
-        }
-
-        if (file.getSize() > 1_048_576) {
-            throw new RuntimeException("Arquivo maior que 1MB.");
+        if (file == null || file.isEmpty()) {
+            throw new RuntimeException("Arquivo de imagem é obrigatório.");
         }
 
         String contentType = file.getContentType();
 
-        if (!List.of("image/png", "image/jpeg", "image/jpg").contains(contentType)) {
-            throw new RuntimeException("Formato inválido. Apenas PNG e JPG permitidos.");
+        if (contentType == null ||
+                (!contentType.equals("image/jpeg") &&
+                        !contentType.equals("image/png") &&
+                        !contentType.equals("image/jpg") &&
+                        !contentType.equals("image/webp"))) {
+            throw new RuntimeException("Formato inválido. Use JPG, PNG ou WEBP.");
+        }
+
+        if (file.getSize() > TAMANHO_MAXIMO_IMAGEM) {
+            throw new RuntimeException("Arquivo maior que 5MB.");
         }
     }
 
@@ -105,6 +110,20 @@ public class ImageService {
 
         return semVersao.substring(0, semVersao.lastIndexOf("."));
         // lojas/abc123
+    }
+
+    public String uploadBannerLoja(MultipartFile file) throws IOException {
+
+        validarImagem(file);
+
+        Map uploadResult = cloudinary.uploader().upload(
+                file.getBytes(),
+                ObjectUtils.asMap(
+                        "folder", "loja_banners"
+                )
+        );
+
+        return uploadResult.get("secure_url").toString();
     }
 
 }
