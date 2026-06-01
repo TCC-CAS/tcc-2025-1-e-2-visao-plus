@@ -5,7 +5,9 @@ import lombok.Data;
 @Data
 public class ConfiguracaoLojaDTO {
 
-
+    private String bannerUrl;
+    private String textoDestaque;
+    private Boolean mostrarBanner;
     private String corPrimaria;
     private String corSecundaria;
     private String corFundo;
