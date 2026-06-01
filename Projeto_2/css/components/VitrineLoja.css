@@ -1,0 +1,642 @@
+/* ==========================================
+   VITRINE LOJA - COMPONENTE ÚNICO
+   Usada pela PáginaLoja e pelo preview do AdminLoja
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Arial&family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600;700&family=Poppins:wght@400;600;700;800&family=Roboto:wght@400;500;700&display=swap');
+
+.vp-vitrine-loja {
+    --cor-primaria: #156783;
+    --cor-secundaria: #b5d7df;
+    --cor-fundo: #f5f7fa;
+    --fonte-primaria: Arial, Helvetica, sans-serif;
+    --fonte-secundaria: Helvetica, Arial, sans-serif;
+
+    width: 100%;
+    min-height: 100vh;
+    background: var(--cor-fundo);
+    color: #263238;
+    font-family: var(--fonte-primaria);
+}
+
+.vp-vitrine-loja,
+.vp-vitrine-loja * {
+    box-sizing: border-box;
+}
+
+/* ==========================================
+   HERO
+========================================== */
+
+.vp-vitrine-hero {
+    width: min(100% - 2rem, 78rem);
+    margin: 1.25rem auto 0;
+
+    min-height: 14rem;
+    overflow: hidden;
+
+    border-radius: 1.25rem;
+    background: var(--cor-primaria);
+    background-size: cover;
+    background-position: center;
+
+    box-shadow: 0 0.75rem 1.8rem rgba(0, 0, 0, 0.14);
+}
+
+.vp-vitrine-hero-overlay {
+    min-height: 14rem;
+    padding: clamp(1.5rem, 4vw, 2.8rem);
+
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 3vw, 2.25rem);
+
+    background: var(--cor-primaria);
+    color: var(--texto-primaria);
+}
+
+.vp-vitrine-hero.com-banner .vp-vitrine-hero-overlay {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.62),
+        rgba(0, 0, 0, 0.18)
+    );
+}
+
+.vp-vitrine-foto {
+    width: clamp(6rem, 10vw, 9rem);
+    height: clamp(6rem, 10vw, 9rem);
+
+    flex: 0 0 auto;
+    border-radius: 999rem;
+    object-fit: cover;
+
+    border: 0.32rem solid rgba(255, 255, 255, 0.86);
+    background: white;
+}
+
+.vp-vitrine-dados {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    color: var(--texto-primaria);
+}
+
+.vp-vitrine-plano {
+    width: fit-content;
+    padding: 0.38rem 0.65rem;
+
+    border-radius: 999rem;
+    background: rgba(255, 255, 255, 0.18);
+
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.vp-vitrine-loja.plano-free .vp-vitrine-plano {
+    display: none;
+}
+
+.vp-vitrine-dados h1 {
+    margin: 0;
+    color: white;
+    font-family: var(--fonte-secundaria);
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1;
+    overflow-wrap: anywhere;
+}
+
+.vp-vitrine-destaque {
+    max-width: 45rem;
+    color: var(--texto-primaria);
+    font-size: clamp(0.95rem, 1.5vw, 1.2rem);
+    font-weight: 700;
+}
+
+.vp-vitrine-contatos p {
+    margin: 0.08rem 0;
+    color: var(--texto-primaria);
+    opacity: 0.94;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   CONTEÚDO
+========================================== */
+
+.vp-vitrine-conteudo {
+    width: min(100% - 3rem, 92rem);
+    margin: 0 auto;
+    padding: 1.6rem 0 4rem;
+}
+
+.vp-vitrine-titulo {
+    text-align: center;
+    margin-bottom: 1.4rem;
+}
+
+.vp-vitrine-titulo h2 {
+    margin: 0;
+    color: var(--cor-primaria);
+    font-family: var(--fonte-secundaria);
+    font-size: clamp(1.35rem, 2vw, 1.75rem);
+}
+
+.vp-vitrine-titulo p {
+    margin-top: 0.45rem;
+    color: #667085;
+}
+
+/* ==========================================
+   PRODUTOS + CUPONS
+========================================== */
+
+.vp-vitrine-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.vp-vitrine-produtos {
+    min-width: 0;
+}
+
+.vp-vitrine-cupons {
+    position: sticky;
+    top: 7rem;
+    min-width: 0;
+}
+
+/* ==========================================
+   SEÇÕES DE PRODUTOS
+========================================== */
+
+.vp-secao-produtos {
+    --cards-por-pagina: 4;
+    --gap-produtos: 1rem;
+
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+
+    background: rgba(255, 255, 255, 0.68);
+    border: 0.06rem solid rgba(21, 103, 131, 0.14);
+    border-radius: 1rem;
+
+    box-shadow: 0 0.5rem 1.3rem rgba(0, 0, 0, 0.05);
+}
+
+.vp-secao-produtos-topo {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.vp-secao-produtos h3 {
+    flex: 1;
+    margin: 0;
+    padding: 0.8rem 1rem;
+
+    border-radius: 0.65rem;
+    background: var(--cor-secundaria);
+    color: var(--texto-secundaria);
+
+    font-family: var(--fonte-secundaria);
+    text-align: center;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+.vp-carrossel-controles {
+    display: flex;
+    gap: 0.45rem;
+}
+
+.vp-carrossel-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+
+    display: grid;
+    place-items: center;
+
+    border: none;
+    border-radius: 999rem;
+
+    background: var(--cor-primaria);
+    color: white;
+
+    font-size: 1.55rem;
+    font-weight: 900;
+    line-height: 1;
+    cursor: pointer;
+
+    box-shadow: 0 0.35rem 0.9rem rgba(0, 0, 0, 0.16);
+    transition: 0.18s ease;
+}
+
+.vp-carrossel-btn:hover:not(:disabled) {
+    filter: brightness(0.92);
+    transform: translateY(-0.08rem);
+}
+
+.vp-carrossel-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.vp-secao-produtos.sem-navegacao .vp-carrossel-controles {
+    display: none;
+}
+
+.vp-carrossel-janela {
+    width: 100%;
+    overflow: hidden;
+}
+
+.vp-lista-produtos {
+    width: 100%;
+    display: flex;
+    gap: var(--gap-produtos);
+
+    transform: translateX(0);
+    transition: transform 0.28s ease;
+    will-change: transform;
+}
+
+.vp-card-produto {
+    flex: 0 0 calc(
+        (100% - ((var(--cards-por-pagina) - 1) * var(--gap-produtos)))
+        / var(--cards-por-pagina)
+    );
+
+    min-width: 0;
+    overflow: hidden;
+
+    background: white;
+    border: 0.06rem solid rgba(21, 103, 131, 0.22);
+    border-left: 0.32rem solid var(--cor-primaria);
+    border-radius: 0.95rem;
+
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.vp-card-produto:hover {
+    transform: translateY(-0.15rem);
+    box-shadow: 0 0.6rem 1.3rem rgba(0, 0, 0, 0.13);
+}
+
+.vp-produto-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #eef3f6;
+}
+
+.vp-produto-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.vp-produto-info {
+    padding: 0.85rem;
+}
+
+.vp-produto-info h4 {
+    margin: 0 0 0.6rem;
+    padding: 0.55rem 0.7rem;
+
+    border-radius: 0.55rem;
+
+    background: var(--cor-secundaria);
+    color: var(--cor-primaria);
+
+    font-family: var(--fonte-secundaria);
+    font-size: clamp(0.82rem, 1.1vw, 1rem);
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.vp-produto-info p {
+    margin: 0.3rem 0;
+    color: #475467;
+    font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+}
+
+.vp-preco-produto,
+.vp-preco-consulta {
+    display: inline-block;
+    margin: 0.45rem 0;
+    padding: 0.38rem 0.62rem;
+
+    border-radius: 999rem;
+
+    background: var(--cor-primaria);
+    color: var(--cor-secundaria);
+
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.vp-btn-cotar {
+    width: calc(100% - 1.7rem);
+    margin: 0 0.85rem 0.85rem;
+    padding: 0.58rem 0.75rem;
+
+    border: none;
+    border-radius: 999rem;
+
+    background: var(--cor-primaria);
+    color: white;
+
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.vp-vazio-produtos {
+    flex: 0 0 100%;
+    padding: 1rem;
+
+    color: #667085;
+    text-align: center;
+    font-style: italic;
+}
+
+/* ==========================================
+   CUPONS
+========================================== */
+
+.vp-vitrine-cupons .vp-cupons-box {
+    width: 100%;
+}
+
+.vp-vitrine-cupons .vp-cupons-lista {
+    grid-template-columns: 1fr !important;
+}
+
+.vp-vitrine-cupons .vp-cupom-lateral,
+.vp-vitrine-cupons .btn-cupom-widget {
+    background: var(--cor-primaria);
+}
+
+.vp-vitrine-cupons .vp-cupons-eyebrow,
+.vp-vitrine-cupons .vp-cupons-topo h2,
+.vp-vitrine-cupons .vp-cupom-header strong,
+.vp-vitrine-cupons .vp-cupom-desconto {
+    color: var(--cor-primaria);
+    font-family: var(--fonte-secundaria);
+}
+
+
+.vp-vitrine-cupons .vp-cupom-card {
+    grid-template-columns: 2.6rem 1fr;
+    align-items: center;
+}
+
+.vp-vitrine-cupons .vp-cupom-lateral {
+    width: 2.6rem;
+    height: 2.6rem;
+}
+
+.vp-vitrine-cupons .vp-cupom-acao {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+}
+
+.vp-vitrine-cupons .btn-cupom-widget {
+    width: 100%;
+}
+
+/* ==========================================
+   PREVIEW ADMIN
+========================================== */
+
+.vp-vitrine-loja.modo-preview {
+    min-height: 0;
+
+    border: 0.06rem solid #d9e2e7;
+    border-radius: 1.2rem;
+    overflow: hidden;
+
+    box-shadow: 0 0.6rem 1.75rem rgba(0, 0, 0, 0.08);
+}
+
+.vp-vitrine-loja.modo-preview .vp-vitrine-hero {
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+}
+
+.vp-vitrine-loja.modo-preview .vp-vitrine-conteudo {
+    width: calc(100% - 2rem);
+}
+
+.vp-vitrine-loja.modo-preview .vp-vitrine-cupons {
+    flex-basis: 16rem;
+}
+
+/* ==========================================
+   RESPONSIVO
+========================================== */
+
+@media (max-width: 72rem) {
+    .vp-vitrine-conteudo {
+        width: min(100% - 2rem, 58rem);
+    }
+
+    .vp-secao-produtos {
+        --cards-por-pagina: 3;
+    }
+
+    .vp-vitrine-cupons {
+        flex-basis: 16rem;
+    }
+}
+
+@media (max-width: 56rem) {
+    .vp-vitrine-grid {
+        flex-direction: column;
+    }
+
+    .vp-vitrine-produtos,
+    .vp-vitrine-cupons {
+        width: 100%;
+        flex: none;
+    }
+
+    .vp-vitrine-cupons {
+        position: static;
+    }
+
+    .vp-secao-produtos {
+        --cards-por-pagina: 3;
+    }
+}
+
+@media (max-width: 42rem) {
+    .vp-vitrine-hero-overlay {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .vp-vitrine-dados {
+        align-items: center;
+    }
+
+    .vp-secao-produtos {
+        --cards-por-pagina: 2;
+    }
+}
+
+@media (max-width: 28rem) {
+    .vp-secao-produtos {
+        --cards-por-pagina: 1;
+    }
+}
+
+/* ==========================================
+   LAYOUT DOS PRODUTOS
+========================================== */
+/* Base */
+.vp-lista-produtos {
+    width: 100%;
+    gap: var(--gap-produtos);
+}
+
+/* GRID */
+.vp-vitrine-loja.produtos-grid .vp-lista-produtos {
+    display: grid;
+    grid-template-columns: repeat(var(--produtos-linha), minmax(0, 1fr));
+    transform: none !important;
+}
+
+.vp-vitrine-loja.produtos-grid .vp-card-produto {
+    width: 100%;
+    min-width: 0;
+    flex: none;
+}
+
+.vp-vitrine-loja.produtos-grid .vp-carrossel-controles {
+    display: none;
+}
+
+/* LISTA */
+.vp-vitrine-loja.produtos-lista .vp-lista-produtos {
+    display: flex;
+    flex-direction: column;
+    transform: none !important;
+}
+
+.vp-vitrine-loja.produtos-lista .vp-card-produto {
+    width: 100%;
+    flex: none;
+    display: grid;
+    grid-template-columns: minmax(10rem, 14rem) minmax(0, 1fr);
+}
+
+.vp-vitrine-loja.produtos-lista .vp-produto-img {
+    height: 100%;
+    min-height: 11rem;
+}
+
+.vp-vitrine-loja.produtos-lista .vp-btn-cotar {
+    grid-column: 1 / -1;
+}
+
+.vp-vitrine-loja.produtos-lista .vp-carrossel-controles {
+    display: none;
+}
+
+/* CARROSSEL */
+.vp-vitrine-loja.produtos-carrossel .vp-carrossel-janela {
+    overflow: hidden;
+}
+
+.vp-vitrine-loja.produtos-carrossel .vp-lista-produtos {
+    display: flex;
+    flex-wrap: nowrap;
+    transform: translateX(0);
+    transition: transform 0.28s ease;
+    will-change: transform;
+}
+
+.vp-vitrine-loja.produtos-carrossel .vp-card-produto {
+    flex: 0 0 calc(
+        (100% - ((var(--cards-por-pagina) - 1) * var(--gap-produtos)))
+        / var(--cards-por-pagina)
+    );
+}
+
+/* Responsivo do grid/carrossel */
+@media (max-width: 72rem) {
+    .vp-vitrine-loja.produtos-grid .vp-lista-produtos {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .vp-secao-produtos {
+        --cards-por-pagina: 3;
+    }
+}
+
+@media (max-width: 42rem) {
+    .vp-vitrine-loja.produtos-grid .vp-lista-produtos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .vp-secao-produtos {
+        --cards-por-pagina: 2;
+    }
+
+    .vp-vitrine-loja.produtos-lista .vp-card-produto {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 28rem) {
+    .vp-vitrine-loja.produtos-grid .vp-lista-produtos {
+        grid-template-columns: 1fr;
+    }
+
+    .vp-secao-produtos {
+        --cards-por-pagina: 1;
+    }
+}
+
+/* ==========================================
+   CUPONS LATERAIS
+========================================== */
+
+.vp-vitrine-cupons .vp-cupons-box {
+    width: 100%;
+    max-height: 42rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.vp-vitrine-cupons .vp-cupons-lista {
+    display: flex !important;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    max-height: 30rem;
+    overflow-y: auto;
+    padding-right: 0.3rem;
+}
+
+.vp-vitrine-cupons .vp-cupom-card {
+    min-height: 8.8rem;
+    flex: 0 0 auto;
+}
+
+.vp-vitrine-cupons .vp-cupons-lista::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+.vp-vitrine-cupons .vp-cupons-lista::-webkit-scrollbar-thumb {
+    background: var(--cor-primaria);
+    border-radius: 999px;
+}

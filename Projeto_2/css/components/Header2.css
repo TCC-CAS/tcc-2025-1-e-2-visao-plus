@@ -2,13 +2,36 @@
    HEADER COMPONENT
    ========================= */
 
+/* =========================
+   HEADER COMPONENT
+   ========================= */
+
+:root {
+    --vp-header-height: 88px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-padding-top: var(--vp-header-height);
+}
+
+body {
+    margin: 0;
+    padding-top: var(--vp-header-height);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 header {
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
+    height: var(--vp-header-height);
     z-index: 1000;
-    max-height: 45px;
 
     display: flex;
     justify-content: space-between;
@@ -44,10 +67,9 @@ header {
 }
 
 header.shrink {
+    height: 64px;
     padding: 8px 30px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: all 0.3s ease;
-    min-height: 55px;
 }
 
 header.shrink .logo {

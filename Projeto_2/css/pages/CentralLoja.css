@@ -550,3 +550,269 @@ body {
     border-radius: 12px;
     padding: 18px;
 }
+
+#btnEnviarResposta:disabled,
+#btnEnviarResposta.carregando {
+    background: #9ca3af !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    transform: none !important;
+}
+
+#btnEnviarResposta.carregando::after {
+    content: " ⏳";
+}
+
+.resposta-box input:disabled,
+.resposta-box textarea:disabled {
+    background: #f3f4f6;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.secao-cupons-central {
+    width: 100%;
+}
+
+.bloqueio-recurso {
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    background: linear-gradient(135deg, #f8fafc, #eef2ff);
+    border-radius: 22px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+}
+
+.bloqueio-icone {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
+    display: grid;
+    place-items: center;
+    border-radius: 18px;
+    background: #ffffff;
+    font-size: 26px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.bloqueio-recurso h3 {
+    margin: 0 0 8px;
+    color: #111827;
+    font-size: 1.35rem;
+}
+
+.bloqueio-recurso p {
+    max-width: 620px;
+    margin: 0 auto 18px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.btn-upgrade-plano,
+.btn-gerenciar-cupons {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 18px;
+    border-radius: 999px;
+    border: none;
+    text-decoration: none;
+    background: #4f46e5;
+    color: #ffffff;
+    font-weight: 800;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-upgrade-plano:hover,
+.btn-gerenciar-cupons:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.25);
+}
+
+.cupons-topo {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.cupons-topo h3 {
+    margin: 0;
+    color: #111827;
+    font-size: 1.35rem;
+}
+
+.cupons-topo p {
+    margin: 4px 0 0;
+    color: #64748b;
+}
+
+.cupons-resumo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.cupom-stat-card {
+    background: #ffffff;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+}
+
+.cupom-stat-card span {
+    display: block;
+    color: #64748b;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+}
+
+.cupom-stat-card strong {
+    display: block;
+    color: #111827;
+    font-size: 1.55rem;
+}
+
+.lista-cupons-central {
+    display: grid;
+    gap: 12px;
+}
+
+.card-cupom-central {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid rgba(148, 163, 184, 0.24);
+    border-radius: 20px;
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+}
+
+.cupom-central-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.cupom-central-header strong {
+    font-size: 1.15rem;
+    color: #111827;
+}
+
+.card-cupom-central p {
+    margin: 0 0 6px;
+    color: #475569;
+}
+
+.card-cupom-central small {
+    display: block;
+    color: #64748b;
+    margin-top: 3px;
+}
+
+.tag-cupom {
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.tag-cupom.ativo {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.tag-cupom.inativo {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.cupom-central-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.cupom-central-acoes button {
+    border: none;
+    border-radius: 999px;
+    padding: 9px 12px;
+    font-weight: 800;
+    cursor: pointer;
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.cupom-central-acoes button:hover {
+    background: #e2e8f0;
+}
+
+.cupom-central-acoes .btn-ativar-cupom {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.cupom-central-acoes .btn-enviar-cupom {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.cupom-central-acoes .btn-desativar-cupom {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.cupom-central-acoes button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.cupons-vazio {
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    color: #64748b;
+}
+
+@media (max-width: 760px) {
+    .cupons-topo,
+    .card-cupom-central {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cupons-resumo-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cupom-central-acoes {
+        justify-content: flex-start;
+    }
+}
+
+.cupom-central-acoes:empty {
+    display: none;
+}
+
+.cupom-central-acoes button {
+    min-width: 120px;
+}
+
+.tag-cupom.vencido {
+    background: #fee2e2;
+    color: #991b1b;
+}

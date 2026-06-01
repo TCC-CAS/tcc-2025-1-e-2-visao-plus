@@ -1,0 +1,547 @@
+/* ========================================
+   PÁGINA DE CUPONS - VISIONPLUS+
+======================================== */
+
+.pagina-cupons-shell {
+    background: var(--cinza-bg);
+}
+
+.conteudo-cupons-loja {
+    padding: 24px;
+    gap: 22px;
+}
+
+#barra-menu a.ativo-menu {
+    background: #e7ecef;
+    border-left-color: var(--azul);
+    color: var(--azul);
+    font-weight: 700;
+}
+
+/* ========================================
+   HERO
+======================================== */
+
+.cupons-loja-hero {
+    background: linear-gradient(135deg, #156783, #0e4e5e);
+    color: white;
+    border-radius: 18px;
+    padding: 26px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    box-shadow: 0 12px 28px rgba(21, 103, 131, 0.22);
+}
+
+.eyebrow-cupons {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.82;
+    margin-bottom: 8px;
+}
+
+.cupons-loja-hero h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+.cupons-loja-hero p {
+    margin: 0;
+    max-width: 650px;
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.45;
+}
+
+.btn-criar-cupom,
+.btn-salvar-cupom {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    background: #ffffff;
+    color: #156783;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-criar-cupom:hover,
+.btn-salvar-cupom:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* ========================================
+   RESUMO
+======================================== */
+
+.resumo-cupons-loja {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(170px, 1fr));
+    gap: 18px;
+}
+
+/* ========================================
+   LISTA
+======================================== */
+
+.grid-cupons-loja {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 18px;
+}
+
+.card-cupom-loja {
+    background: white;
+    border: 1px solid rgba(21, 103, 131, 0.12);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.07);
+    transition: 0.2s ease;
+}
+
+.card-cupom-loja:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.11);
+}
+
+.cupom-card-topo {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.cupom-codigo-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.cupom-codigo-box strong {
+    color: #12323d;
+    font-size: 21px;
+    letter-spacing: 0.5px;
+}
+
+.cupom-codigo-box p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.tag-cupom {
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.tag-cupom.ativo {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.tag-cupom.inativo {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.tag-cupom.vencido {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.cupom-destaque {
+    background: #f0f9ff;
+    border: 1px solid rgba(21, 103, 131, 0.13);
+    border-radius: 12px;
+    padding: 13px;
+    margin-bottom: 13px;
+}
+
+.cupom-destaque span {
+    display: block;
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.cupom-destaque strong {
+    color: #156783;
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.cupom-card-dados {
+    display: grid;
+    gap: 7px;
+    margin-bottom: 14px;
+}
+
+.cupom-card-dados span {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: #334155;
+    font-size: 13px;
+    background: #f8fafc;
+    border-radius: 9px;
+    padding: 8px 10px;
+}
+
+.cupom-card-dados b {
+    color: #12323d;
+}
+
+.cupom-card-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.cupom-card-acoes button {
+    border: none;
+    border-radius: 9px;
+    padding: 9px 11px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.18s ease;
+}
+
+.cupom-card-acoes button:hover {
+    transform: translateY(-1px);
+}
+
+.cupom-card-acoes button:disabled {
+    background: #d1d5db !important;
+    color: white !important;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-editar {
+    background: #f1f5f9;
+    color: #334155;
+}
+
+.btn-ativar {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.btn-enviar {
+    background: #f0f9ff;
+    color: #156783;
+}
+
+.btn-desativar {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.btn-excluir {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.cupons-vazio {
+    grid-column: 1 / -1;
+    background: white;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    padding: 24px;
+    color: #64748b;
+    text-align: center;
+}
+
+/* ========================================
+   MODAL CUPOM - ESTILO COTAÇÃO
+======================================== */
+
+.modal-cupom {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-cupom.ativo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-cupom-content {
+    width: min(92vw, 780px);
+    max-height: 88vh;
+    overflow: hidden;
+    background: white;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.25s ease;
+}
+
+.modal-cupom.ativo .modal-cupom-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-cupom-menor {
+    width: min(92vw, 560px);
+}
+
+.modal-cupom-header {
+    background: #156783;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.modal-cupom-subtitulo {
+    display: block;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.modal-cupom-header h2 {
+    margin: 0;
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.modal-cupom-fechar {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+}
+
+.modal-cupom-fechar:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.modal-cupom-body {
+    padding: 18px;
+    overflow-y: auto;
+    background: #f8fafc;
+}
+
+.form-cupom-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.campo-cheio {
+    grid-column: 1 / -1;
+}
+
+.campo-cupom {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-cupom span {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.campo-cupom small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.campo-cupom input,
+.campo-cupom textarea,
+.campo-cupom select {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    padding: 10px 12px;
+    background: white;
+    color: #111827;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border 0.15s, box-shadow 0.15s;
+}
+
+.campo-cupom input:focus,
+.campo-cupom textarea:focus,
+.campo-cupom select:focus {
+    border-color: #156783;
+    box-shadow: 0 0 0 2px rgba(21, 103, 131, 0.15);
+}
+
+.campo-cupom textarea {
+    min-height: 82px;
+    resize: vertical;
+}
+
+.input-com-prefixo {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+    overflow: hidden;
+    transition: border 0.15s, box-shadow 0.15s;
+}
+
+.input-com-prefixo:focus-within {
+    border-color: #156783;
+    box-shadow: 0 0 0 2px rgba(21, 103, 131, 0.15);
+}
+
+.input-com-prefixo input {
+    border: none;
+    border-radius: 0;
+    box-shadow: none !important;
+}
+
+.prefixo-input,
+.sufixo-input {
+    padding: 0 11px;
+    color: #156783;
+    font-weight: 800;
+    font-size: 13px;
+}
+
+.modal-cupom-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 16px;
+}
+
+.btn-cupom-secundario {
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #334155;
+    border-radius: 9px;
+    padding: 10px 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.modal-cupom-footer .btn-salvar-cupom {
+    background: #156783;
+    color: white;
+    border-radius: 9px;
+}
+
+.modal-cupom-footer .btn-salvar-cupom:hover {
+    background: #0e4e5e;
+}
+
+/* ========================================
+   BLOQUEIO
+======================================== */
+
+.bloqueio-recurso {
+    border: 1px solid rgba(21, 103, 131, 0.18);
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    text-align: center;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.bloqueio-icone {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 14px;
+    border-radius: 16px;
+    display: grid;
+    place-items: center;
+    background: #f0f9ff;
+    color: #156783;
+    font-size: 26px;
+}
+
+.btn-upgrade-plano {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #156783;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 11px 16px;
+    font-weight: 700;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========================================
+   RESPONSIVO
+======================================== */
+
+@media (max-width: 900px) {
+    .cupons-loja-hero {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .resumo-cupons-loja {
+        grid-template-columns: 1fr;
+    }
+
+    .form-cupom-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .conteudo-cupons-loja {
+        padding: 18px;
+    }
+
+    #barra-menu a.ativo-menu {
+        border-left-color: transparent;
+        border-bottom-color: var(--azul);
+    }
+
+    .grid-cupons-loja {
+        grid-template-columns: 1fr;
+    }
+}
