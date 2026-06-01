@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cupons da Loja - VisionPlus+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/pages/CentralLoja.css">
+    <link rel="stylesheet" href="css/pages/CuponsLoja.css">
+</head>
+
+<body>
+    <div id="app-header"></div>
+
+    <main class="central-loja pagina-cupons-shell">
+        <div class="container-layout">
+
+            <aside id="barra-menu">
+                <a href="ProdutosLoja.html">📦 Meus Produtos</a>
+                <a href="AdminLoja.html">⚙️ Administração</a>
+                <a id="MinhaLoja">👁️ Ver Loja</a>
+                <a href="CentralLoja.html">📊 Central da Loja</a>
+                <a href="CuponsLoja.html" class="ativo-menu">🎟️ Gerenciar Cupons</a>
+            </aside>
+
+            <section class="conteudo-layout conteudo-cupons-loja">
+
+                <section class="cupons-loja-hero">
+                    <div>
+                        <span class="eyebrow-cupons">Campanhas promocionais</span>
+                        <h1>Cupons da Loja</h1>
+                        <p>
+                            Crie descontos por tempo limitado, libere para o público geral
+                            ou envie diretamente para clientes específicos.
+                        </p>
+                    </div>
+
+                    <button id="btn-abrir-modal-cupom" class="btn-criar-cupom">
+                        + Criar cupom
+                    </button>
+                </section>
+
+                <section id="bloqueio-cupons-pagina" class="bloqueio-recurso hidden">
+                    <div class="bloqueio-icone">🔒</div>
+                    <h3>Cupons são um recurso dos planos PLUS e PRO</h3>
+                    <p>
+                        Faça upgrade do plano da sua loja para criar campanhas promocionais,
+                        liberar descontos públicos e enviar cupons para clientes específicos.
+                    </p>
+                    <a href="PlanosLoja.html" class="btn-upgrade-plano">Ver planos</a>
+                </section>
+
+                <section id="resumo-cupons-loja" class="resumo-cupons-loja">
+                    <article class="stat-card blue">
+                        <div class="stat-label">Cupons cadastrados</div>
+                        <div class="stat-value" id="cupom-page-total">0</div>
+                        <div class="stat-meta">ativos e inativos</div>
+                    </article>
+
+                    <article class="stat-card green">
+                        <div class="stat-label">Cupons ativos</div>
+                        <div class="stat-value" id="cupom-page-ativos">0</div>
+                        <div class="stat-meta">visíveis ou enviados</div>
+                    </article>
+
+                    <article class="stat-card purple">
+                        <div class="stat-label">Resgates</div>
+                        <div class="stat-value" id="cupom-page-resgates">0</div>
+                        <div class="stat-meta">clientes alcançados</div>
+                    </article>
+                </section>
+
+                <section id="lista-cupons-loja" class="grid-cupons-loja">
+                    <p>Carregando cupons...</p>
+                </section>
+
+            </section>
+        </div>
+    </main>
+
+    <div id="modal-cupom" class="modal-cupom">
+        <div class="modal-cupom-content">
+
+            <div class="modal-cupom-header">
+                <div>
+                    <span class="modal-cupom-subtitulo">Campanha da loja</span>
+                    <h2 id="titulo-modal-cupom">Criar cupom</h2>
+                </div>
+
+                <button id="btn-fechar-modal-cupom" class="modal-cupom-fechar">×</button>
+            </div>
+
+            <form id="form-cupom" class="modal-cupom-body">
+                <input type="hidden" id="cupom-id">
+
+                <div class="form-cupom-grid">
+                    <label class="campo-cupom campo-cheio">
+                        <span>Código do cupom</span>
+                        <input id="cupom-codigo" type="text" maxlength="10" placeholder="Ex: LENTE20" required>
+                        <small>Use um código curto e fácil de lembrar.</small>
+                    </label>
+
+                    <label class="campo-cupom campo-cheio">
+                        <span>Descrição</span>
+                        <textarea id="cupom-descricao" maxlength="50" placeholder="Ex: 20% em lentes selecionadas"></textarea>
+                    </label>
+
+                    <label class="campo-cupom">
+                        <span>Tipo de desconto</span>
+                        <select id="cupom-tipo" required>
+                            <option value="PORCENTAGEM">Porcentagem</option>
+                            <option value="VALOR">Valor fixo</option>
+                        </select>
+                    </label>
+
+                    <label class="campo-cupom">
+                        <span id="label-valor-cupom">Percentual de desconto</span>
+
+                        <div class="input-com-prefixo">
+                            <span id="prefixo-valor-cupom" class="prefixo-input hidden">R$</span>
+                            <input id="cupom-valor" type="text" inputmode="decimal" placeholder="Ex: 15,5" required>
+                            <span id="sufixo-valor-cupom" class="sufixo-input">%</span>
+                        </div>
+
+                        <small id="ajuda-valor-cupom">Digite o percentual com vírgula se precisar. Ex: 10,5%</small>
+                    </label>
+
+                    <label class="campo-cupom">
+                        <span>Data e hora de término</span>
+                        <input id="cupom-validade" type="datetime-local" required>
+                    </label>
+
+                    <label class="campo-cupom">
+                        <span>Quantidade de resgates</span>
+                        <input id="cupom-quantidade" type="number" min="1" placeholder="PLUS até 30 / PRO pode deixar vazio">
+                    </label>
+                </div>
+
+                <div class="modal-cupom-footer">
+                    <button type="button" id="btn-cancelar-modal-cupom" class="btn-cupom-secundario">
+                        Cancelar
+                    </button>
+
+                    <button type="submit" class="btn-salvar-cupom">
+                        Salvar cupom
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-enviar-cupom" class="modal-cupom">
+        <div class="modal-cupom-content modal-cupom-menor">
+
+            <div class="modal-cupom-header">
+                <div>
+                    <span class="modal-cupom-subtitulo">Envio segmentado</span>
+                    <h2>Enviar cupom para usuários</h2>
+                </div>
+
+                <button id="btn-fechar-modal-envio" class="modal-cupom-fechar">×</button>
+            </div>
+
+            <div class="modal-cupom-body">
+                <input type="hidden" id="envio-cupom-id">
+
+                <label class="campo-cupom campo-cheio">
+                    <span>E-mails dos clientes</span>
+                    <textarea id="emails-cupom-envio" placeholder="cliente1@email.com, cliente2@email.com"></textarea>
+                    <small>Separe os e-mails por vírgula.</small>
+                </label>
+
+                <div class="modal-cupom-footer">
+                    <button type="button" id="btn-cancelar-envio-cupom" class="btn-cupom-secundario">
+                        Cancelar
+                    </button>
+
+                    <button type="button" id="btn-confirmar-envio-cupom" class="btn-salvar-cupom">
+                        Enviar cupom
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="JS/pages/CuponsLoja.js"></script>
+</body>
+
+</html>
