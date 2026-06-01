@@ -37,6 +37,8 @@ let buscandoCep = false;
 let enviandoSolicitacao = false;
 let cnpjValidado = "";
 
+
+
 function abrirModal(modal) {
     modal.classList.add("aberto");
 }
@@ -57,7 +59,7 @@ function mostrarMensagem(elemento, texto, tipo) {
 
     setTimeout(() => {
         elemento.classList.remove("mostrar");
-    }, 4500);
+    }, 4000);
 }
 
 function limparNumero(valor) {
@@ -95,6 +97,40 @@ function desbloquearBotao(botao) {
     botao.disabled = false;
     botao.classList.remove("carregando");
     botao.textContent = botao.dataset.textoOriginal || botao.textContent;
+}
+
+async function buscarCoordenadasPorEndereco() {
+    const enderecoCompleto = [
+        inputLogradouro.value.trim(),
+        inputNumero.value.trim(),
+        inputBairro.value.trim(),
+        inputCidade.value.trim(),
+        inputUf.value.trim(),
+        "Brasil"
+    ].filter(Boolean).join(", ");
+
+    const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(enderecoCompleto)}`;
+
+    const resposta = await fetch(url, {
+        headers: {
+            "Accept": "application/json"
+        }
+    });
+
+    if (!resposta.ok) {
+        throw new Error("Erro ao buscar coordenadas pelo endereço.");
+    }
+
+    const dados = await resposta.json();
+
+    if (!dados || dados.length === 0) {
+        return null;
+    }
+
+    return {
+        latitude: Number(dados[0].lat),
+        longitude: Number(dados[0].lon)
+    };
 }
 
 async function buscarCnpj(cnpj) {
@@ -147,24 +183,13 @@ function preencherDadosCnpj(dados) {
     }
 }
 
-function preencherDadosCep(dados) {
+async function preencherDadosCep(dados) {
     inputCep.value = limparNumero(dados.cep || inputCep.value);
 
-    if (dados.street) {
-        inputLogradouro.value = dados.street;
-    }
-
-    if (dados.neighborhood) {
-        inputBairro.value = dados.neighborhood;
-    }
-
-    if (dados.city) {
-        inputCidade.value = dados.city;
-    }
-
-    if (dados.state) {
-        inputUf.value = dados.state;
-    }
+    if (dados.street) inputLogradouro.value = dados.street;
+    if (dados.neighborhood) inputBairro.value = dados.neighborhood;
+    if (dados.city) inputCidade.value = dados.city;
+    if (dados.state) inputUf.value = dados.state;
 
     const coordenadas = dados.location?.coordinates;
 
@@ -174,19 +199,40 @@ function preencherDadosCep(dados) {
 
         mostrarMensagem(
             msgCadastroLoja,
-            "CEP validado com coordenadas. A loja poderá aparecer no mapa após aprovação.",
+            "CEP validado com coordenadas.",
             "sucesso"
         );
-    } else {
-        inputLatitude.value = "";
-        inputLongitude.value = "";
 
-        mostrarMensagem(
-            msgCadastroLoja,
-            "CEP validado, mas sem coordenadas. O admin precisará revisar para aparecer no mapa.",
-            "erro"
-        );
+        return;
     }
+
+    try {
+        const fallback = await buscarCoordenadasPorEndereco();
+
+        if (fallback) {
+            inputLatitude.value = fallback.latitude;
+            inputLongitude.value = fallback.longitude;
+
+            mostrarMensagem(
+                msgCadastroLoja,
+                "Coordenadas encontradas pelo endereço completo.",
+                "sucesso"
+            );
+
+            return;
+        }
+    } catch (erro) {
+        console.warn("Fallback de geocodificação falhou:", erro);
+    }
+
+    inputLatitude.value = "";
+    inputLongitude.value = "";
+
+    mostrarMensagem(
+        msgCadastroLoja,
+        "Endereço validado, mas sem coordenadas. O admin precisará revisar para aparecer no mapa.",
+        "erro"
+    );
 }
 
 btnAbrirModalCnpj.addEventListener("click", () => {
@@ -353,9 +399,25 @@ formLoja.addEventListener("submit", async (event) => {
         latitude: inputLatitude.value ? Number(inputLatitude.value) : null,
         longitude: inputLongitude.value ? Number(inputLongitude.value) : null
     };
+    
+    const camposObrigatoriosPreenchidos =
+        solicitacao.razaoSocial &&
+        solicitacao.nome &&
+        solicitacao.email &&
+        solicitacao.cnpj &&
+        solicitacao.cep &&
+        solicitacao.logradouro &&
+        solicitacao.numero &&
+        solicitacao.bairro &&
+        solicitacao.cidade &&
+        solicitacao.uf;
 
-    if (!solicitacao.razaoSocial || !solicitacao.nome || !solicitacao.cnpj) {
-        mostrarMensagem(msgCadastroLoja, "Preencha razão social, nome da loja e CNPJ.", "erro");
+    if (!camposObrigatoriosPreenchidos) {
+        mostrarMensagem(
+            msgCadastroLoja,
+            "Preencha todos os campos obrigatórios. Apenas descrição e complemento são opcionais.",
+            "erro"
+        );
         return;
     }
 
@@ -364,38 +426,13 @@ formLoja.addEventListener("submit", async (event) => {
         return;
     }
 
-    if (!solicitacao.cep || solicitacao.cep.length !== 8) {
+    if (solicitacao.cep.length !== 8) {
         mostrarMensagem(msgCadastroLoja, "CEP inválido. Informe 8 números.", "erro");
         return;
     }
 
-    if (!solicitacao.logradouro || !solicitacao.numero || !solicitacao.bairro || !solicitacao.cidade || !solicitacao.uf) {
-        mostrarMensagem(msgCadastroLoja, "Preencha todos os dados de endereço.", "erro");
-        return;
-    }
-
-    if (!solicitacao.email) {
-        mostrarMensagem(msgCadastroLoja, "Informe o e-mail da loja.", "erro");
-        return;
-    }
-    
-    if (
-        !solicitacao.razaoSocial ||
-        !solicitacao.nome ||
-        !solicitacao.email ||
-        !solicitacao.cnpj ||
-        !solicitacao.cep ||
-        !solicitacao.logradouro ||
-        !solicitacao.numero ||
-        !solicitacao.bairro ||
-        !solicitacao.cidade ||
-        !solicitacao.uf
-    ) {
-        mostrarMensagem(
-            msgCadastroLoja,
-            "Preencha todos os campos obrigatórios. Apenas descrição e complemento são opcionais.",
-            "erro"
-        );
+    if (!solicitacao.email.includes("@") || !solicitacao.email.includes(".")) {
+        mostrarMensagem(msgCadastroLoja, "Informe um e-mail válido para a loja.", "erro");
         return;
     }
 

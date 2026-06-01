@@ -8,7 +8,14 @@ import { criarCardLoja } from "../components/cards.js";
 import { configurarHeader } from "../components/header.js";
 import { getLojaDoUsuario } from "../core/loja.js";
 import { carregarFotoUsuario, salvarFotoPerfil, carregarFotoLoja, salvarFotoLoja } from "../core/imgs.js";
-import { listarCotacoesPorUsuario, criarCardCotacao, chamarEstilizacao, initScrollCotacoes } from "../core/cotacoes.js";
+import {
+    listarCotacoesPorUsuario,
+    criarCardCotacao,
+    chamarEstilizacao,
+    initScrollCotacoes
+} from "../core/cotacoes.js";
+
+import { abrirModalCotacaoConsumidor } from "../components/ModalCotacaoConsumidor.js";
 import { buscarSolicitacaoLojaPorUsuario } from "../core/solicitacaoLoja.js";
 
 //===================================INICIALIZAÇÃO DE VARIÁVEIS PRINCIPAIS=====================================================//
@@ -19,29 +26,44 @@ let loja = null;
 //===================================CONFIGURAÇÃO DA VISUALIZAÇÃO=====================================================//
 
 async function configurarTela() {
-
     if (!usuario) return;
 
     esconderBlocos([
         "secao-usuario",
         "secao-loja",
-        "secao-cotacoes",
+        "secao-cotacoes-consumidor",
+        "secao-cotacoes-vendedor",
         "secao-admin",
         "secao-pedir_loja"
     ]);
 
     if (usuario.tipoUsuario === "Admin") {
-        mostrarBlocos(["secao-admin", "secao-usuario", "secao-loja", "secao-cotacoes", "secao-pedir_loja"]);
+        mostrarBlocos([
+            "secao-admin",
+            "secao-usuario",
+            "secao-loja"
+        ]);
+
         await carregarUsuarios();
         await carregarLojas();
+        return;
     }
 
     if (usuario.tipoUsuario === "Vendedor") {
-        mostrarBlocos(["secao-loja", "secao-usuario", "secao-cotacoes"]);
+        mostrarBlocos([
+            "secao-loja",
+            "secao-usuario",
+            "secao-cotacoes-vendedor"
+        ]);
+        return;
     }
 
     if (usuario.tipoUsuario === "Comum") {
-        mostrarBlocos(["secao-usuario", "secao-pedir_loja", "secao-cotacoes"]);
+        mostrarBlocos([
+            "secao-usuario",
+            "secao-pedir_loja",
+            "secao-cotacoes-consumidor"
+        ]);
     }
 }
 
@@ -425,16 +447,40 @@ document
 
 //===================================COTAÇÕES=====================================================//
 
-async function carregarCotacoes(idUsuario) {
+async function carregarCotacoesConsumidor(idUsuario) {
     const container = document.getElementById("lista-cotacoes");
+
+    if (!container) return;
+
     container.innerHTML = "";
 
-    const cotacoes = await listarCotacoesPorUsuario(idUsuario);
+    if (!usuario || usuario.tipoUsuario !== "Comum") {
+        return;
+    }
 
-    cotacoes.forEach(c => {
-        const card = criarCardCotacao(c);
-        container.appendChild(card);
-    });
+    try {
+        const cotacoes = await listarCotacoesPorUsuario(idUsuario);
+
+        if (!cotacoes || cotacoes.length === 0) {
+            container.innerHTML = "<p>Nenhuma cotação encontrada.</p>";
+            return;
+        }
+
+        cotacoes.forEach(cotacao => {
+            const card = criarCardCotacao(cotacao, () => {
+                abrirModalCotacaoConsumidor(cotacao, (cotacaoAtualizada) => {
+                    Object.assign(cotacao, cotacaoAtualizada);
+                    carregarCotacoesConsumidor(usuario.id);
+                });
+            });
+
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error("Erro ao carregar cotações do consumidor:", error);
+        container.innerHTML = "<p>Erro ao carregar suas cotações.</p>";
+    }
 }
 
 
@@ -450,25 +496,27 @@ async function init() {
     if (usuario.tipoUsuario === "Vendedor" || usuario.tipoUsuario === "Admin") {
         loja = await getLojaDoUsuario(usuario);
         usuario.loja = loja;
-        //Função de imagem da loja
+
         carregarFotoLoja(usuario);
         salvarFotoLoja();
     }
 
     configurarHeader();
+
     await configurarTela();
     await carregarSolicitacaoLojaDoUsuario();
+
     configurarEventos();
+
     preencherInformacoesUsuario();
     preencherInformacoesLoja();
 
-    //Funções de imagem de perfil
     carregarFotoUsuario(usuario);
     salvarFotoPerfil();
 
-
-
-    chamarEstilizacao();
-    initScrollCotacoes();
-    carregarCotacoes(getUsuarioLogado().id);
+    if (usuario.tipoUsuario === "Comum") {
+        chamarEstilizacao();
+        initScrollCotacoes();
+        await carregarCotacoesConsumidor(usuario.id);
+    }
 }

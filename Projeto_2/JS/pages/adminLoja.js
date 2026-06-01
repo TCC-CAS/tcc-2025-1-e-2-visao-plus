@@ -1,4 +1,5 @@
-import {configurarHeader} from "../components/header.js";
+import { configurarHeader } from "../components/header.js";
+import { montarVitrineLoja } from "../components/VitrineLoja.js";
 
 /*************************************************
  * CONFIGURAÇÕES GERAIS
@@ -17,17 +18,24 @@ const state = {
 };
 
 state.configuracao = {
-    fontePrimaria: "",
-    fonteSecundaria: "",
-    corPrimaria: "",
-    corSecundaria: "",
-    corFundo: "",
-    layoutPagina: "",
+    bannerUrl: "",
+    textoDestaque: "",
+    mostrarBanner: false,
+
+    fontePrimaria: "Arial",
+    fonteSecundaria: "Helvetica",
+
+    corPrimaria: "#156783",
+    corSecundaria: "#b5d7df",
+    corFundo: "#f5f7fa",
+
+    layoutPagina: "padrao",
+    layoutProdutos: "grid",
+
     mostrarPreco: true,
     mostrarMarca: true,
-    produtosLinha: 3
+    produtosLinha: 4
 };
-
 /*************************************************
  * INICIALIZAÇÃO
  *************************************************/
@@ -38,15 +46,20 @@ document.addEventListener("DOMContentLoaded", () => {
 async function initPaginaAdmin() {
     try {
         configurarHeader();
+
         carregarUsuarioLogado();
         carregarLojaDoUsuario();
         renderizarDadosLoja();
 
+        await carregarConfiguracoesLoja();
         await carregarArmacoes();
         await carregarLentes();
-        await carregarConfiguracoesLoja();
+
         configurarEventos();
-        atualizarCards();
+        bloquearCamposPorPlano();
+
+        await aplicarConfiguracaoPreview();
+
     } catch (error) {
         console.error(error);
         alert(error.message);
@@ -82,12 +95,46 @@ function carregarLojaDoUsuario() {
     console.log("OBJETO LOJA:", state.loja);
 }
 
-function renderizarDadosLoja() {
-    document.getElementById("nomeLoja").textContent = state.loja.nome;
-    document.getElementById("DescricaoLoja").textContent = state.loja.descricao;
-    document.getElementById("EmailLoja").textContent = state.loja.email;
-    document.getElementById("EnderecoLoja").textContent = state.loja.endereco;
+function obterPlanoLoja() {
+    return (state.loja?.plano || "FREE").trim().toUpperCase();
 }
+
+
+function renderizarDadosLoja() {
+    const plano = obterPlanoLoja();
+
+    const nomeLojaTopo = document.getElementById("nomeLoja");
+    if (nomeLojaTopo) {
+        nomeLojaTopo.textContent = state.loja.nome || "Minha loja";
+    }
+
+    const planoAtual = document.getElementById("planoAtualLoja");
+    if (planoAtual) {
+        planoAtual.textContent = plano;
+        planoAtual.className = `badge-plano plano-${plano.toLowerCase()}`;
+    }
+
+    const nomePreview = document.getElementById("NomeLoja");
+    if (nomePreview) {
+        nomePreview.textContent = state.loja.nome || "";
+    }
+
+    const descricaoPreview = document.getElementById("DescricaoLoja");
+    if (descricaoPreview) {
+        descricaoPreview.textContent = state.loja.descricao || "";
+    }
+
+    const emailPreview = document.getElementById("EmailLoja");
+    if (emailPreview) {
+        emailPreview.textContent = state.loja.email || "";
+    }
+
+    const enderecoPreview = document.getElementById("EnderecoLoja");
+    if (enderecoPreview) {
+        enderecoPreview.textContent = state.loja.endereco || "";
+    }
+}
+
 
 /*************************************************
  * CARREGAMENTO DE ARMAÇÕES
@@ -102,38 +149,6 @@ async function carregarArmacoes() {
     }
 
     state.armacoes = await response.json();
-    renderizarArmacoes(state.armacoes);
-}
-
-function renderizarArmacoes(armacoes) {
-    const container = document.getElementById("armacao-lista");
-    container.innerHTML = "";
-
-    if (armacoes.length === 0) {
-        container.innerHTML = "<p>Nenhuma armação cadastrada.</p>";
-        return;
-    }
-
-    armacoes.forEach(armacao => {
-        container.appendChild(CardArmacao(armacao));
-    });
-}
-
-function CardArmacao(armacao) {
-    const div = document.createElement("div");
-    div.classList.add("card-armacao");
-
-    div.innerHTML = `
-        <h4>${armacao.nome}</h4>
-        ${state.configuracao.mostrarMarca ? `<p>Marca: ${armacao.marca}</p>` : ""}
-        <p>Modelo: ${armacao.modelo}</p>
-        <p>Material: ${armacao.material}</p>
-        <p>Tipo: ${armacao.tipo}</p>
-        <p>Descrição: ${armacao.descricao}</p>
-        ${state.configuracao.mostrarPreco ? `<p>Preço: R$ ${armacao.preco}</p>` : ""}
-    `;
-
-    return div;
 }
 
 /*************************************************
@@ -149,88 +164,17 @@ async function carregarLentes() {
     }
 
     state.lentes = await response.json();
-    renderizarLentes(state.lentes);
 }
 
-function renderizarLentes(lentes) {
-    const container = document.getElementById("lente-lista");
-    container.innerHTML = "";
 
-    if (lentes.length === 0) {
-        container.innerHTML = "<p>Nenhuma lente cadastrada.</p>";
-        return;
-    }
-
-    lentes.forEach(lente => {
-        container.appendChild(CardLente(lente));
-    });
-}
-
-function CardLente(lente) {
-    const div = document.createElement("div");
-    div.classList.add("card-lente");
-
-    div.innerHTML = `
-        <h4>${lente.nome}</h4>
-        <p>Tipo: ${lente.tipo}</p>
-        ${state.configuracao.mostrarMarca ? `<p>Marca: ${lente.marca}</p>` : ""}
-        <p>Modelo: ${lente.modelo}</p>
-        <p>Material: ${lente.material}</p>
-        <p>Descrição: ${lente.descricao}</p>
-        ${state.configuracao.mostrarPreco ? `<p>Preço: R$ ${lente.preco}</p>` : ""}
-    `;
-
-    return div;
-}
 
 /*************************************************
  * CONFIGURAÇÕES DA LOJA
  *************************************************/
-function aplicarLayoutPagina() {
-    const preview = document.querySelector(".pre-visualizacao");
 
-    preview.classList.remove(
-        "layout-padrao",
-        "layout-centralizado",
-        "layout-fullwidth",
-        "layout-grid"
-    );
-
-    preview.classList.add(`layout-${state.configuracao.layoutPagina}`);
-}
-
-function aplicarLayoutProdutos() {
-    const armacoes = document.querySelector(".armacao-section");
-    const lentes = document.querySelector(".lente-section");
-
-    armacoes.classList.remove(
-        "produtos-horizontal",
-        "produtos-grid",
-        "produtos-lista"
-    );
-
-    lentes.classList.remove(
-        "produtos-horizontal",
-        "produtos-grid",
-        "produtos-lista"
-    );
-
-    armacoes.classList.add(`produtos-${state.configuracao.layoutProdutos}`);
-    lentes.classList.add(`produtos-${state.configuracao.layoutProdutos}`);
-}
-
-function aplicarProdutosPorLinha() {
-    const preview = document.querySelector(".pre-visualizacao");
-
-    preview.style.setProperty(
-        "--produtos-linha",
-        state.configuracao.produtosLinha || 3
-    );
-}
 
 function atualizarCards() {
-    renderizarArmacoes(state.armacoes);
-    renderizarLentes(state.lentes);
+    aplicarConfiguracaoPreview();
 }
 
 async function carregarConfiguracoesLoja() {
@@ -242,40 +186,76 @@ async function carregarConfiguracoesLoja() {
 
     state.configuracao = await response.json();
     preencherInputsConfiguracao();
-    aplicarConfiguracaoPreview();
-    atualizarCards();
 }
 
 function preencherInputsConfiguracao() {
-    document.getElementById("fontePrimaria").value = state.configuracao.fontePrimaria;
-    document.getElementById("fonteSecundaria").value = state.configuracao.fonteSecundaria;
-    document.getElementById("corPrimaria").value = state.configuracao.corPrimaria;
-    document.getElementById("corSecundaria").value = state.configuracao.corSecundaria;
-    document.getElementById("corFundo").value = state.configuracao.corFundo;
-    document.getElementById("layoutPagina").value = state.configuracao.layoutPagina;
+    document.getElementById("fontePrimaria").value = state.configuracao.fontePrimaria || "Arial";
+    document.getElementById("fonteSecundaria").value = state.configuracao.fonteSecundaria || "Helvetica";
+
+    document.getElementById("corPrimaria").value = state.configuracao.corPrimaria || "#156783";
+    document.getElementById("corSecundaria").value = state.configuracao.corSecundaria || "#b5d7df";
+    document.getElementById("corFundo").value = state.configuracao.corFundo || "#f5f7fa";
+
+    document.getElementById("layoutPagina").value = state.configuracao.layoutPagina || "padrao";
+    document.getElementById("layoutProdutos").value = state.configuracao.layoutProdutos || "grid";
+
     document.getElementById("mostrarPreco").checked = !!state.configuracao.mostrarPreco;
     document.getElementById("mostrarMarca").checked = !!state.configuracao.mostrarMarca;
-    document.getElementById("produtosPorLinha").value = state.configuracao.produtosLinha || 3;
-    atualizarCards();
+
+    document.getElementById("produtosPorLinha").value = state.configuracao.produtosLinha || 4;
+
+    document.getElementById("bannerUrl").value = state.configuracao.bannerUrl || "";
+    document.getElementById("mostrarBanner").checked = !!state.configuracao.mostrarBanner;
+
+    document.getElementById("textoDestaque").value = state.configuracao.textoDestaque || "";
 }
 
 function montarConfiguracaoDTO() {
     return {
         fontePrimaria: document.getElementById("fontePrimaria").value,
         fonteSecundaria: document.getElementById("fonteSecundaria").value,
+
         corPrimaria: document.getElementById("corPrimaria").value,
         corSecundaria: document.getElementById("corSecundaria").value,
         corFundo: document.getElementById("corFundo").value,
+
         layoutPagina: document.getElementById("layoutPagina").value,
+        layoutProdutos: document.getElementById("layoutProdutos").value,
+
         mostrarPreco: document.getElementById("mostrarPreco").checked,
         mostrarMarca: document.getElementById("mostrarMarca").checked,
-        produtosLinha: Number(document.getElementById("produtosPorLinha").value)
 
+        produtosLinha: Number(document.getElementById("produtosPorLinha").value),
+
+        bannerUrl: document.getElementById("bannerUrl").value.trim(),
+        mostrarBanner: document.getElementById("mostrarBanner").checked,
+
+        textoDestaque: document.getElementById("textoDestaque").value.trim()
     };
 }
 
 async function salvarConfiguracoes() {
-    const dto = montarConfiguracaoDTO();
+    let dto = montarConfiguracaoDTO();
+
+    const configComBanner = await uploadBannerLoja();
+
+    if (configComBanner) {
+        state.configuracao = {
+            ...state.configuracao,
+            ...configComBanner
+        };
+
+        dto = {
+            ...dto,
+            bannerUrl: configComBanner.bannerUrl,
+            mostrarBanner: true
+        };
+
+        document.getElementById("bannerUrl").value = configComBanner.bannerUrl || "";
+        document.getElementById("mostrarBanner").checked = true;
+    }
+
+    console.log("DTO ENVIADO PARA O BACK:", dto);
 
     const response = await fetch(
         `${API}/configuracao/editar/${state.lojaId}`,
@@ -287,52 +267,172 @@ async function salvarConfiguracoes() {
     );
 
     if (!response.ok) {
-        throw new Error("Erro ao salvar configurações");
+        const erro = await response.text();
+        console.error("ERRO AO SALVAR:", erro);
+        throw new Error(erro || "Erro ao salvar configurações");
     }
 
-    state.configuracao = dto;
-    aplicarConfiguracaoPreview();
-    atualizarCards();
+    const configSalva = await response.json();
+
+    console.log("CONFIGURAÇÃO RETORNADA PELO BACK:", configSalva);
+
+    state.configuracao = configSalva;
+
+    preencherInputsConfiguracao();
+    bloquearCamposPorPlano();
+    await aplicarConfiguracaoPreview();
 
     alert("Configurações salvas com sucesso!");
 }
 
 function resetarConfiguracoes() {
-    const padrao = {
+    state.configuracao = {
+        bannerUrl: "",
+        textoDestaque: "",
+        mostrarBanner: false,
+
         fontePrimaria: "Arial",
         fonteSecundaria: "Helvetica",
-        corPrimaria: "#000000",
-        corSecundaria: "#ffffff",
+
+        corPrimaria: "#156783",
+        corSecundaria: "#b5d7df",
+        corFundo: "#f5f7fa",
+
         layoutPagina: "padrao",
+        layoutProdutos: "grid",
+
         mostrarPreco: true,
-        mostrarMarca: true
+        mostrarMarca: true,
+        produtosLinha: 4
     };
 
-    state.configuracao = padrao;
     preencherInputsConfiguracao();
+    bloquearCamposPorPlano();
     aplicarConfiguracaoPreview();
+
+    alert("Configurações salvas com sucesso!");
 }
 
-function aplicarConfiguracaoPreview() {
-    atualizarCards();
-    const preview = document.querySelector(".pre-visualizacao");
+async function uploadBannerLoja() {
+    const input = document.getElementById("bannerArquivo");
 
-    preview.style.setProperty("--cor-primaria", state.configuracao.corPrimaria);
-    preview.style.setProperty("--cor-secundaria", state.configuracao.corSecundaria);
-    preview.style.setProperty("--cor-fundo", state.configuracao.corFundo);
+    if (!input || !input.files || input.files.length === 0) {
+        return null;
+    }
 
-    preview.style.setProperty("--fonte-primaria", state.configuracao.fontePrimaria);
-    preview.style.setProperty("--fonte-secundaria", state.configuracao.fonteSecundaria);
+    const arquivo = input.files[0];
 
-    aplicarLayoutPagina();
-    aplicarLayoutProdutos();
-    aplicarProdutosPorLinha();
+    const tiposPermitidos = ["image/png", "image/jpeg", "image/jpg"];
+    const tamanhoMaximoMB = 10;
+    const tamanhoMaximoBytes = tamanhoMaximoMB * 1024 * 1024;
 
-    // Dados da loja
-    document.getElementById("NomeLoja").textContent = state.loja.nome;
-    document.getElementById("DescricaoLoja").textContent = state.loja.descricao;
-    document.getElementById("EmailLoja").textContent = state.loja.email;
-    document.getElementById("EnderecoLoja").textContent = state.loja.endereco;
+    if (!tiposPermitidos.includes(arquivo.type)) {
+        throw new Error("Formato inválido. Use PNG ou JPG.");
+    }
+
+    if (arquivo.size > tamanhoMaximoBytes) {
+        throw new Error(`Imagem muito grande. Envie uma imagem com até ${tamanhoMaximoMB}MB.`);
+    }
+
+    const formData = new FormData();
+    formData.append("file", arquivo);
+
+    const response = await fetch(`${API}/configuracao/${state.lojaId}/banner`, {
+        method: "POST",
+        body: formData
+    });
+
+    if (!response.ok) {
+        const erro = await response.text();
+        throw new Error(erro || "Erro ao enviar banner.");
+    }
+
+    return await response.json();
+}
+
+async function aplicarConfiguracaoPreview() {
+    const preview = document.getElementById("previewPublico");
+
+    if (!preview) return;
+
+    await montarVitrineLoja({
+        containerId: "previewPublico",
+        loja: state.loja,
+        configuracao: state.configuracao,
+        lentes: state.lentes,
+        armacoes: state.armacoes,
+        modo: "preview",
+        permitirCotacao: false, 
+        onCotarProduto: null,
+        onAbrirProduto: null
+    });
+}
+
+
+
+/*************************************************
+* PLANOS
+*************************************************/
+
+function bloquearCamposPorPlano() {
+    const plano = obterPlanoLoja();
+
+    const camposPlus = [
+        "layoutProdutos",
+        "produtosPorLinha",
+        "mostrarPreco",
+        "bannerUrl",
+        "mostrarBanner"
+    ];
+
+    const camposPro = [
+        "layoutPagina",
+        "textoDestaque"
+    ];
+
+    const plusLiberado = plano === "PLUS" || plano === "PRO";
+    const proLiberado = plano === "PRO";
+
+    aplicarBloqueioCampos(camposPlus, !plusLiberado);
+    aplicarBloqueioCampos(camposPro, !proLiberado);
+
+    marcarSecaoBloqueada(".recurso-plus", !plusLiberado);
+    marcarSecaoBloqueada(".recurso-pro", !proLiberado);
+
+    if (plano === "FREE") {
+        state.configuracao.mostrarPreco = true;
+        state.configuracao.mostrarBanner = false;
+        state.configuracao.bannerUrl = "";
+        state.configuracao.textoDestaque = "";
+        state.configuracao.layoutPagina = "padrao";
+        state.configuracao.layoutProdutos = "grid";
+        state.configuracao.produtosLinha = 4;
+
+        document.getElementById("mostrarPreco").checked = true;
+        document.getElementById("mostrarBanner").checked = false;
+    }
+}
+
+function aplicarBloqueioCampos(ids, bloquear) {
+    ids.forEach(id => {
+        const elemento = document.getElementById(id);
+
+        if (!elemento) return;
+
+        elemento.disabled = bloquear;
+
+        const campo = elemento.closest(".campo-config");
+
+        if (campo) {
+            campo.classList.toggle("campo-bloqueado", bloquear);
+        }
+    });
+}
+
+function marcarSecaoBloqueada(seletor, bloquear) {
+    document.querySelectorAll(seletor).forEach(secao => {
+        secao.classList.toggle("secao-bloqueada", bloquear);
+    });
 }
 
 /*************************************************
@@ -351,22 +451,51 @@ function fecharModal(id) {
  *************************************************/
 function configurarEventos() {
     document
-        .getElementById("salvarConfiguracoes")
-        .addEventListener("click", salvarConfiguracoes);
+    .getElementById("salvarConfiguracoes")
+    .addEventListener("click", async (event) => {
+        event.preventDefault();
+
+        try {
+            await salvarConfiguracoes();
+        } catch (error) {
+            console.error("Erro ao salvar configurações:", error);
+            alert(error.message || "Erro ao salvar configurações.");
+        }
+    });
 
     document
         .getElementById("resetarConfiguracoes")
         .addEventListener("click", resetarConfiguracoes);
 
-    // Preview ao vivo
     document.querySelectorAll(".config-input").forEach(input => {
-        input.addEventListener("change", () => {
-            state.configuracao = montarConfiguracaoDTO();
-            aplicarConfiguracaoPreview();
-            aplicarConfiguracaoPreview();
-            atualizarCards();
-        });
+        input.addEventListener("input", atualizarPreviewAoVivo);
+        input.addEventListener("change", atualizarPreviewAoVivo);
     });
+}
+
+function atualizarPreviewAoVivo() {
+    state.configuracao = montarConfiguracaoDTO();
+
+    const plano = obterPlanoLoja();
+
+    if (plano === "FREE") {
+        state.configuracao.layoutPagina = "padrao";
+        state.configuracao.layoutProdutos = "grid";
+        state.configuracao.produtosLinha = 4;
+        state.configuracao.mostrarPreco = true;
+        state.configuracao.mostrarBanner = false;
+        state.configuracao.bannerUrl = "";
+        state.configuracao.textoDestaque = "";
+    }
+
+    if (plano === "PLUS") {
+        state.configuracao.layoutPagina = "banner";
+        state.configuracao.textoDestaque = "";
+    }
+
+    preencherInputsConfiguracao();
+    bloquearCamposPorPlano();
+    aplicarConfiguracaoPreview();
 }
 
 

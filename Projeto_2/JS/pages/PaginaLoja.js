@@ -1,192 +1,309 @@
-import { configurarHeader } from "../components/header.js";
-import { buscarLojaPorId } from "../core/loja.js";
-import { listarArmacoesPorLoja, listarLentesPorLoja } from "../core/produtos.js";
-import { adicionarProdutoCotacao } from "../components/modalCotacao.js";
-import { abrirModal, fecharModal } from "../components/modals.js";
+  import { configurarHeader } from "../components/header.js";
+  import { buscarLojaPorId } from "../core/loja.js";
+  import { listarArmacoesPorLoja, listarLentesPorLoja } from "../core/produtos.js";
+  import { adicionarProdutoCotacao } from "../components/modalCotacao.js";
+  import { getUsuarioLogado } from "../core/auth.js";
+  import { montarVitrineLoja } from "../components/VitrineLoja.js";
 
-/* =========================
-   VISUALIZAÇÃO DA PÁGINA
-========================= */
-function getIdDaUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("id");
-}
+  /* =========================
+    CONFIGURAÇÕES
+  ========================= */
 
-async function carregarLoja() {
-  try {
-    const id = getIdDaUrl();
+  const API = "http://localhost:8080";
 
-    if (!id) {
-      alert("Loja não encontrada");
-      return;
-    }
+  const state = {
+      loja: null,
+      lentes: [],
+      armacoes: [],
+      configuracao: {
+          bannerUrl: "",
+          textoDestaque: "",
+          mostrarBanner: false,
 
-    const loja = await buscarLojaPorId(id);
-    document.getElementById("loja-foto").src = loja.fotoUrl || "imgs/store1.png";
-    document.getElementById("loja-nome").textContent = loja.nome;
-    document.getElementById("loja-email").textContent = loja.email;
-    document.getElementById("loja-endereco").textContent = loja.endereco;
+          fontePrimaria: "Arial",
+          fonteSecundaria: "Helvetica",
 
-  } catch (e) {
-    console.error(e);
-    alert("Erro ao carregar loja");
-  }
-}
+          corPrimaria: "#156783",
+          corSecundaria: "#b5d7df",
+          corFundo: "#f5f7fa",
 
-async function carregarProdutos() {
-  try {
-    const id = getIdDaUrl();
+          layoutPagina: "padrao",
+          layoutProdutos: "grid",
 
-    if (!id) {
-      alert("Loja não encontrada");
-      return;
-    }
+          mostrarPreco: true,
+          mostrarMarca: true,
+          produtosLinha: 4
+      }
+  };
 
-    const lentes = await listarLentesPorLoja(id);
-    const armacoes = await listarArmacoesPorLoja(id);
+  /* =========================
+    ELEMENTOS
+  ========================= */
 
-    renderizarProdutos(lentes, armacoes);
-  } catch (e) {
-    console.error(e);
-    alert("Erro ao carregar produtos");
-  }
-}
+  const msgPaginaLoja = document.getElementById("msgPaginaLoja");
+  const btnCotacaoFlutuante = document.getElementById("btn-cotacao");
 
-function renderizarProdutos(lentes, armacoes) {
-  const containerLentes = document.getElementById("lista-lentes");
-  const containerArmacoes = document.getElementById("lista-armacoes");
+  /* =========================
+    INICIALIZAÇÃO
+  ========================= */
 
-  containerLentes.innerHTML = "";
-  containerArmacoes.innerHTML = "";
+  document.addEventListener("DOMContentLoaded", async () => {
+      try {
+          configurarHeader();
 
-  if (lentes.length === 0) {
-    containerLentes.innerHTML = "<p>Nenhuma lente cadastrada.</p>";
-  } else {
-    lentes.forEach(lente => {
-      containerLentes.appendChild(criarCardLente(lente));
-    });
-  }
+          fecharModalProdutoAoIniciar();
+          configurarEventoFecharModalProduto();
 
-  if (armacoes.length === 0) {
-    containerArmacoes.innerHTML = "<p>Nenhuma armação cadastrada.</p>";
-  } else {
-    armacoes.forEach(armacao => {
-      containerArmacoes.appendChild(criarCardArmacao(armacao));
-    });
-  }
-}
+          await carregarVitrineCompleta();
 
-/* =========================
-   LÓGICA DOS PRODUTOS
-========================= */
-
-function criarCardLente(lente) {
-  const div = document.createElement("div");
-  div.classList.add("card-produto");
-
-  div.innerHTML = `
-    <div class="produto">
-      <div class="imagem-produto">
-        <img src="${lente.fotoUrl || "imgs/store1.png"}" alt="${lente.nome}">
-      </div>
-
-      <div class="dados-produto">
-      <h3>${lente.nome}</h3>
-      <p><strong>Preço:</strong> R$ ${lente.preco.toFixed(2)}</p>
-      <p><strong>Descrição:</strong> ${lente.descricao || ""}</p>
-      </div>
-    </div>
-    <button class="btn-cotar">+ Cotar</button>
-  `;
-
-  // clique no card → abre modal
-  div.addEventListener("click", () => abrirModalProduto(lente, "lente"));
-
-  // botão → cotação direta
-  div.querySelector(".btn-cotar").addEventListener("click", (e) => {
-    e.stopPropagation(); // não abrir modal
-    adicionarProdutoCotacao(lente, "lente");
+      } catch (error) {
+          console.error("Erro ao inicializar página da loja:", error);
+          mostrarMensagem(msgPaginaLoja, "Erro ao carregar página da loja.", "erro");
+      }
   });
 
-  return div;
-}
+  /* =========================
+    CARREGAMENTO PRINCIPAL
+  ========================= */
 
-function abrirModalProduto(produto, tipo) {
-  const modal = document.getElementById("modal-produto");
+  async function carregarVitrineCompleta() {
+      const idLoja = getIdDaUrl();
 
-  document.getElementById("produto-nome").textContent = produto.nome;
-  document.getElementById("produto-tipo").textContent = tipo;
-  document.getElementById("produto-marca").textContent = produto.marca || "";
-  document.getElementById("produto-modelo").textContent = produto.modelo || "";
-  document.getElementById("produto-material").textContent = produto.material || "";
-  document.getElementById("produto-descricao").textContent = produto.descricao || "";
-  document.getElementById("produto-preco").textContent =
-    `R$ ${produto.preco.toFixed(2)}`;
+      if (!idLoja) {
+          mostrarMensagem(msgPaginaLoja, "Loja não encontrada.", "erro");
+          return;
+      }
 
-    const img = document.getElementById("produto-imagem");
-  img.src = produto.fotoUrl || "imgs/store1.png";
-  img.alt = produto.nome;
+      const [loja, configuracao, lentes, armacoes] = await Promise.all([
+          buscarLojaPorId(idLoja),
+          buscarConfiguracaoLoja(idLoja),
+          listarLentesPorLoja(idLoja),
+          listarArmacoesPorLoja(idLoja)
+      ]);
 
-  const btn = document.getElementById("btn-adicionar-cotacao");
+      state.loja = loja;
+      state.configuracao = {
+          ...state.configuracao,
+          ...configuracao
+      };
+      state.lentes = lentes || [];
+      state.armacoes = armacoes || [];
 
-  const novoBtn = btn.cloneNode(true);
-  btn.replaceWith(novoBtn);
+      await montarVitrineLoja({
+          containerId: "vitrineLoja",
+          loja: state.loja,
+          configuracao: state.configuracao,
+          lentes: state.lentes,
+          armacoes: state.armacoes,
+          modo: "publico",
+          permitirCotacao: usuarioPodeSolicitarCotacao(),
 
-  novoBtn.addEventListener("click", () => {
-    adicionarProdutoCotacao(produto, tipo);
-    modal.classList.remove("ativo");
-  });
+          onCotarProduto: (produto, tipo) => {
+              if (!validarPermissaoCotacao()) return;
 
-  modal.classList.add("ativo");
-}
+              adicionarProdutoCotacao(produto, tipo);
+          },
 
-document
-  .getElementById("fechar-modal-produto")
-  ?.addEventListener("click", () => {
-    document.getElementById("modal-produto").classList.remove("ativo");
-  });
+          onAbrirProduto: (produto, tipo) => {
+              abrirModalProduto(produto, tipo);
+          }
+      });
 
+      controlarBotaoCotacaoFlutuante();
+  }
 
+  /* =========================
+    BUSCAS
+  ========================= */
 
-function criarCardArmacao(armacao) {
-  const div = document.createElement("div");
-  div.classList.add("card-produto");
+  async function buscarConfiguracaoLoja(lojaId) {
+      const response = await fetch(`${API}/configuracao/buscar/${lojaId}`);
 
-  div.innerHTML = `
-    <div class="produto">
-      <div class="imagem-produto">
-        <img src="${armacao.fotoUrl || "imgs/store1.png"}" alt="${armacao.nome}">
-      </div>
+      if (!response.ok) {
+          throw new Error("Erro ao buscar configuração da loja");
+      }
 
-      <div class="dados-produto">
-        <h3>${armacao.nome}</h3>
-        <p><strong>Preço:</strong> R$ ${armacao.preco.toFixed(2)}</p>
-        <p><strong>Descrição:</strong> ${armacao.descricao || ""}</p>
-      </div>
-    </div>
+      return await response.json();
+  }
 
-    <button class="btn-cotar">+ Cotar</button>
-  `;
+  function getIdDaUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("id");
+  }
 
-  div.addEventListener("click", () => abrirModalProduto(armacao, "armacao"));
+  /* =========================
+    PERMISSÕES
+  ========================= */
 
-  div.querySelector(".btn-cotar").addEventListener("click", (e) => {
-    e.stopPropagation();
-    adicionarProdutoCotacao(armacao, "armacao");
-  });
+  function usuarioPodeSolicitarCotacao() {
+      const usuario = getUsuarioLogado();
 
-  return div;
-}
+      return usuario && usuario.tipoUsuario === "Comum";
+  }
 
+  function validarPermissaoCotacao() {
+      if (usuarioPodeSolicitarCotacao()) {
+          return true;
+      }
 
+      const usuario = getUsuarioLogado();
 
-/* =========================
-   INICIALIZAÇÃO
-========================= */
-document.addEventListener("DOMContentLoaded", () => {
-  configurarHeader();
-  carregarLoja();
-  carregarProdutos();
+      if (!usuario) {
+          mostrarMensagem(
+              msgPaginaLoja,
+              "Você precisa estar logado como consumidor para solicitar cotação.",
+              "erro"
+          );
 
-  document.getElementById("modal-produto")?.classList.remove("ativo");
-});
+          setTimeout(() => {
+              window.location.href = "Login.html";
+          }, 1800);
+
+          return false;
+      }
+
+      mostrarMensagem(
+          msgPaginaLoja,
+          "Usuários de loja não podem solicitar cotações. Use a central da loja para responder clientes.",
+          "erro"
+      );
+
+      return false;
+  }
+
+  function controlarBotaoCotacaoFlutuante() {
+      if (!btnCotacaoFlutuante) return;
+
+      if (usuarioPodeSolicitarCotacao()) {
+          btnCotacaoFlutuante.classList.remove("cotacao-bloqueada");
+      } else {
+          btnCotacaoFlutuante.classList.add("cotacao-bloqueada");
+      }
+  }
+
+  /* =========================
+    REGRAS VISUAIS DA CONFIGURAÇÃO
+  ========================= */
+
+  function deveMostrarPreco() {
+      return state.configuracao?.mostrarPreco !== false;
+  }
+
+  function deveMostrarMarca() {
+      return state.configuracao?.mostrarMarca !== false;
+  }
+
+  /* =========================
+    MODAL DE PRODUTO
+  ========================= */
+
+  function abrirModalProduto(produto, tipo) {
+      const modal = document.getElementById("modal-produto");
+
+      if (!modal || !produto) return;
+
+      document.getElementById("produto-nome").textContent = produto.nome || "Produto";
+      document.getElementById("produto-tipo").textContent = formatarTipoProduto(tipo);
+
+      const produtoMarca = document.getElementById("produto-marca");
+      if (produtoMarca) {
+          produtoMarca.textContent = deveMostrarMarca()
+              ? produto.marca || "Não informada"
+              : "Oculta pela loja";
+      }
+
+      document.getElementById("produto-modelo").textContent = produto.modelo || "Não informado";
+      document.getElementById("produto-material").textContent = produto.material || "Não informado";
+      document.getElementById("produto-descricao").textContent = produto.descricao || "Sem descrição.";
+
+      const produtoPreco = document.getElementById("produto-preco");
+
+      if (produtoPreco) {
+          if (deveMostrarPreco()) {
+              produtoPreco.textContent = `R$ ${Number(produto.preco || 0).toFixed(2).replace(".", ",")}`;
+              produtoPreco.classList.remove("preco-consulta-modal");
+          } else {
+              produtoPreco.textContent = "Preço sob consulta";
+              produtoPreco.classList.add("preco-consulta-modal");
+          }
+      }
+
+      const img = document.getElementById("produto-imagem");
+
+      if (img) {
+          img.src = produto.fotoUrl || "imgs/store1.png";
+          img.alt = produto.nome || "Produto";
+      }
+
+      configurarBotaoAdicionarCotacaoProduto(produto, tipo, modal);
+
+      modal.classList.add("ativo");
+  }
+
+  function configurarBotaoAdicionarCotacaoProduto(produto, tipo, modal) {
+      const btnAntigo = document.getElementById("btn-adicionar-cotacao");
+
+      if (!btnAntigo) return;
+
+      const novoBtn = btnAntigo.cloneNode(true);
+      btnAntigo.replaceWith(novoBtn);
+
+      if (!usuarioPodeSolicitarCotacao()) {
+          novoBtn.classList.add("cotacao-bloqueada");
+      } else {
+          novoBtn.classList.remove("cotacao-bloqueada");
+      }
+
+      novoBtn.addEventListener("click", () => {
+          if (!validarPermissaoCotacao()) return;
+
+          adicionarProdutoCotacao(produto, tipo);
+          modal.classList.remove("ativo");
+      });
+  }
+
+  function configurarEventoFecharModalProduto() {
+      const btnFechar = document.getElementById("fechar-modal-produto");
+
+      btnFechar?.addEventListener("click", () => {
+          document.getElementById("modal-produto")?.classList.remove("ativo");
+      });
+
+      const modal = document.getElementById("modal-produto");
+
+      modal?.addEventListener("click", (event) => {
+          if (event.target === modal) {
+              modal.classList.remove("ativo");
+          }
+      });
+  }
+
+  function fecharModalProdutoAoIniciar() {
+      document.getElementById("modal-produto")?.classList.remove("ativo");
+  }
+
+  function formatarTipoProduto(tipo) {
+      if (tipo === "lente") return "Lente";
+      if (tipo === "armacao") return "Armação";
+
+      return tipo || "Produto";
+  }
+
+  /* =========================
+    MENSAGENS
+  ========================= */
+
+  function mostrarMensagem(elemento, texto, tipo) {
+      if (!elemento) {
+          alert(texto);
+          return;
+      }
+
+      elemento.textContent = texto;
+      elemento.classList.remove("sucesso", "erro");
+      elemento.classList.add("mostrar", tipo);
+
+      setTimeout(() => {
+          elemento.classList.remove("mostrar");
+      }, 4000);
+  }

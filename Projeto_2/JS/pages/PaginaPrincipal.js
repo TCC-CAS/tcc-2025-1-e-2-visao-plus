@@ -5,10 +5,12 @@ import { listarLojas } from "../core/loja.js";
 import { listarCotacoesPorUsuario, criarCardCotacao, chamarEstilizacao, initScrollCotacoes } from "../core/cotacoes.js";
 import { initBuscaLojas, chamarEstilizacaoSearchBar } from "../components/searchBar.js";
 import { inicializarMapa } from "../core/apiMapa.js";
+import { abrirModalCotacaoConsumidor } from "../components/ModalCotacaoConsumidor.js";
+import { montarSecaoCupons } from "../components/CuponsWidget.js";
 
 let lojasCache = [];
 
-async function carregarMapa(){
+async function carregarMapa() {
 
     const oticas = await listarLojas();
 
@@ -20,7 +22,6 @@ function esconderTodosOsBlocos() {
     // Seções
     document.getElementById("secao-cotacoes").style.display = "none";
     document.getElementById("secao-admin").style.display = "none";
-    document.getElementById("div-invisivel").style.display = "none";
 }
 
 
@@ -33,8 +34,6 @@ function configurarTela() {
     const usuario = getUsuarioLogado();
 
     if (!usuario) {
-        // Se não tiver ninguém logado, não mostramos nada
-        document.getElementById("div-invisivel").style.display = "block";
         return;
     }
 
@@ -42,17 +41,14 @@ function configurarTela() {
 
     // Agora decide pelo tipo
     if (usuario.tipoUsuario === "Comum") {
-
         document.getElementById("secao-cotacoes").style.display = "block";
 
     } else if (usuario.tipoUsuario === "Vendedor") {
-
-        document.getElementById("secao-cotacoes").style.display = "block";
+        document.getElementById("secao-cotacoes").style.display = "none";
 
     } else if (usuario.tipoUsuario === "Admin") {
-
         document.getElementById("secao-admin").style.display = "block";
-        document.getElementById("secao-cotacoes").style.display = "block";
+        document.getElementById("secao-cotacoes").style.display = "none";
     }
 }
 
@@ -134,13 +130,28 @@ document.getElementById("modal-loja").addEventListener("click", (e) => {
 });
 
 async function carregarCotacoes(idUsuario) {
+    const usuario = getUsuarioLogado();
+
+    if (!usuario || usuario.tipoUsuario !== "Comum") return;
+
     const container = document.getElementById("lista-cotacoes");
     container.innerHTML = "";
 
     const cotacoes = await listarCotacoesPorUsuario(idUsuario);
 
-    cotacoes.forEach(c => {
-        const card = criarCardCotacao(c);
+    if (!cotacoes || cotacoes.length === 0) {
+        container.innerHTML = "<p>Nenhuma cotação encontrada.</p>";
+        return;
+    }
+
+    cotacoes.forEach(cotacao => {
+        const card = criarCardCotacao(cotacao, () => {
+            abrirModalCotacaoConsumidor(cotacao, (cotacaoAtualizada) => {
+                Object.assign(cotacao, cotacaoAtualizada);
+                carregarCotacoes(usuario.id);
+            });
+        });
+
         container.appendChild(card);
     });
 }
@@ -153,15 +164,22 @@ document.addEventListener("DOMContentLoaded", () => {
     chamarEstilizacaoSearchBar();
 
     chamarEstilizacao();
-    initScrollCotacoes();   
+    initScrollCotacoes();
     carregarMapa();
-    
-    getUsuarioLogado;
+
     const usuario = getUsuarioLogado();
-    if(usuario != null){
+
+    if (usuario && usuario.tipoUsuario === "Comum") {
         carregarCotacoes(usuario.id);
     }
-    
+
+    montarSecaoCupons({
+        containerId: "secao-cupons-globais",
+        modo: "global",
+        titulo: "Cupons disponíveis na VisionPlus+",
+        subtitulo: "Resgate cupons ativos de óticas parceiras antes que acabem."
+    });
+
 });
 
 
