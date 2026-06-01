@@ -11,9 +11,22 @@
     <div id="app-header"></div>
 
     <section class="main-content">
-        <h1 class="titulo-secao">
-            Configuração da loja: <span id="nomeLoja"></span>
-        </h1>
+        <div class="admin-topo-loja">
+            <div>
+                <h1 class="titulo-secao">
+                    Configuração da loja: <span id="nomeLoja"></span>
+                </h1>
+
+                <p class="subtitulo-admin">
+                    Personalize como sua loja aparece para os clientes.
+                </p>
+            </div>
+
+            <div class="resumo-plano">
+                <span>Plano atual</span>
+                <strong id="planoAtualLoja" class="badge-plano">FREE</strong>
+            </div>
+        </div>
 
         <section class="painel-edicao-loja">
 
@@ -38,6 +51,52 @@
                     <label for="corFundo">Cor de fundo</label>
                     <input type="color" id="corFundo" name="corFundo" class="config-input">
                 </div>
+            </section>
+
+            <!-- BANNER -->
+            <section class="painel-secao recurso-plus">
+                <h3>Banner da Loja</h3>
+
+                <p class="descricao-recurso">
+                    Adicione uma imagem de fundo para deixar sua página mais profissional.
+                </p>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarBanner" class="config-input">
+                        Mostrar banner na página da loja
+                    </label>
+                </div>
+
+                <div class="campo-config campo-largo">
+                    <label for="bannerArquivo">Imagem do banner</label>
+                    <input type="file" id="bannerArquivo" accept="image/png, image/jpeg, image/jpg">
+                    <small>Use PNG ou JPG. A imagem será enviada para o Cloudinary.</small>
+                </div>
+
+                <input type="hidden" id="bannerUrl" class="config-input">
+                <small class="aviso-plano">
+                    Disponível nos planos PLUS e PRO.
+                </small>
+            </section>
+
+            <!-- TEXTO DE DESTAQUE -->
+            <section class="painel-secao recurso-pro">
+                <h3>Texto de Destaque</h3>
+
+                <p class="descricao-recurso">
+                    Frase principal exibida no topo da loja.
+                </p>
+
+                <div class="campo-config campo-largo">
+                    <label for="textoDestaque">Frase de destaque</label>
+                    <input type="text" id="textoDestaque" class="config-input" maxlength="120"
+                        placeholder="Ex: Óculos completos com qualidade e preço justo">
+                </div>
+
+                <small class="aviso-plano">
+                    Disponível no plano PRO.
+                </small>
             </section>
 
             <!-- TIPOGRAFIA -->
@@ -73,9 +132,8 @@
                     <label for="layoutPagina">Layout geral</label>
                     <select id="layoutPagina" class="config-input">
                         <option value="padrao">Padrão</option>
-                        <option value="centralizado">Centralizado</option>
-                        <option value="fullwidth">Wide</option>
-                        <option value="grid">Grid</option>
+                        <option value="banner">Banner</option>
+                        <option value="vitrine">Vitrine</option>
                     </select>
                 </div>
 
@@ -96,7 +154,7 @@
                     <select id="layoutProdutos" class="config-input">
                         <option value="grid">Grid</option>
                         <option value="lista">Lista</option>
-                        <option value="horizontal">Carrossel</option>
+                        <option value="carrossel">Carrossel</option>
                     </select>
                 </div>
 
@@ -119,33 +177,16 @@
 
             <!-- AÇÕES -->
             <section class="painel-acoes">
-                <button id="salvarConfiguracoes">Salvar configurações</button>
-                <button id="resetarConfiguracoes">Resetar configurações</button>
+                <button type="button" id="salvarConfiguracoes">Salvar configurações</button>
+                <button type="button" id="resetarConfiguracoes">Resetar configurações</button>
             </section>
 
         </section>
 
-        <section class="pre-visualizacao layout-padrao">
-            <section class="Dados da loja">
-                <p><span id="NomeLoja"></span></p>
-                <p>Descrição da Loja:<span id="DescricaoLoja"></span></p>
-                <p>Contato: <span id="EmailLoja"></span></p>
-                <p>Endereço: <span id="EnderecoLoja"></span></p>
-            </section>
-
-            <!--lista de armações-->
-            <section class="armacao-section">
-                <h3>Minhas Armações</h3>
-                <section id="armacao-lista" class="lista-horizontal"></section>
-            </section>
-
-            <!--lista de lentes-->
-            <section class="lente-section">
-                <h3>Minhas Lentes</h3>
-                <section id="lente-lista" class="lista-horizontal"></section>
-            </section>
+        <section class="preview-wrapper">
+            <div class="preview-label">Pré-visualização da página pública</div>
+            <section id="previewPublico"></section>
         </section>
-    </section>
 
 
 </body>
