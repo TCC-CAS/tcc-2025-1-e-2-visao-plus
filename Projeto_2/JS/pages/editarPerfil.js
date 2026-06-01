@@ -83,7 +83,7 @@ async function salvarPerfil(e) {
 
 async function editarDadosUsuario(dadosUsuario) {
     try {
-        const response = await fetch("http://localhost:8080/usuarios/editarUsuario", {
+        const response = await fetch("https://tccvisionplus-production.up.railway.app/usuarios/editarUsuario", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

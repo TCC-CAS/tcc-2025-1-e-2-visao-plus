@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch("http://localhost:8080/lojas/criarLoja", {
+            const response = await fetch("https://tccvisionplus-production.up.railway.app/lojas/criarLoja", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

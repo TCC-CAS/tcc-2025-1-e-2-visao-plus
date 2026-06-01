@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8080";
+const API_BASE = "https://tccvisionplus-production.up.railway.app";
 
 const listaSolicitacoes = document.getElementById("admin-solicitacoes-loja");
 

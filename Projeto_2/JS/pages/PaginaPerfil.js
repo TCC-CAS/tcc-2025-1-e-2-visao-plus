@@ -230,7 +230,7 @@ async function salvarSenha(e) {
     };
 
     try {
-        const response = await fetch("http://localhost:8080/usuarios/alterarSenha", {
+        const response = await fetch("https://tccvisionplus-production.up.railway.app/usuarios/alterarSenha", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

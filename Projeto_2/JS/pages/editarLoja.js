@@ -108,7 +108,7 @@ async function salvarLoja(e) {
 
 async function editarDadosLoja(dadosLoja) {
     try {
-        const response = await fetch("http://localhost:8080/lojas/editarLoja", {
+        const response = await fetch("https://tccvisionplus-production.up.railway.app/lojas/editarLoja", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

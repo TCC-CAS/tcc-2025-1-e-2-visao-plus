@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", carregarLojas);
 
 async function carregarLojas() {
     try {
-        const response = await fetch("http://localhost:8080/lojas/listarLojas");
+        const response = await fetch("https://tccvisionplus-production.up.railway.app/lojas/listarLojas");
         if (!response.ok) throw new Error("Erro ao buscar lojas");
 
         const lojas = await response.json();
@@ -86,7 +86,7 @@ async function salvarLojaAdmin(e) {
         endereco: document.getElementById("admin-endereco-loja").value,
     }
 
-    const response = await fetch("http://localhost:8080/lojas/editarLoja", {
+    const response = await fetch("https://tccvisionplus-production.up.railway.app/lojas/editarLoja", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
@@ -108,7 +108,7 @@ async function deletarLoja(id) {
     if (!confirmacao) return;
 
     const response = await fetch(
-        `http://localhost:8080/lojas/deletarLoja/${id}`, {
+        `https://tccvisionplus-production.up.railway.app/lojas/deletarLoja/${id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" }
         }

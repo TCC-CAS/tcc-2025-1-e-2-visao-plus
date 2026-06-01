@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", carregarUsuarios);
 
 async function carregarUsuarios() {
     try {
-        const response = await fetch("http://localhost:8080/usuarios/listarUsuarios");
+        const response = await fetch("https://tccvisionplus-production.up.railway.app/usuarios/listarUsuarios");
         if (!response.ok) throw new Error("Erro ao buscar usuario");
 
         const usuarios = await response.json();
@@ -82,7 +82,7 @@ async function salvarUsuarioAdmin(e) {
         tipoUsuario: document.getElementById("admin-tipo-usuario").value
     };
 
-    const response = await fetch("http://localhost:8080/usuarios/editarUsuario", {
+    const response = await fetch("https://tccvisionplus-production.up.railway.app/usuarios/editarUsuario", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
@@ -102,7 +102,7 @@ async function deletarUsuario(id) {
     if (!confirmacao) return;
 
     const response = await fetch(
-        `http://localhost:8080/usuarios/deletarUsuario/${id}`,
+        `https://tccvisionplus-production.up.railway.app/usuarios/deletarUsuario/${id}`,
         { method: "DELETE" }
     );
 

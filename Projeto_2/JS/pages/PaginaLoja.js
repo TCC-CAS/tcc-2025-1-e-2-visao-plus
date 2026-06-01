@@ -9,7 +9,7 @@
     CONFIGURAÇÕES
   ========================= */
 
-  const API = "http://localhost:8080";
+  const API = "https://tccvisionplus-production.up.railway.app";
 
   const state = {
       loja: null,

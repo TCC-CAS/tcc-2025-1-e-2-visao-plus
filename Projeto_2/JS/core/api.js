@@ -1,6 +1,6 @@
 // js/core/api.js
 
-export const API = "http://localhost:8080";
+export const API = "https://tccvisionplus-production.up.railway.app";
 
 /**
  * Fetch padrão da aplicação

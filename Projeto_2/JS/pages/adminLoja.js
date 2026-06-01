@@ -4,7 +4,7 @@ import { montarVitrineLoja } from "../components/VitrineLoja.js";
 /*************************************************
  * CONFIGURAÇÕES GERAIS
  *************************************************/
-const API = "http://localhost:8080";
+const API = "https://tccvisionplus-production.up.railway.app";
 
 /*************************************************
  * ESTADO GLOBAL DA PÁGINA
