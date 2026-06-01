@@ -1,6 +1,7 @@
 package com.Gabriel.API_Banco.service;
 import com.Gabriel.API_Banco.dto.EditarLojaDTO;
 import com.Gabriel.API_Banco.model.Armacao;
+import com.Gabriel.API_Banco.model.enums.PlanoLoja;
 import org.springframework.stereotype.Service;
 
 import com.Gabriel.API_Banco.dto.CriarLojaDTO;
@@ -39,6 +40,7 @@ public class LojaService {
         loja.setDono(dono);
         loja.setCep(dto.getCEP());
         dono.setTipoUsuario("Vendedor");
+        loja.setPlano(PlanoLoja.FREE);
 
         return r.save(loja);
     }

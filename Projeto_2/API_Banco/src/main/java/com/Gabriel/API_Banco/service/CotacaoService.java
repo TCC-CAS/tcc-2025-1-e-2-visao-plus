@@ -242,6 +242,11 @@ public class CotacaoService {
                 validarParticipanteDaCotacao(cotacao, idAtor);
             }
 
+            case REJEITADA -> {
+                validarTransicao(atual, novo, Set.of(StatusCotacao.PROPOSTA_ENVIADA));
+                validarDonoDoUsuario(cotacao, idAtor);
+            }
+
             default -> throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
                     "Transição de status inválida"

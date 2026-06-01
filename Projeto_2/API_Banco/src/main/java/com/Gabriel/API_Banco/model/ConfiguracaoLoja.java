@@ -1,5 +1,6 @@
 package com.Gabriel.API_Banco.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class ConfiguracaoLoja {
     @Column(name = "id_config")
     private Long id;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_loja", nullable = false, unique = true)
     private Loja loja;
@@ -46,4 +48,13 @@ public class ConfiguracaoLoja {
 
     @Column(name= "mostrar_preco")
     private Boolean mostrarPreco;
+
+    @Column(name = "banner_url")
+    private String bannerUrl;
+
+    @Column(name = "texto_destaque")
+    private String textoDestaque;
+
+    @Column(name = "mostrar_banner")
+    private Boolean mostrarBanner;
 }
