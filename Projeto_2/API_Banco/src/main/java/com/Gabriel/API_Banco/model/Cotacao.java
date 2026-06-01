@@ -65,10 +65,20 @@ public class Cotacao {
     private String observacaoLoja;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_cotacao")
+    @Column(name = "status_cotacao", length = 50)
     private StatusCotacao status;
 
     @Column(name = "url_foto")
     private String fotoUrl;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cupom_usuario")
+    private CupomUsuario cupomAplicado;
+
+    @Column(name = "valor_original", precision = 10, scale = 2)
+    private BigDecimal valorOriginal;
+
+    @Column(name = "valor_desconto", precision = 10, scale = 2)
+    private BigDecimal valorDesconto;
 }
 

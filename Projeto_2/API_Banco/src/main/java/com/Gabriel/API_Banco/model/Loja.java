@@ -1,5 +1,6 @@
 package com.Gabriel.API_Banco.model;
 
+import com.Gabriel.API_Banco.model.enums.PlanoLoja;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -73,4 +74,8 @@ public class Loja {
     @OneToMany(mappedBy = "loja", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonIgnore
     private List<Produto> produtos;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "plano")
+    private PlanoLoja plano = PlanoLoja.FREE;
 }
