@@ -35,7 +35,7 @@ function desbloquearBotao(botao) {
 
 function normalizarStatus(status) {
     if (status === "PROPOSTA_ENVIADA") return "RESPONDIDA";
-    if (status === "EM_NEGOIACAO") return "NEGOCIANDO";
+    if (status === "EM_NEGOCIACAO") return "NEGOCIANDO";
     return status || "SOLICITADA";
 }
 

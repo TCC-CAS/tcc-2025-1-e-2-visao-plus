@@ -44,7 +44,7 @@ function getIdCotacao(cotacao) {
 }
 
 function usuarioPodeUsarModalLoja(usuario) {
-    return usuario && usuario.tipoUsuario === "Vendedor";
+    return usuario && (usuario.tipoUsuario === "Vendedor" || usuario.tipoUsuario === "Admin");
 }
 
 function atualizarHeaderStatus(modal, novoStatus) {
@@ -148,7 +148,7 @@ async function executarTransicao(cotacao, novoStatus, botao, modal, onStatusAtua
     try {
         bloquearBotao(botao, "Processando...");
 
-        const cotacaoAtualizada = await transicionarStatus(idCotacao, novoStatus, loja?.id);
+        const cotacaoAtualizada = await transicionarStatus(idCotacao, novoStatus, usuario.id);
 
         cotacao.status = cotacaoAtualizada.status;
         onStatusAtualizado?.(cotacaoAtualizada);
