@@ -129,4 +129,6 @@ public class UsuarioController {
     public ResponseEntity<?> recuperarSenha(@RequestBody recuperaSenhaDTO dto) {
         return s.recuperaSenha(dto);
     }
+
+
 }

@@ -5,6 +5,9 @@ import com.Gabriel.API_Banco.model.ConfiguracaoLoja;
 import com.Gabriel.API_Banco.service.ConfiguracaoLojaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -17,29 +20,33 @@ public class ConfiguracaoLojaController {
         this.service = service;
     }
 
-    /**
-     * Busca a configuração da loja.
-     * Se não existir, cria uma padrão.
-     */
     @GetMapping("/buscar/{lojaId}")
-    public ResponseEntity<ConfiguracaoLoja> buscarConfiguracao(
-            @PathVariable Long lojaId
-    ) {
+    public ResponseEntity<ConfiguracaoLoja> buscarConfiguracao(@PathVariable Long lojaId) {
         ConfiguracaoLoja config = service.buscarOuCriarConfiguracao(lojaId);
         return ResponseEntity.ok(config);
     }
 
-    /**
-     * Atualiza a configuração da loja
-     */
     @PutMapping("/editar/{lojaId}")
     public ResponseEntity<ConfiguracaoLoja> atualizarConfiguracao(
             @PathVariable Long lojaId,
             @RequestBody ConfiguracaoLojaDTO dto
     ) {
-        ConfiguracaoLoja atualizada =
-                service.atualizarConfiguracao(lojaId, dto);
-
+        ConfiguracaoLoja atualizada = service.atualizarConfiguracao(lojaId, dto);
         return ResponseEntity.ok(atualizada);
+    }
+
+    @PostMapping("/{lojaId}/banner")
+    public ResponseEntity<?> uploadBanner(
+            @PathVariable Long lojaId,
+            @RequestParam("file") MultipartFile file
+    ) {
+        try {
+            ConfiguracaoLoja atualizada = service.atualizarBanner(lojaId, file);
+            return ResponseEntity.ok(atualizada);
+        } catch (RuntimeException erro) {
+            return ResponseEntity.badRequest().body(erro.getMessage());
+        } catch (IOException erro) {
+            return ResponseEntity.status(500).body("Erro ao enviar imagem para o Cloudinary.");
+        }
     }
 }
