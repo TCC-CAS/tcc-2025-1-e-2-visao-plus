@@ -77,7 +77,7 @@ function carregarUsuarioLogado() {
     }
 
     state.usuario = JSON.parse(usuarioString);
-    console.log("USUÁRIO LOGADO:", state.usuario);
+    ("USUÁRIO LOGADO:", state.usuario);
 }
 
 function carregarLojaDoUsuario() {
@@ -92,7 +92,7 @@ function carregarLojaDoUsuario() {
         throw new Error("ID da loja inválido");
     }
 
-    console.log("OBJETO LOJA:", state.loja);
+    ("OBJETO LOJA:", state.loja);
 }
 
 function obterPlanoLoja() {
@@ -255,7 +255,7 @@ async function salvarConfiguracoes() {
         document.getElementById("mostrarBanner").checked = true;
     }
 
-    console.log("DTO ENVIADO PARA O BACK:", dto);
+    ("DTO ENVIADO PARA O BACK:", dto);
 
     const response = await fetch(
         `${API}/configuracao/editar/${state.lojaId}`,
@@ -274,7 +274,7 @@ async function salvarConfiguracoes() {
 
     const configSalva = await response.json();
 
-    console.log("CONFIGURAÇÃO RETORNADA PELO BACK:", configSalva);
+    ("CONFIGURAÇÃO RETORNADA PELO BACK:", configSalva);
 
     state.configuracao = configSalva;
 

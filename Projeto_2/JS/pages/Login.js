@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btnSubmit.disabled = true;
             btnSubmit.textContent = "Entrando...";
 
-            const response = await fetch("http://localhost:8080/usuarios/login", {
+            const response = await fetch("https://tccvisionplus-production.up.railway.app/usuarios/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

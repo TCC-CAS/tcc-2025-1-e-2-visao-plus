@@ -60,12 +60,12 @@ export function salvarFotoPerfil() {
 
 
 export function carregarFotoUsuario(usuario) {
-    console.log("FotoUrl recebida:", usuario.fotoUrl);
+    ("FotoUrl recebida:", usuario.fotoUrl);
     if (!imgFoto) return;
 
     if (usuario?.fotoUrl && usuario.fotoUrl.trim() !== "") {
         imgFoto.src = usuario.fotoUrl;
-        console.log("FotoUrl recebida:", usuario.fotoUrl);
+        ("FotoUrl recebida:", usuario.fotoUrl);
     } else {
         imgFoto.src = "imgs/9742847.png";
     }
@@ -132,12 +132,12 @@ export function salvarFotoLoja() {
 
 export function carregarFotoLoja(usuario) {
 
-    console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
+    ("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
     if (!imgFotoLoja) return;
 
     if (usuario?.loja?.fotoUrl && usuario.loja.fotoUrl.trim() !== "") {
         imgFotoLoja.src = usuario.loja.fotoUrl;
-        console.log("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
+        ("FotoUrl Loja recebida:", usuario.loja.fotoUrl);
     } else {
         imgFotoLoja.src = "imgs/store1.png";
     }

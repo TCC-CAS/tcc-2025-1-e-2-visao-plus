@@ -37,7 +37,7 @@ function configurarTela() {
         return;
     }
 
-    console.log("Usuário logado:", usuario);
+    ("Usuário logado:", usuario);
 
     // Agora decide pelo tipo
     if (usuario.tipoUsuario === "Comum") {
@@ -154,6 +154,31 @@ async function carregarCotacoes(idUsuario) {
 
         container.appendChild(card);
     });
+    initScrollCotacoes();
+}
+
+function inicializarSessoesRecolhiveis() {
+    const paineis = document.querySelectorAll("[data-collapsible]");
+
+    paineis.forEach(painel => {
+        const botao = painel.querySelector(".painel-header");
+        const icone = painel.querySelector(".painel-icone");
+
+        if (!botao) return;
+
+        botao.addEventListener("click", () => {
+            painel.classList.toggle("fechado");
+
+            const estaFechado = painel.classList.contains("fechado");
+            icone.textContent = estaFechado ? "+" : "−";
+
+            if (!estaFechado) {
+                setTimeout(() => {
+                    initScrollCotacoes();
+                }, 200);
+            }
+        });
+    });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -180,6 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         subtitulo: "Resgate cupons ativos de óticas parceiras antes que acabem."
     });
 
+    inicializarSessoesRecolhiveis();
 });
 
 

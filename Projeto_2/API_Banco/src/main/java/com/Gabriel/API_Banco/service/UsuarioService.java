@@ -27,6 +27,7 @@ public class UsuarioService {
     private final ImageService imageService;
     private final EmailService emailService;
 
+
     public UsuarioService(UsuarioRepositorio r, LojaRepositorio lr, ImageService imageService, EmailService emailService) {
         this.r = r;
         this.lr = lr;

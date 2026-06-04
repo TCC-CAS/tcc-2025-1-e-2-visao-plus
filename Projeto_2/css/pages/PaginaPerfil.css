@@ -539,3 +539,692 @@ input {
     background: rgba(231, 76, 60, 0.14);
     color: #b83225;
 }
+
+
+/* ==========================================
+   CARDS DE COTAÇÃO - CONSUMIDOR / LOJA
+========================================== */
+
+#secao-cotacoes,
+#secao-cotacoes-consumidor,
+#secao-cotacoes-loja {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(21, 103, 131, 0.12);
+}
+
+#secao-cotacoes h2,
+#secao-cotacoes-consumidor h2,
+#secao-cotacoes-loja h2 {
+    color: #156783;
+    margin-bottom: 18px;
+    font-size: 24px;
+}
+
+#lista-cotacoes,
+#lista-cotacoes-loja {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.card-cotacao {
+    background: #f8fafc;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.card-cotacao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+}
+
+.card-cotacao-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.card-cotacao-topo h3 {
+    margin: 0 0 4px;
+    color: #12323d;
+    font-size: 17px;
+}
+
+.card-cotacao-topo p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.badge-status {
+    color: white;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    background: #156783;
+}
+
+.card-cotacao-dados {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 14px;
+    border: 1px solid #edf2f7;
+}
+
+.card-cotacao-dados p {
+    margin: 6px 0;
+    color: #334155;
+    font-size: 13px;
+}
+
+.btn-ver-cotacao {
+    width: 100%;
+    background: #156783;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-ver-cotacao:hover {
+    background: #0e4e5e;
+    transform: translateY(-1px);
+}
+
+.cotacoes-vazio {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #64748b;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+@media (max-width: 768px) {
+    #secao-cotacoes,
+    #secao-cotacoes-consumidor,
+    #secao-cotacoes-loja {
+        padding: 18px;
+    }
+
+    #lista-cotacoes,
+    #lista-cotacoes-loja {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   CARROSSEL HORIZONTAL DE COTAÇÕES
+========================================== */
+
+#secao-cotacoes,
+#secao-cotacoes-consumidor,
+#secao-cotacoes-loja {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Container dos cards */
+#lista-cotacoes,
+#lista-cotacoes-loja {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+    padding: 4px 52px 12px;
+
+    scrollbar-width: none;
+}
+
+#lista-cotacoes::-webkit-scrollbar,
+#lista-cotacoes-loja::-webkit-scrollbar {
+    display: none;
+}
+
+/* 5 cards por tela */
+#lista-cotacoes .card-cotacao,
+#lista-cotacoes-loja .card-cotacao {
+    flex: 0 0 calc((100% - 64px) / 5);
+    max-width: calc((100% - 64px) / 5);
+    min-width: 220px;
+}
+
+/* Botões laterais do carrossel */
+.scroll-btn,
+.btn-scroll-cotacao,
+.btn-cotacao-scroll {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    border: none;
+
+    background: #ffffff;
+    color: #156783;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+
+    cursor: pointer;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.scroll-btn:hover,
+.btn-scroll-cotacao:hover,
+.btn-cotacao-scroll:hover {
+    background: #156783;
+    color: white;
+}
+
+/* tenta cobrir nomes comuns de botão esquerdo/direito */
+.scroll-btn.left,
+.scroll-btn.esquerda,
+.btn-scroll-cotacao.left,
+.btn-scroll-cotacao.esquerda,
+.btn-cotacao-scroll.left,
+.btn-cotacao-scroll.esquerda {
+    left: 14px;
+}
+
+.scroll-btn.right,
+.scroll-btn.direita,
+.btn-scroll-cotacao.right,
+.btn-scroll-cotacao.direita,
+.btn-cotacao-scroll.right,
+.btn-cotacao-scroll.direita {
+    right: 14px;
+}
+
+/* Responsivo */
+@media (max-width: 1400px) {
+    #lista-cotacoes .card-cotacao,
+    #lista-cotacoes-loja .card-cotacao {
+        flex-basis: calc((100% - 48px) / 4);
+        max-width: calc((100% - 48px) / 4);
+    }
+}
+
+@media (max-width: 1100px) {
+    #lista-cotacoes .card-cotacao,
+    #lista-cotacoes-loja .card-cotacao {
+        flex-basis: calc((100% - 32px) / 3);
+        max-width: calc((100% - 32px) / 3);
+    }
+}
+
+@media (max-width: 768px) {
+    #lista-cotacoes,
+    #lista-cotacoes-loja {
+        padding: 4px 44px 12px;
+    }
+
+    #lista-cotacoes .card-cotacao,
+    #lista-cotacoes-loja .card-cotacao {
+        flex-basis: 82%;
+        max-width: 82%;
+        min-width: 260px;
+    }
+}
+
+/* ==========================================
+   PERFIL MODERNO - VISIONPLUS+
+========================================== */
+
+:root {
+    --vp-primary: #156783;
+    --vp-primary-dark: #0d4f63;
+    --vp-primary-soft: #e8f5f8;
+    --vp-bg: #f4f8fb;
+    --vp-card: #ffffff;
+    --vp-border: rgba(21, 103, 131, 0.14);
+    --vp-text: #12323d;
+    --vp-muted: #64748b;
+    --vp-shadow: 0 18px 45px rgba(15, 76, 96, 0.12);
+}
+
+body {
+    padding-top: 95px;
+    background:
+        radial-gradient(circle at top left, rgba(21, 103, 131, 0.10), transparent 34%),
+        linear-gradient(180deg, #f7fbfd 0%, #eef5f8 100%);
+    color: var(--vp-text);
+}
+
+.pagina-perfil {
+    width: min(1760px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 24px 0 44px;
+}
+
+/* HERO */
+
+.hero-perfil {
+    background:
+        linear-gradient(135deg, rgba(21, 103, 131, 0.96), rgba(13, 79, 99, 0.92)),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.28), transparent 36%);
+    border-radius: 24px;
+    padding: 34px 38px;
+    margin-bottom: 20px;
+    color: white;
+    box-shadow: var(--vp-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-perfil::after {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    right: -70px;
+    top: -80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-tag,
+.painel-tag {
+    display: inline-block;
+    color: var(--vp-primary);
+    background: var(--vp-primary-soft);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+
+.hero-perfil .hero-tag {
+    color: white;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.hero-perfil h1 {
+    max-width: 760px;
+    margin: 12px 0 8px;
+    font-size: clamp(28px, 3vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+
+.hero-perfil p {
+    max-width: 720px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* GRID PRINCIPAL */
+
+.perfil-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.8fr);
+    gap: 20px;
+    align-items: stretch;
+}
+
+/* BLOCO PADRÃO */
+
+.perfil-bloco,
+.painel-recolhivel,
+.painel-admin {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--vp-border);
+    border-radius: 24px;
+    box-shadow: var(--vp-shadow);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.perfil-bloco {
+    padding: 24px;
+}
+
+.painel-perfil {
+    padding: 0;
+}
+
+#secao-usuario {
+    min-height: 100%;
+}
+
+/* CABEÇALHO DO PERFIL */
+
+.perfil-header {
+    border-bottom: 1px solid rgba(21, 103, 131, 0.12);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.titulo-perfil {
+    color: var(--vp-text);
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -0.2px;
+}
+
+/* DADOS USUÁRIO/LOJA */
+
+.dados-usuario,
+.dados-loja {
+    grid-template-columns: minmax(240px, 0.75fr) minmax(280px, 1fr);
+    gap: 22px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    box-shadow: none;
+}
+
+.info-usuario,
+.info-loja {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfc 100%);
+    border: 1px solid rgba(21, 103, 131, 0.10);
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(15, 76, 96, 0.08);
+}
+
+.info-usuario p,
+.info-loja p {
+    font-size: 15px;
+    color: #334155;
+}
+
+.info-usuario strong,
+.info-loja strong {
+    color: var(--vp-primary);
+}
+
+/* BOTÕES */
+
+.button {
+    background: var(--vp-primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 800;
+    transition: 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.button:hover {
+    background: var(--vp-primary-dark);
+    transform: translateY(-1px);
+}
+
+.button-icon {
+    right: 0;
+    top: -6px;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: rgba(21, 103, 131, 0.10);
+    box-shadow: none;
+}
+
+.button-icon:hover {
+    background: rgba(21, 103, 131, 0.18);
+}
+
+/* PAINÉIS RECOLHÍVEIS */
+
+.painel-recolhivel {
+    margin: 18px 0;
+}
+
+.painel-header {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+}
+
+.painel-header h2 {
+    margin: 8px 0 0;
+    color: var(--vp-text);
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.1px;
+}
+
+.painel-icone {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: var(--vp-primary);
+    color: white;
+    font-size: 24px;
+    font-weight: 900;
+    box-shadow: 0 10px 22px rgba(21, 103, 131, 0.24);
+    transition: 0.2s ease;
+}
+
+.painel-header:hover .painel-icone {
+    transform: scale(1.05);
+    background: var(--vp-primary-dark);
+}
+
+.painel-corpo {
+    max-height: 900px;
+    opacity: 1;
+    overflow: hidden;
+    padding: 0 24px 24px;
+    transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.2s ease;
+}
+
+.painel-recolhivel.fechado .painel-corpo {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* SOLICITAÇÃO DE LOJA */
+
+.info-pedir-loja {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfc 100%);
+    border: 1px solid rgba(21, 103, 131, 0.10);
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
+}
+
+.info-pedir-loja p {
+    margin: 0 0 18px;
+    color: #334155;
+    line-height: 1.5;
+}
+
+.info-solicitacao-loja {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfc 100%);
+    border: 1px solid rgba(21, 103, 131, 0.10);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.info-solicitacao-loja h3 {
+    color: var(--vp-primary);
+    margin: 0 0 8px;
+}
+
+.card-minha-solicitacao {
+    border: 1px solid rgba(21, 103, 131, 0.14);
+    border-left: 6px solid var(--vp-primary);
+    border-radius: 16px;
+    box-shadow: 0 12px 28px rgba(15, 76, 96, 0.10);
+}
+
+
+
+
+.bloco-aviso {
+    padding: 22px;
+    text-align: center;
+    box-shadow: none;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfc 100%);
+}
+
+.bloco-aviso p {
+    color: #334155;
+    margin-top: 0;
+}
+
+/* ADMIN MODERNO */
+
+.painel-admin {
+    width: min(1760px, calc(100% - 40px));
+    margin: 20px auto 0;
+    padding: 0;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.94), rgba(248,251,252,0.94));
+}
+
+.painel-admin .painel-corpo > section {
+    margin-bottom: 28px;
+}
+
+.painel-admin h3 {
+    color: var(--vp-primary);
+    font-size: 22px;
+    margin: 0 0 14px;
+}
+
+.lista-usuarios,
+.lista-lojas,
+.lista-solicitacoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+.card-usuario,
+.card-loja {
+    background: white;
+    border: 1px solid rgba(21, 103, 131, 0.12);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 10px 26px rgba(15, 76, 96, 0.08);
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.card-usuario:hover,
+.card-loja:hover {
+    background: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(15, 76, 96, 0.14);
+}
+
+/* MODAIS */
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 24px;
+}
+
+.modal-content h2 {
+    color: var(--vp-primary);
+    font-weight: 900;
+}
+
+.modal-content input,
+.modal-content select {
+    border-radius: 12px;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 1100px) {
+    .perfil-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dados-usuario,
+    .dados-loja {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 88px;
+    }
+
+    .pagina-perfil {
+        width: min(100% - 24px, 1760px);
+        padding-top: 16px;
+    }
+
+    .hero-perfil {
+        padding: 26px 22px;
+        border-radius: 20px;
+    }
+
+    .perfil-bloco {
+        padding: 18px;
+    }
+
+    .painel-header {
+        padding: 18px;
+    }
+
+    .painel-corpo {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .lista-usuarios,
+    .lista-lojas,
+    .lista-solicitacoes {
+        grid-template-columns: 1fr;
+    }
+}

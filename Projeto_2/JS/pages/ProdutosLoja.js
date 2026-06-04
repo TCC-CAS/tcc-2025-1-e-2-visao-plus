@@ -51,7 +51,7 @@ function carregarUsuarioLogado() {
     }
 
     state.usuario = JSON.parse(usuarioString);
-    console.log("USUÁRIO LOGADO:", state.usuario);
+    ("USUÁRIO LOGADO:", state.usuario);
 }
 
 function carregarLojaDoUsuario() {
@@ -66,7 +66,7 @@ function carregarLojaDoUsuario() {
         throw new Error("ID da loja inválido");
     }
 
-    console.log("OBJETO LOJA:", state.loja);
+    ("OBJETO LOJA:", state.loja);
 }
 
 function renderizarNomeLoja() {
@@ -264,7 +264,7 @@ async function adicionarArmacao(event) {
         idLoja: state.lojaId
     };
 
-    console.log(armacao);
+    (armacao);
 
     await fetch(`${API}/armacao/criarArmacao`, {
         method: "POST",

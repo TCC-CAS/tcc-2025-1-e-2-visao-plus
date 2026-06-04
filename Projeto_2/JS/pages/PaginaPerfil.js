@@ -274,7 +274,7 @@ async function salvarPerfil(e) {
 
     const dadosUsuario = montarDtoUsuario();
 
-    console.log("DTO Perfil:", dadosUsuario);
+    ("DTO Perfil:", dadosUsuario);
 
     const usuarioAtualizado = await editarDadosUsuario(dadosUsuario);
 
@@ -310,7 +310,7 @@ async function salvarLoja(e) {
 
     const dadosLoja = montarDtoLoja();
 
-    console.log("DTO Loja:", dadosLoja);
+    ("DTO Loja:", dadosLoja);
 
     const lojaAtualizada = await editarDadosLoja(dadosLoja);
 
@@ -477,6 +477,8 @@ async function carregarCotacoesConsumidor(idUsuario) {
             container.appendChild(card);
         });
 
+        initScrollCotacoes();
+
     } catch (error) {
         console.error("Erro ao carregar cotações do consumidor:", error);
         container.innerHTML = "<p>Erro ao carregar suas cotações.</p>";
@@ -493,15 +495,28 @@ async function init() {
 
     if (!usuario) return;
 
-    if (usuario.tipoUsuario === "Vendedor" || usuario.tipoUsuario === "Admin") {
-        loja = await getLojaDoUsuario(usuario);
-        usuario.loja = loja;
-
-        carregarFotoLoja(usuario);
-        salvarFotoLoja();
-    }
-
     configurarHeader();
+
+    // Só tenta buscar loja se o usuário for Vendedor ou Admin
+    if (usuario.tipoUsuario === "Vendedor" || usuario.tipoUsuario === "Admin") {
+        try {
+            loja = await getLojaDoUsuario(usuario);
+
+            if (loja) {
+                usuario.loja = loja;
+                localStorage.setItem("lojaAtual", JSON.stringify(loja));
+
+                carregarFotoLoja(usuario);
+                salvarFotoLoja();
+            } else {
+                console.warn("Usuário não possui loja vinculada.");
+            }
+
+        } catch (error) {
+            console.warn("Não foi possível carregar loja do usuário:", error);
+            loja = null;
+        }
+    }
 
     await configurarTela();
     await carregarSolicitacaoLojaDoUsuario();

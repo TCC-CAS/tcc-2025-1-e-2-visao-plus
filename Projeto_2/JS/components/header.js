@@ -12,9 +12,9 @@ export function configurarHeader() {
     if (!header) return;
 
     const usuario = getUsuarioLogado();
-    //console.log("Usuário logado no header:", usuario);
+    //("Usuário logado no header:", usuario);
     const pagina = window.location.pathname.split("/").pop();
-    //console.log("Página atual:", pagina);
+    //("Página atual:", pagina);
 
     header.innerHTML = `
         <header>

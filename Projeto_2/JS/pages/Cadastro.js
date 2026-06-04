@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             btnSubmit.textContent = "Registrando...";
 
-            const response = await fetch("http://localhost:8080/usuarios/registrar", {
+            const response = await fetch("https://tccvisionplus-production.up.railway.app/usuarios/registrar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

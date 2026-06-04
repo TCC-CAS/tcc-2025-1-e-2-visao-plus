@@ -87,7 +87,7 @@ async function salvarLoja(e) {
         endereco: document.getElementById("edit-endereco-loja").value
     };
 
-    console.log("DTO Loja:", dadosLoja);
+    ("DTO Loja:", dadosLoja);
 
     const lojaAtualizada = await editarDadosLoja(dadosLoja);
 

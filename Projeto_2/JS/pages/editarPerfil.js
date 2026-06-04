@@ -64,7 +64,7 @@ async function salvarPerfil(e) {
 
     const dadosUsuario = montarDtoUsuario();
 
-    console.log("DTO Perfil:", dadosUsuario);
+    ("DTO Perfil:", dadosUsuario);
 
     const usuarioAtualizado = await editarDadosUsuario(dadosUsuario);
 

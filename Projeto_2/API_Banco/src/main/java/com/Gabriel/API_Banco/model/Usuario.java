@@ -3,6 +3,9 @@ package com.Gabriel.API_Banco.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
+import java.time.LocalDateTime;
 import lombok.Data;
 
 import java.util.List;
@@ -27,7 +30,8 @@ public class Usuario {
     @Column(name = "email", unique = true)
     private String email;
 
-    @Column(name = "senha")
+    @JsonIgnore
+    @Column(length = 100, nullable = false)
     private String senha;
 
     @Column(name = "tipo_usuario")

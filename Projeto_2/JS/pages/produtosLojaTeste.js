@@ -26,14 +26,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         // 1 - usuário
         usuario = getUsuarioLogado();
-        console.log("Usuário logado:", usuario);
+        ("Usuário logado:", usuario);
 
         // 2️ - loja
         loja = await getLojaDoUsuario(usuario);
         if (!loja) {
             alert("Nenhuma loja associada ao usuário. Acesse o painel de administração para criar uma loja.");
             return;
-        } console.log("Loja do usuário:", loja);
+        } ("Loja do usuário:", loja);
 
         // 3️ - header
         configurarHeader(usuario);
