@@ -1,0 +1,1044 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+   ========================= */
+
+/* Fonte padrão do site */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   CARROSSEL DE PRODUTOS
+   ========================= */
+
+.products-carousel {
+    padding: 20px;
+    text-align: center;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px;
+}
+
+.product {
+    min-width: 200px;
+    border: 1px solid #156783;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+}
+
+.product img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.product button {
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+   ========================= */
+
+.main-content {
+    display: flex;
+    height: 75vh;
+}
+
+/* Mapa */
+.map-container {
+    flex: 3;
+    background-color: white;
+    border: 1px solid #156783;
+    margin: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mapa-oticas {
+    width: 100%;
+    height: 100%;
+}
+
+/* =========================
+    LISTA DE LOJAS
+   ========================= */
+.lista-lojas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    overflow-y: auto;
+    padding-right: 4px;
+
+    flex: 1; /* ocupa espaço restante */
+
+    margin-top: 8px;
+    padding-right: 6px;
+
+    /* REMOVE QUALQUER FUNDO */
+    background: transparent;
+}
+
+.lista-lojas::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lista-lojas::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.4);
+    border-radius: 6px;
+}
+
+.lista-lojas::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* CARD DE LOJA  que não faz nada na real*/
+
+/* CARD DA LOJA */
+.card-loja {
+    background: #ffffff89;
+    border-radius: 10px;
+    padding: 10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* imagem da loja */
+.imagem-loja {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.imagem-loja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* dados da loja */
+.dados-loja {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-loja .dados-loja h2 {
+    align-self: self-start;
+    font-size: 16px;
+    margin: 0;
+    color: white;
+}
+
+.card-loja .dados-loja p {
+    font-size: 12px;
+    margin: 2px 0;
+    color: #444;
+}
+
+/* hover bonito */
+.card-loja:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+/* ESTILIZAÇÃO DO SIDEBAR QUE ATUALMENTE MUDA O CARD DA LOJA SLA PQ*/
+
+/* Sidebar */
+.sidebar {
+    flex: 1;
+    background-color: #156783;
+    padding: 16px;
+    margin: 5px 20px 20px 0;
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    height: calc(75vh - 40px); /* acompanha o mapa */
+    overflow: hidden; /* impede vazamento */
+}
+
+.sidebar h3 {
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 600;
+
+    margin: 0 0 12px 4px; /* respiro lateral */
+    letter-spacing: 0.3px;
+    text-align: center;
+}
+
+.sidebar h2 {
+    color: #156783;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.sidebar p {
+    color: #156783;
+    margin-bottom: 10px;
+    text-align: left;
+    margin-top: 0px;
+}
+
+.sidebar button {
+    background-color: white;
+    color: #156783;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.sidebar button:hover {
+    background-color: #f0f0f0;
+}
+
+.mapa-ilustrativo {
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* ========================= 
+   MODAL GLASSMORPHISM
+   ========================= */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-overlay.ativo {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-glass {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 2vh;
+    padding: 3.5vh 4vh;
+    width: 40vw;
+    max-width: 90vw;
+    box-shadow: 0 1vh 4vh rgba(0, 0, 0, 0.3);
+    position: relative;
+    transform: translateY(2vh);
+    transition: transform 0.25s ease;
+}
+
+.modal-overlay.ativo .modal-glass {
+    transform: translateY(0);
+}
+
+.modal-fechar {
+    position: absolute;
+    top: 1.5vh;
+    right: 2vh;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 4vh;
+    height: 4vh;
+    font-size: 2.2vh;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-fechar:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    gap: 2vh;
+    margin-bottom: 2.5vh;
+}
+
+.modal-header img {
+    width: 9vh;
+    height: 9vh;
+    border-radius: 1.2vh;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: white;
+    font-size: 2.4vh;
+    font-weight: 600;
+}
+
+.modal-header p {
+    margin: 0.4vh 0 0;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.8vh;
+}
+
+.modal-campo {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1.2vh;
+    padding: 1.4vh 2vh;
+    display: flex;
+    align-items: center;
+    gap: 1.5vh;
+    margin-bottom: 1.2vh;
+}
+
+.modal-campo .icone {
+    font-size: 2vh;
+}
+
+.modal-campo .label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.4vh;
+    margin: 0;
+}
+
+.modal-campo .valor {
+    color: white;
+    font-size: 1.8vh;
+    margin: 0;
+}
+
+.modal-btn-ver {
+    width: 100%;
+    margin-top: 2.5vh;
+    padding: 1.5vh;
+    border-radius: 1.2vh;
+    background: white;
+    color: #156783;
+    border: none;
+    font-weight: bold;
+    font-size: 1.8vh;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.modal-btn-ver:hover {
+    background: #e8f4f8;
+}
+
+/* ==========================================
+   CARDS DE COTAÇÃO - CONSUMIDOR / LOJA
+========================================== */
+
+#secao-cotacoes,
+#secao-cotacoes-consumidor,
+#secao-cotacoes-loja {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(21, 103, 131, 0.12);
+}
+
+#secao-cotacoes h2,
+#secao-cotacoes-consumidor h2,
+#secao-cotacoes-loja h2 {
+    color: #156783;
+    margin-bottom: 18px;
+    font-size: 24px;
+}
+
+#lista-cotacoes,
+#lista-cotacoes-loja {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.card-cotacao {
+    background: #f8fafc;
+    border: 1px solid #dbeafe;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.card-cotacao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    background: #ffffff;
+}
+
+.card-cotacao-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.card-cotacao-topo h3 {
+    margin: 0 0 4px;
+    color: #12323d;
+    font-size: 17px;
+}
+
+.card-cotacao-topo p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.badge-status {
+    color: white;
+    padding: 5px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    background: #156783;
+}
+
+.card-cotacao-dados {
+    background: white;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 14px;
+    border: 1px solid #edf2f7;
+}
+
+.card-cotacao-dados p {
+    margin: 6px 0;
+    color: #334155;
+    font-size: 13px;
+}
+
+.btn-ver-cotacao {
+    width: 100%;
+    background: #156783;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-ver-cotacao:hover {
+    background: #0e4e5e;
+    transform: translateY(-1px);
+}
+
+.cotacoes-vazio {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #64748b;
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+@media (max-width: 768px) {
+    #secao-cotacoes,
+    #secao-cotacoes-consumidor,
+    #secao-cotacoes-loja {
+        padding: 18px;
+    }
+
+    #lista-cotacoes,
+    #lista-cotacoes-loja {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   CARROSSEL HORIZONTAL DE COTAÇÕES
+========================================== */
+
+#secao-cotacoes,
+#secao-cotacoes-consumidor,
+#secao-cotacoes-loja {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Container dos cards */
+#lista-cotacoes,
+#lista-cotacoes-loja {
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 16px;
+
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-behavior: smooth;
+    padding: 4px 52px 12px;
+
+    scrollbar-width: none;
+}
+
+#lista-cotacoes::-webkit-scrollbar,
+#lista-cotacoes-loja::-webkit-scrollbar {
+    display: none;
+}
+
+/* 5 cards por tela */
+#lista-cotacoes .card-cotacao,
+#lista-cotacoes-loja .card-cotacao {
+    flex: 0 0 calc((100% - 64px) / 5);
+    max-width: calc((100% - 64px) / 5);
+    min-width: 220px;
+}
+
+/* Botões laterais do carrossel */
+.scroll-btn,
+.btn-scroll-cotacao,
+.btn-cotacao-scroll {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    border: none;
+
+    background: #ffffff;
+    color: #156783;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+
+    cursor: pointer;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.scroll-btn:hover,
+.btn-scroll-cotacao:hover,
+.btn-cotacao-scroll:hover {
+    background: #156783;
+    color: white;
+}
+
+/* tenta cobrir nomes comuns de botão esquerdo/direito */
+.scroll-btn.left,
+.scroll-btn.esquerda,
+.btn-scroll-cotacao.left,
+.btn-scroll-cotacao.esquerda,
+.btn-cotacao-scroll.left,
+.btn-cotacao-scroll.esquerda {
+    left: 14px;
+}
+
+.scroll-btn.right,
+.scroll-btn.direita,
+.btn-scroll-cotacao.right,
+.btn-scroll-cotacao.direita,
+.btn-cotacao-scroll.right,
+.btn-cotacao-scroll.direita {
+    right: 14px;
+}
+
+/* Responsivo */
+@media (max-width: 1400px) {
+    #lista-cotacoes .card-cotacao,
+    #lista-cotacoes-loja .card-cotacao {
+        flex-basis: calc((100% - 48px) / 4);
+        max-width: calc((100% - 48px) / 4);
+    }
+}
+
+@media (max-width: 1100px) {
+    #lista-cotacoes .card-cotacao,
+    #lista-cotacoes-loja .card-cotacao {
+        flex-basis: calc((100% - 32px) / 3);
+        max-width: calc((100% - 32px) / 3);
+    }
+}
+
+@media (max-width: 768px) {
+    #lista-cotacoes,
+    #lista-cotacoes-loja {
+        padding: 4px 44px 12px;
+    }
+
+    #lista-cotacoes .card-cotacao,
+    #lista-cotacoes-loja .card-cotacao {
+        flex-basis: 82%;
+        max-width: 82%;
+        min-width: 260px;
+    }
+}
+/* ==========================================
+   HOME MODERNA - PÁGINA PRINCIPAL
+========================================== */
+
+:root {
+    --vp-primary: #156783;
+    --vp-primary-dark: #0d4f63;
+    --vp-primary-soft: #e8f5f8;
+    --vp-bg: #f4f8fb;
+    --vp-card: #ffffff;
+    --vp-border: rgba(21, 103, 131, 0.14);
+    --vp-text: #12323d;
+    --vp-muted: #64748b;
+    --vp-shadow: 0 18px 45px rgba(15, 76, 96, 0.12);
+}
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(21, 103, 131, 0.10), transparent 34%),
+        linear-gradient(180deg, #f7fbfd 0%, #eef5f8 100%);
+    color: var(--vp-text);
+}
+
+.pagina-principal {
+    width: min(1760px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 24px 0 40px;
+}
+
+/* HERO */
+
+.hero-home {
+    background:
+        linear-gradient(135deg, rgba(21, 103, 131, 0.96), rgba(13, 79, 99, 0.92)),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.28), transparent 36%);
+    border-radius: 24px;
+    padding: 34px 38px;
+    margin-bottom: 18px;
+    color: white;
+    box-shadow: var(--vp-shadow);
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-home::after {
+    content: "";
+    position: absolute;
+    width: 240px;
+    height: 240px;
+    right: -70px;
+    top: -80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-tag,
+.painel-tag {
+    display: inline-block;
+    color: var(--vp-primary);
+    background: var(--vp-primary-soft);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+}
+
+.hero-home .hero-tag {
+    color: white;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.hero-home h1 {
+    max-width: 760px;
+    margin: 12px 0 8px;
+    font-size: clamp(28px, 3vw, 46px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+
+.hero-home p {
+    max-width: 690px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* PAINÉIS RECOLHÍVEIS */
+
+.painel-recolhivel {
+    background: rgba(255, 255, 255, 0.88);
+    border: 1px solid var(--vp-border);
+    border-radius: 22px;
+    margin: 16px 0;
+    box-shadow: 0 14px 38px rgba(15, 76, 96, 0.08);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.painel-header {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-align: left;
+}
+
+.painel-header h2 {
+    margin: 8px 0 0;
+    color: var(--vp-text);
+    font-size: 22px;
+    letter-spacing: 0.2px;
+}
+
+.painel-icone {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: var(--vp-primary);
+    color: white;
+    font-size: 24px;
+    font-weight: 800;
+    box-shadow: 0 10px 22px rgba(21, 103, 131, 0.24);
+    transition: 0.2s ease;
+}
+
+.painel-header:hover .painel-icone {
+    transform: scale(1.05);
+    background: var(--vp-primary-dark);
+}
+
+.painel-corpo {
+    max-height: 700px;
+    opacity: 1;
+    overflow: hidden;
+    padding: 0 24px 24px;
+    transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.2s ease;
+}
+
+.painel-recolhivel.fechado .painel-corpo {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Remove cara antiga dos blocos internos */
+
+#secao-cupons-globais {
+    margin: 0;
+}
+
+#secao-cotacoes {
+    padding: 0;
+    text-align: initial;
+    margin-bottom: 16px;
+}
+
+#secao-cotacoes > h2 {
+    display: none;
+}
+
+/* MAPA COMO ÁREA PRINCIPAL */
+
+.mapa-home-card {
+    margin-top: 18px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid var(--vp-border);
+    border-radius: 26px;
+    box-shadow: var(--vp-shadow);
+    padding: 22px;
+}
+
+.mapa-home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.mapa-home-header h2 {
+    margin: 8px 0 4px;
+    font-size: 28px;
+    color: var(--vp-text);
+    letter-spacing: -0.4px;
+}
+
+.mapa-home-header p {
+    margin: 0;
+    color: var(--vp-muted);
+}
+
+/* Layout mapa + busca */
+
+.main-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    gap: 20px;
+    height: 68vh;
+    min-height: 560px;
+}
+
+.map-container {
+    margin: 0;
+    border: 1px solid rgba(21, 103, 131, 0.16);
+    border-radius: 22px;
+    overflow: hidden;
+    background: #eaf3f6;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.5);
+}
+
+#mapa-oticas {
+    width: 100%;
+    height: 100%;
+    border-radius: 22px;
+}
+
+/* Leaflet com cara mais limpa */
+
+.leaflet-control-zoom {
+    border: none !important;
+    box-shadow: 0 10px 26px rgba(15, 76, 96, 0.18) !important;
+}
+
+.leaflet-control-zoom a {
+    color: var(--vp-primary) !important;
+    border: none !important;
+}
+
+/* SIDEBAR MODERNA */
+
+.sidebar {
+    margin: 0;
+    height: 100%;
+    border-radius: 22px;
+    padding: 18px;
+    background:
+        linear-gradient(180deg, #156783 0%, #0d4f63 100%);
+    box-shadow: 0 16px 40px rgba(15, 76, 96, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+}
+
+.sidebar h3 {
+    color: white;
+    margin: 2px 0 16px;
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.2px;
+}
+
+.input-busca-lojas {
+    width: 100%;
+    height: 46px;
+    border: none;
+    outline: none;
+    border-radius: 14px;
+    padding: 0 16px;
+    margin-bottom: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--vp-text);
+    font-size: 15px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+}
+
+.input-busca-lojas::placeholder {
+    color: #7b8b94;
+}
+
+.input-busca-lojas:focus {
+    box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 0.28),
+        0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+/* LISTA DE LOJAS */
+
+.lista-lojas {
+    gap: 12px;
+    padding: 2px 6px 4px 2px;
+}
+
+.card-loja {
+    background: rgba(255, 255, 255, 0.94);
+    border-radius: 16px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,0.35);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.card-loja:hover {
+    transform: translateY(-3px);
+    background: white;
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.16);
+}
+
+.imagem-loja {
+    width: 62px;
+    height: 62px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f1f5f9;
+    flex: 0 0 62px;
+}
+
+.imagem-loja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 14px;
+}
+
+.dados-loja {
+    min-width: 0;
+}
+
+.card-loja .dados-loja h2 {
+    color: var(--vp-text);
+    font-size: 16px;
+    font-weight: 900;
+    margin: 0 0 5px;
+    line-height: 1.15;
+}
+
+.card-loja .dados-loja p {
+    color: #526977;
+    font-size: 12px;
+    margin: 3px 0;
+    line-height: 1.25;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-loja .dados-loja p strong {
+    font-weight: 600;
+}
+
+/* COTAÇÕES NO PAINEL */
+
+.cotacoes-wrapper {
+    position: relative;
+}
+
+#lista-cotacoes,
+#lista-cotacoes-loja {
+    padding: 4px 52px 14px;
+}
+
+.card-cotacao {
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbfc 100%);
+}
+
+/* ADMIN */
+
+#secao-admin {
+    min-height: 240px;
+    margin-top: 20px;
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 1100px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .map-container {
+        height: 520px;
+    }
+
+    .sidebar {
+        height: 440px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pagina-principal {
+        width: min(100% - 24px, 1760px);
+        padding-top: 16px;
+    }
+
+    .hero-home {
+        padding: 26px 22px;
+        border-radius: 20px;
+    }
+
+    .painel-header {
+        padding: 18px;
+    }
+
+    .painel-corpo {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .mapa-home-card {
+        padding: 16px;
+        border-radius: 22px;
+    }
+
+    .map-container {
+        height: 430px;
+    }
+
+    .sidebar {
+        height: 420px;
+    }
+}

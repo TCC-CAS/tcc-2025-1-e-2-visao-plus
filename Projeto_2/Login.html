@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login do usuário</title>
+    <link rel="stylesheet" href="css/pages/Cadastro.css">
+</head>
+
+<body>
+    <div id="mensagensTopo">
+        <div id="msgLogin" class="toast"></div>
+    </div>
+
+    <div id="app-header"></div>
+
+    <main class="auth-page">
+        <section class="auth-shell">
+
+            <!-- LADO ESQUERDO: GIFS -->
+            <section class="auth-visual">
+                <img
+                    id="authGif"
+                    src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxoZGxkZHZtMG54dGtmajh0cnp3M25wZDBnanRkMnEzZnJoNHVkaSZlcD12MV9pbnRlcm5hbF9naWQmY3Q9Zw/xUOrw1p8ATwqTPX1NC/giphy.gif"
+                    alt="Animação VisionPlus+"
+                >
+
+                <div class="auth-visual-overlay"></div>
+
+                <div class="auth-visual-content">
+                    <span class="auth-badge">VisionPlus+</span>
+
+                    <h2>Bem-vindo de volta</h2>
+
+                    <p>
+                        Acesse sua conta para acompanhar cotações, encontrar óticas
+                        e gerenciar sua experiência na plataforma.
+                    </p>
+
+                    <div class="gif-indicators">
+                        <span class="gif-dot ativo"></span>
+                        <span class="gif-dot"></span>
+                        <span class="gif-dot"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LADO DIREITO: FORM -->
+            <section class="auth-form-side">
+                <div class="form-card">
+                    <h1>Login do usuário</h1>
+
+                    <p class="auth-subtitle">
+                        Entre na sua conta para continuar no VisionPlus+.
+                    </p>
+
+                    <form id="loginForm">
+                        <label for="nome">Nome de usuário:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Nome de usuário" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="E-mail" required>
+
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" name="senha" placeholder="Senha" required>
+
+                        <button type="submit">Login</button>
+                    </form>
+
+                    <p class="auth-footer-link">
+                        Não possui uma conta? <a href="Cadastro.html">Faça o Cadastro</a>
+                    </p>
+
+                    <p class="auth-footer-link">
+                        Perdeu sua senha? <a href="RecuperarSenha.html">Recupere-a aqui</a>
+                    </p>
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <script type="module" src="JS/pages/Login.js"></script>
+</body>
+
+</html>

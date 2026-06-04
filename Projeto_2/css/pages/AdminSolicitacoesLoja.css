@@ -1,0 +1,49 @@
+.lista-solicitacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.card-solicitacao-loja {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e5e5e5;
+}
+
+.card-solicitacao-loja h4 {
+    margin: 0 0 10px;
+    color: #156783;
+}
+
+.card-solicitacao-loja p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.acoes-solicitacao {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.btn-aprovar,
+.btn-rejeitar {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-aprovar {
+    background: #156783;
+    color: white;
+}
+
+.btn-rejeitar {
+    background: #d9534f;
+    color: white;
+}

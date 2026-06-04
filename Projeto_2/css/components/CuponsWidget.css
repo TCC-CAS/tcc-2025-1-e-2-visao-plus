@@ -1,0 +1,240 @@
+.vp-cupons-widget {
+    width: 100%;
+}
+#secao-cupons-globais {
+    width: 100%;
+    padding: 24px 20px 0;
+}
+
+#secao-cupons-globais .vp-cupons-widget {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.vp-cupons-box {
+    background: white;
+    border: 1px solid rgba(21, 103, 131, 0.12);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.vp-cupons-topo {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.vp-cupons-eyebrow {
+    display: block;
+    color: #156783;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.vp-cupons-topo h2 {
+    margin: 0 0 4px;
+    color: #12323d;
+    font-size: 22px;
+}
+
+.vp-cupons-topo p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.vp-cupons-lista {
+    display: grid;
+    gap: 12px;
+}
+
+.vp-cupons-box.publico .vp-cupons-lista {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+}
+
+.vp-cupons-box.perfil .vp-cupons-lista {
+    grid-template-columns: 1fr;
+}
+.vp-cupom-card {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    min-height: 230px;
+    padding: 16px;
+
+    background: #f8fafc;
+    border: 1px solid #dbeafe;
+    border-radius: 16px;
+
+    transition: 0.18s ease;
+}
+
+.vp-cupom-card:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+}
+
+.vp-cupom-icone {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+    background: #156783;
+    color: white;
+
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.vp-cupom-conteudo {
+    flex: 1;
+    min-width: 0;
+    padding-right: 52px;
+}
+
+.vp-cupom-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    margin-bottom: 8px;
+}
+
+.vp-cupom-header strong {
+    color: #12323d;
+    font-size: 17px;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.vp-cupom-tag {
+    padding: 4px 8px;
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.vp-cupom-tag.ativo {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.vp-cupom-tag.resgatado {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.vp-cupom-tag.usado {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.vp-cupom-tag.vencido {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.vp-cupom-descricao {
+    margin: 0 0 10px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.35;
+}
+
+.vp-cupom-desconto {
+    margin: 8px 0 6px;
+
+    color: #156783;
+    font-size: 26px;
+    line-height: 1.05;
+    font-weight: 950;
+}
+
+.vp-cupom-validade {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.vp-cupom-validade b {
+    color: #12323d;
+}
+
+.vp-cupom-footer {
+    margin-top: auto;
+    padding-top: 12px;
+
+    border-top: 1px dashed #cbd5e1;
+}
+
+.btn-cupom-widget {
+    width: 100%;
+
+    border: none;
+    border-radius: 10px;
+    background: #156783;
+    color: white;
+
+    padding: 11px 14px;
+
+    font-weight: 900;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.18s ease;
+}
+
+.btn-cupom-widget:hover {
+    background: #0e4e5e;
+    transform: translateY(-1px);
+}
+
+.btn-cupom-widget.secundario,
+.btn-cupom-widget:disabled {
+    background: #e5e7eb;
+    color: #64748b;
+    cursor: not-allowed;
+    transform: none;
+}
+@media (max-width: 650px) {
+    .vp-cupom-card {
+        grid-template-columns: 46px 1fr;
+    }
+
+
+    .btn-cupom-widget {
+        width: 100%;
+    }
+}
+
+.vp-vitrine-cupons .vp-cupom-card {
+    min-height: 245px;
+}
+
+.vp-vitrine-cupons .vp-cupom-desconto {
+    font-size: 23px;
+}
+
+.vp-vitrine-cupons .vp-cupom-conteudo {
+    padding-right: 48px;
+}

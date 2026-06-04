@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="css/pages/PaginaPrincipal.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/components/CuponsWidget.css">
+    <link rel="stylesheet" href="css/components/ModalCotacaoResposta.css">
+</head>
+
+<!-- MODAL LOJA -->
+<div id="modal-loja" class="modal-overlay">
+    <div class="modal-glass">
+        <button class="modal-fechar" id="modal-fechar">×</button>
+
+        <div class="modal-header">
+            <img id="modal-foto" src="" alt="Foto da loja">
+            <div>
+                <h2 id="modal-nome"></h2>
+                <p id="modal-cidade"></p>
+            </div>
+        </div>
+
+        <div class="modal-campo">
+            <span class="icone">📧</span>
+            <div>
+                <p class="label">E-mail</p>
+                <p class="valor" id="modal-email"></p>
+            </div>
+        </div>
+
+        <div class="modal-campo">
+            <span class="icone">📍</span>
+            <div>
+                <p class="label">Endereço</p>
+                <p class="valor" id="modal-endereco"></p>
+            </div>
+        </div>
+
+        <div class="modal-campo">
+            <span class="icone">📞</span>
+            <div>
+                <p class="label">Telefone</p>
+                <p class="valor" id="modal-telefone"></p>
+            </div>
+        </div>
+
+        <button class="modal-btn-ver" id="modal-btn-ver">Ver página da loja →</button>
+    </div>
+</div>
+
+<body>
+    <div id="app-header"></div>
+
+    <main class="pagina-principal">
+
+        <section class="hero-home">
+            <div>
+                <span class="hero-tag">VisionPlus+ perto de você</span>
+                <h1>Encontre óticas próximas e acompanhe suas cotações</h1>
+                <p>Veja lojas no mapa, consulte cupons disponíveis e acompanhe suas solicitações em um só lugar.</p>
+            </div>
+        </section>
+
+        <section class="painel-recolhivel fechado" data-collapsible>
+            <button class="painel-header" type="button">
+                <div>
+                    <span class="painel-tag">Descontos</span>
+                    <h2>Cupons disponíveis</h2>
+                </div>
+                <span class="painel-icone">+</span>
+            </button>
+
+            <div class="painel-corpo">
+                <section id="secao-cupons-globais"></section>
+            </div>
+        </section>
+
+        <section id="secao-cotacoes" class="products-carousel painel-recolhivel fechado" data-collapsible>
+            <button class="painel-header" type="button">
+                <div>
+                    <span class="painel-tag">Histórico</span>
+                    <h2>Cotações recentes</h2>
+                </div>
+                <span class="painel-icone">+</span>
+            </button>
+
+            <div class="painel-corpo">
+                <div class="cotacoes-wrapper">
+                    <button class="scroll-btn left" id="scroll-left">‹</button>
+                    <div id="lista-cotacoes" class="lista-cotacoes"></div>
+                    <button class="scroll-btn right" id="scroll-right">›</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="mapa-home-card">
+            <div class="mapa-home-header">
+                <div>
+                    <span class="painel-tag">Mapa</span>
+                    <h2>Óticas próximas</h2>
+                    <p>Pesquise uma loja ou clique em um marcador no mapa.</p>
+                </div>
+            </div>
+
+            <section class="main-content">
+                <!-- MAPA (todos) -->
+                <section id="secao-mapa" class="map-container">
+                    <!--<img src="imgs/MapaIlustrativo.png" alt="FotoMapa" class="mapa-ilustrativo">-->
+                    <div id="mapa-oticas"></div>
+                </section>
+
+                <!-- LOJAS -->
+                <section id="secao-lojas" class="sidebar">
+                    <h3>Lojas Próximas</h3>
+
+                    <!-- BARRA DE BUSCA -->
+                    <input type="text" id="busca-lojas" placeholder="Buscar lojas..." class="input-busca-lojas">
+
+                    <section id="lista-lojas" class="lista-lojas"></section>
+                </section>
+            </section>
+
+        </section>
+        
+
+        <!-- ADMIN -->
+        <section id="secao-admin" class="map-container">
+            <h2 id="map">Dashboard Administrativo</h2>
+        </section>
+
+    </main>
+
+
+</body>
+
+<!--<script src="JS/pages/PaginaPrincipal.js"></script>-->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script type="module" src="JS/pages/PaginaPrincipal.js"></script>
+
+</html>

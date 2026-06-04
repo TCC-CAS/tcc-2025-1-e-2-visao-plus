@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Edição da Loja</title>
+    <link rel="stylesheet" href="css/pages/AdminLoja.css">
+</head>
+
+<body>
+    <div id="app-header"></div>
+
+    <section class="main-content">
+        <div class="admin-topo-loja">
+            <div>
+                <h1 class="titulo-secao">
+                    Configuração da loja: <span id="nomeLoja"></span>
+                </h1>
+
+                <p class="subtitulo-admin">
+                    Personalize como sua loja aparece para os clientes.
+                </p>
+            </div>
+
+            <div class="resumo-plano">
+                <span>Plano atual</span>
+                <strong id="planoAtualLoja" class="badge-plano">FREE</strong>
+            </div>
+        </div>
+
+        <section class="painel-edicao-loja">
+
+            <h2>Personalização da Loja</h2>
+            <p>Ajuste a aparência da sua loja como os clientes irão ver.</p>
+
+            <!-- IDENTIDADE VISUAL -->
+            <section class="painel-secao">
+                <h3>Identidade Visual</h3>
+
+                <div class="campo-config">
+                    <label for="corPrimaria">Cor principal</label>
+                    <input type="color" id="corPrimaria" name="corPrimaria" class="config-input">
+                </div>
+
+                <div class="campo-config">
+                    <label for="corSecundaria">Cor secundária</label>
+                    <input type="color" id="corSecundaria" name="corSecundaria" class="config-input">
+                </div>
+
+                <div class="campo-config">
+                    <label for="corFundo">Cor de fundo</label>
+                    <input type="color" id="corFundo" name="corFundo" class="config-input">
+                </div>
+            </section>
+
+            <!-- BANNER -->
+            <section class="painel-secao recurso-plus">
+                <h3>Banner da Loja</h3>
+
+                <p class="descricao-recurso">
+                    Adicione uma imagem de fundo para deixar sua página mais profissional.
+                </p>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarBanner" class="config-input">
+                        Mostrar banner na página da loja
+                    </label>
+                </div>
+
+                <div class="campo-config campo-largo">
+                    <label for="bannerArquivo">Imagem do banner</label>
+                    <input type="file" id="bannerArquivo" accept="image/png, image/jpeg, image/jpg">
+                    <small>Use PNG ou JPG. A imagem será enviada para o Cloudinary.</small>
+                </div>
+
+                <input type="hidden" id="bannerUrl" class="config-input">
+                <small class="aviso-plano">
+                    Disponível nos planos PLUS e PRO.
+                </small>
+            </section>
+
+            <!-- TEXTO DE DESTAQUE -->
+            <section class="painel-secao recurso-pro">
+                <h3>Texto de Destaque</h3>
+
+                <p class="descricao-recurso">
+                    Frase principal exibida no topo da loja.
+                </p>
+
+                <div class="campo-config campo-largo">
+                    <label for="textoDestaque">Frase de destaque</label>
+                    <input type="text" id="textoDestaque" class="config-input" maxlength="120"
+                        placeholder="Ex: Óculos completos com qualidade e preço justo">
+                </div>
+
+                <small class="aviso-plano">
+                    Disponível no plano PRO.
+                </small>
+            </section>
+
+            <!-- TIPOGRAFIA -->
+            <section class="painel-secao">
+                <h3>Tipografia</h3>
+
+                <div class="campo-config">
+                    <label for="fontePrimaria">Fonte primária</label>
+                    <select id="fontePrimaria" class="config-input">
+                        <option value="Poppins">Poppins</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="Open Sans">Open Sans</option>
+                        <option value="Arial">Arial</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label for="fonteSecundaria">Fonte secundária</label>
+                    <select id="fonteSecundaria" class="config-input">
+                        <option value="Roboto">Roboto</option>
+                        <option value="Open Sans">Open Sans</option>
+                        <option value="Helvetica">Helvetica</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- LAYOUT -->
+            <section class="painel-secao">
+                <h3>Layout da Página</h3>
+
+                <div class="campo-config">
+                    <label for="layoutPagina">Layout geral</label>
+                    <select id="layoutPagina" class="config-input">
+                        <option value="padrao">Padrão</option>
+                        <option value="banner">Banner</option>
+                        <option value="vitrine">Vitrine</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarMarca" class="config-input">
+                        Mostrar marca
+                    </label>
+                </div>
+            </section>
+
+            <!-- PRODUTOS -->
+            <section class="painel-secao">
+                <h3>Exibição de Produtos</h3>
+
+                <div class="campo-config">
+                    <label for="layoutProdutos">Layout dos produtos</label>
+                    <select id="layoutProdutos" class="config-input">
+                        <option value="grid">Grid</option>
+                        <option value="lista">Lista</option>
+                        <option value="carrossel">Carrossel</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label for="produtosPorLinha">Produtos por linha</label>
+                    <select id="produtosPorLinha" class="config-input">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="campo-config">
+                    <label>
+                        <input type="checkbox" id="mostrarPreco" class="config-input">
+                        Mostrar preço
+                    </label>
+                </div>
+            </section>
+
+            <!-- AÇÕES -->
+            <section class="painel-acoes">
+                <button type="button" id="salvarConfiguracoes">Salvar configurações</button>
+                <button type="button" id="resetarConfiguracoes">Resetar configurações</button>
+            </section>
+
+        </section>
+
+        <section class="preview-wrapper">
+            <div class="preview-label">Pré-visualização da página pública</div>
+            <section id="previewPublico"></section>
+        </section>
+
+
+</body>
+
+<script type="module" src="JS/pages/adminLoja.js"></script>
+
+
+</html>

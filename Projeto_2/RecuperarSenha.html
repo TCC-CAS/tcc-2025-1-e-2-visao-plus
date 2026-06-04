@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Senha</title>
+    <link rel="stylesheet" href="css/pages/Cadastro.css">
+</head>
+
+<body>
+    <div id="mensagensTopo">
+        <div id="msgLogin" class="toast"></div>
+    </div>
+
+    <div id="app-header"></div>
+
+    <main class="auth-page">
+        <section class="auth-shell">
+
+            <!-- LADO ESQUERDO: GIFS -->
+            <section class="auth-visual">
+                
+                <img id="authGif"
+                    src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxoZGxkZHZtMG54dGtmajh0cnp3M25wZDBnanRkMnEzZnJoNHVkaSZlcD12MV9pbnRlcm5hbF9naWQmY3Q9Zw/xUOrw1p8ATwqTPX1NC/giphy.gif"
+                    alt="Animação VisionPlus+">
+
+                <div class="auth-visual-overlay"></div>
+
+                <div class="auth-visual-content">
+                    <span class="auth-badge">VisionPlus+</span>
+
+                    <h2>Bem-vindo de volta</h2>
+
+                    <p>
+                        Acesse sua conta para acompanhar cotações, encontrar óticas
+                        e gerenciar sua experiência na plataforma.
+                    </p>
+
+                    <div class="gif-indicators">
+                        <span class="gif-dot ativo"></span>
+                        <span class="gif-dot"></span>
+                        <span class="gif-dot"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LADO DIREITO: FORM -->
+            <section class="auth-form-side">
+                <div class="form-card">
+                    <h1>Recuperar Senha</h1>
+
+                    <p class="auth-subtitle">
+                        Insira seus dados cadastrais para receber em seu email sua senha temporária.
+                    </p>
+
+                    <form id="loginForm">
+                        <label for="nome">Nome de usuário:</label>
+                        <input type="text" id="nome" name="nome" required><br>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required><br>
+                        
+
+                        <button type="submit">Recuperar Senha</button>
+                    </form>
+
+                    <p class="auth-footer-link">
+                        <a href="Login.html">Retornar ao login</a>
+                    </p>
+                </div>
+            </section>
+        </section>
+    </main>
+    <script type="module" src="JS/pages/RecuperarSenha.js"></script>
+</body>
+
+</html>

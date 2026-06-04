@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Loja</title>
+    <link rel="stylesheet" href="css/pages/CadastroLoja.css">
+</head>
+
+<body>
+
+    <div id="mensagensTopo">
+        <div id="msgCadastroLoja" class="toast"></div>
+    </div>
+
+    <div id="app-header"></div>
+
+    <main class="cadastro-page">
+        <section class="hero-cadastro">
+            <h1>Solicitação de Abertura de Loja</h1>
+            <p>
+                Cadastre sua ótica no VisionPlus+. Primeiro validamos o CNPJ,
+                depois coletamos os dados da loja e enviamos para aprovação do administrador.
+            </p>
+
+            <button type="button" id="btnAbrirModalCnpj" class="btn-principal">
+                Solicitar abertura de loja
+            </button>
+        </section>
+    </main>
+
+    <!-- MODAL 1 - CNPJ -->
+    <div id="modalCnpj" class="modal-overlay">
+        <div class="modal-card">
+            <button type="button" class="modal-close" id="btnFecharModalCnpj">&times;</button>
+
+            <h2>Verificação inicial</h2>
+            <p class="modal-descricao">
+                Informe o CNPJ da ótica para buscarmos os dados cadastrais.
+            </p>
+
+            <form id="formCnpj">
+                <label for="cnpj">CNPJ:</label>
+                <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" required>
+
+                <label class="checkbox-line">
+                    <input type="checkbox" id="checkHumano">
+                    Confirmo que sou uma pessoa humana solicitando este cadastro.
+                </label>
+
+                <button type="submit" id="btnBuscarCnpj">
+                    Buscar dados do CNPJ
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2 - DADOS DA LOJA -->
+    <div id="modalDadosLoja" class="modal-overlay">
+        <div class="modal-card modal-card-grande">
+            <button type="button" class="modal-close" id="btnFecharModalDados">&times;</button>
+
+            <h2>Dados da ótica</h2>
+            <p class="modal-descricao">
+                Confira e complete os dados da loja. Esses dados serão enviados para aprovação.
+            </p>
+
+            <form id="cadastroLojaForm">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="razaoSocial">Razão social:</label>
+                        <input type="text" id="razaoSocial" name="razaoSocial" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome">Nome fantasia / Nome da loja:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email da loja:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cep">CEP:</label>
+                        <input type="text" id="cep" name="cep" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="logradouro">Logradouro:</label>
+                        <input type="text" id="logradouro" name="logradouro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numero">Número:</label>
+                        <input type="text" id="numero" name="numero" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bairro">Bairro:</label>
+                        <input type="text" id="bairro" name="bairro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cidade">Cidade:</label>
+                        <input type="text" id="cidade" name="cidade" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="uf">UF:</label>
+                        <input type="text" id="uf" name="uf" maxlength="2" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complemento">Complemento:</label>
+                        <input type="text" id="complemento" name="complemento">
+                    </div>
+                </div>
+
+                <div class="form-group full">
+                    <label for="descricao">Descrição da loja:</label>
+                    <textarea id="descricao" name="descricao" maxlength="500"></textarea>
+                </div>
+
+                <input type="hidden" id="latitude">
+                <input type="hidden" id="longitude">
+
+                <button type="submit" id="btnEnviarSolicitacao">
+                    Enviar solicitação
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="JS/pages/CadastroLoja.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+/* ===== WRAPPER ===== */
+.carrossel-cotacoes-wrapper {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    margin: 20px 0;
+}
+ 
+/* ===== HEADER CLICÁVEL ===== */
+.carrossel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: default;
+}
+ 
+.carrossel-header-esq {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+ 
+.carrossel-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+}
+ 
+.carrossel-badge {
+    background: #156783;
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    min-width: 24px;
+    text-align: center;
+}
+ 
+.carrossel-toggle {
+    background: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+}
+ 
+.carrossel-toggle:hover {
+    background: #f0f9ff;
+    color: #156783;
+    border-color: #156783;
+}
+ 
+/* ===== BODY COLAPSÁVEL ===== */
+.carrossel-body {
+    padding: 10px 20px 16px;
+    overflow: hidden;
+    max-height: 400px;
+    transition: max-height 0.35s ease, padding 0.35s ease, opacity 0.25s ease;
+    opacity: 1;
+}
+ 
+.carrossel-body.fechado {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+}
+ 
+/* ===== ESTADOS VAZIOS ===== */
+.cotacoes-loading,
+.cotacoes-vazio {
+    color: #9ca3af;
+    font-size: 13px;
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+}
+ 
+/* ===== SCROLL BUTTONS (override pra ficar dentro do wrapper) ===== */
+.carrossel-cotacoes-wrapper .cotacoes-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+ 
+.carrossel-cotacoes-wrapper .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+ 
+.carrossel-cotacoes-wrapper .scroll-btn.left  { left:  -12px; }
+.carrossel-cotacoes-wrapper .scroll-btn.right { right: -12px; }

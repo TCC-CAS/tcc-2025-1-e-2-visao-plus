@@ -1,0 +1,673 @@
+body {
+    background-color: #f0f8ff; /* Fundo azul muito claro */
+    font-size: 16px;
+    padding-top: 2%;
+    max-width: 100%;
+    overflow: hidden;
+    font-family: Arial;
+}
+
+
+.container-cadastro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 35px;
+    background-color: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+label {
+    margin: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    margin: 8px 0 15px 0;
+    padding: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+button {
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background-color: #0e4e5e;
+    transform: translateY(-2px);
+    transition: 0.2s ease;
+}
+
+h1 {
+    color: #156783;
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+    font-family: Arial;
+}
+
+a {
+    color: #156783;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+/*==================================================
+    CARD DE ERRO DA SENHA
+==================================================*/
+
+.regras-card {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    width: 250px;
+    padding: 15px;
+    background: white;
+    color: #333;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
+    z-index: 9999;
+}
+
+.regras-card.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.regras-card h4 {
+    margin-top: 0;
+}
+
+.erro-senha {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+/*==================================================
+    RESPONSIVO
+==================================================*/
+
+.regras-card li {
+    list-style: none;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.valido {
+    color: #00c853;
+}
+
+.invalido {
+    color: red;
+}
+
+input.senha-valida {
+    border: 2px solid #00c853;
+}
+
+input.senha-invalida {
+    border: 2px solid red;
+}
+
+/*================================================
+    MENSAGENS DE DISPONIBILIDADE
+=================================================*/
+
+/* Container das mensagens */
+#mensagensTopo {
+    position: fixed;
+    top: 1%;
+    left: 20%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999999;
+}
+
+/* Toast base */
+.toast {
+    min-width: 280px;
+    max-width: 400px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* Mostrar */
+.toast.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sucesso */
+.toast.sucesso {
+    background-color: #2ecc71;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+}
+
+/* Erro */
+.toast.erro {
+    background-color: #e74c3c;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+}
+
+/*==================================================
+    MODAL TERMOS DE USO
+==================================================*/
+
+.modal-termos-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal-termos-overlay.ativo {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-termos-box {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    width: 90%;
+    max-width: 540px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+    transform: translateY(16px);
+    transition: transform 0.25s ease;
+}
+
+.modal-termos-overlay.ativo .modal-termos-box {
+    transform: translateY(0);
+}
+
+.modal-termos-box h2 {
+    color: #156783;
+    margin: 0 0 16px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.modal-termos-conteudo {
+    overflow-y: auto;
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 13px;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.modal-termos-conteudo::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-termos-conteudo::-webkit-scrollbar-thumb {
+    background: #156783;
+    border-radius: 6px;
+}
+
+.modal-termos-rodape {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.checkbox-termos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+}
+
+.checkbox-termos input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: #156783;
+    cursor: pointer;
+}
+
+.modal-termos-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-cancelar-termos {
+    background-color: transparent;
+    color: #156783;
+    border: 2px solid #156783;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+    transition: 0.2s;
+}
+
+.btn-cancelar-termos:hover {
+    background-color: #f0f8ff;
+    transform: translateY(-1px);
+}
+
+.btn-aceitar-termos {
+    background-color: #156783;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    flex: 1;
+    transition: 0.2s;
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.btn-aceitar-termos.habilitado {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.btn-aceitar-termos.habilitado:hover {
+    background-color: #0e4e5e;
+    transform: translateY(-1px);
+}
+
+/*==================================================
+    BOTÃO DE SUBMIT COM LOADING
+==================================================*/
+
+button[type="submit"].carregando {
+    background-color: #aaa;
+    cursor: not-allowed;
+    transform: none;
+    pointer-events: none;
+}
+
+button[type="submit"].carregando::after {
+    content: " ⏳";
+}
+
+.label-termos-aceitos {
+    font-size: 13px;
+    color: #156783;
+    text-align: center;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.container-cadastro {
+    min-height: 90vh;
+    padding: 30px 16px;
+}
+
+
+form {
+    position: relative;
+    border: 1px solid rgba(21, 103, 131, 0.12);
+}
+
+
+input:focus {
+    outline: none;
+    border-color: #156783;
+    box-shadow: 0 0 0 3px rgba(21, 103, 131, 0.12);
+}
+
+.termos-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0 4px;
+    padding: 12px;
+    background: #f7fbfd;
+    border: 1px solid rgba(21, 103, 131, 0.15);
+    border-radius: 10px;
+}
+
+.termos-area input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #156783;
+    margin: 0;
+    cursor: pointer;
+}
+
+.termos-area label {
+    font-size: 13px;
+    color: #333;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.termos-area a {
+    color: #156783;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.termos-area a:hover {
+    text-decoration: underline;
+}
+
+.aviso-termos {
+    color: #e74c3c;
+    font-size: 12px;
+    margin: 0 0 8px;
+    display: none;
+    text-align: left;
+}
+
+.modal-termos-box {
+    max-width: 680px;
+}
+
+.modal-termos-conteudo {
+    max-height: 420px;
+}
+
+.modal-termos-conteudo p {
+    text-align: left;
+}
+
+.modal-termos-conteudo strong {
+    color: #156783;
+}
+
+@media (max-width: 600px) {
+    form {
+        padding: 24px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    #mensagensTopo {
+        left: 50%;
+        width: calc(100% - 32px);
+    }
+
+    .toast {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .regras-card {
+        position: fixed;
+        top: 80px;
+        right: 16px;
+        left: 16px;
+        width: auto;
+    }
+}
+
+/*==================================================
+    LAYOUT AUTH COM GIF - CADASTRO / LOGIN
+    Isolado para não quebrar header
+==================================================*/
+
+.auth-page,
+.auth-page * {
+    box-sizing: border-box;
+}
+
+.auth-page {
+    width: 100%;
+    max-width: 100%;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 16px;
+    background-color: #f0f8ff;
+    overflow-x: hidden;
+}
+
+.auth-shell {
+    width: min(1120px, 100%);
+    height: min(640px, calc(100vh - 110px));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: white;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+/* Lado esquerdo com GIF */
+.auth-visual {
+    position: relative;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    background-color: #156783;
+}
+
+.auth-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.auth-visual img.trocando {
+    opacity: 0.25;
+}
+
+.auth-visual-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.62)
+    );
+}
+
+.auth-visual-content {
+    position: absolute;
+    left: 36px;
+    right: 36px;
+    bottom: 36px;
+    color: white;
+    z-index: 2;
+}
+
+.auth-badge {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.18);
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.auth-visual-content h2 {
+    color: white;
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 12px;
+    text-align: left;
+}
+
+.auth-visual-content p {
+    color: white;
+    text-align: left;
+    line-height: 1.5;
+    margin: 0 0 20px;
+    font-size: 15px;
+}
+
+.gif-indicators {
+    display: flex;
+    gap: 8px;
+}
+
+.gif-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+.gif-dot.ativo {
+    background-color: white;
+}
+
+/* Lado direito do form */
+.auth-form-side {
+    height: 100%;
+    background-color: #f0f8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 32px;
+    overflow: hidden;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 500px;
+}
+
+.form-card h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 30px;
+}
+
+.auth-subtitle {
+    color: #555;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* Remove o texto automático do form::before só dentro do layout novo */
+.auth-form-side form::before {
+    content: none;
+}
+
+/* Mantém o formulário branco e mais compacto */
+.auth-form-side form {
+    background-color: white;
+    padding: 24px 30px;
+    max-width: 500px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.auth-form-side label {
+    font-size: 14px;
+}
+
+.auth-form-side input {
+    padding: 12px 14px;
+    margin: 6px 0 13px 0;
+}
+
+.auth-form-side button[type="submit"] {
+    padding: 13px;
+    margin-top: 8px;
+}
+
+/* Link inferior */
+.auth-footer-link {
+    margin-top: 16px;
+    margin-bottom: 0;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .auth-page {
+        align-items: flex-start;
+        padding: 18px 14px 30px;
+    }
+
+    .auth-shell {
+        height: auto;
+        grid-template-columns: 1fr;
+    }
+
+    .auth-visual {
+        height: 260px;
+    }
+
+    .auth-form-side {
+        height: auto;
+        padding: 24px 18px;
+    }
+
+    .auth-visual-content h2 {
+        font-size: 24px;
+    }
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuário</title>
+    <link rel="stylesheet" href="css/pages/Cadastro.css">
+</head>
+
+<body>
+    <div id="mensagensTopo">
+        <div id="msgNome" class="toast"></div>
+        <div id="msgEmail" class="toast"></div>
+        <div id="msgSenha" class="toast"></div>
+    </div>
+
+    <div id="app-header"></div>
+
+    <main class="auth-page">
+        <section class="auth-shell">
+
+            <section class="auth-visual">
+                <img id="authGif"
+                    src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmxoZGxkZHZtMG54dGtmajh0cnp3M25wZDBnanRkMnEzZnJoNHVkaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xUOrw1p8ATwqTPX1NC/giphy.gif"
+                    alt="Animação VisionPlus+">
+
+                <div class="auth-visual-overlay"></div>
+
+                <div class="auth-visual-content">
+                    <span class="auth-badge">VisionPlus+</span>
+                    <h2>Seu hub de óticas em poucos cliques</h2>
+                    <p>
+                        Compare óticas, faça cotações e acompanhe suas solicitações
+                        de forma simples, bonita e organizada.
+                    </p>
+
+                    <div class="gif-indicators">
+                        <span class="gif-dot ativo"></span>
+                        <span class="gif-dot"></span>
+                        <span class="gif-dot"></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="auth-form-side">
+                <div class="form-card">
+                    <h1>Cadastro de Usuário</h1>
+
+                    <p class="auth-subtitle">
+                        Crie sua conta para acessar óticas, cotações e reservas.
+                    </p>
+
+                    <form id="cadastroForm">
+                        <label for="nome">Nome de usuário:</label>
+                        <input type="text" id="nome" name="nome" autocomplete="username" placeholder="Nome de usuário"
+                            required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" autocomplete="username@useremail.com"
+                            placeholder="E-mail" required>
+
+                        <div id="erroSenha" class="erro-senha"></div>
+
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" autocomplete="current-password" placeholder="Senha" required>
+
+                        <div id="regrasCard" class="regras-card">
+                            <h4>Regras da senha:</h4>
+                            <ul>
+                                <li id="regraTamanho">Mínimo 8 caracteres</li>
+                                <li id="regraMaiuscula">Pelo menos 1 letra maiúscula</li>
+                                <li id="regraMinuscula">Pelo menos 1 letra minúscula</li>
+                                <li id="regraNumero">Pelo menos 1 número</li>
+                                <li id="regraEspecial">Pelo menos 1 caractere especial</li>
+                                <li id="regraProibido">Não pode conter &lt; ou &gt;</li>
+                            </ul>
+                        </div>
+
+                        <label for="confirmarSenha">Confirmar Senha:</label>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" autocomplete="confirm-password"
+                            placeholder="Confirme a senha" required>
+
+                        <div class="termos-area">
+                            <input type="checkbox" id="checkTermos" disabled>
+                            <label for="checkTermos">
+                                Li e aceito os <a href="#" id="abrirTermos">Termos de Uso</a>
+                            </label>
+                        </div>
+
+                        <p id="avisoTermos" class="aviso-termos">
+                            Você precisa aceitar os termos de uso para se cadastrar.
+                        </p>
+
+                        <button type="submit">Registrar</button>
+                    </form>
+
+                    <p class="auth-footer-link">
+                        Já tem uma conta? <a href="Login.html">Faça login</a>
+                    </p>
+                </div>
+            </section>
+
+        </section>
+    </main>
+
+    <!-- MODAL TERMOS DE USO -->
+    <div id="modalTermos" class="modal-termos-overlay">
+        <div class="modal-termos-box">
+            <h2>Termos de Uso da Plataforma VisionPlus+</h2>
+
+            <div class="modal-termos-conteudo" id="conteudoTermos">
+                <p><strong>1. Introdução</strong></p>
+                <p>
+                    O presente Termo de Uso estabelece as condições gerais para acesso e utilização da plataforma
+                    VisionPlus+,
+                    desenvolvida com o objetivo de conectar consumidores a óticas, oferecendo funcionalidades de
+                    consulta,
+                    cotação, reserva de produtos e comunicação entre usuários e estabelecimentos.
+                </p>
+
+                <p><strong>2. Aceitação dos Termos</strong></p>
+                <p>
+                    Ao acessar ou utilizar o VisionPlus+, o usuário declara ter lido, compreendido e aceitado
+                    integralmente
+                    estes Termos de Uso. Caso não concorde, deverá se abster de utilizar a plataforma.
+                </p>
+
+                <p><strong>3. Uso da Plataforma</strong></p>
+                <p>
+                    A plataforma deve ser utilizada somente para fins legais e éticos, relacionados à busca, cotação,
+                    reserva e interação com óticas cadastradas.
+                </p>
+
+                <p><strong>4. Responsabilidades do Usuário</strong></p>
+                <p>
+                    O usuário compromete-se a fornecer informações verdadeiras, não tentar acessar dados de terceiros,
+                    não interferir no funcionamento da plataforma e não utilizar o sistema para fins ilícitos.
+                </p>
+
+                <p><strong>5. Produtos, Cotações e Reservas</strong></p>
+                <p>
+                    As informações de produtos são de responsabilidade das óticas cadastradas. As cotações possuem
+                    status
+                    de acompanhamento e as reservas somente poderão ocorrer após aceite da cotação.
+                </p>
+
+                <p><strong>6. Privacidade e Proteção de Dados</strong></p>
+                <p>
+                    A VisionPlus+ coleta e armazena apenas os dados necessários ao funcionamento da plataforma, como
+                    nome,
+                    e-mail, endereço e, quando aplicável, informações relacionadas à saúde visual, como receitas ou grau
+                    informado.
+                </p>
+
+                <p><strong>7. Compartilhamento de Dados</strong></p>
+                <p>
+                    O compartilhamento de informações ocorre somente com as óticas selecionadas pelo próprio consumidor,
+                    não sendo público nem repassado a terceiros não envolvidos no processo de cotação.
+                </p>
+
+                <p><strong>8. Upload de Receitas ou Imagens</strong></p>
+                <p>
+                    O envio de imagens ou prescrições é opcional e serve apenas para facilitar a cotação. O usuário é
+                    responsável por garantir que os documentos enviados estejam legíveis e não contenham informações
+                    desnecessárias.
+                </p>
+
+                <p><strong>9. Propriedade Intelectual</strong></p>
+                <p>
+                    Todos os direitos sobre nome, logotipo, layout, código-fonte e demais elementos pertencem à
+                    VisionPlus+
+                    e/ou seus desenvolvedores. É proibida a reprodução ou comercialização sem autorização.
+                </p>
+
+                <p><strong>10. Limitação de Responsabilidade</strong></p>
+                <p>
+                    A VisionPlus+ atua como intermediadora digital entre consumidores e óticas, não se responsabilizando
+                    pela
+                    veracidade das informações fornecidas por usuários, qualidade dos produtos ou indisponibilidades
+                    temporárias.
+                </p>
+
+                <p><strong>11. Alterações dos Termos</strong></p>
+                <p>
+                    A VisionPlus+ poderá alterar estes Termos de Uso quando necessário. Alterações relevantes poderão
+                    ser
+                    comunicadas por e-mail ou dentro da plataforma.
+                </p>
+
+                <p><strong>12. Foro e Legislação Aplicável</strong></p>
+                <p>
+                    Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil.
+                </p>
+            </div>
+
+            <div class="modal-termos-rodape">
+                <label class="checkbox-termos">
+                    <input type="checkbox" id="checkModalTermos">
+                    Li e concordo com os Termos de Uso
+                </label>
+
+                <div class="modal-termos-btns">
+                    <button type="button" class="btn-cancelar-termos" id="btnCancelarTermos">
+                        Cancelar
+                    </button>
+
+                    <button type="button" class="btn-aceitar-termos" id="btnAceitarTermos">
+                        Aceitar termos
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="JS/pages/Cadastro.js"></script>
+</body>
+
+</html>

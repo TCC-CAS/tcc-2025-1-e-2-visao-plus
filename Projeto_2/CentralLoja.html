@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central da Loja - VisionPlus+</title>
+    <link rel="stylesheet" href="css/pages/CentralLoja.css">
+</head>
+
+<body>
+    <div id="app-header"></div>
+
+    <main class="central-loja">
+        <div class="container-layout">
+
+            <aside id="barra-menu">
+                <a href="ProdutosLoja.html">📦 Meus Produtos</a>
+                <a href="AdminLoja.html">⚙️ Administração</a>
+                <a id="MinhaLoja">👁️ Ver Loja</a>
+                <a href="CuponsLoja.html">🎟️ Gerenciar Cupons</a>
+            </aside>
+
+            <section class="conteudo-layout">
+
+                <section id="secao-cotacoes-loja">
+                    <h2>Cotações da Loja</h2>
+                    <div id="lista-cotacoes-loja" class="lista-cotacoes"></div>
+                </section>
+
+                <section class="painel-analytics">
+
+                    <div class="guia-cards">
+                        <button class="card-aba ativo" data-painel="engajamento">
+                            📊 Engajamento
+                        </button>
+
+                        <button class="card-aba" data-painel="visualizacoes">
+                            📈 Visualizações
+                        </button>
+
+                        <button class="card-aba" data-painel="cupons">
+                            🎟️ Cupons
+                        </button>
+                    </div>
+
+                    <div id="conteudo-dinamico" class="vazio">
+                        <p>👆 Clique em um card acima para visualizar</p>
+                    </div>
+
+                </section>
+
+            </section>
+
+        </div>
+    </main>
+
+    <div id="templates-paineis" hidden>
+
+        <div id="painel-engajamento" class="painel-conteudo">
+            <div class="painel-grid">
+                <div class="stat-card blue">
+                    <div class="stat-label">Cotações Recebidas</div>
+                    <div class="stat-value" id="stat-cotacoes">0</div>
+                    <div class="stat-meta">últimos 30 dias</div>
+                </div>
+
+                <div class="stat-card green">
+                    <div class="stat-label">Taxa de Resposta</div>
+                    <div class="stat-value" id="stat-taxa">0%</div>
+                    <div class="stat-meta">proporção respondidas</div>
+                </div>
+
+                <div class="stat-card purple">
+                    <div class="stat-label">Cotações Aprovadas</div>
+                    <div class="stat-value" id="stat-aprovadas">0</div>
+                    <div class="stat-meta">convertidas em vendas</div>
+                </div>
+
+                <div class="stat-card blue">
+                    <div class="stat-label">Ticket Médio</div>
+                    <div class="stat-value" id="stat-ticket">R$ 0</div>
+                    <div class="stat-meta">valor médio por cotação</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="painel-visualizacoes" class="painel-conteudo">
+            <div class="painel-placeholder">
+                <p class="placeholder-title">📈 Painel de Visualizações</p>
+                <p>Gráficos e dados de visualizações serão exibidos aqui</p>
+                <small>Pronto para implementação futura</small>
+            </div>
+        </div>
+
+        <div id="painel-cupons" class="painel-conteudo">
+            <section id="secao-cupons-central" class="secao-cupons-central">
+
+                <div id="bloqueio-cupons-plano" class="bloqueio-recurso hidden">
+                    <div class="bloqueio-icone">🔒</div>
+                    <h3>Cupons são um recurso dos planos PLUS e PRO</h3>
+                    <p>
+                        Faça upgrade do plano da sua loja para criar campanhas,
+                        liberar descontos públicos e enviar cupons para clientes específicos.
+                    </p>
+                    <a href="PlanosLoja.html" class="btn-upgrade-plano">Ver planos</a>
+                </div>
+
+                <div id="conteudo-cupons-central">
+                    <div class="cupons-topo">
+                        <div>
+                            <h3>🎟️ Cupons da Loja</h3>
+                            <p>Ative campanhas públicas ou envie cupons para clientes específicos.</p>
+                        </div>
+
+                        <a href="CuponsLoja.html" class="btn-gerenciar-cupons">
+                            Gerenciar cupons
+                        </a>
+                    </div>
+
+                    <div class="cupons-resumo-grid">
+                        <div class="cupom-stat-card">
+                            <span>Total</span>
+                            <strong id="cupom-stat-total">0</strong>
+                        </div>
+
+                        <div class="cupom-stat-card">
+                            <span>Ativos</span>
+                            <strong id="cupom-stat-ativos">0</strong>
+                        </div>
+
+                        <div class="cupom-stat-card">
+                            <span>Resgatados</span>
+                            <strong id="cupom-stat-resgatados">0</strong>
+                        </div>
+
+                        <div class="cupom-stat-card">
+                            <span>Usados</span>
+                            <strong id="cupom-stat-usados">0</strong>
+                        </div>
+                    </div>
+
+                    <div id="lista-cupons-central" class="lista-cupons-central">
+                        <p>Carregando cupons...</p>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+
+    <script type="module" src="JS/pages/CentralLoja.js"></script>
+    <script type="module" src="JS/pages/CentralLojaCupons.js"></script>
+</body>
+
+</html>
